@@ -1,0 +1,33 @@
+<div class="p-grid p-pt-5">
+    <div class="p-col">
+        <p-carousel [value]="cars" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions" >
+            <ng-template let-car pTemplate="item">
+                <p-card [header]=car.title [style]="{width: '360px'}" styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img alt="Card" [src]=car.url>
+                    </ng-template>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+                        repudiandae
+                        numquam deserunt
+                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
+                        cupiditate
+                        neque quas!</p>
+                </p-card>
+            </ng-template>
+        </p-carousel>
+    </div>
+<!-- <footer class="layout-footer">
+    <p-card header="Contacto">
+        <div class="p-grid">
+            <div class="p-col">
+                <h4>Nuestras oficinas</h4>
+            </div>
+            <div class="p-col">
+                <h4>Teléfono</h4>
+            </div>
+            <div class="p-col">
+                <h4>Email</h4>
+            </div>
+        </div>
+    </p-card>
+</footer> -->
