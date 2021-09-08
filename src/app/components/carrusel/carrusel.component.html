@@ -1,0 +1,10 @@
+<p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true"  styleClass="p-mt-3" >
+    <ng-template pTemplate="header">
+        <h1 class="nov">Novedades del Centro</h1>
+    </ng-template>
+    <ng-template let-image pTemplate="item">
+                <div>
+                    <img src="{{image}}" class="novedad-imagen"/>
+                </div>        
+    </ng-template>
+</p-carousel>

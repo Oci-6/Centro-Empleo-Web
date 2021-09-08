@@ -9,25 +9,9 @@ import { MenuItem } from 'primeng/api';
 })
 export class AppComponent {
   title = 'Centro Empleo';
-  items: MenuItem[] = [];
-
+  
   ngOnInit() {
-    this.items = [
-        {
-            label:'Ingresar',
-            icon:'pi pi-sign-in',
-        },
-        {
-            label:'Ofertas de trabajo',
-            icon:'pi pi-briefcase',
-
-        },
-        {
-            label:'Novedades',
-            icon:'pi pi-exclamation-circle',
-
-        },
-    ];
+    
 }
 
 }
