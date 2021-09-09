@@ -2,12 +2,12 @@
     <div class="p-col p-md-6 p-xl-4">
         <p-card header="Iniciar Sesión" styleClass="p-card-shadow p-p-3 p-text-center">
             <div class="p-col p-mt-1">
-                No tienes cuenta?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/" >Registrate</a>
+                No tienes cuenta?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/registrar" >Registrate</a>
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="ngOnSubmit()">
                 <div class="p-grid p-formgrid p-flex-column p-fluid">
                     <div class="p-col">
-                        <p-message *ngIf="!loginForm.valid" severity="error" text="Faltan Campos"></p-message>
+                        <!-- <p-message *ngIf="!loginForm.valid" severity="error" text="Faltan Campos"></p-message> -->
                     </div>
                     <div class="p-col p-mt-4">
                         <span class="p-float-label">
@@ -32,6 +32,9 @@
                     </div>
                     <div class="p-col p-mt-3">
                         <p-button label="Ingresar con Facebook" icon="pi pi-facebook" routerLink="/register"></p-button>
+                    </div>
+                    <div class="p-col p-mt-5">
+                        Eres una empresa?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/solicitar_acceso">Solicitar acceso</a>
                     </div>
                 </div>
             </form>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,8 @@ import { LoginComponent } from './views/login/login.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { NovedadesComponent } from './views/novedades/novedades.component';
+import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
+
 
 @NgModule({
   declarations: [
@@ -36,13 +39,15 @@ import { NovedadesComponent } from './views/novedades/novedades.component';
     LoginComponent,
     RegistrarComponent,
     OfertasComponent,
-    NovedadesComponent
+    NovedadesComponent,
+    SolicitarAccesoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     //PrimeImports
     PrimeNgModule,
+    BrowserAnimationsModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
