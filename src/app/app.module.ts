@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,9 @@ import { RegistrarComponent } from './views/registrar/registrar.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { NovedadesComponent } from './views/novedades/novedades.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
+import { MessageService,  } from 'primeng/api';
+import { AuthService } from './services/Auth/auth.service';
+
 
 
 @NgModule({
@@ -40,7 +44,7 @@ import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/so
     RegistrarComponent,
     OfertasComponent,
     NovedadesComponent,
-    SolicitarAccesoComponent
+    SolicitarAccesoComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,8 +52,12 @@ import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/so
     //PrimeImports
     PrimeNgModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [{
+  providers: [
+    MessageService,
+    AuthService,
+    {
     provide: 'SocialAuthServiceConfig',
     useValue: {
       autoLogin: false,
