@@ -27,6 +27,10 @@ import { NovedadesComponent } from './views/novedades/novedades.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
 import { MessageService,  } from 'primeng/api';
 import { AuthService } from './services/Auth/auth.service';
+import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
+import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { FormularioComponent } from './views/postulante/formulario/formulario.component';
 
 
 
@@ -45,6 +49,10 @@ import { AuthService } from './services/Auth/auth.service';
     OfertasComponent,
     NovedadesComponent,
     SolicitarAccesoComponent,
+    ListaEmpresasComponent,
+    ListaPostulantesComponent,
+    DashboardComponent,
+    FormularioComponent,
   ],
   imports: [
     BrowserModule,

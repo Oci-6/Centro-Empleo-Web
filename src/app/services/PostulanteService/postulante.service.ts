@@ -17,6 +17,10 @@ export class PostulanteService {
     return this.http.post(this.URL + '/', user);
   }
 
+  getPostulantes(){
+    return this.http.get<Postulante[]>(this.URL + '/');
+  }
+
   infoPostulante(id: number) {
     return this.http.get<Postulante>(this.URL + '/' + id);
   }
@@ -24,5 +28,7 @@ export class PostulanteService {
   modificarPostulante(postulante: Postulante) {
     return this.http.put(this.URL + '/' + postulante.id, postulante);
   }
+
+  
 }
 

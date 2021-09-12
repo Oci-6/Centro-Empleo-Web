@@ -17,6 +17,9 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { StepsModule } from 'primeng/steps';
+
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { InputTextModule } from 'primeng/inputtext';
     DividerModule,
     DialogModule,
     InputTextModule,
+    TableModule,
+    StepsModule,
   ],
   exports: [    
     MenubarModule,
@@ -55,6 +60,8 @@ import { InputTextModule } from 'primeng/inputtext';
     DividerModule,
     DialogModule,
     InputTextModule,
+    TableModule,
+    StepsModule,
   ]
 })
 export class PrimeNgModule { }

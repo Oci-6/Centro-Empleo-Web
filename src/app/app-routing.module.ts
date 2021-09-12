@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
+import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'registrar', component: RegistrarComponent },
   { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
   { path: 'ofertas', component: OfertasComponent },
+  { path: 'empresas', component: ListaEmpresasComponent },
+  { path: 'postulantes', component: ListaPostulantesComponent },
 ];
 
 @NgModule({
