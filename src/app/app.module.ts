@@ -31,6 +31,8 @@ import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empre
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
+import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
+import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
 
 
 
@@ -53,6 +55,8 @@ import { FormularioComponent } from './views/postulante/formulario/formulario.co
     ListaPostulantesComponent,
     DashboardComponent,
     FormularioComponent,
+    DatosPersonalesComponent,
+    EducacionFormacionComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,9 @@ import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/so
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
+import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
+import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
+import { FormularioComponent } from './views/postulante/formulario/formulario.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
 const routes: Routes = [
@@ -16,6 +19,8 @@ const routes: Routes = [
   { path: 'ofertas', component: OfertasComponent },
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
+  { path: 'formulario/datosPersonales', component: DatosPersonalesComponent },
+  { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
 ];
 
 @NgModule({
