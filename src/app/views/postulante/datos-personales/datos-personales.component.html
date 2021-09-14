@@ -1,126 +1,137 @@
-<div class="p-mt-5">
-<p-card >
 <app-formulario></app-formulario>
-
-<div class="FormularioComponent-content p-mt-5">
-<p-card>
-    <ng-template pTemplate="title">
-        Datos Personales
-    </ng-template>
-    <ng-template pTemplate="subtitle">
-        Ingresa tus datos personales
-    </ng-template>
-
-    <div class="p-fluid p-formgrid p-grid" [formGroup]="datosPersonalesForm" (ngSubmit)="ngOnSubmit()">
-
-        <div class="p-field p-field p-col-12 p-md-6">
-            <label for="tipoDocumento">Tipo de Documento</label>
-            <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedTipoD.nombre" placeholder="Tipo de Documento" optionLabel="nombre" formControlName="tipoDocumento"></p-dropdown>
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="documento">N° de documento (sin puntos ni guiones, con dígito
-                verificador)</label>
-            <p-inputNumber [(ngModel)]="postulante.documento" mode="decimal" inputId="documento" [useGrouping]="false"
-                formControlName="documento"></p-inputNumber>
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="primerApellido">Primer Apellido</label>
-            <input id="primerApellido" type="text" required pInputText [(ngModel)]="postulante.primerApellido"
-                formControlName="primerApellido">
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="segundoApellido">Segundo Apellido</label>
-            <input id="segundoApellido" type="text" required pInputText [(ngModel)]="postulante.segundoApellido"
-                formControlName="segundoApellido">
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="primerNombre">Primer Nombre</label>
-            <input id="primerNombre" type="text" required pInputText [(ngModel)]="postulante.primerNombre"
-                formControlName="primerNombre">
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="segundoNombre">Segundo Nombre</label>
-            <input id="segundoNombre" type="text" required pInputText [(ngModel)]="postulante.segundoNombre"
-                formControlName="segundoNombre">
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="sexo">Sexo</label>
-            <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" placeholder="Sexo"  formControlName="sexo"></p-dropdown>
-        </div> 
-
-        <span class="p-field p-col-12 p-md-6">
-            <label for="fechaN">Fecha de Nacimiento</label>
-            <p-calendar inputId="fechaN" [(ngModel)]="fechaN" formControlName="fechaN" dateFormat="dd-mm-yy">
-            </p-calendar>
-        </span>
-
-
-
-
-        <!-- <div class="p-field">
-                                <p-dropdown [options]="pais" [(ngModel)]="selectedPais" placeholder="Pais" optionLabel="name" formControlName="pais"></p-dropdown>
-                            </div> -->
-
-        <!-- <div class="p-field">
-                                <p-dropdown [options]="departamento" [(ngModel)]="selectedDepartamento" placeholder="Departamento" optionLabel="name" formControlName="departamento"></p-dropdown>
-                            </div> -->
-
-        <!-- <div class="p-field">
-                                <p-dropdown [options]="localidad" [(ngModel)]="selectedLocalidad" placeholder="Localidad" optionLabel="name" formControlName="localidad"></p-dropdown>
-                            </div> -->
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="barrio">Barrio</label>
-            <p-inputNumber [(ngModel)]="postulante.barrio" mode="decimal" inputId="barrio" [useGrouping]="false"
-                formControlName="barrio"></p-inputNumber>
-        </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="direccion">Direccion</label>
-            <input id="direccion" type="text" required pInputText [(ngModel)]="postulante.direccion"
-                formControlName="direccion">
-        </div>
-
+<div class="p-mt-5">
+    <p-card>
         
 
-        <div class="p-field p-col-12 p-md-6">
-            <label for="primerTelefono">Primer Telefono</label>
-            <input id="primerTelefono" type="text" required pInputText [(ngModel)]="postulante.primerTelefono"
-                formControlName="primerTelefono">
+        <div class="FormularioComponent-content">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Datos Personales
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    Ingresa tus datos personales
+                </ng-template>
+
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="datosPersonalesForm" (ngSubmit)="ngOnSubmit()">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="tipoDocumento">Tipo de Documento</label>
+                        <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedTipoD.nombre"
+                            placeholder="Tipo de Documento" optionLabel="nombre" formControlName="tipoDocumento">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="documento">N° de documento (sin puntos ni guiones, con dígito
+                            verificador)</label>
+                        <p-inputNumber [(ngModel)]="postulante.documento" mode="decimal" inputId="documento"
+                            [useGrouping]="false" formControlName="documento"></p-inputNumber>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="primerApellido">Primer Apellido</label>
+                        <input id="primerApellido" type="text" required pInputText
+                            [(ngModel)]="postulante.primerApellido" formControlName="primerApellido">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="segundoApellido">Segundo Apellido</label>
+                        <input id="segundoApellido" type="text" required pInputText
+                            [(ngModel)]="postulante.segundoApellido" formControlName="segundoApellido">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="primerNombre">Primer Nombre</label>
+                        <input id="primerNombre" type="text" required pInputText [(ngModel)]="postulante.primerNombre"
+                            formControlName="primerNombre">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="segundoNombre">Segundo Nombre</label>
+                        <input id="segundoNombre" type="text" required pInputText [(ngModel)]="postulante.segundoNombre"
+                            formControlName="segundoNombre">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="sexo">Sexo</label>
+                        <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" placeholder="Sexo"
+                            formControlName="sexo"></p-dropdown>
+                    </div>
+
+                    <span class="p-field p-col-12 p-md-6">
+                        <label for="fechaN">Fecha de Nacimiento</label>
+                        <p-calendar inputId="fechaN" [(ngModel)]="fechaN" formControlName="fechaN"
+                            dateFormat="dd-mm-yy" placeholder={{convertirFecha(postulante.fechaNacimiento)}}>
+                        </p-calendar>
+                    </span>
+
+
+
+
+                    <div class="p-field p-col-12 p-md-2">
+                        <label for="pais">Pais</label>
+                        <p-dropdown [options]="paises" optionLabel="nombre" placeholder="Pais" 
+                            formControlName="pais" [(ngModel)]="selectedPais" inputId="pais" (onChange)="onChangePais()"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&selectedPais.nombre=='Uruguay'">
+                        <label for="departamento">Departamento</label>
+                        <p-dropdown [options]="departamentos" [(ngModel)]="selectedDepartamento"
+                             placeholder="Departamento" optionLabel="nombre" formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento">
+                        <label for="localidad">Localidad</label>
+                        <p-dropdown [options]="localidades" [(ngModel)]="selectedLocalidad" placeholder="Localidad"
+                            optionLabel="nombre" formControlName="localidad" inputId="localidad"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="barrio">Barrio</label>
+                        <input inputId="barrio" type="text" required pInputText [(ngModel)]="postulante.barrio" formControlName="barrio">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="direccion">Direccion</label>
+                        <input id="direccion" type="text" required pInputText [(ngModel)]="postulante.direccion"
+                            formControlName="direccion">
+                    </div>
+
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="primerTelefono">Primer Telefono</label>
+                        <input id="primerTelefono" type="text" required pInputText
+                            [(ngModel)]="postulante.primerTelefono" formControlName="primerTelefono">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="segundoTelefono">Segundo Telefono</label>
+                        <input id="segundoTelefono" type="text" required pInputText
+                            [(ngModel)]="postulante.segundoTelefono" formControlName="segundoTelefono">
+                    </div>
+
+                    <!-- <div class="p-field">
+                        <label for="email">Email</label>
+                        <input id="email" type="text" required pInputText
+                            [(ngModel)]="postulante.email" formControlName="email">
+                    </div> -->
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="noticias" class="p-mr-2"> Desea recibir noticias?</label>
+                        <p-checkbox [(ngModel)]="value" [binary]="true" id="noticias" formControlName="noticias" placeholder="postulante.recibirOfertas"></p-checkbox>
+
+                    </div>
+                    <p-button  label="Next" (onClick)="ngOnSubmit()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                </div>
+
+                <ng-template pTemplate="footer">
+                    <div class="p-grid p-nogutter p-justify-end">
+                        <p-button  label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        </p-button>
+                    </div>
+                </ng-template>
+            </p-card>
         </div>
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="segundoTelefono">Segundo Telefono</label>
-            <input id="segundoTelefono" type="text" required pInputText [(ngModel)]="postulante.segundoTelefono"
-                formControlName="segundoTelefono">
-        </div>
-
-        <!-- <div class="p-field">
-                                <label for="email">Email</label>
-                                <input id="email" type="text" required pInputText
-                                    [(ngModel)]="postulante.email" formControlName="email">
-                            </div> -->
-
-        <div class="p-field p-col-12 p-md-6">
-            <label for="noticias" class="p-mr-2 p-d-inline">Desea recibir noticias?</label>
-            <p-checkbox [(ngModel)]="value" [binary]="true" id="noticias" formControlName="noticias" class="p-d-inline">
-            </p-checkbox>
-
-        </div>
-    </div>
-
-    <ng-template pTemplate="footer">
-        <div class="p-grid p-nogutter p-justify-end">
-            <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-        </div>
-    </ng-template>
-</p-card>
-</div>
-</p-card>
+    </p-card>
 </div>

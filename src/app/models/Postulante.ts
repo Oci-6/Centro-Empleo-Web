@@ -1,3 +1,6 @@
+import { Localidad } from "./Localidad";
+import { Pais } from "./Pais";
+
 export class Postulante {
 
     //Datos Básicos
@@ -40,6 +43,12 @@ export class Postulante {
     visibilidad?: boolean | undefined;
     estado?: boolean | undefined;
     recibirOfertas?: boolean | undefined;
+
+    //Relaciones con otros datos
+    pais?: Pais | undefined;
+    localidad?: Localidad | undefined;
+    paisId?: number | undefined;
+    localidadId?: number | undefined;
 
     constructor() {}
 }

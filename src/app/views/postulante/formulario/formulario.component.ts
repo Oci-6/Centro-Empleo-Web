@@ -20,27 +20,27 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [{
-      label: 'Datos Personales',
+      label: 'Datos',
       routerLink: 'formulario/datosPersonales'
     },
     {
-      label: 'Educacion & Formación',
+      label: 'Educacion',
       routerLink: 'formulario/educacionFormacion'
     },
     {
-      label: 'Experiencia Laboral',
+      label: 'Experiencia',
       routerLink: 'payment'
     },
     {
-      label: 'Permisos & Licencias',
+      label: 'Permisos',
       routerLink: 'confirmation'
     },
     {
-      label: 'Intereses & Preferencias',
+      label: 'Intereses ',
       routerLink: 'confirmation'
     },
     {
-      label: 'CV & Permisos Legales',
+      label: 'CV',
       routerLink: 'confirmation'
     }
     ];

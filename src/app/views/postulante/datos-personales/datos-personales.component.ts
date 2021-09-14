@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Departamento } from 'src/app/models/Departamento';
+import { Localidad } from 'src/app/models/Localidad';
 import { Message } from 'src/app/models/Message';
+import { Pais } from 'src/app/models/Pais';
 import { Postulante } from 'src/app/models/Postulante';
 import { tipoD } from 'src/app/models/tipoD';
+import { PaisService } from 'src/app/services/PaisService/pais.service';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
 
 @Component({
@@ -16,6 +21,10 @@ export class DatosPersonalesComponent implements OnInit {
 
   tipoDocumento: tipoD[] = [];
 
+  public paises: Pais[] = [];
+  public departamentos: Departamento[] = [];
+  public localidades: Localidad[] = [];
+
   sexo: string[] = ['Masculino','Femenino','Otro'];
 
   selectedSexo: string | undefined;
@@ -23,6 +32,9 @@ export class DatosPersonalesComponent implements OnInit {
   postulante: Postulante = {};
 
   selectedTipoD: tipoD = {nombre: ''}; 
+  selectedPais: Pais | undefined;
+  selectedDepartamento: Departamento | undefined;
+  selectedLocalidad: number | undefined;
 
   message: Message | undefined;
 
@@ -41,13 +53,9 @@ export class DatosPersonalesComponent implements OnInit {
     private postulanteService: PostulanteService,
     private messageService: MessageService,
     private router: Router,
+    private paisService: PaisService,
   ) {
     
-    this.tipoDocumento = [
-      {nombre: 'Cedula de Identidad'},
-      {nombre: 'Pasaporte'},
-    ]; 
-
     this.tipoDocumento = [
       {nombre: 'Cedula de Identidad'},
       {nombre: 'Pasaporte'},
@@ -85,6 +93,14 @@ export class DatosPersonalesComponent implements OnInit {
 
     this.getInfoPostulante(this.postulanteId);
 
+    this.paisService.getPaises().subscribe(
+      result =>{
+        this.paises = result;
+      }
+    );
+
+    console.log(this.postulante);
+
   }
 
   getInfoPostulante(postulanteId: number) {
@@ -92,13 +108,36 @@ export class DatosPersonalesComponent implements OnInit {
     this.postulanteService.infoPostulante(postulanteId).subscribe(
       result => {
         this.postulante = result;
+        console.log(this.postulante);
       }
+      
     );
+  }
+
+  convertirFecha(fecha: Date | undefined) {
+
+    return moment(fecha).format("DD-MM-YYYY");
+
+  }
+
+  // getDepartamentos(selectedPais: Pais){
+    
+  // }
+
+  onChangePais(){
+    if(this.selectedPais?.departamentos) this.departamentos = this.selectedPais?.departamentos;
+    console.log(this.selectedPais?.departamentos);
+  }
+
+  onChangeDepartamento(){
+    if(this.selectedDepartamento?.localidades) this.localidades = this.selectedDepartamento?.localidades;
+    console.log(this.selectedPais?.departamentos);
   }
 
   ngOnSubmit() {
     let postulante = new Postulante();
-    postulante.tipoDocumento = this.datosPersonalesForm.controls.tipoDocumento.value;
+    postulante.id = this.postulanteId;
+    postulante.tipoDocumento = this.datosPersonalesForm.controls.tipoDocumento.value.nombre;
     postulante.documento = this.datosPersonalesForm.controls.documento.value;
     postulante.primerNombre = this.datosPersonalesForm.controls.primerApellido.value;
     postulante.segundoNombre = this.datosPersonalesForm.controls.segundoApellido.value;
@@ -106,6 +145,18 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.segundoApellido = this.datosPersonalesForm.controls.segundoNombre.value;
     postulante.sexo = this.datosPersonalesForm.controls.sexo.value;
     postulante.fechaNacimiento = this.datosPersonalesForm.controls.fechaN.value;
+    postulante.pais = this.datosPersonalesForm.controls.pais.value;
+    postulante.paisId = this.datosPersonalesForm.controls.pais.value.id;
+    if(postulante.pais?.nombre=="Uruguay"){
+      postulante.localidadId = this.datosPersonalesForm.controls.localidad.value;
+      console.log(postulante.localidadId)
+    }
+    postulante.barrio = this.datosPersonalesForm.controls.barrio.value;
+    postulante.direccion = this.datosPersonalesForm.controls.direccion.value;
+    postulante.primerTelefono = this.datosPersonalesForm.controls.primerTelefono.value;
+    postulante.segundoTelefono = this.datosPersonalesForm.controls.segundoTelefono.value;
+    postulante.recibirOfertas = this.datosPersonalesForm.controls.noticias.value;
+
 
     console.log(postulante);
 

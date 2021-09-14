@@ -26,7 +26,7 @@ export class PostulanteService {
   }
 
   modificarPostulante(postulante: Postulante) {
-    return this.http.put(this.URL + '/' + postulante.id, postulante);
+    return this.http.put(this.URL + '/', postulante);
   }
 
   

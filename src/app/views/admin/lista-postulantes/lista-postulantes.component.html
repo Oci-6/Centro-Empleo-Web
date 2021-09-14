@@ -27,29 +27,43 @@
     </p-table>
 </p-card>
 
-<p-dialog class="p-grid p-jc-center p-mt-4" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog" [breakpoints]="[{ '960px': '75vw' }]"
-    [style]="{ width: '70vw' }" [baseZIndex]="10000" >
-        <p-card class="p-col p-md-6 p-xl-4">
-            <div class="p-grid p-jc-center p-ai-center p-mb-3">
-                <div class="p-grid">
-                        <div class="p-col">
-                            <div>
-                                <img src="http://c.files.bbci.co.uk/17D60/production/_111223679_coronathumbweb.jpg" class="novedad-imagen" style="width: 100%; height:150px"/>
-                                <!-- selectedPostulante.imagen -->
-                            </div>
-                        </div> 
-                        <div class="p-col">
-                            <input id="primerNombre" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.primerNombre" class="p-mb-2"/>
-                            <label for="primerNombre">Primer Nombre</label>
-                            <input id="primerApellido" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.primerApellido" class="p-mb-2"/>
-                            <label for="primerApellido">Primer Apellido</label>
-                            <input id="documento" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.documento" class="p-mb-2"/>
-                            <label for="documento">Documento</label>
-                        </div>
-                        
-                </div>
-                <input id="disabled-input" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.sexo" />   
+<p-dialog class="p-grid p-jc-center" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog"
+    [breakpoints]="{'960px': '75vw', '640px': '80vw'}" [style]="{width: '30vw'}">
+    <p-card>
+        <div class="p-grid p-formgrid p-grid">
+
+            <div class="p-field ">
+                <img src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png" class="novedad-imagen"
+                    style="width: 100%; height:150px" />
+                <!-- selectedPostulante.imagen -->
             </div>
-        </p-card>
-    
+
+            <div class="p-field p-col-12 p-md-6 p-ml-3">
+                <label for="primerNombre">Primer Nombre</label>
+                <input id="primerNombre" type="text" pInputText [disabled]="true"
+                    [(ngModel)]="selectedPostulante.primerNombre" class="p-mb-2" />
+                <label for="primerApellido">Primer Apellido</label>
+                <input id="primerApellido" type="text" pInputText [disabled]="true"
+                    [(ngModel)]="selectedPostulante.primerApellido" class="p-mb-2" />
+            </div>
+
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+            
+            <div class="p-field p-col-12 p-md-6">
+                <label for="documento">Documento</label>
+                <input id="documento" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.documento" class="p-mb-2" />
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="sexo">Sexo</label>
+                <input id="sexo" type="text" pInputText [disabled]="true" [(ngModel)]="selectedPostulante.sexo" class="p-mb-2" />
+            </div>
+
+        </div>
+        
+
+    </p-card>
+
 </p-dialog>

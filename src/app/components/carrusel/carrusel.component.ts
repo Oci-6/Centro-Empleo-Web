@@ -12,7 +12,7 @@ export class CarruselComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.images = ["http://c.files.bbci.co.uk/17D60/production/_111223679_coronathumbweb.jpg", "http://c.files.bbci.co.uk/17D60/production/_111223679_coronathumbweb.jpg"];
+    this.images = ["https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png", "https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png"];
   }
 
 }

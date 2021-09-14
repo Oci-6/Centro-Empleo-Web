@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'ofertas', component: OfertasComponent },
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
-  { path: 'formulario/datosPersonales', component: DatosPersonalesComponent },
+  { path: 'formulario/datosPersonales/:postulanteId', component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
 ];
 
