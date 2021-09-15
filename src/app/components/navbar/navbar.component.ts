@@ -27,7 +27,8 @@ export class NavbarComponent implements OnInit {
       {
           label:'Ofertas de trabajo',
           icon:'pi pi-briefcase',
-          styleClass: 'mr-2'
+          styleClass: 'mr-2',
+          routerLink: ['/ofertas']
 
       },
       {

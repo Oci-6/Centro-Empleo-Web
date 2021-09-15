@@ -1,1 +1,40 @@
-<p>registrar works!</p>
+<div class="p-grid p-jc-center p-mt-4">
+    <div class="p-col p-md-6 p-xl-4">
+        <p-card header="Registrar" styleClass="p-card-shadow p-p-3 p-text-center">
+            <form [formGroup]="registerForm" (ngSubmit)="ngOnSubmit()">
+                <div class="p-grid p-formgrid p-flex-column p-fluid">
+                    <div class="p-col">
+                        <!-- <p-message *ngIf="!registerForm.valid" severity="error" text="Faltan Campos"></p-message>  -->
+                    </div>
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <input id="email" type="email" formControlName="email" pInputText>
+                            <label for="email">Email</label>
+                        </span>
+                    </div>
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <p-password id="contraseña1" [toggleMask]="true" formControlName="contraseña1"></p-password>
+                            <label for="contraseña1">Contraseña</label>
+                        </span>
+                    </div>
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <p-password id="contraseña2" [toggleMask]="true" formControlName="contraseña2"></p-password>
+                            <label for="contraseña2">Repetir contraseña</label>
+                        </span>
+                    </div>
+                    <div class="p-col p-mt-5">
+                        <p-button type="submit" label="Register" icon="pi pi-check"></p-button>
+                    </div>
+                    <div class="p-col p-mt-3">
+                        <p-divider align="center"><b>O</b></p-divider>
+                    </div>
+                    <div class="p-col p-mt-3">
+                        <p-button label="Login" icon="pi pi-user" routerLink="/login"></p-button>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>

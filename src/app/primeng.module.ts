@@ -17,6 +17,14 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { StepsModule } from 'primeng/steps';
+import {ToastModule} from 'primeng/toast';
+import {DropdownModule} from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {CheckboxModule} from 'primeng/checkbox';
+
 
 @NgModule({
   imports: [
@@ -36,6 +44,13 @@ import { InputTextModule } from 'primeng/inputtext';
     DividerModule,
     DialogModule,
     InputTextModule,
+    TableModule,
+    StepsModule,
+    ToastModule,
+    DropdownModule,
+    CalendarModule,
+    InputNumberModule,
+    CheckboxModule,
   ],
   exports: [    
     MenubarModule,
@@ -54,6 +69,13 @@ import { InputTextModule } from 'primeng/inputtext';
     DividerModule,
     DialogModule,
     InputTextModule,
+    TableModule,
+    StepsModule,
+    ToastModule,
+    DropdownModule,
+    CalendarModule,
+    InputNumberModule,
+    CheckboxModule,
   ]
 })
 export class PrimeNgModule { }

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,17 @@ import { LoginComponent } from './views/login/login.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { NovedadesComponent } from './views/novedades/novedades.component';
+import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
+import { MessageService,  } from 'primeng/api';
+import { AuthService } from './services/Auth/auth.service';
+import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
+import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
+import { FormularioComponent } from './views/postulante/formulario/formulario.component';
+import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
+import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,15 +49,27 @@ import { NovedadesComponent } from './views/novedades/novedades.component';
     LoginComponent,
     RegistrarComponent,
     OfertasComponent,
-    NovedadesComponent
+    NovedadesComponent,
+    SolicitarAccesoComponent,
+    ListaEmpresasComponent,
+    ListaPostulantesComponent,
+    DashboardComponent,
+    FormularioComponent,
+    DatosPersonalesComponent,
+    EducacionFormacionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     //PrimeImports
     PrimeNgModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [{
+  providers: [
+    MessageService,
+    AuthService,
+    {
     provide: 'SocialAuthServiceConfig',
     useValue: {
       autoLogin: false,
