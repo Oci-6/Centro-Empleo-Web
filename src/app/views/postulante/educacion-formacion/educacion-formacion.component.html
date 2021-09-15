@@ -1,129 +1,156 @@
 <app-formulario></app-formulario>
 
 <div class="p-mt-5">
-    <p-card >
-    
-    
-    <div class="FormularioComponent-content p-mt-5">
     <p-card>
-        <ng-template pTemplate="title">
-            Educación & Formación
-        </ng-template>
-        <ng-template pTemplate="subtitle">
-            Ingresa tus datos personales
-        </ng-template>
-    
-        <div class="p-fluid p-formgrid p-grid" [formGroup]="datosPersonalesForm" (ngSubmit)="ngOnSubmit()">
-    
-            <div class="p-field p-field p-col-12 p-md-6">
-                <label for="tipoDocumento">Tipo de Documento</label>
-                <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedTipoD.nombre" placeholder="Tipo de Documento" optionLabel="nombre" formControlName="tipoDocumento"></p-dropdown>
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="documento">N° de documento (sin puntos ni guiones, con dígito
-                    verificador)</label>
-                <p-inputNumber [(ngModel)]="postulante.documento" mode="decimal" inputId="documento" [useGrouping]="false"
-                    formControlName="documento"></p-inputNumber>
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="primerApellido">Primer Apellido</label>
-                <input id="primerApellido" type="text" required pInputText [(ngModel)]="postulante.primerApellido"
-                    formControlName="primerApellido">
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="segundoApellido">Segundo Apellido</label>
-                <input id="segundoApellido" type="text" required pInputText [(ngModel)]="postulante.segundoApellido"
-                    formControlName="segundoApellido">
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="primerNombre">Primer Nombre</label>
-                <input id="primerNombre" type="text" required pInputText [(ngModel)]="postulante.primerNombre"
-                    formControlName="primerNombre">
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="segundoNombre">Segundo Nombre</label>
-                <input id="segundoNombre" type="text" required pInputText [(ngModel)]="postulante.segundoNombre"
-                    formControlName="segundoNombre">
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="sexo">Sexo</label>
-                <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" placeholder="Sexo"  formControlName="sexo"></p-dropdown>
-            </div> 
-    
-            <span class="p-field p-col-12 p-md-6">
-                <label for="fechaN">Fecha de Nacimiento</label>
-                <p-calendar inputId="fechaN" [(ngModel)]="fechaN" formControlName="fechaN" dateFormat="dd-mm-yy">
-                </p-calendar>
-            </span>
-    
-    
-    
-    
-            <!-- <div class="p-field">
-                                    <p-dropdown [options]="pais" [(ngModel)]="selectedPais" placeholder="Pais" optionLabel="name" formControlName="pais"></p-dropdown>
-                                </div> -->
-    
-            <!-- <div class="p-field">
-                                    <p-dropdown [options]="departamento" [(ngModel)]="selectedDepartamento" placeholder="Departamento" optionLabel="name" formControlName="departamento"></p-dropdown>
-                                </div> -->
-    
-            <!-- <div class="p-field">
-                                    <p-dropdown [options]="localidad" [(ngModel)]="selectedLocalidad" placeholder="Localidad" optionLabel="name" formControlName="localidad"></p-dropdown>
-                                </div> -->
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="barrio">Barrio</label>
-                <p-inputNumber [(ngModel)]="postulante.barrio" mode="decimal" inputId="barrio" [useGrouping]="false"
-                    formControlName="barrio"></p-inputNumber>
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="direccion">Direccion</label>
-                <input id="direccion" type="text" required pInputText [(ngModel)]="postulante.direccion"
-                    formControlName="direccion">
-            </div>
-    
-            
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="primerTelefono">Primer Telefono</label>
-                <input id="primerTelefono" type="text" required pInputText [(ngModel)]="postulante.primerTelefono"
-                    formControlName="primerTelefono">
-            </div>
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="segundoTelefono">Segundo Telefono</label>
-                <input id="segundoTelefono" type="text" required pInputText [(ngModel)]="postulante.segundoTelefono"
-                    formControlName="segundoTelefono">
-            </div>
-    
-            <!-- <div class="p-field">
-                                    <label for="email">Email</label>
-                                    <input id="email" type="text" required pInputText
-                                        [(ngModel)]="postulante.email" formControlName="email">
-                                </div> -->
-    
-            <div class="p-field p-col-12 p-md-6">
-                <label for="noticias" class="p-mr-2 p-d-inline">Desea recibir noticias?</label>
-                <p-checkbox [(ngModel)]="value" [binary]="true" id="noticias" formControlName="noticias" class="p-d-inline">
-                </p-checkbox>
-    
-            </div>
+
+
+        <div class="FormularioComponent-content p-mt-5">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Educación & Formación
+                </ng-template>
+
+                <p-divider align="left" type="dashed">
+                    <b>Idiomas</b>
+                </p-divider>
+                <!--Nivel Educativo Formal-->
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="educacionFormacionForm" (ngSubmit)="ngOnSubmit()">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="nivelEducativo">Indique el máximo nivel educativo alcanzado</label>
+                        <p-dropdown [options]="nivelEducativo" [(ngModel)]="postulante.nivelEducativo" formControlName="nivelEducativo"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="estadoNE">Estado</label>
+                        <p-dropdown [options]="estadoNE" [(ngModel)]="postulante.estadoNE" formControlName="estadoNE"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6"
+                        *ngIf="postulante.estadoNE=='Bachillerato Liceo o UTU'|| postulante.estadoNE=='Técnico Profesional UTU' 
+                        || postulante.estadoNE=='Magisterio - Profesorado'|| postulante.estadoNE=='Terciario no universitario'
+                        || postulante.estadoNE=='Universitario'|| postulante.estadoNE=='Posgrado - Master - Doctorado'">
+                        <label for="orientacionNE">Orientación del máximo nivel educativo alcanzado</label>
+                        <input id="orientacionNE" type="text" required pInputText
+                            [(ngModel)]="postulante.orientacionNE" formControlName="orientacionNE">
+                    </div>
+
+                </div>
+                <p-divider align="left" type="dashed">
+                    <b>Capacitacion y Formacion Adicional</b>
+                </p-divider>
+                <!--Capacitación y Formación adicional-->
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="capacitacionFormacionForm" (ngSubmit)="ngOnSubmit()">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="nombreCurso">Nombre del Curso</label>
+                        <input id="nombreCurso" type="text" required pInputText 
+                            [(ngModel)]="capFor.nombre" formControlName="nombreCurso">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="areaT">Área temática</label>
+                        <p-dropdown [options]="areaT" [(ngModel)]="capFor.areaTematica" formControlName="areaT"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="institucion">Institución Educativa</label>
+                        <input id="institucion" type="text" required pInputText 
+                            [(ngModel)]="capFor.institucion" formControlName="institucion">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="fechaInicio">Año de inicio</label>
+                        <input id="fechaInicio" type="text" required pInputText 
+                            [(ngModel)]="capFor.fechaInicio" formControlName="fechaInicio">
+                    </div>
+
+                    <!-- <div class="p-field p-col-12 p-md-6">
+                        <label for="duracion">Duración</label>
+                        <input id="duracion" type="text" required pInputText 
+                            [(ngModel)]="capFor.duracion" formControlName="duracion">
+                        <p-dropdown [options]="tipoDuracion" [(ngModel)]="capFor.tipoDuracion" formControlName="tipoDuracion"></p-dropdown>
+                    </div> -->
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="estadoCurso">Estado del Curso</label>
+                        <p-dropdown [options]="estadoCurso" [(ngModel)]="capFor.estado" formControlName="estadoCurso"></p-dropdown>
+                    </div>
+
+                </div>
+                <p-divider align="left" type="dashed">
+                    <b>Conocimientos Informaticos</b>
+                </p-divider>
+                <!--Conocimientos Informaticos-->
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="conocimientosInformaticosForm" (ngSubmit)="ngOnSubmit()">
+                    
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="nombreApp">Nombre de la Aplicación</label>
+                        <input id="nombreApp" type="text" required pInputText 
+                            [(ngModel)]="conInfo.nombreApp" formControlName="nombreApp">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="categoriaCI">Categoria</label>
+                        <p-dropdown [options]="categoriaCI" [(ngModel)]="conInfo.categoria" formControlName="categoriaCI"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="nivelC">Nivel de Conocimiento</label>
+                        <p-dropdown [options]="nivelC" [(ngModel)]="conInfo.nivelConocimiento" formControlName="nivelC"></p-dropdown>
+                    </div>
+
+                </div>
+                <p-divider align="left" type="dashed">
+                    <b>Idiomas</b>
+                </p-divider>
+                <!--Idioma-->
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="agregarIdiomaForm" (ngSubmit)="ngOnSubmit()">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="idioma">Idioma</label>
+                        <p-dropdown [options]="idiomas" [(ngModel)]="idioma.nombre" formControlName="idioma"></p-dropdown>
+                    </div>
+                    
+                    <div class="p-field p-col-12 p-md-6" *ngIf="idioma.nombre=='Otro'">
+                        <label for="especificacion">Especificación</label>
+                        <input id="especificacion" type="text" required pInputText 
+                            [(ngModel)]="idioma.especificacion" formControlName="especificacion">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="hablaConv">Habla / Conversación</label>
+                        <p-dropdown [options]="hablaConv" [(ngModel)]="idioma.hablaConv" formControlName="hablaConv"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="compAud">Comprensión Auditiva</label>
+                        <p-dropdown [options]="compAud" [(ngModel)]="idioma.compAud" formControlName="compAud"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="compLec">Comprensión Lectora</label>
+                        <p-dropdown [options]="compLec" [(ngModel)]="idioma.compLec" formControlName="compLec"></p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="escritura">Escritura</label>
+                        <p-dropdown [options]="escritura" [(ngModel)]="idioma.escritura" formControlName="escritura"></p-dropdown>
+                    </div>
+
+                </div>
+                
+
+
+
+                <ng-template pTemplate="footer">
+                    <div class="p-grid p-nogutter p-justify-between">
+                        <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        </p-button>
+                    </div>
+                </ng-template>
+            </p-card>
         </div>
-    
-        <ng-template pTemplate="footer">
-            <div class="p-grid p-nogutter p-justify-between">
-                <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-            </div>
-        </ng-template>
     </p-card>
-    </div>
-    </p-card>
-    </div>
+</div>

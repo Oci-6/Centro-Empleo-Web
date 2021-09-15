@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
+import { ConocimientoInfo } from 'src/app/models/ConocimientoInfo';
+import { Idioma } from 'src/app/models/Idioma';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
 import { tipoD } from 'src/app/models/tipoD';
@@ -14,122 +17,97 @@ import { PostulanteService } from 'src/app/services/PostulanteService/postulante
 })
 export class EducacionFormacionComponent implements OnInit {
 
-  tipoDocumento: tipoD[] = [];
-
-  sexo: string[] = ['Masculino','Femenino','Otro'];
-
-  selectedSexo: string | undefined;
-
-  postulante: Postulante = {};
-
-  selectedTipoD: tipoD = {nombre: ''}; 
-
-  message: Message | undefined;
-
-  fechaN = '';
-
-  fecha: Date | undefined | string;
+  nivelEducativo: string[] = ['Primaria', 'Ciclo Básico Liceo', 'Ciclo Básico UTU', 'Bachillerato Liceo', 'Bachillerato Liceo o UTU', 'Técnico Profesional UTU', 'Magisterio - Profesorado', 'Terciario no universitario', 'Universitario', 'Posgrado - Master - Doctorado'];
+  estadoNE: string[] = ['Completo', 'Incompleto', 'Cursando']
+  areaT: string[] = ['Administración - Secretariado', 'Arte - Cultura', 'Atención al Cliente', 'Automotriz - Mecánica', 'Banca - Servicios Financieros', 'Comercio - Maercado - Ventas', 'Comunicación', 'Oficios - Construcción - Servicios Varios', 'Contabilidad - Auditoría - Finanzas', 'Diseño - Marketing - Publicidad', 'Estética', 'Gastronomía', 'Idiomas', 'Informática', 'Recursos Humanos', 'Salud', 'Seguridad / Vigilancia', 'Tecnologías de la Información', 'Turismo - Hotelería', 'Otro'];
+  tipoDuracion: string[] = ['Años', 'Meses', 'Días', 'Horas'];
+  estadoCurso: string[] = ['En curso', 'Finalizado', 'No finalizado'];
+  categoriaCI: string[] = ['Ofimática', 'Base de Datos', 'Comunicación', 'Diseño', 'Herramientas de Gestión', 'Herramientas de Contabilidad', 'Lenguaje de Programación', 'Paquetes integrados', 'Sistemas Operativos', 'Otro']
+  nivelC: string[] = ['Nivel Usuario', 'Nivel Profesional', 'Nivel Experto'];
+  idiomas: string[] = ['Alemán', 'Chino ', 'Coreano', 'Español', 'Francés', 'Inglés', 'Italiano', 'Japonés', 'Portugués', 'Lenguaje de Señas', 'Otro']
+  hablaConv: string[] = ['No', 'Básico', 'Regular', 'Fluido']
+  compAud: string[] = ['No', 'Básico', 'Regular', 'Fluido']
+  compLec: string[] = ['No', 'Básico', 'Regular', 'Fluido']
+  escritura: string[] = ['No', 'Básico', 'Regular', 'Fluido']
 
   postulanteId: number | undefined;
+  public educacionFormacionForm: FormGroup = new FormGroup({});
+  public capacitacionFormacionForm: FormGroup = new FormGroup({});
+  public conocimientosInformaticosForm: FormGroup = new FormGroup({});
+  public agregarIdiomaForm: FormGroup = new FormGroup({});
 
-  public datosPersonalesForm: FormGroup = new FormGroup({});
+  arreglo: FormGroup[] = [];
 
-  value: boolean = false;
+  postulante: Postulante = {};
+  capFor: CapacitacionFormacion = {};
+  conInfo: ConocimientoInfo = {};
+  idioma: Idioma = {};
+
 
   constructor(
     private route: ActivatedRoute,
-    private postulanteService: PostulanteService,
     private messageService: MessageService,
-    private router: Router,
-  ) {
-    
-    this.tipoDocumento = [
-      {nombre: 'Cedula de Identidad'},
-      {nombre: 'Pasaporte'},
-    ]; 
-
-    this.tipoDocumento = [
-      {nombre: 'Cedula de Identidad'},
-      {nombre: 'Pasaporte'},
-    ]; 
-
-  }
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
 
-      // Route params
+    // Route params
     const routeParams = this.route.snapshot.paramMap;
     this.postulanteId = Number(routeParams.get('postulanteId'));
 
-    this.datosPersonalesForm = new FormGroup({
-      tipoDocumento: new FormControl('', [Validators.required]),
-      documento: new FormControl('', [Validators.required]),
-      primerApellido: new FormControl('', [Validators.required]),
-      segundoApellido: new FormControl(''),
-      primerNombre: new FormControl('', [Validators.required]),
-      segundoNombre: new FormControl(''),
-      sexo: new FormControl('', [Validators.required]),
-      fechaN: new FormControl('', [Validators.required]),
-
-      pais: new FormControl('', [Validators.required]),
-      departamento: new FormControl('', [Validators.required]),
-      localidad: new FormControl('', [Validators.required]),
-      barrio: new FormControl(''),
-      direccion: new FormControl('', [Validators.required]),
-
-      primerTelefono: new FormControl('', [Validators.required]),
-      segundoTelefono: new FormControl(''),
-      
-      noticias: new FormControl('', [Validators.required]),
+    this.educacionFormacionForm = new FormGroup({
+      nivelEducativo: new FormControl('', [Validators.required]),
+      estadoNE: new FormControl('', [Validators.required]),
+      orientacionNE: new FormControl('', [Validators.required]),
+    });
+    this.capacitacionFormacionForm = new FormGroup({
+      nombreCurso: new FormControl('', [Validators.required]),
+      areaT: new FormControl('', [Validators.required]),
+      institucion: new FormControl('', [Validators.required]),
+      fechaInicio: new FormControl('', [Validators.required]),
+      tipoDuracion: new FormControl('', [Validators.required]),
+      estadoCurso: new FormControl('', [Validators.required]),
+    });
+    this.conocimientosInformaticosForm = new FormGroup({
+      nombreApp: new FormControl('', [Validators.required]),
+      categoriaCI: new FormControl('', [Validators.required]),
+      nivelC: new FormControl('', [Validators.required]),
+    });
+    this.agregarIdiomaForm = new FormGroup({
+      idioma: new FormControl('', [Validators.required]),
+      especificacion: new FormControl('', [Validators.required]),
+      hablaConv: new FormControl('', [Validators.required]),
+      compAud: new FormControl('', [Validators.required]),
+      compLec: new FormControl('', [Validators.required]),
+      escritura: new FormControl('', [Validators.required]),
     });
 
-    this.getInfoPostulante(this.postulanteId);
+    // this.getInfoPostulante(this.postulanteId);
 
   }
 
-  getInfoPostulante(postulanteId: number) {
+  // getInfoPostulante(postulanteId: number) {
 
-    this.postulanteService.infoPostulante(postulanteId).subscribe(
-      result => {
-        this.postulante = result;
-      }
-    );
-  }
+  //   this.postulanteService.infoPostulante(postulanteId).subscribe(
+  //     result => {
+  //       this.postulante = result;
+  //     }
+  //   );
+  // }
 
   ngOnSubmit() {
-    let postulante = new Postulante();
-    postulante.tipoDocumento = this.datosPersonalesForm.controls.tipoDocumento.value;
-    postulante.documento = this.datosPersonalesForm.controls.documento.value;
-    postulante.primerNombre = this.datosPersonalesForm.controls.primerApellido.value;
-    postulante.segundoNombre = this.datosPersonalesForm.controls.segundoApellido.value;
-    postulante.primerApellido = this.datosPersonalesForm.controls.primerNombre.value;
-    postulante.segundoApellido = this.datosPersonalesForm.controls.segundoNombre.value;
-    postulante.sexo = this.datosPersonalesForm.controls.sexo.value;
-    postulante.fechaNacimiento = this.datosPersonalesForm.controls.fechaN.value;
-
-    console.log(postulante);
-
-    this.postulanteService.modificarPostulante(postulante).subscribe(
-      response => {
-
-        this.datosPersonalesForm.reset;
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
-      }
-    );
-
+    
   }
 
   nextPage() {
-        this.router.navigate(['formulario/educacionFormacion']);
+    this.router.navigate(['formulario/educacionFormacion']);
 
-      return;
-    }
+    return;
+  }
 
-    prevPage() {
-      this.router.navigate(['formulario/datosPersonales']);
+  prevPage() {
+    this.router.navigate(['formulario/datosPersonales']);
   }
 
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
   { path: 'formulario/datosPersonales/:postulanteId', component: DatosPersonalesComponent },
-  { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
+  { path: 'formulario/educacionFormacion/:postulanteId', component: EducacionFormacionComponent },
 ];
 
 @NgModule({
