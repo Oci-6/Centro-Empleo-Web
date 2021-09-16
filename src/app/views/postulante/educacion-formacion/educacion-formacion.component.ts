@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
@@ -31,8 +31,8 @@ export class EducacionFormacionComponent implements OnInit {
   escritura: string[] = ['No', 'Básico', 'Regular', 'Fluido']
 
   postulanteId: number | undefined;
+  
   public educacionFormacionForm: FormGroup = new FormGroup({});
-  public capacitacionFormacionForm: FormGroup = new FormGroup({});
   public conocimientosInformaticosForm: FormGroup = new FormGroup({});
   public agregarIdiomaForm: FormGroup = new FormGroup({});
 
@@ -43,11 +43,22 @@ export class EducacionFormacionComponent implements OnInit {
   conInfo: ConocimientoInfo = {};
   idioma: Idioma = {};
 
+  // educacionFormacionForm = this.fb.group({
+  //   nivelE: this.fb.array([])
+  // });
+
+  capacitacionFormacionForm = this.fb.group({
+    capacitaciones: this.fb.array([])
+  });
+
+  
+
 
   constructor(
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder,
     ) { }
 
   ngOnInit(): void {
@@ -61,14 +72,14 @@ export class EducacionFormacionComponent implements OnInit {
       estadoNE: new FormControl('', [Validators.required]),
       orientacionNE: new FormControl('', [Validators.required]),
     });
-    this.capacitacionFormacionForm = new FormGroup({
-      nombreCurso: new FormControl('', [Validators.required]),
-      areaT: new FormControl('', [Validators.required]),
-      institucion: new FormControl('', [Validators.required]),
-      fechaInicio: new FormControl('', [Validators.required]),
-      tipoDuracion: new FormControl('', [Validators.required]),
-      estadoCurso: new FormControl('', [Validators.required]),
-    });
+    // this.capacitacionFormacionForm = new FormGroup({
+    //   nombreCurso: new FormControl('', [Validators.required]),
+    //   areaT: new FormControl('', [Validators.required]),
+    //   institucion: new FormControl('', [Validators.required]),
+    //   fechaInicio: new FormControl('', [Validators.required]),
+    //   tipoDuracion: new FormControl('', [Validators.required]),
+    //   estadoCurso: new FormControl('', [Validators.required]),
+    // });
     this.conocimientosInformaticosForm = new FormGroup({
       nombreApp: new FormControl('', [Validators.required]),
       categoriaCI: new FormControl('', [Validators.required]),
@@ -98,6 +109,41 @@ export class EducacionFormacionComponent implements OnInit {
 
   ngOnSubmit() {
     
+  }
+
+  // get nivelE(){
+  //   return this.educacionFormacionForm.controls["nivelE"] as FormArray;
+  // }
+
+  // addNE(){
+  //   const nivelEducativoForm = this.fb.group({
+  //     nivelNE: ['', Validators.required],
+  //     estadoNE: ['', Validators.required],
+  //     orientacionNE: ['', Validators.required],
+  //   });
+
+  //   this.nivelE.push(nivelEducativoForm);
+  // }
+
+  get capacitaciones(){
+    return this.capacitacionFormacionForm.get('capacitaciones') as FormArray;
+  }
+
+  addCapFor(){
+    const CapForForm = this.fb.group({
+      nombreCurso: ['', Validators.required],
+      areaT: ['', Validators.required],
+      institucion: ['', Validators.required],
+      fechaInicio: ['', Validators.required],
+      tipoDuracion: ['', Validators.required],
+      estadoCurso: ['', Validators.required],
+    });
+
+    this.capacitaciones.push(CapForForm);
+  }
+
+  deleteCapFor(capForIndex:number){
+    this.capacitaciones.removeAt(capForIndex);
   }
 
   nextPage() {

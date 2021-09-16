@@ -11,19 +11,22 @@
                 </ng-template>
 
                 <p-divider align="left" type="dashed">
-                    <b>Idiomas</b>
+                    <b>Nivel Educativo Formal</b>
                 </p-divider>
+
                 <!--Nivel Educativo Formal-->
                 <div class="p-fluid p-formgrid p-grid" [formGroup]="educacionFormacionForm" (ngSubmit)="ngOnSubmit()">
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nivelEducativo">Indique el máximo nivel educativo alcanzado</label>
-                        <p-dropdown [options]="nivelEducativo" [(ngModel)]="postulante.nivelEducativo" formControlName="nivelEducativo"></p-dropdown>
+                        <p-dropdown [options]="nivelEducativo" [(ngModel)]="postulante.nivelEducativo"
+                            formControlName="nivelEducativo"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="estadoNE">Estado</label>
-                        <p-dropdown [options]="estadoNE" [(ngModel)]="postulante.estadoNE" formControlName="estadoNE"></p-dropdown>
+                        <p-dropdown [options]="estadoNE" [(ngModel)]="postulante.estadoNE" formControlName="estadoNE">
+                        </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6"
@@ -31,115 +34,147 @@
                         || postulante.estadoNE=='Magisterio - Profesorado'|| postulante.estadoNE=='Terciario no universitario'
                         || postulante.estadoNE=='Universitario'|| postulante.estadoNE=='Posgrado - Master - Doctorado'">
                         <label for="orientacionNE">Orientación del máximo nivel educativo alcanzado</label>
-                        <input id="orientacionNE" type="text" required pInputText
-                            [(ngModel)]="postulante.orientacionNE" formControlName="orientacionNE">
+                        <input id="orientacionNE" type="text" required pInputText [(ngModel)]="postulante.orientacionNE"
+                            formControlName="orientacionNE">
                     </div>
 
                 </div>
+
                 <p-divider align="left" type="dashed">
                     <b>Capacitacion y Formacion Adicional</b>
                 </p-divider>
+
                 <!--Capacitación y Formación adicional-->
-                <div class="p-fluid p-formgrid p-grid" [formGroup]="capacitacionFormacionForm" (ngSubmit)="ngOnSubmit()">
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="capacitacionFormacionForm">
 
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="nombreCurso">Nombre del Curso</label>
-                        <input id="nombreCurso" type="text" required pInputText 
-                            [(ngModel)]="capFor.nombre" formControlName="nombreCurso">
-                    </div>
+                    <ng-container formArrayName="capacitaciones">
 
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="areaT">Área temática</label>
-                        <p-dropdown [options]="areaT" [(ngModel)]="capFor.areaTematica" formControlName="areaT"></p-dropdown>
-                    </div>
+                        <div *ngFor="let CapForForm of capacitaciones.controls; let i = index" [formGroupName]="i">
 
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="institucion">Institución Educativa</label>
-                        <input id="institucion" type="text" required pInputText 
-                            [(ngModel)]="capFor.institucion" formControlName="institucion">
-                    </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="nombreCurso">Nombre del Curso</label>
+                                <input id="nombreCurso" type="text" required pInputText [(ngModel)]="capFor.nombre"
+                                    formControlName="nombreCurso[i]">
+                            </div>
 
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="fechaInicio">Año de inicio</label>
-                        <input id="fechaInicio" type="text" required pInputText 
-                            [(ngModel)]="capFor.fechaInicio" formControlName="fechaInicio">
-                    </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="areaT">Área temática</label>
+                                <p-dropdown [options]="areaT" [(ngModel)]="capFor.areaTematica" formControlName="areaT[i]">
+                                </p-dropdown>
+                            </div>
 
-                    <!-- <div class="p-field p-col-12 p-md-6">
-                        <label for="duracion">Duración</label>
-                        <input id="duracion" type="text" required pInputText 
-                            [(ngModel)]="capFor.duracion" formControlName="duracion">
-                        <p-dropdown [options]="tipoDuracion" [(ngModel)]="capFor.tipoDuracion" formControlName="tipoDuracion"></p-dropdown>
-                    </div> -->
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="institucion">Institución Educativa</label>
+                                <input id="institucion" type="text" required pInputText [(ngModel)]="capFor.institucion"
+                                    formControlName="institucion[i]">
+                            </div>
 
-                    <div class="p-field p-col-12 p-md-6">
-                        <label for="estadoCurso">Estado del Curso</label>
-                        <p-dropdown [options]="estadoCurso" [(ngModel)]="capFor.estado" formControlName="estadoCurso"></p-dropdown>
-                    </div>
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="fechaInicio">Año de inicio</label>
+                                <input id="fechaInicio" type="text" required pInputText [(ngModel)]="capFor.fechaInicio"
+                                    formControlName="fechaInicio[i]">
+                            </div>
+
+                            <!-- <div class="p-field p-col-12 p-md-6">
+                                <label for="duracion">Duración</label>
+                                <input id="duracion" type="text" required pInputText 
+                                    [(ngModel)]="capFor.duracion" formControlName="duracion">
+                                <p-dropdown [options]="tipoDuracion" [(ngModel)]="capFor.tipoDuracion" formControlName="tipoDuracion"></p-dropdown>
+                                </div> -->
+
+                            <div class="p-field p-col-12 p-md-6">
+                                <label for="estadoCurso">Estado del Curso</label>
+                                <p-dropdown [options]="estadoCurso" [(ngModel)]="capFor.estado"
+                                    formControlName="estadoCurso[i]"></p-dropdown>
+                            </div>
+
+                            <p-button label="Borrar Capacitacion" (onClick)="deleteCapFor(i)" icon="pi pi-minus">
+                            </p-button>
+
+
+                        </div>
+
+                    </ng-container>
+
+
+
+                    <p-button label="Agregar Capacitacion" (onClick)="addCapFor()" icon="pi pi-plus"></p-button>
 
                 </div>
+
                 <p-divider align="left" type="dashed">
                     <b>Conocimientos Informaticos</b>
                 </p-divider>
+
                 <!--Conocimientos Informaticos-->
-                <div class="p-fluid p-formgrid p-grid" [formGroup]="conocimientosInformaticosForm" (ngSubmit)="ngOnSubmit()">
-                    
+                <div class="p-fluid p-formgrid p-grid" [formGroup]="conocimientosInformaticosForm"
+                    (ngSubmit)="ngOnSubmit()">
+
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nombreApp">Nombre de la Aplicación</label>
-                        <input id="nombreApp" type="text" required pInputText 
-                            [(ngModel)]="conInfo.nombreApp" formControlName="nombreApp">
+                        <input id="nombreApp" type="text" required pInputText [(ngModel)]="conInfo.nombreApp"
+                            formControlName="nombreApp">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="categoriaCI">Categoria</label>
-                        <p-dropdown [options]="categoriaCI" [(ngModel)]="conInfo.categoria" formControlName="categoriaCI"></p-dropdown>
+                        <p-dropdown [options]="categoriaCI" [(ngModel)]="conInfo.categoria"
+                            formControlName="categoriaCI"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nivelC">Nivel de Conocimiento</label>
-                        <p-dropdown [options]="nivelC" [(ngModel)]="conInfo.nivelConocimiento" formControlName="nivelC"></p-dropdown>
+                        <p-dropdown [options]="nivelC" [(ngModel)]="conInfo.nivelConocimiento" formControlName="nivelC">
+                        </p-dropdown>
                     </div>
 
                 </div>
+
                 <p-divider align="left" type="dashed">
                     <b>Idiomas</b>
                 </p-divider>
+
                 <!--Idioma-->
                 <div class="p-fluid p-formgrid p-grid" [formGroup]="agregarIdiomaForm" (ngSubmit)="ngOnSubmit()">
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="idioma">Idioma</label>
-                        <p-dropdown [options]="idiomas" [(ngModel)]="idioma.nombre" formControlName="idioma"></p-dropdown>
+                        <p-dropdown [options]="idiomas" [(ngModel)]="idioma.nombre" formControlName="idioma">
+                        </p-dropdown>
                     </div>
-                    
+
                     <div class="p-field p-col-12 p-md-6" *ngIf="idioma.nombre=='Otro'">
                         <label for="especificacion">Especificación</label>
-                        <input id="especificacion" type="text" required pInputText 
-                            [(ngModel)]="idioma.especificacion" formControlName="especificacion">
+                        <input id="especificacion" type="text" required pInputText [(ngModel)]="idioma.especificacion"
+                            formControlName="especificacion">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="hablaConv">Habla / Conversación</label>
-                        <p-dropdown [options]="hablaConv" [(ngModel)]="idioma.hablaConv" formControlName="hablaConv"></p-dropdown>
+                        <p-dropdown [options]="hablaConv" [(ngModel)]="idioma.hablaConv" formControlName="hablaConv">
+                        </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="compAud">Comprensión Auditiva</label>
-                        <p-dropdown [options]="compAud" [(ngModel)]="idioma.compAud" formControlName="compAud"></p-dropdown>
+                        <p-dropdown [options]="compAud" [(ngModel)]="idioma.compAud" formControlName="compAud">
+                        </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="compLec">Comprensión Lectora</label>
-                        <p-dropdown [options]="compLec" [(ngModel)]="idioma.compLec" formControlName="compLec"></p-dropdown>
+                        <p-dropdown [options]="compLec" [(ngModel)]="idioma.compLec" formControlName="compLec">
+                        </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="escritura">Escritura</label>
-                        <p-dropdown [options]="escritura" [(ngModel)]="idioma.escritura" formControlName="escritura"></p-dropdown>
+                        <p-dropdown [options]="escritura" [(ngModel)]="idioma.escritura" formControlName="escritura">
+                        </p-dropdown>
                     </div>
 
                 </div>
-                
+
 
 
 
