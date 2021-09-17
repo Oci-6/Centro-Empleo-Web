@@ -117,7 +117,8 @@ export class DatosPersonalesComponent implements OnInit {
         if (result.pais?.departamentos)this.departamentos = result.pais?.departamentos;
         if (result.localidad?.departamento?.nombre) this.selectedDepartamento = result.localidad?.departamento;
         if (result.localidad) this.selectedLocalidad = result.localidad;
-        this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
+        // this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
+        console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
         this.getLocalidades(this.selectedDepartamento?.id);
@@ -149,6 +150,7 @@ export class DatosPersonalesComponent implements OnInit {
   convertirFecha(fecha: Date | undefined) : Date {
 
     return moment(fecha,"DD-MM-YYYY").toDate();
+    
 
   }
 
