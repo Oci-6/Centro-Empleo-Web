@@ -51,38 +51,38 @@
 
                         <div *ngFor="let CapForForm of capacitaciones.controls; let i = index" [formGroupName]="i">
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field p-md-6">
                                 <label for="nombreCurso">Nombre del Curso</label>
                                 <input id="nombreCurso" type="text" required pInputText
                                     [formControlName]="i+'nombreCurso'">
                             </div>
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field">
                                 <label for="areaT">Área temática</label>
                                 <p-dropdown [options]="areaT" [formControlName]="i+'areaT'">
                                 </p-dropdown>
                             </div>
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field">
                                 <label for="institucion">Institución Educativa</label>
                                 <input id="institucion" type="text" required pInputText
                                     [formControlName]="i+'institucion'">
                             </div>
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field">
                                 <label for="fechaInicio">Año de inicio</label>
                                 <input id="fechaInicio" type="text" required pInputText
                                     [formControlName]="i+'fechaInicio'">
                             </div>
 
-                            <!-- <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field">
                                 <label for="duracion">Duración</label>
                                 <input id="duracion" type="text" required pInputText 
-                                    [(ngModel)]="capFor.duracion" [formControlName]="duracion">
-                                <p-dropdown [options]="tipoDuracion" [(ngModel)]="capFor.tipoDuracion" [formControlName]="tipoDuracion"></p-dropdown>
-                                </div> -->
+                                    [formControlName]="i+'duracion'">
+                                <p-dropdown [options]="tipoDuracion" [formControlName]="i+'tipoDuracion'"></p-dropdown>
+                                </div>
 
-                            <div class="p-field p-col-12 p-md-6">
+                            <div class="p-field">
                                 <label for="estadoCurso">Estado del Curso</label>
                                 <p-dropdown [options]="estadoCurso" [formControlName]="i+'estadoCurso'"></p-dropdown>
                             </div>

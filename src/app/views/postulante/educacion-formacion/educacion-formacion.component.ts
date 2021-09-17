@@ -31,15 +31,15 @@ export class EducacionFormacionComponent implements OnInit {
   escritura: string[] = ['No', 'Básico', 'Regular', 'Fluido']
 
   postulanteId: number | undefined;
-  
-  
+
+
   public educacionFormacionForm: FormGroup = new FormGroup({});
 
   submitted: boolean | undefined = false;
 
   selectedNE: string | undefined;
   selectedEstadoNE: string | undefined;
-  
+
 
   arreglo: FormGroup[] = [];
 
@@ -60,7 +60,7 @@ export class EducacionFormacionComponent implements OnInit {
   agregarIdiomaForm = this.fb.group({
     IdiomasArreglo: this.fb.array([])
   });
-  
+
 
   constructor(
     private route: ActivatedRoute,
@@ -68,7 +68,7 @@ export class EducacionFormacionComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private postulanteService: PostulanteService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
@@ -108,6 +108,32 @@ export class EducacionFormacionComponent implements OnInit {
 
     // a
 
+    this.capacitaciones.controls.forEach((element: any, index: number) => {
+
+      let cF: CapacitacionFormacion = new CapacitacionFormacion();
+
+      if(element.controls[index+"id"]){
+        cF.id = element.controls[index+"id"].value;
+      }
+      cF.nombre = element.controls[index + "nombreCurso"].value;
+      cF.areaTematica = element.controls[index + "areaT"].value;
+      cF.institucion = element.controls[index + "institucion"].value;
+      cF.fechaInicio = element.controls[index + "fechaInicio"].value;
+      cF.estado = element.controls[index + "estadoCurso"].value;
+      cF.tipoDuracion = element.controls[index + "tipoDuracion"].value;
+      cF.duracion = element.controls[index + "duracion"].value;
+
+      if (this.postulanteId)
+        this.postulanteService.postCapacitacion(this.postulanteId, cF).subscribe(
+          response => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+
+          },
+          error => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+          }
+        )
+    })
 
   }
 
@@ -118,76 +144,101 @@ export class EducacionFormacionComponent implements OnInit {
         this.postulante = result;
         this.selectedNE = result.nivelEducativo;
         this.selectedEstadoNE = result.estadoNE;
-    
+
+        this.postulante.capacitacionFormacion?.forEach((capacitacion: CapacitacionFormacion) => {
+          const CapForForm = this.fb.group({
+          });
+          CapForForm.addControl(this.capacitaciones.length + 'id', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required));
+
+          CapForForm.controls[this.capacitaciones.length + "id"].setValue(capacitacion.id);
+          CapForForm.controls[this.capacitaciones.length + "nombreCurso"].setValue(capacitacion.nombre);
+          CapForForm.controls[this.capacitaciones.length + "areaT"].setValue(capacitacion.areaTematica);
+          CapForForm.controls[this.capacitaciones.length + "institucion"].setValue(capacitacion.institucion);
+          CapForForm.controls[this.capacitaciones.length + "fechaInicio"].setValue(capacitacion.fechaInicio);
+          CapForForm.controls[this.capacitaciones.length + "estadoCurso"].setValue(capacitacion.estado);
+          CapForForm.controls[this.capacitaciones.length + "tipoDuracion"].setValue(capacitacion.tipoDuracion);
+          CapForForm.controls[this.capacitaciones.length + "duracion"].setValue(capacitacion.duracion);
+          // console.log(this.capacitaciones);
+          // console.log(this.capacitaciones.length+'nombreCurso');
+          this.capacitaciones.push(CapForForm);
+        })
       }
-      
+
     );
   }
-  
+
   //Get de arreglos
-  get capacitaciones(){
+  get capacitaciones() {
     return this.capacitacionFormacionForm.get('capacitaciones') as FormArray;
   }
 
-  get conocimientosI(){
+  get conocimientosI() {
     return this.conocimientosInformaticosForm.get('conocimientosI') as FormArray;
   }
 
-  get IdiomasArreglo(){
+  get IdiomasArreglo() {
     return this.agregarIdiomaForm.get('IdiomasArreglo') as FormArray;
   }
 
   //Add FormGroups a los arreglos
-  addCapFor(){
+  addCapFor() {
     const CapForForm = this.fb.group({
     });
-    CapForForm.addControl(this.capacitaciones.length+'nombreCurso', new FormControl ('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length+'areaT', new FormControl ('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length+'institucion', new FormControl ('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length+'fechaInicio', new FormControl ('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length+'tipoDuracion', new FormControl ('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length+'estadoCurso', new FormControl ('', Validators.required)),
-    // console.log(this.capacitaciones);
-    // console.log(this.capacitaciones.length+'nombreCurso');
-    this.capacitaciones.push(CapForForm);
+    CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required)),
+      // console.log(this.capacitaciones);
+      // console.log(this.capacitaciones.length+'nombreCurso');
+      this.capacitaciones.push(CapForForm);
   }
 
-  addConocimientosI(){
+  addConocimientosI() {
     const ConIForm = this.fb.group({
     });
-    ConIForm.addControl(this.conocimientosI.length+'nombreApp', new FormControl ('', Validators.required)),
-    ConIForm.addControl(this.conocimientosI.length+'categoriaCI', new FormControl ('', Validators.required)),
-    ConIForm.addControl(this.conocimientosI.length+'nivelC', new FormControl ('', Validators.required));
+    ConIForm.addControl(this.conocimientosI.length + 'nombreApp', new FormControl('', Validators.required)),
+      ConIForm.addControl(this.conocimientosI.length + 'categoriaCI', new FormControl('', Validators.required)),
+      ConIForm.addControl(this.conocimientosI.length + 'nivelC', new FormControl('', Validators.required));
     console.log(this.conocimientosI);
-    console.log(this.conocimientosI.length+'nombreCurso');
+    console.log(this.conocimientosI.length + 'nombreCurso');
     this.conocimientosI.push(ConIForm);
   }
 
-  addIdioma(){
+  addIdioma() {
     const IdiomaForm = this.fb.group({
     });
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'idioma', new FormControl ('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'especificacion', new FormControl ('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'hablaConv', new FormControl ('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'compAud', new FormControl ('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'compLec', new FormControl ('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length+'escritura', new FormControl ('', Validators.required));
+    IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'escritura', new FormControl('', Validators.required));
     console.log(this.IdiomasArreglo);
-    console.log(this.IdiomasArreglo.length+'nombreCurso');
+    console.log(this.IdiomasArreglo.length + 'nombreCurso');
     this.IdiomasArreglo.push(IdiomaForm);
   }
-  
-  
+
+
   //Borrar FormGroups de los arreglos
-  deleteCapFor(capForIndex:number){
+  deleteCapFor(capForIndex: number) {
     this.capacitaciones.removeAt(capForIndex);
   }
 
-  deleteConI(conIIndex:number){
+  deleteConI(conIIndex: number) {
     this.conocimientosI.removeAt(conIIndex);
   }
 
-  deleteIdioma(idiomaIndex:number){
+  deleteIdioma(idiomaIndex: number) {
     this.IdiomasArreglo.removeAt(idiomaIndex);
   }
 
@@ -202,14 +253,14 @@ export class EducacionFormacionComponent implements OnInit {
     this.router.navigate(['formulario/datosPersonales']);
   }
 
-  submit(){
+  submit() {
     console.log(this.capacitaciones.controls);
   }
 
-  submit2(){
+  submit2() {
     console.log(this.conocimientosI.controls);
   }
-  submit3(){
+  submit3() {
     console.log(this.IdiomasArreglo.controls);
   }
 

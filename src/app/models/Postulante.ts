@@ -1,3 +1,4 @@
+import { CapacitacionFormacion } from "./CapacitacionFormacion";
 import { Localidad } from "./Localidad";
 import { Pais } from "./Pais";
 
@@ -49,6 +50,8 @@ export class Postulante {
     localidad?: Localidad | undefined;
     paisId?: number | undefined;
     localidadId?: number | undefined;
+
+    capacitacionFormacion?: CapacitacionFormacion[] | undefined;
 
     constructor() {}
 }

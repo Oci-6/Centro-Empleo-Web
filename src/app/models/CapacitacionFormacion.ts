@@ -11,6 +11,7 @@ export class CapacitacionFormacion {
     estado?: string | undefined;
 
     postulante?: Postulante | undefined;
+    tipoDuracion?: string | undefined;
 
     constructor() {}
 }
