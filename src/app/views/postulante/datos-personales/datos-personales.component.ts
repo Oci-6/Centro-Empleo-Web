@@ -9,6 +9,7 @@ import { Message } from 'src/app/models/Message';
 import { Pais } from 'src/app/models/Pais';
 import { Postulante } from 'src/app/models/Postulante';
 import { tipoD } from 'src/app/models/tipoD';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 import { PaisService } from 'src/app/services/PaisService/pais.service';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
 
@@ -26,13 +27,13 @@ export class DatosPersonalesComponent implements OnInit {
   public departamentos: Departamento[] = [];
   public localidades: Localidad[] = [];
 
-  sexo: string[] = ['Masculino','Femenino','Otro'];
+  sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
 
   selectedSexo: string | undefined;
 
   postulante: Postulante = {};
 
-  selectedTipoD: tipoD = {nombre: ''}; 
+  selectedTipoD: tipoD = { nombre: '' };
   selectedPais: Pais | undefined;
   selectedDepartamento: Departamento | undefined;
   selectedLocalidad: Localidad | undefined;
@@ -56,55 +57,55 @@ export class DatosPersonalesComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private paisService: PaisService,
+    private authService: AuthService,
   ) {
-    
+
     this.tipoDocumento = [
-      {nombre: 'Cedula de Identidad'},
-      {nombre: 'Pasaporte'},
-    ]; 
+      { nombre: 'Cedula de Identidad' },
+      { nombre: 'Pasaporte' },
+    ];
 
   }
 
   ngOnInit(): void {
 
-      // Route params
-    const routeParams = this.route.snapshot.paramMap;
-    this.postulanteId = Number(routeParams.get('postulanteId'));
+    // Route params
+    this.postulanteId = this.authService.getUser();
+    if (this.postulanteId) {
+      this.datosPersonalesForm = new FormGroup({
+        tipoDocumento: new FormControl('', [Validators.required]),
+        documento: new FormControl('', [Validators.required]),
+        primerApellido: new FormControl('', [Validators.required]),
+        segundoApellido: new FormControl(''),
+        primerNombre: new FormControl('', [Validators.required]),
+        segundoNombre: new FormControl(''),
+        sexo: new FormControl('', [Validators.required]),
+        fechaN: new FormControl('', [Validators.required]),
 
-    this.datosPersonalesForm = new FormGroup({
-      tipoDocumento: new FormControl('', [Validators.required]),
-      documento: new FormControl('', [Validators.required]),
-      primerApellido: new FormControl('', [Validators.required]),
-      segundoApellido: new FormControl(''),
-      primerNombre: new FormControl('', [Validators.required]),
-      segundoNombre: new FormControl(''),
-      sexo: new FormControl('', [Validators.required]),
-      fechaN: new FormControl('', [Validators.required]),
+        pais: new FormControl('', [Validators.required]),
+        departamento: new FormControl('', [Validators.required]),
+        localidad: new FormControl('', [Validators.required]),
+        barrio: new FormControl(''),
+        direccion: new FormControl('', [Validators.required]),
 
-      pais: new FormControl('', [Validators.required]),
-      departamento: new FormControl('', [Validators.required]),
-      localidad: new FormControl('', [Validators.required]),
-      barrio: new FormControl(''),
-      direccion: new FormControl('', [Validators.required]),
+        primerTelefono: new FormControl('', [Validators.required]),
+        segundoTelefono: new FormControl(''),
 
-      primerTelefono: new FormControl('', [Validators.required]),
-      segundoTelefono: new FormControl(''),
-      
-      noticias: new FormControl('', [Validators.required]),
-    });
+        noticias: new FormControl('', [Validators.required]),
+      });
 
-    this.getInfoPostulante(this.postulanteId);
+      this.getInfoPostulante(this.postulanteId);
 
-    this.paisService.getPaises().subscribe(
-      result =>{
-        this.paises = result;
-      }
-    );
+      this.paisService.getPaises().subscribe(
+        result => {
+          this.paises = result;
+        }
+      );
 
-    
 
-    // console.log(this.selectedDepartamento);
 
+      // console.log(this.selectedDepartamento);
+    }
   }
 
   getInfoPostulante(postulanteId: number) {
@@ -114,7 +115,7 @@ export class DatosPersonalesComponent implements OnInit {
         this.postulante = result;
         // console.log(this.postulante);
         this.selectedPais = result.pais;
-        if (result.pais?.departamentos)this.departamentos = result.pais?.departamentos;
+        if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
         if (result.localidad?.departamento?.nombre) this.selectedDepartamento = result.localidad?.departamento;
         if (result.localidad) this.selectedLocalidad = result.localidad;
         // this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
@@ -122,45 +123,45 @@ export class DatosPersonalesComponent implements OnInit {
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
         this.getLocalidades(this.selectedDepartamento?.id);
-        
 
-      //  if(result.pais?.nombre=='Uruguay'){
-      //    if(result.localidad) this.selectedLocalidad = result.localidad;
-      //    this.selectedDepartamento = this.selectedLocalidad?.departamento;
-      //  }
-      //  console.log(result.pais?.departamentos);
+
+        //  if(result.pais?.nombre=='Uruguay'){
+        //    if(result.localidad) this.selectedLocalidad = result.localidad;
+        //    this.selectedDepartamento = this.selectedLocalidad?.departamento;
+        //  }
+        //  console.log(result.pais?.departamentos);
         // this.selectedDepartamento = result.pais?.
-        
+
         // this.selectedTipoD = result.tipoDocumento;
       }
-      
+
     );
   }
 
-  getLocalidades(departamento: number | undefined){
+  getLocalidades(departamento: number | undefined) {
     this.paisService.getLocalidades(departamento).subscribe(
       result => {
         this.localidades = result;
-        
+
       },
     );
-    
-  }
-
-  convertirFecha(fecha: Date | undefined) : Date {
-
-    return moment(fecha,"DD-MM-YYYY").toDate();
-    
 
   }
 
-  onChangePais(){
-    if(this.selectedPais?.departamentos) this.departamentos = this.selectedPais?.departamentos;
+  convertirFecha(fecha: Date | undefined): Date {
+
+    return moment(fecha, "DD-MM-YYYY").toDate();
+
+
+  }
+
+  onChangePais() {
+    if (this.selectedPais?.departamentos) this.departamentos = this.selectedPais?.departamentos;
     // console.log(this.selectedPais?.departamentos);
   }
 
-  onChangeDepartamento(){
-    if(this.selectedDepartamento?.localidades) this.localidades = this.selectedDepartamento?.localidades;
+  onChangeDepartamento() {
+    if (this.selectedDepartamento?.localidades) this.localidades = this.selectedDepartamento?.localidades;
     // console.log(this.selectedPais?.departamentos);
   }
 
@@ -177,7 +178,7 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.fechaNacimiento = this.datosPersonalesForm.controls.fechaN.value;
     // postulante.pais = this.datosPersonalesForm.controls.pais.value;
     postulante.paisId = this.datosPersonalesForm.controls.pais.value.id;
-    if(this.selectedPais?.nombre=="Uruguay"){
+    if (this.selectedPais?.nombre == "Uruguay") {
       let localidad: Localidad = this.datosPersonalesForm.controls.localidad.value;
       postulante.localidadId = localidad.id;
       console.log(localidad)
@@ -207,14 +208,14 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   async nextPage() {
-        await this.ngOnSubmit();
-        if(this.submitted){
-          this.router.navigate(['formulario/educacionFormacion']);
-        }
-        
-      return;
+    await this.ngOnSubmit();
+    if (this.submitted) {
+      this.router.navigate(['formulario/educacionFormacion']);
     }
 
-   
+    return;
+  }
+
+
 }
 

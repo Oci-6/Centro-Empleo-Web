@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'ofertas', component: OfertasComponent },
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
-  { path: 'formulario/datosPersonales/:postulanteId',canActivate: [LoginGuard], component: DatosPersonalesComponent },
-  { path: 'formulario/educacionFormacion/:postulanteId', component: EducacionFormacionComponent },
+  { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
+  { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
 ];
 
 @NgModule({
