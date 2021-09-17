@@ -33,6 +33,8 @@ import { DashboardComponent } from './views/admin/dashboard/dashboard.component'
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
 import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
+import { AuthInterceptor } from './services/Auth/auth.interceptor';
+import { LoginGuard } from './guards/login.guard';
 
 
 
@@ -69,6 +71,12 @@ import { EducacionFormacionComponent } from './views/postulante/educacion-formac
   providers: [
     MessageService,
     AuthService,
+    LoginGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     {
     provide: 'SocialAuthServiceConfig',
     useValue: {

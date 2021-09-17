@@ -16,8 +16,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (typeof auth === 'string') {
             const token = JSON.parse(auth).token;
-            const expiration = JSON.parse(auth).expiration;
-            if (token && expiration && moment(expiration).isAfter()) {
+            // const expiration = JSON.parse(auth).expiration;
+            if (token /*&& expiration && moment(expiration).isAfter()*/) {
                 const cloned = req.clone({
                     headers: req.headers.set("Authorization", "Bearer " + token)
                 });
