@@ -32,7 +32,13 @@ export class EducacionFormacionComponent implements OnInit {
 
   postulanteId: number | undefined;
   
+  
   public educacionFormacionForm: FormGroup = new FormGroup({});
+
+  submitted: boolean | undefined = false;
+
+  selectedNE: string | undefined;
+  selectedEstadoNE: string | undefined;
   
 
   arreglo: FormGroup[] = [];
@@ -61,6 +67,7 @@ export class EducacionFormacionComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private fb: FormBuilder,
+    private postulanteService: PostulanteService,
     ) { }
 
   ngOnInit(): void {
@@ -75,12 +82,47 @@ export class EducacionFormacionComponent implements OnInit {
       orientacionNE: new FormControl('', [Validators.required]),
     });
 
+    this.getInfoPostulante(this.postulanteId);
+
   }
 
   ngOnSubmit() {
-    
+    let postulante = new Postulante();
+    postulante.id = this.postulanteId;
+    postulante.nivelEducativo = this.educacionFormacionForm.controls.nivelEducativo.value;
+    postulante.estadoNE = this.educacionFormacionForm.controls.estadoNE.value;
+    postulante.orientacionNE = this.educacionFormacionForm.controls.orientacionNE.value;
+
+    this.postulanteService.modificarPostulante(postulante).subscribe(
+      response => {
+
+        this.educacionFormacionForm.reset;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+        this.submitted = true;
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+        this.submitted = false;
+      }
+    );
+
+    // a
+
+
   }
 
+  getInfoPostulante(postulanteId: number) {
+
+    this.postulanteService.infoPostulante(postulanteId).subscribe(
+      result => {
+        this.postulante = result;
+        this.selectedNE = result.nivelEducativo;
+        this.selectedEstadoNE = result.estadoNE;
+    
+      }
+      
+    );
+  }
   
   //Get de arreglos
   get capacitaciones(){
