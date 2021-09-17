@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: 'ofertas', component: OfertasComponent },
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
-  { path: 'formulario/datosPersonales/:postulanteId', component: DatosPersonalesComponent },
+  { path: 'formulario/datosPersonales/:postulanteId',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion/:postulanteId', component: EducacionFormacionComponent },
 ];
 

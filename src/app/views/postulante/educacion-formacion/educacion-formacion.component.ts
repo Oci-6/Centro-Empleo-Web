@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
@@ -31,10 +31,9 @@ export class EducacionFormacionComponent implements OnInit {
   escritura: string[] = ['No', 'Básico', 'Regular', 'Fluido']
 
   postulanteId: number | undefined;
+  
   public educacionFormacionForm: FormGroup = new FormGroup({});
-  public capacitacionFormacionForm: FormGroup = new FormGroup({});
-  public conocimientosInformaticosForm: FormGroup = new FormGroup({});
-  public agregarIdiomaForm: FormGroup = new FormGroup({});
+  
 
   arreglo: FormGroup[] = [];
 
@@ -44,10 +43,24 @@ export class EducacionFormacionComponent implements OnInit {
   idioma: Idioma = {};
 
 
+  capacitacionFormacionForm = this.fb.group({
+    capacitaciones: this.fb.array([])
+  });
+
+  conocimientosInformaticosForm = this.fb.group({
+    conocimientosI: this.fb.array([])
+  });
+
+  agregarIdiomaForm = this.fb.group({
+    IdiomasArreglo: this.fb.array([])
+  });
+  
+
   constructor(
     private route: ActivatedRoute,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder,
     ) { }
 
   ngOnInit(): void {
@@ -61,45 +74,82 @@ export class EducacionFormacionComponent implements OnInit {
       estadoNE: new FormControl('', [Validators.required]),
       orientacionNE: new FormControl('', [Validators.required]),
     });
-    this.capacitacionFormacionForm = new FormGroup({
-      nombreCurso: new FormControl('', [Validators.required]),
-      areaT: new FormControl('', [Validators.required]),
-      institucion: new FormControl('', [Validators.required]),
-      fechaInicio: new FormControl('', [Validators.required]),
-      tipoDuracion: new FormControl('', [Validators.required]),
-      estadoCurso: new FormControl('', [Validators.required]),
-    });
-    this.conocimientosInformaticosForm = new FormGroup({
-      nombreApp: new FormControl('', [Validators.required]),
-      categoriaCI: new FormControl('', [Validators.required]),
-      nivelC: new FormControl('', [Validators.required]),
-    });
-    this.agregarIdiomaForm = new FormGroup({
-      idioma: new FormControl('', [Validators.required]),
-      especificacion: new FormControl('', [Validators.required]),
-      hablaConv: new FormControl('', [Validators.required]),
-      compAud: new FormControl('', [Validators.required]),
-      compLec: new FormControl('', [Validators.required]),
-      escritura: new FormControl('', [Validators.required]),
-    });
-
-    // this.getInfoPostulante(this.postulanteId);
 
   }
-
-  // getInfoPostulante(postulanteId: number) {
-
-  //   this.postulanteService.infoPostulante(postulanteId).subscribe(
-  //     result => {
-  //       this.postulante = result;
-  //     }
-  //   );
-  // }
 
   ngOnSubmit() {
     
   }
 
+  
+  //Get de arreglos
+  get capacitaciones(){
+    return this.capacitacionFormacionForm.get('capacitaciones') as FormArray;
+  }
+
+  get conocimientosI(){
+    return this.conocimientosInformaticosForm.get('conocimientosI') as FormArray;
+  }
+
+  get IdiomasArreglo(){
+    return this.agregarIdiomaForm.get('IdiomasArreglo') as FormArray;
+  }
+
+  //Add FormGroups a los arreglos
+  addCapFor(){
+    const CapForForm = this.fb.group({
+    });
+    CapForForm.addControl(this.capacitaciones.length+'nombreCurso', new FormControl ('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length+'areaT', new FormControl ('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length+'institucion', new FormControl ('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length+'fechaInicio', new FormControl ('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length+'tipoDuracion', new FormControl ('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length+'estadoCurso', new FormControl ('', Validators.required)),
+    // console.log(this.capacitaciones);
+    // console.log(this.capacitaciones.length+'nombreCurso');
+    this.capacitaciones.push(CapForForm);
+  }
+
+  addConocimientosI(){
+    const ConIForm = this.fb.group({
+    });
+    ConIForm.addControl(this.conocimientosI.length+'nombreApp', new FormControl ('', Validators.required)),
+    ConIForm.addControl(this.conocimientosI.length+'categoriaCI', new FormControl ('', Validators.required)),
+    ConIForm.addControl(this.conocimientosI.length+'nivelC', new FormControl ('', Validators.required));
+    console.log(this.conocimientosI);
+    console.log(this.conocimientosI.length+'nombreCurso');
+    this.conocimientosI.push(ConIForm);
+  }
+
+  addIdioma(){
+    const IdiomaForm = this.fb.group({
+    });
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'idioma', new FormControl ('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'especificacion', new FormControl ('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'hablaConv', new FormControl ('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'compAud', new FormControl ('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'compLec', new FormControl ('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length+'escritura', new FormControl ('', Validators.required));
+    console.log(this.IdiomasArreglo);
+    console.log(this.IdiomasArreglo.length+'nombreCurso');
+    this.IdiomasArreglo.push(IdiomaForm);
+  }
+  
+  
+  //Borrar FormGroups de los arreglos
+  deleteCapFor(capForIndex:number){
+    this.capacitaciones.removeAt(capForIndex);
+  }
+
+  deleteConI(conIIndex:number){
+    this.conocimientosI.removeAt(conIIndex);
+  }
+
+  deleteIdioma(idiomaIndex:number){
+    this.IdiomasArreglo.removeAt(idiomaIndex);
+  }
+
+  //Cambiar página del steper
   nextPage() {
     this.router.navigate(['formulario/educacionFormacion']);
 
@@ -108,6 +158,17 @@ export class EducacionFormacionComponent implements OnInit {
 
   prevPage() {
     this.router.navigate(['formulario/datosPersonales']);
+  }
+
+  submit(){
+    console.log(this.capacitaciones.controls);
+  }
+
+  submit2(){
+    console.log(this.conocimientosI.controls);
+  }
+  submit3(){
+    console.log(this.IdiomasArreglo.controls);
   }
 
 }
