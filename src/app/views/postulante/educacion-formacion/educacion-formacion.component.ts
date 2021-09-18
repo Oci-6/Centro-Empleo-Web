@@ -134,7 +134,58 @@ export class EducacionFormacionComponent implements OnInit {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
             }
           )
-      })
+      });
+
+      this.conocimientosI.controls.forEach((element: any, index: number) => {
+
+        let cI: ConocimientoInfo = new ConocimientoInfo();
+
+        if (element.controls[index + "id"]) {
+          cI.id = element.controls[index + "id"].value;
+        }
+        cI.nombreApp = element.controls[index + "nombreApp"].value;
+        cI.categoria = element.controls[index + "categoriaCI"].value;
+        cI.nivelConocimiento = element.controls[index + "nivelC"].value;
+        
+
+        if (this.postulanteId)
+          this.postulanteService.postCI(this.postulanteId, cI).subscribe(
+            response => {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+
+            },
+            error => {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+            }
+          )
+      });
+
+      this.IdiomasArreglo.controls.forEach((element: any, index: number) => {
+
+        let Idiomas: Idioma = new Idioma();
+
+        if (element.controls[index + "id"]) {
+          Idiomas.id = element.controls[index + "id"].value;
+        }
+        Idiomas.nombre = element.controls[index + "idioma"].value;
+        Idiomas.especificacion = element.controls[index + "especificacion"].value;
+        Idiomas.hablaConv = element.controls[index + "hablaConv"].value;
+        Idiomas.compAud = element.controls[index + "compAud"].value;
+        Idiomas.compLec = element.controls[index + "compLec"].value;
+        Idiomas.escritura = element.controls[index + "escritura"].value;
+        
+
+        if (this.postulanteId)
+          this.postulanteService.postIdioma(this.postulanteId, Idiomas).subscribe(
+            response => {
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+
+            },
+            error => {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+            }
+          )
+      });
 
     }
   
@@ -171,6 +222,51 @@ export class EducacionFormacionComponent implements OnInit {
             // console.log(this.capacitaciones.length+'nombreCurso');
             this.capacitaciones.push(CapForForm);
           })
+
+
+          this.postulante.conocimientoInfo?.forEach((conocimientoI: ConocimientoInfo) => {
+
+            const ConIForm = this.fb.group({
+            });
+            ConIForm.addControl(this.conocimientosI.length + 'id', new FormControl('', Validators.required));
+            ConIForm.addControl(this.conocimientosI.length + 'nombreApp', new FormControl('', Validators.required)),
+            ConIForm.addControl(this.conocimientosI.length + 'categoriaCI', new FormControl('', Validators.required)),
+            ConIForm.addControl(this.conocimientosI.length + 'nivelC', new FormControl('', Validators.required));
+
+            ConIForm.controls[this.conocimientosI.length + "id"].setValue(conocimientoI.id);
+            ConIForm.controls[this.conocimientosI.length + "nombreApp"].setValue(conocimientoI.nombreApp);
+            ConIForm.controls[this.conocimientosI.length + "categoriaCI"].setValue(conocimientoI.categoria);
+            ConIForm.controls[this.conocimientosI.length + "nivelC"].setValue(conocimientoI.nivelConocimiento);
+            // console.log(this.conocimientosI);
+            // console.log(this.conocimientosI.length + 'nombreCurso');
+            this.conocimientosI.push(ConIForm);
+          });
+
+          this.postulante.idioma?.forEach((idioma:Idioma)=>{
+
+            const IdiomaForm = this.fb.group({
+            });
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'id', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'escritura', new FormControl('', Validators.required));
+
+            IdiomaForm.controls[this.IdiomasArreglo.length + "id"].setValue(idioma.id);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "idioma"].setValue(idioma.nombre);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "especificacion"].setValue(idioma.especificacion);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "hablaConv"].setValue(idioma.hablaConv);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "compAud"].setValue(idioma.compAud);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "compLec"].setValue(idioma.compLec);
+            IdiomaForm.controls[this.IdiomasArreglo.length + "escritura"].setValue(idioma.escritura);
+            // console.log(this.IdiomasArreglo);
+            // console.log(this.IdiomasArreglo.length + 'nombreCurso');
+            this.IdiomasArreglo.push(IdiomaForm);
+
+          });
+          
         }
 
       );

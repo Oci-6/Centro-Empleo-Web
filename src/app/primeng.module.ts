@@ -24,6 +24,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CheckboxModule} from 'primeng/checkbox';
+import {AccordionModule} from 'primeng/accordion';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     CalendarModule,
     InputNumberModule,
     CheckboxModule,
+    AccordionModule,
   ],
   exports: [    
     MenubarModule,
@@ -76,6 +78,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     CalendarModule,
     InputNumberModule,
     CheckboxModule,
+    AccordionModule,
   ]
 })
 export class PrimeNgModule { }
