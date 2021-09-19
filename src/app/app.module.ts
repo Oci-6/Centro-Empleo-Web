@@ -35,6 +35,7 @@ import { DatosPersonalesComponent } from './views/postulante/datos-personales/da
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
 import { AuthInterceptor } from './services/Auth/auth.interceptor';
 import { LoginGuard } from './guards/login.guard';
+import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 
 
 
@@ -59,6 +60,7 @@ import { LoginGuard } from './guards/login.guard';
     FormularioComponent,
     DatosPersonalesComponent,
     EducacionFormacionComponent,
+    ExperienciasLaboralesComponent,
   ],
   imports: [
     BrowserModule,

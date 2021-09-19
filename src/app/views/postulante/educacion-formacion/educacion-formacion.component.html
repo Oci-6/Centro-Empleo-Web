@@ -15,7 +15,8 @@
                 </p-divider>
 
                 <!--Nivel Educativo Formal-->
-                <div class="p-fluid p-formgrid p-grid" [formGroup]="educacionFormacionForm" (ngSubmit)="ngOnSubmit()">
+                <div class="p-fluid p-formgrid p-grid p-mb-4" [formGroup]="educacionFormacionForm"
+                    (ngSubmit)="ngOnSubmit()">
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nivelEducativo">Indique el máximo nivel educativo alcanzado</label>
@@ -45,64 +46,68 @@
                 </p-divider>
 
                 <!--Capacitación y Formación adicional-->
-                <div class="p-fluid" [formGroup]="capacitacionFormacionForm">
+                <div class="p-fluid p-mb-4" [formGroup]="capacitacionFormacionForm">
 
                     <ng-container formArrayName="capacitaciones">
-                        <p-accordion >
+                        <p-accordion>
 
-                            <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container" *ngFor="let CapForForm of capacitaciones.controls; let i = index" [formGroupName]="i">
+                            <div class="p-fluid p-grid"
+                                *ngFor="let CapForForm of capacitaciones.controls; let i = index" [formGroupName]="i">
 
-                                <p-accordionTab header="Capacitación adicional {{i+1}}" class="p-field p-col-12 ">
+                                <p-accordionTab header="Capacitación adicional {{i+1}}" class="p-col-12" [selected]="true">
 
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="nombreCurso">Nombre del Curso</label>
-                                        <input id="nombreCurso" type="text" required pInputText
-                                            [formControlName]="i+'nombreCurso'">
+                                    <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nombreCurso">Nombre del Curso</label>
+                                            <input id="nombreCurso" type="text" required pInputText
+                                                [formControlName]="i+'nombreCurso'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="areaT">Área temática</label>
+                                            <p-dropdown [options]="areaT" [formControlName]="i+'areaT'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="institucion">Institución Educativa</label>
+                                            <input id="institucion" type="text" required pInputText
+                                                [formControlName]="i+'institucion'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="fechaInicio">Año de inicio</label>
+                                            <input id="fechaInicio" type="text" required pInputText
+                                                [formControlName]="i+'fechaInicio'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="duracion">Duración</label>
+                                            <input id="duracion" type="text" required pInputText
+                                                [formControlName]="i+'duracion'">
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="duracion">Tipo de duración</label>
+                                            <p-dropdown [options]="tipoDuracion" [formControlName]="i+'tipoDuracion'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="estadoCurso">Estado del Curso</label>
+                                            <p-dropdown [options]="estadoCurso" [formControlName]="i+'estadoCurso'">
+                                            </p-dropdown>
+                                        </div>
+
+
+                                        <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <p-button (onClick)="deleteCapFor(i)" icon="pi pi-trash"></p-button>
+                                        </div>
+
+                                        <!-- <p-divider class="p-col-12"></p-divider> -->
                                     </div>
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="areaT">Área temática</label>
-                                        <p-dropdown [options]="areaT" [formControlName]="i+'areaT'">
-                                        </p-dropdown>
-                                    </div>
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="institucion">Institución Educativa</label>
-                                        <input id="institucion" type="text" required pInputText
-                                            [formControlName]="i+'institucion'">
-                                    </div>
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="fechaInicio">Año de inicio</label>
-                                        <input id="fechaInicio" type="text" required pInputText
-                                            [formControlName]="i+'fechaInicio'">
-                                    </div>
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="duracion">Duración</label>
-                                        <input id="duracion" type="text" required pInputText
-                                            [formControlName]="i+'duracion'">
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="duracion">Tipo de duración</label>
-                                        <p-dropdown [options]="tipoDuracion" [formControlName]="i+'tipoDuracion'">
-                                        </p-dropdown>
-                                    </div>
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <label for="estadoCurso">Estado del Curso</label>
-                                        <p-dropdown [options]="estadoCurso" [formControlName]="i+'estadoCurso'">
-                                        </p-dropdown>
-                                    </div>
-
-
-                                    <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <p-button (onClick)="deleteCapFor(i)" icon="pi pi-trash"></p-button>
-                                    </div>
-
-                                    <!-- <p-divider class="p-col-12"></p-divider> -->
-
                                 </p-accordionTab>
                             </div>
                         </p-accordion>
@@ -121,41 +126,50 @@
                 </p-divider>
 
                 <!--Conocimientos Informaticos-->
-                <div class="p-fluid" [formGroup]="conocimientosInformaticosForm">
+                <div class="p-fluid p-mb-4" [formGroup]="conocimientosInformaticosForm">
 
                     <ng-container formArrayName="conocimientosI">
+                        <p-accordion>
 
-                        <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container"
-                            *ngFor="let ConIForm of conocimientosI.controls; let i = index" [formGroupName]="i">
+                            <div class="p-fluid p-grid" *ngFor="let ConIForm of conocimientosI.controls; let i = index"
+                                [formGroupName]="i">
 
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="nombreApp">Nombre de la Aplicación</label>
-                                <input id="nombreApp" type="text" required pInputText [formControlName]="i+'nombreApp'">
+                                <p-accordionTab header="Conocimiento informático {{i+1}}" class="p-col-12">
+
+                                    <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nombreApp">Nombre de la Aplicación</label>
+                                            <input id="nombreApp" type="text" required pInputText
+                                                [formControlName]="i+'nombreApp'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="categoriaCI">Categoria</label>
+                                            <p-dropdown [options]="categoriaCI" [formControlName]="i+'categoriaCI'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nivelC">Nivel de Conocimiento</label>
+                                            <p-dropdown [options]="nivelC" [formControlName]="i+'nivelC'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <p-button (onClick)="deleteConI(i)" icon="pi pi-trash"></p-button>
+                                        </div>
+
+
+                                    </div>
+                                </p-accordionTab>
                             </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="categoriaCI">Categoria</label>
-                                <p-dropdown [options]="categoriaCI" [formControlName]="i+'categoriaCI'"></p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="nivelC">Nivel de Conocimiento</label>
-                                <p-dropdown [options]="nivelC" [formControlName]="i+'nivelC'">
-                                </p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <p-button (onClick)="deleteConI(i)" icon="pi pi-trash"></p-button>
-                            </div>
-
-                            <p-divider class="p-col-12"></p-divider>
-
-                        </div>
-
+                        </p-accordion>
                     </ng-container>
 
                     <!-- <p-button label="Prueba2" (onClick)="submit2()" icon="pi pi-minus"></p-button> -->
-                    <p-button label="Agregar ConI" (onClick)="addConocimientosI()" icon="pi pi-plus"></p-button>
+                    <p-button label="Agregar Conocimiento Informático" (onClick)="addConocimientosI()"
+                        icon="pi pi-plus"></p-button>
 
 
                 </div>
@@ -165,53 +179,63 @@
                 </p-divider>
 
                 <!--Idioma-->
-                <div class="p-fluid " [formGroup]="agregarIdiomaForm">
+                <div class="p-fluid p-mb-4" [formGroup]="agregarIdiomaForm">
 
                     <ng-container formArrayName="IdiomasArreglo">
+                        <p-accordion>
 
-                        <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container"
-                            *ngFor="let IdiomaForm of IdiomasArreglo.controls; let i = index" [formGroupName]="i">
+                            <div class="p-fluid p-grid"
+                                *ngFor="let IdiomaForm of IdiomasArreglo.controls; let i = index" [formGroupName]="i">
+
+                                <p-accordionTab header="Idioma {{i+1}}" class="p-col-12">
+
+                                    <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="idioma">Idioma</label>
+                                            <p-dropdown [options]="idiomas" [formControlName]="i+'idioma'"></p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6" *ngIf="idioma.nombre=='Otro'">
+                                            <label for="especificacion">Especificación</label>
+                                            <input id="especificacion" type="text" required pInputText
+                                                [formControlName]="i+'especificacion'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="hablaConv">Habla / Conversación</label>
+                                            <p-dropdown [options]="hablaConv" [formControlName]="i+'hablaConv'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="compAud">Comprensión Auditiva</label>
+                                            <p-dropdown [options]="compAud" [formControlName]="i+'compAud'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="compLec">Comprensión Lectora</label>
+                                            <p-dropdown [options]="compLec" [formControlName]="i+'compLec'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="escritura">Escritura</label>
+                                            <p-dropdown [options]="escritura" [formControlName]="i+'escritura'">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <p-button (onClick)="deleteIdioma(i)" icon="pi pi-trash"></p-button>
+                                        </div>
 
 
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="idioma">Idioma</label>
-                                <p-dropdown [options]="idiomas" [formControlName]="i+'idioma'"></p-dropdown>
+                                    </div>
+                                </p-accordionTab>
                             </div>
 
-                            <div class="p-field p-col-12 p-md-6" *ngIf="idioma.nombre=='Otro'">
-                                <label for="especificacion">Especificación</label>
-                                <input id="especificacion" type="text" required pInputText
-                                    [formControlName]="i+'especificacion'">
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="hablaConv">Habla / Conversación</label>
-                                <p-dropdown [options]="hablaConv" [formControlName]="i+'hablaConv'"></p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="compAud">Comprensión Auditiva</label>
-                                <p-dropdown [options]="compAud" [formControlName]="i+'compAud'"></p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="compLec">Comprensión Lectora</label>
-                                <p-dropdown [options]="compLec" [formControlName]="i+'compLec'"></p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <label for="escritura">Escritura</label>
-                                <p-dropdown [options]="escritura" [formControlName]="i+'escritura'"></p-dropdown>
-                            </div>
-
-                            <div class="p-field p-col-12 p-md-6">
-                                <p-button (onClick)="deleteIdioma(i)" icon="pi pi-trash"></p-button>
-                            </div>
-
-                            <p-divider class="p-col-12"></p-divider>
-
-                        </div>
-
+                        </p-accordion>
                     </ng-container>
 
                     <!-- <p-button label="Prueba3" (onClick)="submit3()" icon="pi pi-minus"></p-button> -->

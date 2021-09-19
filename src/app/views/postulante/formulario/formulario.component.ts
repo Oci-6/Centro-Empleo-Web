@@ -29,7 +29,7 @@ export class FormularioComponent implements OnInit {
     },
     {
       label: 'Experiencia',
-      routerLink: 'payment'
+      routerLink: 'formulario/experienciaLaboral'
     },
     {
       label: 'Permisos',

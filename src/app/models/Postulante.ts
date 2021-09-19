@@ -1,5 +1,6 @@
 import { CapacitacionFormacion } from "./CapacitacionFormacion";
 import { ConocimientoInfo } from "./ConocimientoInfo";
+import { ExpLaboral } from "./ExpLaboral";
 import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
 import { Pais } from "./Pais";
@@ -56,6 +57,7 @@ export class Postulante {
     capacitacionFormacion?: CapacitacionFormacion[] | undefined;
     conocimientoInfo?: ConocimientoInfo[] | undefined;
     idioma?: Idioma[] | undefined;
+    expLaborales?: ExpLaboral[] | undefined;
 
     constructor() {}
 }

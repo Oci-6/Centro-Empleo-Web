@@ -9,6 +9,7 @@ import { LoginComponent } from './views/login/login.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
+import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
@@ -21,7 +22,9 @@ const routes: Routes = [
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
-  { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
+  { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
+  { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
+
 ];
 
 @NgModule({

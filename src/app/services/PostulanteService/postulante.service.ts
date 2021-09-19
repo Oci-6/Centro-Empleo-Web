@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
 import { ConocimientoInfo } from 'src/app/models/ConocimientoInfo';
+import { ExpLaboral } from 'src/app/models/ExpLaboral';
 import { Idioma } from 'src/app/models/Idioma';
 import { Postulante } from 'src/app/models/Postulante';
 import { User } from 'src/app/models/User';
@@ -69,6 +70,20 @@ export class PostulanteService {
   }
   putIdioma(idioma: Idioma){
     return this.http.put<Idioma>(this.URL + '/idioma/' , idioma);
+  }
+
+  //Experiencias Laborales
+  infoExpLaboral(id: number){
+    return this.http.get<ExpLaboral>(this.URL + '/expLaboral/' + id);
+  }
+  expLaboralesPostulante(idPostulante: number){
+    return this.http.get<ExpLaboral[]>(this.URL + '/expLaboral/' + idPostulante);
+  }
+  postExpLaboral(idPostulante: number, expLaboral: ExpLaboral){
+    return this.http.post<ExpLaboral>(this.URL + '/expLaboral/' + idPostulante, expLaboral);
+  }
+  putExpLaboral(expLaboral: ExpLaboral){
+    return this.http.put<ExpLaboral>(this.URL + '/expLaboral/' , expLaboral);
   }
 
 }
