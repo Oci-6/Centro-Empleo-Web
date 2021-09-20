@@ -97,6 +97,11 @@ export class MenuComponent implements OnInit {
             icon: 'pi pi-pw pi-users',
             url: 'postulaciones'
           },
+          {
+            label: 'Formulario',
+            icon: 'pi pi-pw pi-file',
+            url: 'formulario/datosPersonales'
+          }
         );
       }
 

@@ -4,6 +4,7 @@ import { ExpLaboral } from "./ExpLaboral";
 import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
 import { Pais } from "./Pais";
+import { PermisosLicencias } from "./PermisosLicencias";
 
 export class Postulante {
 
@@ -59,6 +60,7 @@ export class Postulante {
     conocimientoInfo?: ConocimientoInfo[] | undefined;
     idioma?: Idioma[] | undefined;
     expLaboral?: ExpLaboral[] | undefined;
+    permisosLicencias?: PermisosLicencias[] | undefined;
 
     constructor() {}
 }

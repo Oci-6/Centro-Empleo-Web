@@ -61,8 +61,8 @@ export class ExperienciasLaboralesComponent implements OnInit {
       eL.area = element.controls[index + "areaRubro"].value;
       eL.nivelJer = element.controls[index + "nivelJerarquico"].value;
       eL.tareas = element.controls[index + "tareas"].value;
-      eL.fechaInicio = moment(element.controls[index + "fechaInicio"].value,'MM-DD-YYYY').toDate();
-      eL.fechaFin = moment(element.controls[index + "fechaFin"].value,'MM-DD-YYYY').toDate();
+      eL.fechaInicio = moment(element.controls[index + "fechaInicio"].value, 'MM-DD-YYYY').toDate();
+      eL.fechaFin = moment(element.controls[index + "fechaFin"].value, 'MM-DD-YYYY').toDate();
       eL.trabajando = element.controls[index + "trabajando"].value;
 
       eL.nombreRef = element.controls[index + "nombreRef"].value;
@@ -70,7 +70,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
       eL.cargoRef = element.controls[index + "cargoRef"].value;
       eL.telefonoRef = element.controls[index + "telefonoRef"].value;
       eL.emailRef = element.controls[index + "emailRef"].value;
-      
+
       console.log(eL);
 
       if (this.postulanteId)
@@ -117,8 +117,8 @@ export class ExperienciasLaboralesComponent implements OnInit {
           ExpLabForm.controls[this.experienciasL.length + "areaRubro"].setValue(experienciaL.area);
           ExpLabForm.controls[this.experienciasL.length + "nivelJerarquico"].setValue(experienciaL.nivelJer);
           ExpLabForm.controls[this.experienciasL.length + "tareas"].setValue(experienciaL.tareas);
-          ExpLabForm.controls[this.experienciasL.length + "fechaInicio"].setValue((moment(experienciaL.fechaInicio,'YYYY-MM-DD').toDate()));
-          ExpLabForm.controls[this.experienciasL.length + "fechaFin"].setValue((moment(experienciaL.fechaFin,'YYYY-MM-DD').toDate()));
+          ExpLabForm.controls[this.experienciasL.length + "fechaInicio"].setValue((moment(experienciaL.fechaInicio, 'YYYY-MM-DD').toDate()));
+          ExpLabForm.controls[this.experienciasL.length + "fechaFin"].setValue((moment(experienciaL.fechaFin, 'YYYY-MM-DD').toDate()));
           ExpLabForm.controls[this.experienciasL.length + "trabajando"].setValue(experienciaL.trabajando);
 
           ExpLabForm.controls[this.experienciasL.length + "nombreRef"].setValue(experienciaL.nombreRef);
@@ -133,52 +133,52 @@ export class ExperienciasLaboralesComponent implements OnInit {
 
 
       }
-      );
-    }
-  
+    );
+  }
+
 
   get experienciasL() {
-      return this.expLaboralForm.get('experienciasL') as FormArray;
-    }
+    return this.expLaboralForm.get('experienciasL') as FormArray;
+  }
 
   addExpLaboral() {
-      const ExpLabForm = this.fb.group({
-      });
-      ExpLabForm.addControl(this.experienciasL.length + 'nombreEmpresa', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'cargo', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'areaRubro', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'nivelJerarquico', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'tareas', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'fechaInicio', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'fechaFin', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl('', Validators.required));
+    const ExpLabForm = this.fb.group({
+    });
+    ExpLabForm.addControl(this.experienciasL.length + 'nombreEmpresa', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'cargo', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'areaRubro', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'nivelJerarquico', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'tareas', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'fechaInicio', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'fechaFin', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl('', Validators.required));
 
-      ExpLabForm.addControl(this.experienciasL.length + 'nombreRef', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'apellidoRef', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'cargoRef', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'telefonoRef', new FormControl('', Validators.required));
-      ExpLabForm.addControl(this.experienciasL.length + 'emailRef', new FormControl('', Validators.required));
-      // console.log(this.experienciasL);
-      // console.log(this.experienciasL.length+'nombreCurso');
-      this.experienciasL.push(ExpLabForm);
-    }
+    ExpLabForm.addControl(this.experienciasL.length + 'nombreRef', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'apellidoRef', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'cargoRef', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'telefonoRef', new FormControl('', Validators.required));
+    ExpLabForm.addControl(this.experienciasL.length + 'emailRef', new FormControl('', Validators.required));
+    // console.log(this.experienciasL);
+    // console.log(this.experienciasL.length+'nombreCurso');
+    this.experienciasL.push(ExpLabForm);
+  }
 
-    deleteExpLab(expLabIndex: number) {
-      this.experienciasL.removeAt(expLabIndex);
-    }
-  
-    //Cambiar página del steper
-    nextPage() {
-      this.router.navigate(['/formulario/experienciaLaboral']);
-    }
-  
-    prevPage() {
-      this.router.navigate(['formulario/educacionFormacion']);
-    }
+  deleteExpLab(expLabIndex: number) {
+    this.experienciasL.removeAt(expLabIndex);
+  }
 
-    toDate(a: string):Date{
-      return new Date(a);
-    }
+  //Cambiar página del steper
+  nextPage() {
+    this.router.navigate(['/formulario/permisosLicencias']);
+  }
+
+  prevPage() {
+    this.router.navigate(['formulario/educacionFormacion']);
+  }
+
+  toDate(a: string): Date {
+    return new Date(a);
+  }
 
 
 

@@ -33,7 +33,7 @@ export class FormularioComponent implements OnInit {
     },
     {
       label: 'Permisos',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/permisosLicencias'
     },
     {
       label: 'Intereses ',

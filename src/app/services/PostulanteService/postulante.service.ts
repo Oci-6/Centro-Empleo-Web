@@ -4,6 +4,7 @@ import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
 import { ConocimientoInfo } from 'src/app/models/ConocimientoInfo';
 import { ExpLaboral } from 'src/app/models/ExpLaboral';
 import { Idioma } from 'src/app/models/Idioma';
+import { PermisosLicencias } from 'src/app/models/PermisosLicencias';
 import { Postulante } from 'src/app/models/Postulante';
 import { User } from 'src/app/models/User';
 
@@ -84,6 +85,20 @@ export class PostulanteService {
   }
   putExpLaboral(expLaboral: ExpLaboral){
     return this.http.put<ExpLaboral>(this.URL + '/expLaboral/' , expLaboral);
+  }
+
+  //Permisos y Licencias
+  infoPermisosLicencias(id: number){
+    return this.http.get<PermisosLicencias>(this.URL + '/permisosLicencia/' + id);
+  }
+  PermisosLicenciasPostulante(idPostulante: number){
+    return this.http.get<PermisosLicencias[]>(this.URL + '/permisosLicencias/' + idPostulante);
+  }
+  postPermisosLicencias(idPostulante: number, expLaboral: PermisosLicencias){
+    return this.http.post<PermisosLicencias>(this.URL + '/permisosLicencia/' + idPostulante, expLaboral);
+  }
+  putPermisosLicencias(PL: PermisosLicencias){
+    return this.http.put<PermisosLicencias>(this.URL + '/permisosLicencia/' , PL);
   }
 
 }
