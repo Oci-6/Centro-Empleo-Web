@@ -36,6 +36,7 @@ import { EducacionFormacionComponent } from './views/postulante/educacion-formac
 import { AuthInterceptor } from './services/Auth/auth.interceptor';
 import { LoginGuard } from './guards/login.guard';
 import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
+import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
 
 
 
@@ -61,6 +62,7 @@ import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-
     DatosPersonalesComponent,
     EducacionFormacionComponent,
     ExperienciasLaboralesComponent,
+    PermisosLicenciasComponent,
   ],
   imports: [
     BrowserModule,

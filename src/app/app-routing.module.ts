@@ -13,6 +13,7 @@ import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
 import { MisPostulacionesComponent } from './views/postulante/mis-postulaciones/mis-postulaciones.component';
 import { PerfilComponent } from './views/postulante/perfil/perfil.component';
+import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
   { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
+  { path: 'formulario/permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'postulaciones', component: MisPostulacionesComponent },
 ];

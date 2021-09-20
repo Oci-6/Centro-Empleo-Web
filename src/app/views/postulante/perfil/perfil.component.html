@@ -5,7 +5,7 @@
 
         <div class="p-grid">
             <div class="p-col-12 p-md-3 p-fluid">
-                <img style="width: 100%;" [src]="'http://localhost:3000/'+postulante?.foto">
+                <img style="width: 80%; height:250px " [src]="'http://localhost:3000/'+postulante?.foto">
 
 
                 <p-fileUpload mode="basic" chooseLabel="Cambiar Foto de Perfil" name="file"
@@ -78,13 +78,10 @@
                         {{postulante.estadoNE}}
                     </div>
                     <div class="p-field p-col-12 p-md-6">
-                        <strong>Dirección:</strong> <br>
+                        <strong>Orientación:</strong> <br>
                         {{postulante.orientacionNE}}
                     </div>
-                    <div class="p-field p-col-12 p-md-6">
-                        <strong>Dirección:</strong> <br>
-                        {{postulante.direccion}}
-                    </div>
+                    
                     <p-accordion> 
                         <p-accordionTab *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0" header="Capacitaciones">
                             <p-accordion>
