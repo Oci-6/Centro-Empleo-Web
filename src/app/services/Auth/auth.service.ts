@@ -18,7 +18,15 @@ export class AuthService {
   logout(): void {
     localStorage.clear();
     window.location.reload();
-}
+  }
+
+  getUser():number | undefined{
+    let aux = localStorage.getItem("auth");
+    if(aux){
+      return JSON.parse(aux).usuario; 
+    }
+    return undefined;
+  }
 
 
 }
