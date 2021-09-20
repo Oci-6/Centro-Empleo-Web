@@ -43,15 +43,13 @@ export class NavbarComponent implements OnInit {
       ];
     } else {
       this.items = [
+        
         {
-          label: 'LogOut',
-          icon: 'pi pi-sign-out',
+          label: 'Bienvenido',
+          icon: 'pi pi-user',
           styleClass: 'mr-5',
-          command: this.authService.logout
-
 
         },
-
         {
           label: 'Ofertas de trabajo',
           icon: 'pi pi-briefcase',
@@ -64,38 +62,15 @@ export class NavbarComponent implements OnInit {
           icon: 'pi pi-exclamation-circle',
 
         },
-      ];
-      switch (JSON.parse(auth).tipo) {
-        case "Postulante":
-          
-          this.items.push(
-            {
-              label: 'Mi perfil',
-              icon: 'pi pi-user',
-              styleClass: 'mr-5',
-              routerLink: ['/']
+        {
+          label: 'LogOut',
+          icon: 'pi pi-sign-out',
+          styleClass: 'mr-5',
+          command: this.authService.logout
 
 
-            })
-          this.items.push(
-            {
-              label: 'Formulario',
-              icon: 'pi pi-id-card',
-              styleClass: 'mr-5',
-              routerLink: ['/formulario/datosPersonales']
-
-
-            })
-
-
-          break;
-        case "Admin":
-          break;
-        case "Empresa":
-          break;
-
-      }
-
+        }]
+      
 
     }
   }

@@ -25,6 +25,9 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CheckboxModule} from 'primeng/checkbox';
 import {AccordionModule} from 'primeng/accordion';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {FileUploadModule} from 'primeng/fileupload';
+
 
 
 @NgModule({
@@ -53,6 +56,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     CheckboxModule,
     AccordionModule,
+    InputSwitchModule,
+    FileUploadModule,
   ],
   exports: [    
     MenubarModule,
@@ -79,6 +84,8 @@ import {AccordionModule} from 'primeng/accordion';
     InputNumberModule,
     CheckboxModule,
     AccordionModule,
+    InputSwitchModule,
+    FileUploadModule,
   ]
 })
 export class PrimeNgModule { }

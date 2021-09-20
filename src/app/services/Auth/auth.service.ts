@@ -28,5 +28,13 @@ export class AuthService {
     return undefined;
   }
 
+  getAuth():any | undefined{
+    let aux = localStorage.getItem("auth");
+    if(aux){
+      return JSON.parse(aux); 
+    }
+    return undefined;
+  }
+
 
 }

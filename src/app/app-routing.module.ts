@@ -10,6 +10,8 @@ import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { DatosPersonalesComponent } from './views/postulante/datos-personales/datos-personales.component';
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
+import { MisPostulacionesComponent } from './views/postulante/mis-postulaciones/mis-postulaciones.component';
+import { PerfilComponent } from './views/postulante/perfil/perfil.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'postulantes', component: ListaPostulantesComponent },
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion', component: EducacionFormacionComponent },
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'postulaciones', component: MisPostulacionesComponent },
 ];
 
 @NgModule({
