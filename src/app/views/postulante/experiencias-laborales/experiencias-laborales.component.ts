@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { ExpLaboral } from 'src/app/models/ExpLaboral';
 import { Postulante } from 'src/app/models/Postulante';
@@ -53,14 +54,15 @@ export class ExperienciasLaboralesComponent implements OnInit {
 
       if (element.controls[index + "id"]) {
         eL.id = element.controls[index + "id"].value;
+        console.log('dasda');
       }
       eL.nombreEmp = element.controls[index + "nombreEmpresa"].value;
       eL.cargo = element.controls[index + "cargo"].value;
       eL.area = element.controls[index + "areaRubro"].value;
       eL.nivelJer = element.controls[index + "nivelJerarquico"].value;
       eL.tareas = element.controls[index + "tareas"].value;
-      eL.fechaInicio = element.controls[index + "fechaInicio"].value;
-      eL.fechaFin = element.controls[index + "fechaFin"].value;
+      eL.fechaInicio = moment(element.controls[index + "fechaInicio"].value,'MM-DD-YYYY').toDate();
+      eL.fechaFin = moment(element.controls[index + "fechaFin"].value,'MM-DD-YYYY').toDate();
       eL.trabajando = element.controls[index + "trabajando"].value;
 
       eL.nombreRef = element.controls[index + "nombreRef"].value;
@@ -69,6 +71,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
       eL.telefonoRef = element.controls[index + "telefonoRef"].value;
       eL.emailRef = element.controls[index + "emailRef"].value;
       
+      console.log(eL);
 
       if (this.postulanteId)
         this.postulanteService.postExpLaboral(this.postulanteId, eL).subscribe(
@@ -89,7 +92,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
       result => {
         this.postulante = result;
 
-        this.postulante.expLaborales?.forEach((experienciaL: ExpLaboral) => {
+        this.postulante.expLaboral?.forEach((experienciaL: ExpLaboral) => {
           const ExpLabForm = this.fb.group({
           });
           ExpLabForm.addControl(this.experienciasL.length + 'id', new FormControl('', Validators.required));
@@ -114,8 +117,8 @@ export class ExperienciasLaboralesComponent implements OnInit {
           ExpLabForm.controls[this.experienciasL.length + "areaRubro"].setValue(experienciaL.area);
           ExpLabForm.controls[this.experienciasL.length + "nivelJerarquico"].setValue(experienciaL.nivelJer);
           ExpLabForm.controls[this.experienciasL.length + "tareas"].setValue(experienciaL.tareas);
-          ExpLabForm.controls[this.experienciasL.length + "fechaInicio"].setValue(experienciaL.fechaInicio);
-          ExpLabForm.controls[this.experienciasL.length + "fechaFin"].setValue(experienciaL.fechaFin);
+          ExpLabForm.controls[this.experienciasL.length + "fechaInicio"].setValue((moment(experienciaL.fechaInicio,'YYYY-MM-DD').toDate()));
+          ExpLabForm.controls[this.experienciasL.length + "fechaFin"].setValue((moment(experienciaL.fechaFin,'YYYY-MM-DD').toDate()));
           ExpLabForm.controls[this.experienciasL.length + "trabajando"].setValue(experienciaL.trabajando);
 
           ExpLabForm.controls[this.experienciasL.length + "nombreRef"].setValue(experienciaL.nombreRef);
@@ -141,7 +144,6 @@ export class ExperienciasLaboralesComponent implements OnInit {
   addExpLaboral() {
       const ExpLabForm = this.fb.group({
       });
-      ExpLabForm.addControl(this.experienciasL.length + 'id', new FormControl('', Validators.required));
       ExpLabForm.addControl(this.experienciasL.length + 'nombreEmpresa', new FormControl('', Validators.required));
       ExpLabForm.addControl(this.experienciasL.length + 'cargo', new FormControl('', Validators.required));
       ExpLabForm.addControl(this.experienciasL.length + 'areaRubro', new FormControl('', Validators.required));
@@ -173,6 +175,11 @@ export class ExperienciasLaboralesComponent implements OnInit {
     prevPage() {
       this.router.navigate(['formulario/educacionFormacion']);
     }
+
+    toDate(a: string):Date{
+      return new Date(a);
+    }
+
 
 
 }

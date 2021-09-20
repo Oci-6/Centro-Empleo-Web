@@ -15,10 +15,9 @@
                     <ng-container formArrayName="experienciasL">
                         <p-accordion>
 
-                            <div class="p-fluid p-grid"
-                                *ngFor="let ExpLabForm of experienciasL.controls; let i = index" [formGroupName]="i">
+                            <div class="p-fluid p-grid" *ngFor="let ExpLabForm of experienciasL.controls; let i = index" [formGroupName]="i">
 
-                                <p-accordionTab header="Experiencia Laboral {{i+1}}" class="p-col-12" [selected]="true">
+                                <p-accordionTab header="Experiencia Laboral {{i+1}}" class="p-col-12">
 
                                     <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
 
@@ -54,13 +53,13 @@
                                         
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="fechaInicio">Desde</label>
-                                            <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'" dateFormat="dd.mm.yy" ></p-calendar>
+                                            <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'" dateFormat="dd/mm/yy" ></p-calendar>
                                         </span>
 
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="fechaFin">Hasta</label>
-                                            <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'" dateFormat="dd.mm.yy" ></p-calendar>
-                                        </span>
+                                            <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'" dateFormat="dd/mm/yy" ></p-calendar>
+                                        </span> 
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="trabajando"> Actualmente trabajando?</label>

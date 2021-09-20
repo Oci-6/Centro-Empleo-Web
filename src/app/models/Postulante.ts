@@ -57,7 +57,7 @@ export class Postulante {
     capacitacionFormacion?: CapacitacionFormacion[] | undefined;
     conocimientoInfo?: ConocimientoInfo[] | undefined;
     idioma?: Idioma[] | undefined;
-    expLaborales?: ExpLaboral[] | undefined;
+    expLaboral?: ExpLaboral[] | undefined;
 
     constructor() {}
 }

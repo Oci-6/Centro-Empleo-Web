@@ -118,7 +118,7 @@ export class DatosPersonalesComponent implements OnInit {
         if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
         if (result.localidad?.departamento?.nombre) this.selectedDepartamento = result.localidad?.departamento;
         if (result.localidad) this.selectedLocalidad = result.localidad;
-        // this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
+        this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
         console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
@@ -157,11 +157,14 @@ export class DatosPersonalesComponent implements OnInit {
 
   onChangePais() {
     if (this.selectedPais?.departamentos) this.departamentos = this.selectedPais?.departamentos;
-    // console.log(this.selectedPais?.departamentos);
+    console.log(this.selectedPais);
+    console.log(this.selectedPais?.departamentos);
   }
 
   onChangeDepartamento() {
     if (this.selectedDepartamento?.localidades) this.localidades = this.selectedDepartamento?.localidades;
+    console.log(this.selectedDepartamento);
+    
     // console.log(this.selectedPais?.departamentos);
   }
 

@@ -291,15 +291,15 @@ export class EducacionFormacionComponent implements OnInit {
     const CapForForm = this.fb.group({
     });
     CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required)),
-      CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required)),
-      // console.log(this.capacitaciones);
-      // console.log(this.capacitaciones.length+'nombreCurso');
-      this.capacitaciones.push(CapForForm);
+    CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required)),
+    CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required)),
+    // console.log(this.capacitaciones);
+    // console.log(this.capacitaciones.length+'nombreCurso');
+    this.capacitaciones.push(CapForForm);
   }
 
   addConocimientosI() {
@@ -343,9 +343,7 @@ export class EducacionFormacionComponent implements OnInit {
 
   //Cambiar página del steper
   nextPage() {
-    this.router.navigate(['formulario/educacionFormacion']);
-
-    return;
+    this.router.navigate(['formulario/experienciaLaboral']);
   }
 
   prevPage() {
