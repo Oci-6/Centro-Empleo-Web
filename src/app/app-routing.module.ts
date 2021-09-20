@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'postulantes', component: ListaPostulantesComponent },
   { path: 'formulario/datosPersonales/:postulanteId', component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion/:postulanteId', component: EducacionFormacionComponent },
+  
 ];
 
 @NgModule({
