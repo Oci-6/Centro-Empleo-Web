@@ -9,7 +9,17 @@ export class MisPostulacionesComponent implements OnInit {
 
   constructor() { }
 
+  cols: any[] = []
+
+  oferta: any[] = [];
+
   ngOnInit(): void {
+    this.cols = [
+      { field: 'titulo', header: 'Título' },
+      { field: 'empresa', header: 'Empresa' },
+      { field: 'fechaCierre', header: 'Fecha de cierre' },
+      { field: 'estado', header: 'Estado' }
+    ];
   }
 
 }

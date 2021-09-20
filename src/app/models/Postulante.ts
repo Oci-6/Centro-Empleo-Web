@@ -17,6 +17,7 @@ export class Postulante {
     segundoApellido?: string | undefined;
     sexo?: string | undefined;
     fechaNacimiento?: Date | undefined;
+    foto?: string | undefined;
 
     //Dirección
     barrio?: string | undefined;

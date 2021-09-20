@@ -11,6 +11,8 @@ import { DatosPersonalesComponent } from './views/postulante/datos-personales/da
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
 import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
+import { MisPostulacionesComponent } from './views/postulante/mis-postulaciones/mis-postulaciones.component';
+import { PerfilComponent } from './views/postulante/perfil/perfil.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
 const routes: Routes = [
@@ -24,7 +26,8 @@ const routes: Routes = [
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
   { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
-
+  { path: 'perfil', component: PerfilComponent },
+  { path: 'postulaciones', component: MisPostulacionesComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,17 +9,13 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
-  @Input()
-  roles?: string[];
-
-  @Input()
-  userName?: string;
-
   items: MenuItem[] = [];
 
+  constructor(private authService: AuthService){}
   ngOnInit() {
-    if (this.roles) {
-      if (this.roles.includes("ADMIN")) {
+    let user = this.authService.getAuth();
+    if (user) {
+      if (user.tipo === "Admin") {
         this.items.push(
           {
             label: 'Listar Empresas',
@@ -63,7 +60,7 @@ export class MenuComponent implements OnInit {
       //   });
       // }
 
-      if (this.roles.includes("EMPRESARIO")) {
+      if (user.tipo === "Empresa") {
         this.items.push(
           {
             label: 'Mis Ofertas Laborales',
@@ -83,12 +80,12 @@ export class MenuComponent implements OnInit {
         );
       }
 
-      if (this.roles.includes("POSTULANTE")) {
+      if (user.tipo === "Postulante") {
         this.items.push(
           {
             label: 'Mi Perfil',
             icon: 'pi pi-pw pi-book',
-            url: 'misOfertas'
+            url: 'perfil'
           },
           {
             label: 'Ofertas Laborales',

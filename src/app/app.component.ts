@@ -9,9 +9,15 @@ import { MenuItem } from 'primeng/api';
 })
 export class AppComponent {
   title = 'Centro Empleo';
-  
+
+  auth: any;
+
   ngOnInit() {
-    
-}
+    let usuario = localStorage.getItem('auth');
+
+    if (typeof usuario === 'string') {
+      this.auth = JSON.parse(usuario);
+    }
+  }
 
 }
