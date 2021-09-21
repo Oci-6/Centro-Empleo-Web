@@ -41,7 +41,7 @@ export class FormularioComponent implements OnInit {
     },
     {
       label: 'CV',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/cv'
     }
     ];
   }

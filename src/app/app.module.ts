@@ -39,6 +39,7 @@ import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
 import { InteresesPreferenciasComponent } from './views/postulante/intereses-preferencias/intereses-preferencias.component';
 import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
+import { CvPermisosLegalesComponent } from './views/postulante/cv-permisos-legales/cv-permisos-legales.component';
 
 
 
@@ -67,6 +68,7 @@ import { DatosPostulanteComponent } from './components/datos-postulante/datos-po
     PermisosLicenciasComponent,
     InteresesPreferenciasComponent,
     DatosPostulanteComponent,
+    CvPermisosLegalesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,56 @@
+<app-formulario></app-formulario>
+<div class="p-mt-5">
+    <p-card header="CV y Permisos legales">
+
+        <h2>Curriculum Vitae</h2>
+        <div class="FormularioComponent-content">
+            <p-fileUpload mode="basic" name="file"
+                [url]="'http://localhost:3000/api/upload/documento/'+user.usuario+'&Curriculum'"
+                (onUpload)="onUpload($event)" chooseLabel="Agregar Curriculum Vitae" accept="application/pdf">
+
+            </p-fileUpload>
+            
+        </div>
+
+        <p-divider>
+        </p-divider>
+        <h2>Terminos y Condiciones</h2>
+        <div class="p-col-12 p-md-6">
+            <strong>
+                <p>
+                    Para mayor seguridad de los usuarios, las empresas que buscan personal
+                    podrán acceder a sus datos personales y perfil laboral, solo si usted
+                    aprueba la visibilidad de su perfil. La información proporcionada será
+                    visible SOLO para aquellas empresas que publiquen ofertas y/o realice
+                    búsquedas en el Portal de Empleo San José. Usted podrá modificar y
+                    cambiar el nivel de visibilidad en cualquier momento.
+                </p>
+            </strong>
+        </div>
+        <div class="p-fluid p-formgrid p-grid p-mb-4 p-mt-4" [formGroup]="cvPermisosForm" (ngSubmit)="ngOnSubmit()">
+            <div class="p-field-checkbox p-col-12 p-md-6">
+                <p-checkbox [binary]="true" id="visibilidad" formControlName="visibilidad"
+                    [(ngModel)]="postulante.visibilidad">
+                </p-checkbox>
+                <label for="visibilidad">Acepto mis datos sean visible en la bolsa de trabajo</label>
+            </div>
+
+            <div class="p-field-checkbox p-col-12 p-md-6">
+                <p-checkbox [binary]="true" id="terminosCondiciones" formControlName="terminosCondiciones"
+                    [required]="true" [(ngModel)]="terminosCondiciones">
+                </p-checkbox>
+                <label for="terminosCondiciones">Acepta los terminos y condiciones</label>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-between">
+                <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                </p-button>
+                <p-button label="Guardar" [disabled]="!terminosCondiciones" (onClick)="ngOnSubmit()" icon="pi pi-plus"
+                    iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
