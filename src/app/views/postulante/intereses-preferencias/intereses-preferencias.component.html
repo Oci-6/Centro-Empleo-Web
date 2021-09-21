@@ -1,0 +1,120 @@
+<app-formulario></app-formulario>
+
+<div class="p-mt-5">
+    <p-card>
+
+        <div class="FormularioComponent-content p-mt-5">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Intereses y Preferencias
+                </ng-template>
+
+                <!--Jornada Laboral Preferida-->
+                <div class="p-fluid p-formgrid p-grid p-mb-4" [formGroup]="JornadaPreferidaForm"
+                    (ngSubmit)="ngOnSubmit()">
+
+                    <div class="p-field-checkbox p-col-12 p-md-6">  
+                        <p-checkbox [binary]="true" id="jIndiferente" formControlName="jIndiferente"
+                            [(ngModel)]="postulante.jIndiferente">
+                        </p-checkbox>
+                        <label for="jIndiferente">Indiferente</label>
+                    </div>
+
+                    <div class="p-field-checkbox p-col-12 p-md-6">
+                        <p-checkbox [binary]="true" id="jCompleta" formControlName="jCompleta"
+                            [(ngModel)]="postulante.jCompleta">
+                        </p-checkbox>
+                        <label for="jCompleta">Completa</label>
+                    </div>
+
+                    <div class="p-field-checkbox p-col-12 p-md-6">
+                        <p-checkbox [binary]="true" id="jMtManiana" formControlName="jMtManiana"
+                            [(ngModel)]="postulante.jMtManiana">
+                        </p-checkbox>
+                        <label for="jMtManiana">Medio Turno Mañana</label>
+                    </div>
+
+                    <div class="p-field-checkbox p-col-12 p-md-6">
+                        <p-checkbox [binary]="true" id="jMtTarde" formControlName="jMtTarde"
+                            [(ngModel)]="postulante.jMtTarde">
+                        </p-checkbox>
+                        <label for="jMtTarde">Medio Turno Tarde</label>
+                    </div>
+
+                    <div class="p-field-checkbox p-col-12 p-md-6">
+                        <p-checkbox [binary]="true" id="jMtNoche" formControlName="jMtNoche"
+                            [(ngModel)]="postulante.jMtNoche">
+                        </p-checkbox>
+                        <label for="jMtNoche">Medio Turno Noche</label>
+                    </div>
+
+                </div>
+
+                <p-divider align="left" type="dashed">
+                    <b>Preferencias Laborales</b>
+                </p-divider>
+
+                <!--Preferencias Laborales-->
+                <div class="p-fluid p-mb-4" [formGroup]="preferenciaLaboralForm">
+
+                    <ng-container formArrayName="preferenciasLaborales">
+                        <p-accordion>
+
+                            <div class="p-fluid p-grid"
+                                *ngFor="let PrefLabForm of preferenciasLaborales.controls; let i = index"
+                                [formGroupName]="i">
+
+                                <p-accordionTab header="Preferencia laboral {{i+1}}" class="p-col-12">
+
+                                    <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="puestoPref">Puesto Preferido</label>
+                                            <input id="puestoPref" type="text" required pInputText [formControlName]="i+'puestoPref'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="areaInteresL">Área de interés laboral</label>
+                                            <p-dropdown [options]="areaInteresL" [formControlName]="i+'areaInteresL'"></p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="aspSalarial">Aspiración salarial nominal</label>
+                                            <p-inputNumber mode="decimal" inputId="aspSalarial" [useGrouping]="false" [formControlName]="i+'aspSalarial'"></p-inputNumber>
+                                        </div>
+
+                                        <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <p-button (onClick)="deletePrefLab(i)" icon="pi pi-trash"></p-button>
+                                        </div>
+
+                                        <!-- <p-divider class="p-col-12"></p-divider> -->
+                                    </div>
+                                </p-accordionTab>
+                            </div>
+                        </p-accordion>
+
+
+                    </ng-container>
+
+
+                    <!-- <p-button label="Prueba" (onClick)="submit()" icon="pi pi-minus"></p-button> -->
+                    <p-button label="Agregar Preferencia Laboral" (onClick)="addPrefLab()" icon="pi pi-plus">
+                    </p-button>
+
+                </div>
+
+                <ng-template pTemplate="footer">
+                    <div class="p-grid p-nogutter p-justify-between">
+                        <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        </p-button>
+                        <p-button label="Guardar" (onClick)="ngOnSubmit()" icon="pi pi-plus" iconPos="right"></p-button>
+                    </div>
+                </ng-template>
+
+            </p-card>
+        </div>
+
+    </p-card>
+</div>

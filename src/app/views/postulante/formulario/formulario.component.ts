@@ -37,7 +37,7 @@ export class FormularioComponent implements OnInit {
     },
     {
       label: 'Intereses ',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/preferenciasLaborales'
     },
     {
       label: 'CV',
