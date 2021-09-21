@@ -60,7 +60,7 @@
 
                     <span class="p-field p-col-12 p-md-6">
                         <label for="fechaN">Fecha de Nacimiento</label>
-                        <p-calendar inputId="fechaN" [(ngModel)]="postulante.fechaNacimiento" formControlName="fechaN" dateFormat="dd.mm.yy" ></p-calendar>
+                        <p-calendar inputId="fechaN" formControlName="fechaN" dateFormat="dd/mm/yy" ></p-calendar>
                     </span>
 
 
@@ -68,8 +68,8 @@
 
                     <div class="p-field p-col-12 p-md-2">
                         <label for="pais">Pais</label>
-                        <p-dropdown [options]="paises" optionLabel="nombre"
-                            formControlName="pais" [(ngModel)]="selectedPais" inputId="pais" (onChange)="onChangePais()"></p-dropdown>
+                        <p-dropdown [options]="paises" optionLabel="nombre" optionValue="id"
+                            formControlName="pais" inputId="pais" (onChange)="onChangePais()"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&selectedPais.nombre=='Uruguay'">

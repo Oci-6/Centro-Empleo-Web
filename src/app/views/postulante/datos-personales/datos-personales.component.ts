@@ -94,7 +94,7 @@ export class DatosPersonalesComponent implements OnInit {
         noticias: new FormControl('', [Validators.required]),
       });
 
-      this.getInfoPostulante(this.postulanteId);
+      
 
       this.paisService.getPaises().subscribe(
         result => {
@@ -103,8 +103,9 @@ export class DatosPersonalesComponent implements OnInit {
       );
 
 
-
-      // console.log(this.selectedDepartamento);
+      this.getInfoPostulante(this.postulanteId);
+      
+    
     }
   }
 
@@ -117,13 +118,18 @@ export class DatosPersonalesComponent implements OnInit {
         this.selectedPais = result.pais;
         if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
         if (result.localidad?.departamento?.nombre) this.selectedDepartamento = result.localidad?.departamento;
-        if (result.localidad) this.selectedLocalidad = result.localidad;
+        this.selectedLocalidad = result.localidad;
         this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
-        console.log(this.postulante.fechaNacimiento);
+        // console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
         this.getLocalidades(this.selectedDepartamento?.id);
-
+        this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
+        this.datosPersonalesForm.controls["pais"].setValue(this.selectedPais?.id);
+        console.log(this.postulante);
+        console.log(this.selectedLocalidad);
+        console.log(this.selectedPais);
+        
 
         //  if(result.pais?.nombre=='Uruguay'){
         //    if(result.localidad) this.selectedLocalidad = result.localidad;
@@ -181,10 +187,13 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.fechaNacimiento = this.datosPersonalesForm.controls.fechaN.value;
     // postulante.pais = this.datosPersonalesForm.controls.pais.value;
     postulante.paisId = this.datosPersonalesForm.controls.pais.value.id;
+    // console.log(this.selectedLocalidad);
+    
     if (this.selectedPais?.nombre == "Uruguay") {
-      let localidad: Localidad = this.datosPersonalesForm.controls.localidad.value;
-      postulante.localidadId = localidad.id;
-      console.log(localidad)
+      let localidad: Localidad | undefined = this.selectedLocalidad;
+      if(localidad)console.log(localidad.id);
+      if(localidad) postulante.localidadId = localidad.id;
+      // console.log(localidad)
     }
     postulante.barrio = this.datosPersonalesForm.controls.barrio.value;
     postulante.direccion = this.datosPersonalesForm.controls.direccion.value;
@@ -193,7 +202,7 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.recibirOfertas = this.datosPersonalesForm.controls.noticias.value;
 
 
-    console.log(postulante);
+    // console.log(postulante);
 
     this.postulanteService.modificarPostulante(postulante).subscribe(
       response => {
