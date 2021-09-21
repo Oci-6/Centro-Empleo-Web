@@ -11,6 +11,7 @@ import { DatosPersonalesComponent } from './views/postulante/datos-personales/da
 import { EducacionFormacionComponent } from './views/postulante/educacion-formacion/educacion-formacion.component';
 import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 import { FormularioComponent } from './views/postulante/formulario/formulario.component';
+import { InteresesPreferenciasComponent } from './views/postulante/intereses-preferencias/intereses-preferencias.component';
 import { MisPostulacionesComponent } from './views/postulante/mis-postulaciones/mis-postulaciones.component';
 import { PerfilComponent } from './views/postulante/perfil/perfil.component';
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
   { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
   { path: 'formulario/permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
+  { path: 'formulario/preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'postulaciones', component: MisPostulacionesComponent },
 ];

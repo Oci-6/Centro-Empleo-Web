@@ -129,7 +129,7 @@ export class PermisosLicenciasComponent implements OnInit {
 
   //Cambiar página del steper
   nextPage() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/formulario/preferenciasLaborales']);
   }
 
   prevPage() {

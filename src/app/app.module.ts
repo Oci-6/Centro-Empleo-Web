@@ -37,6 +37,7 @@ import { AuthInterceptor } from './services/Auth/auth.interceptor';
 import { LoginGuard } from './guards/login.guard';
 import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
+import { InteresesPreferenciasComponent } from './views/postulante/intereses-preferencias/intereses-preferencias.component';
 
 
 
@@ -63,6 +64,7 @@ import { PermisosLicenciasComponent } from './views/postulante/permisos-licencia
     EducacionFormacionComponent,
     ExperienciasLaboralesComponent,
     PermisosLicenciasComponent,
+    InteresesPreferenciasComponent,
   ],
   imports: [
     BrowserModule,

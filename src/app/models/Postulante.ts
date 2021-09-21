@@ -5,6 +5,7 @@ import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
 import { Pais } from "./Pais";
 import { PermisosLicencias } from "./PermisosLicencias";
+import { PreferenciaLaboral } from "./PreferenciaLaboral";
 
 export class Postulante {
 
@@ -36,7 +37,7 @@ export class Postulante {
     //Jornada preferida
     jIndiferente?: boolean | undefined;
     jCompleta?: boolean | undefined;
-    jMtMañana?: boolean | undefined;
+    jMtManiana?: boolean | undefined;
     jMtTarde?: boolean | undefined;
     jMtNoche?: boolean | undefined;
 
@@ -61,6 +62,7 @@ export class Postulante {
     idioma?: Idioma[] | undefined;
     expLaboral?: ExpLaboral[] | undefined;
     permisosLicencias?: PermisosLicencias[] | undefined;
+    preferenciaLaboral?: PreferenciaLaboral[] | undefined;
 
     constructor() {}
 }

@@ -6,6 +6,7 @@ import { ExpLaboral } from 'src/app/models/ExpLaboral';
 import { Idioma } from 'src/app/models/Idioma';
 import { PermisosLicencias } from 'src/app/models/PermisosLicencias';
 import { Postulante } from 'src/app/models/Postulante';
+import { PreferenciaLaboral } from 'src/app/models/PreferenciaLaboral';
 import { User } from 'src/app/models/User';
 
 @Injectable({
@@ -99,6 +100,20 @@ export class PostulanteService {
   }
   putPermisosLicencias(PL: PermisosLicencias){
     return this.http.put<PermisosLicencias>(this.URL + '/permisosLicencia/' , PL);
+  }
+
+  //Intereses y Preferencias
+  infoPrefLab(id: number){
+    return this.http.get<PreferenciaLaboral>(this.URL + '/preferenciaLaboral/' + id);
+  }
+  PrefLabPostulante(idPostulante: number){
+    return this.http.get<PreferenciaLaboral[]>(this.URL + '/preferenciaLaborales/' + idPostulante);
+  }
+  postPrefLab(idPostulante: number, prefLab: PreferenciaLaboral){
+    return this.http.post<PreferenciaLaboral>(this.URL + '/preferenciaLaboral/' + idPostulante, prefLab);
+  }
+  putPrefLab(PL: PreferenciaLaboral){
+    return this.http.put<PreferenciaLaboral>(this.URL + '/preferenciaLaboral/' , PL);
   }
 
 }
