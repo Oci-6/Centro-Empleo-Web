@@ -25,7 +25,7 @@ import { RegistrarComponent } from './views/registrar/registrar.component';
 import { OfertasComponent } from './views/ofertas/ofertas.component';
 import { NovedadesComponent } from './views/novedades/novedades.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
-import { MessageService,  } from 'primeng/api';
+import { MessageService, } from 'primeng/api';
 import { AuthService } from './services/Auth/auth.service';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
@@ -37,6 +37,7 @@ import { AuthInterceptor } from './services/Auth/auth.interceptor';
 import { LoginGuard } from './guards/login.guard';
 import { ExperienciasLaboralesComponent } from './views/postulante/experiencias-laborales/experiencias-laborales.component';
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
+import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
 
 
 
@@ -63,6 +64,7 @@ import { PermisosLicenciasComponent } from './views/postulante/permisos-licencia
     EducacionFormacionComponent,
     ExperienciasLaboralesComponent,
     PermisosLicenciasComponent,
+    DatosPostulanteComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import { PermisosLicenciasComponent } from './views/postulante/permisos-licencia
     PrimeNgModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SocialLoginModule,
   ],
   providers: [
     MessageService,
@@ -82,24 +85,24 @@ import { PermisosLicenciasComponent } from './views/postulante/permisos-licencia
       multi: true,
     },
     {
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            '811112997489-6gbrihariesa3h7pbcrpbtr8qfm13l4i.apps.googleusercontent.com'
-          )
-        },
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('1007582456710652')
-        }
-      ]
-    } as SocialAuthServiceConfig,
-  }
-],
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '811112997489-6gbrihariesa3h7pbcrpbtr8qfm13l4i.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1007582456710652')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

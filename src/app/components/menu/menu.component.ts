@@ -20,27 +20,27 @@ export class MenuComponent implements OnInit {
           {
             label: 'Listar Empresas',
             icon: 'pi pi-pw pi-book',
-            url: 'empresas'
+            routerLink: 'empresas'
           },
           {
             label: 'Listar Postulantes',
             icon: 'pi pi-pw pi-users',
-            url: 'postulantes'
+            routerLink: 'postulantes'
           },
           {
             label: 'Ofertas Laborales',
             icon: 'pi pi-pw pi-users',
-            url: 'ofertas'
+            routerLink: 'ofertas'
           },
           {
             label: 'Novedades',
             icon: 'pi pi-pw pi-users',
-            url: 'novedades'
+            routerLink: 'novedades'
           },
           {
             label: 'Dashboard de Seguimiento',
             icon: 'pi pi-pw pi-users',
-            url: 'dashboard'
+            routerLink: 'dashboard'
           },
         );
       }
@@ -53,7 +53,7 @@ export class MenuComponent implements OnInit {
       //     items: [{
       //       label: 'Lista',
       //       icon: 'pi pi-fw pi-list',
-      //       url: 'usuarios',
+      //       routerLink: 'usuarios',
       //     },
       //     { separator: true },
       //     ]
@@ -65,17 +65,17 @@ export class MenuComponent implements OnInit {
           {
             label: 'Mis Ofertas Laborales',
             icon: 'pi pi-pw pi-book',
-            url: 'misOfertas'
+            routerLink: 'misOfertas'
           },
           {
             label: 'Listar Postulantes',
             icon: 'pi pi-pw pi-users',
-            url: 'novedades'
+            routerLink: 'novedades'
           },
           {
             label: 'Novedades',
             icon: 'pi pi-pw pi-users',
-            url: 'novedades'
+            routerLink: 'novedades'
           },
         );
       }
@@ -85,22 +85,22 @@ export class MenuComponent implements OnInit {
           {
             label: 'Mi Perfil',
             icon: 'pi pi-pw pi-book',
-            url: 'perfil'
+            routerLink: 'perfil'
           },
           {
             label: 'Ofertas Laborales',
             icon: 'pi pi-pw pi-users',
-            url: 'ofertas'
+            routerLink: 'ofertas'
           },
           {
             label: 'Mis postulaciones',
             icon: 'pi pi-pw pi-users',
-            url: 'postulaciones'
+            routerLink: 'postulaciones'
           },
           {
             label: 'Formulario',
             icon: 'pi pi-pw pi-file',
-            url: 'formulario/datosPersonales'
+            routerLink: 'formulario/datosPersonales'
           }
         );
       }

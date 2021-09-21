@@ -36,5 +36,8 @@ export class AuthService {
     return undefined;
   }
 
+  signInWithSocial(user: User){
+    return this.http.post(this.URL + '/signInSocial', user);
+  }
 
 }
