@@ -28,15 +28,15 @@
 </p-card>
 
 <p-dialog class="p-grid p-jc-center" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog"
-    [breakpoints]="{'960px': '75vw', '640px': '80vw'}" [style]="{width: '30vw'}">
-    <p-card>
+   [style]="{height: '100%',width: '80%'}">
+    <!-- <p-card>
         <div class="p-grid p-formgrid p-grid">
 
             <div class="p-field ">
                 <img src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png" class="novedad-imagen"
-                    style="width: 100%; height:150px" />
+                    style="width: 100%; height:150px" /> -->
                 <!-- selectedPostulante.imagen -->
-            </div>
+            <!-- </div>
 
             <div class="p-field p-col-12 p-md-6 p-ml-3">
                 <label for="primerNombre">Primer Nombre</label>
@@ -64,6 +64,7 @@
         </div>
         
 
-    </p-card>
-
+    </p-card> -->
+   
+    <app-datos-postulante *ngIf="selectedPostulante.id" [id]="selectedPostulante.id"></app-datos-postulante>
 </p-dialog>

@@ -27,6 +27,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FileUploadModule} from 'primeng/fileupload';
+import {ChartModule} from 'primeng/chart';
 
 
 
@@ -58,6 +59,7 @@ import {FileUploadModule} from 'primeng/fileupload';
     AccordionModule,
     InputSwitchModule,
     FileUploadModule,
+    ChartModule,
   ],
   exports: [    
     MenubarModule,
@@ -86,6 +88,7 @@ import {FileUploadModule} from 'primeng/fileupload';
     AccordionModule,
     InputSwitchModule,
     FileUploadModule,
+    ChartModule,
   ]
 })
 export class PrimeNgModule { }

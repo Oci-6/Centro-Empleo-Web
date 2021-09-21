@@ -12,30 +12,15 @@ import { PostulanteService } from 'src/app/services/PostulanteService/postulante
 })
 export class PerfilComponent implements OnInit {
 
+  auth: any;
+
   constructor(
-    private postulanteService: PostulanteService,
-    private authService: AuthService,
-    private messageService: MessageService,
-    private router: Router) { }
+    private authService: AuthService) { }
 
   postulante: Postulante | undefined;
 
   ngOnInit(): void {
-    this.postulanteService.infoPostulante(this.authService.getAuth().usuario).subscribe(
-      (response) => {
-        this.postulante = response;
-      },
-      (error) => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error interno del sistema'});
-      }
-    )
-  }
-
-  onUpload(){
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-    let url = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([url]));
+    this.auth = this.authService.getAuth();
   }
 
 }

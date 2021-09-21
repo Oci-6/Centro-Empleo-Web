@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
 import { LoginGuard } from './guards/login.guard';
+import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
@@ -32,6 +34,10 @@ const routes: Routes = [
   { path: 'formulario/preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'postulaciones', component: MisPostulacionesComponent },
+
+  { path: 'personales', component: DatosPostulanteComponent },
+  //Rutas Admin
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({

@@ -28,10 +28,10 @@
                         <p-divider align="center"><b>O</b></p-divider>
                     </div>
                     <div class="p-col p-mt-3">
-                        <p-button label="Ingresar con Google" icon="pi pi-google" routerLink="/register"></p-button>
+                        <p-button label="Ingresar con Google" icon="pi pi-google" (onClick)="signInWithGoogle()"></p-button>
                     </div>
                     <div class="p-col p-mt-3">
-                        <p-button label="Ingresar con Facebook" icon="pi pi-facebook" routerLink="/register"></p-button>
+                        <p-button label="Ingresar con Facebook" icon="pi pi-facebook" (onClick)="signInWithFB()"></p-button>
                     </div>
                     <div class="p-col p-mt-5">
                         Eres una empresa?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/solicitar_acceso">Solicitar acceso</a>

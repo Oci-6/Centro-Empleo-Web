@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
@@ -22,6 +23,7 @@ export class ListaPostulantesComponent implements OnInit {
   constructor(
     private postulanteService: PostulanteService,
     private messageService: MessageService,
+    private router: Router,
   ) { }
 
   postulantes: Postulante[] = [];
@@ -32,8 +34,8 @@ export class ListaPostulantesComponent implements OnInit {
       { field: 'primerApellido', header: 'Primer Apellido' },
       { field: 'documento', header: 'Documento' },
       { field: 'sexo', header: 'Sexo' },
-      { field: 'fechaNacimiento', header: 'Fecha de Nacimiento'},
-      { field: 'visibilidad', header: 'Visibilidad'},
+      { field: 'fechaNacimiento', header: 'Fecha de Nacimiento' },
+      { field: 'visibilidad', header: 'Visibilidad' },
     ];
 
     this.postulanteService.getPostulantes().subscribe(
@@ -50,9 +52,8 @@ export class ListaPostulantesComponent implements OnInit {
     )
   }
 
-  showInfoPostulante(postulante: Postulante): void{
+  showInfoPostulante(postulante: Postulante): void {
     this.selectedPostulante = postulante;
-
     this.displayInfoPostulanteDialog = true;
   }
 
