@@ -72,16 +72,14 @@
                             formControlName="pais" inputId="pais" (onChange)="onChangePais()"></p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&selectedPais.nombre=='Uruguay'">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="uruguay()">
                         <label for="departamento">Departamento</label>
-                        <p-dropdown [options]="departamentos" [(ngModel)]="selectedDepartamento"
-                             optionLabel="nombre" formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()"></p-dropdown>
+                        <p-dropdown [options]="departamentos" optionLabel="nombre" optionValue="id" formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()"></p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="uruguay()&&datosPersonalesForm.controls.departamento.value">
                         <label for="localidad">Localidad</label>
-                        <p-dropdown [options]="localidades" [(ngModel)]="selectedLocalidad"
-                            optionLabel="nombre" formControlName="localidad" inputId="localidad"></p-dropdown>
+                        <p-dropdown [options]="localidades" optionLabel="nombre" optionValue="id" formControlName="localidad" inputId="localidad"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
