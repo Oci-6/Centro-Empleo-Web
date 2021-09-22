@@ -26,7 +26,7 @@ export class PostulanteService {
     return this.http.get<Postulante[]>(this.URL + '/');
   }
   infoPostulante(id: number) {
-    console.log(id);
+    // console.log(id);
     return this.http.get<Postulante>(this.URL + '/' + id);
   }
   modificarPostulante(postulante: Postulante) {

@@ -20,13 +20,12 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nivelEducativo">Indique el máximo nivel educativo alcanzado</label>
-                        <p-dropdown [options]="nivelEducativo" [(ngModel)]="postulante.nivelEducativo"
-                            formControlName="nivelEducativo"></p-dropdown>
+                        <p-dropdown [options]="nivelEducativo" formControlName="nivelEducativo"></p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="estadoNE">Estado</label>
-                        <p-dropdown [options]="estadoNE" [(ngModel)]="postulante.estadoNE" formControlName="estadoNE">
+                        <p-dropdown [options]="estadoNE" formControlName="estadoNE">
                         </p-dropdown>
                     </div>
 
@@ -35,8 +34,7 @@
                         || postulante.nivelEducativo=='Magisterio - Profesorado'|| postulante.nivelEducativo=='Terciario no universitario'
                         || postulante.nivelEducativo=='Universitario'|| postulante.nivelEducativo=='Posgrado - Master - Doctorado'">
                         <label for="orientacionNE">Orientación del máximo nivel educativo alcanzado</label>
-                        <input id="orientacionNE" type="text" required pInputText [(ngModel)]="postulante.orientacionNE"
-                            formControlName="orientacionNE">
+                        <input id="orientacionNE" type="text" required pInputText formControlName="orientacionNE">
                     </div>
 
                 </div>

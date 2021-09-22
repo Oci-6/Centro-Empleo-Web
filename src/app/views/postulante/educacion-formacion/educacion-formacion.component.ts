@@ -198,6 +198,10 @@ export class EducacionFormacionComponent implements OnInit {
           this.selectedNE = result.nivelEducativo;
           this.selectedEstadoNE = result.estadoNE;
 
+          this.educacionFormacionForm.controls["nivelEducativo"].setValue(this.postulante.nivelEducativo);
+          this.educacionFormacionForm.controls["estadoNE"].setValue(this.postulante.estadoNE);
+          this.educacionFormacionForm.controls["orientacionNE"].setValue(this.postulante.orientacionNE);
+
           this.postulante.capacitacionFormacion?.forEach((capacitacion: CapacitacionFormacion) => {
             const CapForForm = this.fb.group({
             });
