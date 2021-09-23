@@ -24,8 +24,8 @@ export class DatosPersonalesComponent implements OnInit {
   submitted: boolean | undefined = false;
 
   public paises: Pais[] = [];
-  public departamentos: Departamento[] = [];
-  public localidades: Localidad[] = [];
+  public departamentos: Departamento[] | undefined = [];
+  public localidades: Localidad[] | undefined = [];
 
   sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
 
@@ -34,9 +34,9 @@ export class DatosPersonalesComponent implements OnInit {
   postulante: Postulante = {};
 
   selectedTipoD: tipoD = { nombre: '' };
-  selectedPais: Pais | undefined;
-  selectedDepartamento: Departamento | undefined;
-  selectedLocalidad: Localidad | undefined;
+  selectedPais: number | undefined;
+  selectedDepartamento: number | undefined;
+  selectedLocalidad: number | undefined;
   selectedFechaN: Date | undefined;
 
   message: Message | undefined;
@@ -99,6 +99,14 @@ export class DatosPersonalesComponent implements OnInit {
       this.paisService.getPaises().subscribe(
         result => {
           this.paises = result;
+          let paisNuevo = {
+          id : -1,
+          nombre : 'Seleccione un Pais',
+          departamentos : [],
+          inactive: true,          
+          };
+          
+          this.paises.unshift(paisNuevo);
         }
       );
 
@@ -115,20 +123,37 @@ export class DatosPersonalesComponent implements OnInit {
       result => {
         this.postulante = result;
         // console.log(this.postulante);
-        this.selectedPais = result.pais;
+        this.selectedPais = result.pais?.id;
         if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
-        if (result.localidad?.departamento?.nombre) this.selectedDepartamento = result.localidad?.departamento;
-        this.selectedLocalidad = result.localidad;
+        this.departamentos?.sort((a:any, b:any) => a.id - b.id)
+        if (this.departamentos&&this.selectedDepartamento&&result.localidad?.departamento?.nombre) this.departamentos[this.selectedDepartamento-1] = result.localidad?.departamento;
+        if(result.localidad) this.selectedLocalidad = result.localidad.id;
         this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
+        if(result.localidad?.departamento)this.selectedDepartamento = result.localidad.departamento.id;
         // console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
-        this.getLocalidades(this.selectedDepartamento?.id);
+        this.getLocalidades(this.selectedDepartamento);
         this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
-        this.datosPersonalesForm.controls["pais"].setValue(this.selectedPais?.id);
+        this.datosPersonalesForm.controls["pais"].setValue(this.selectedPais);
+        this.datosPersonalesForm.controls["tipoDocumento"].setValue(this.postulante.tipoDocumento);
+        this.datosPersonalesForm.controls["documento"].setValue(this.postulante.documento);
+        this.datosPersonalesForm.controls["primerApellido"].setValue(this.postulante.primerApellido);
+        this.datosPersonalesForm.controls["segundoApellido"].setValue(this.postulante.segundoApellido);
+        this.datosPersonalesForm.controls["primerNombre"].setValue(this.postulante.primerNombre);
+        this.datosPersonalesForm.controls["segundoNombre"].setValue(this.postulante.segundoNombre);
+        this.datosPersonalesForm.controls["sexo"].setValue(this.postulante.sexo);
+        this.datosPersonalesForm.controls["departamento"].setValue(this.selectedDepartamento);
+        this.datosPersonalesForm.controls["barrio"].setValue(this.postulante.barrio);
+        this.datosPersonalesForm.controls["direccion"].setValue(this.postulante.direccion);
+        this.datosPersonalesForm.controls["primerTelefono"].setValue(this.postulante.primerTelefono);
+        this.datosPersonalesForm.controls["segundoTelefono"].setValue(this.postulante.segundoTelefono);
+        this.datosPersonalesForm.controls["noticias"].setValue(this.postulante.recibirOfertas);
+        this.datosPersonalesForm.controls["localidad"].setValue(this.postulante.localidad?.id);
+        
         console.log(this.postulante);
-        console.log(this.selectedLocalidad);
-        console.log(this.selectedPais);
+        // console.log(this.selectedLocalidad);
+        // console.log(this.selectedPais);
         
 
         //  if(result.pais?.nombre=='Uruguay'){
@@ -148,6 +173,7 @@ export class DatosPersonalesComponent implements OnInit {
     this.paisService.getLocalidades(departamento).subscribe(
       result => {
         this.localidades = result;
+        this.localidades?.sort((a:any, b:any) => a.id - b.id)
 
       },
     );
@@ -162,14 +188,24 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   onChangePais() {
-    if (this.selectedPais?.departamentos) this.departamentos = this.selectedPais?.departamentos;
-    console.log(this.selectedPais);
-    console.log(this.selectedPais?.departamentos);
+
+    this.selectedPais = this.datosPersonalesForm.controls.pais.value;
+    if(this.selectedPais&&this.paises[this.selectedPais].departamentos) this.departamentos = this.paises[this.selectedPais].departamentos;
+    this.departamentos?.sort((a:any, b:any) => a.id - b.id)
+    // console.log(this.departamentos);
+    
+    
   }
 
   onChangeDepartamento() {
-    if (this.selectedDepartamento?.localidades) this.localidades = this.selectedDepartamento?.localidades;
-    console.log(this.selectedDepartamento);
+    this.selectedDepartamento = this.datosPersonalesForm.controls.departamento.value;
+    if (this.selectedDepartamento&&this.departamentos) this.localidades = this.departamentos[this.selectedDepartamento-1].localidades;
+    if (this.selectedDepartamento&&this.departamentos) console.log(this.departamentos[this.selectedDepartamento-1]);
+    this.localidades?.sort((a:any, b:any) => a.id - b.id);
+
+    
+    // console.log(this.selectedDepartamento);
+
     
     // console.log(this.selectedPais?.departamentos);
   }
@@ -188,11 +224,15 @@ export class DatosPersonalesComponent implements OnInit {
     // postulante.pais = this.datosPersonalesForm.controls.pais.value;
     postulante.paisId = this.datosPersonalesForm.controls.pais.value.id;
     // console.log(this.selectedLocalidad);
-    
-    if (this.selectedPais?.nombre == "Uruguay") {
-      let localidad: Localidad | undefined = this.selectedLocalidad;
-      if(localidad)console.log(localidad.id);
-      if(localidad) postulante.localidadId = localidad.id;
+    this.departamentos?.sort((a:any, b:any) => a.id - b.id)
+    if (this.selectedPais&&this.paises[this.selectedPais].nombre == "Uruguay") {
+      // console.log('asdadasda');
+      postulante.localidadId = this.datosPersonalesForm.controls.localidad.value;
+      // console.log(postulante.localidadId);
+      
+      // let localidad: number | undefined = this.selectedLocalidad;
+      // if(localidad)console.log(localidad);
+      // if(localidad) postulante.localidadId = localidad;
       // console.log(localidad)
     }
     postulante.barrio = this.datosPersonalesForm.controls.barrio.value;
