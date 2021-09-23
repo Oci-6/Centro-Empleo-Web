@@ -40,6 +40,10 @@ import { PermisosLicenciasComponent } from './views/postulante/permisos-licencia
 import { InteresesPreferenciasComponent } from './views/postulante/intereses-preferencias/intereses-preferencias.component';
 import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
 import { CvPermisosLegalesComponent } from './views/postulante/cv-permisos-legales/cv-permisos-legales.component';
+import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.component';
+import { ListaPostulantesPartialComponent } from './components/lista-postulantes-partial/lista-postulantes-partial.component';
+import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
+import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 
 
 
@@ -69,6 +73,10 @@ import { CvPermisosLegalesComponent } from './views/postulante/cv-permisos-legal
     InteresesPreferenciasComponent,
     DatosPostulanteComponent,
     CvPermisosLegalesComponent,
+    MisOfertasComponent,
+    ListaPostulantesPartialComponent,
+    AgregarOfertaComponent,
+    DetalleOfertaComponent,
   ],
   imports: [
     BrowserModule,

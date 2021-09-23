@@ -94,7 +94,7 @@ export class DatosPersonalesComponent implements OnInit {
         noticias: new FormControl('', [Validators.required]),
       });
 
-      
+
 
       this.paisService.getPaises().subscribe(
         result => {
@@ -112,8 +112,8 @@ export class DatosPersonalesComponent implements OnInit {
 
 
       this.getInfoPostulante(this.postulanteId);
-      
-    
+
+
     }
   }
 
@@ -187,6 +187,10 @@ export class DatosPersonalesComponent implements OnInit {
 
   }
 
+  uruguay(): boolean {
+    return this.datosPersonalesForm.controls.pais.value == this.paises.find(element => element.nombre === "Uruguay")?.id;
+  }
+
   onChangePais() {
 
     this.selectedPais = this.datosPersonalesForm.controls.pais.value;
@@ -222,7 +226,7 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.sexo = this.datosPersonalesForm.controls.sexo.value;
     postulante.fechaNacimiento = this.datosPersonalesForm.controls.fechaN.value;
     // postulante.pais = this.datosPersonalesForm.controls.pais.value;
-    postulante.paisId = this.datosPersonalesForm.controls.pais.value.id;
+    postulante.paisId = this.datosPersonalesForm.controls.pais.value;
     // console.log(this.selectedLocalidad);
     this.departamentos?.sort((a:any, b:any) => a.id - b.id)
     if (this.selectedPais&&this.paises[this.selectedPais].nombre == "Uruguay") {
