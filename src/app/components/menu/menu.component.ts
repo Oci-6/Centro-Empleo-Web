@@ -70,7 +70,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Listar Postulantes',
             icon: 'pi pi-pw pi-users',
-            routerLink: 'novedades'
+            routerLink: 'postulantes'
           },
           {
             label: 'Novedades',

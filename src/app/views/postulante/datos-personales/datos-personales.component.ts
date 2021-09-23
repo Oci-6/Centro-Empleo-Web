@@ -118,11 +118,13 @@ export class DatosPersonalesComponent implements OnInit {
         if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
 
         //Setear departamento desde localidad
-        if (result.localidad?.departamento?.nombre) this.datosPersonalesForm.controls["departamento"].setValue(result.localidad?.departamento.id);
+        if (result.localidad?.departamento?.nombre) {
+          this.datosPersonalesForm.controls["departamento"].setValue(result.localidad?.departamento.id);
 
-        //Setear localidad y obtenerlas desde departamento
-        if (result.localidad?.nombre) this.datosPersonalesForm.controls["localidad"].setValue(result.localidad?.id);
-        this.getLocalidades(result.localidad?.departamento?.id);
+          //Setear localidad y obtenerlas desde departamento
+          if (result.localidad?.nombre) this.datosPersonalesForm.controls["localidad"].setValue(result.localidad?.id);
+          this.getLocalidades(result.localidad?.departamento?.id);
+        }
 
         this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
 
@@ -161,7 +163,7 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   uruguay(): boolean {
-    return this.datosPersonalesForm.controls.pais.value == this.paises.find(element =>  element.nombre === "Uruguay" )?.id;
+    return this.datosPersonalesForm.controls.pais.value == this.paises.find(element => element.nombre === "Uruguay")?.id;
   }
 
   onChangePais() {
@@ -170,7 +172,7 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   onChangeDepartamento() {
-    let departamento = this.departamentos.find(element => element.id === this.datosPersonalesForm.controls.departamento.value )
+    let departamento = this.departamentos.find(element => element.id === this.datosPersonalesForm.controls.departamento.value)
     if (departamento?.localidades) this.localidades = departamento.localidades;
   }
 
@@ -189,7 +191,7 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.paisId = this.datosPersonalesForm.controls.pais.value;
     // console.log(this.selectedLocalidad);
 
-    if (this.datosPersonalesForm.controls.pais.value == this.paises.find(element =>  element.nombre === "Uruguay")?.id) {
+    if (this.datosPersonalesForm.controls.pais.value == this.paises.find(element => element.nombre === "Uruguay")?.id) {
 
       postulante.localidadId = this.datosPersonalesForm.controls.localidad.value;
       // console.log(localidad)

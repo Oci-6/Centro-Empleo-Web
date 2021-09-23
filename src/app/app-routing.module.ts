@@ -5,6 +5,9 @@ import { LoginGuard } from './guards/login.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
+import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
+import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
+import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
@@ -24,10 +27,11 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
-  { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
   { path: 'ofertas', component: OfertasComponent },
   { path: 'empresas', component: ListaEmpresasComponent },
   { path: 'postulantes', component: ListaPostulantesComponent },
+  { path: 'ofertas/:id', component: DetalleOfertaComponent },
+
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
   { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
@@ -37,7 +41,10 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
   { path: 'postulaciones', component: MisPostulacionesComponent },
 
-  { path: 'personales', component: DatosPostulanteComponent },
+  //Rutas Empresa
+  { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
+  { path: 'misOfertas', component: MisOfertasComponent },
+  { path: 'agregarOferta', component: AgregarOfertaComponent },
   //Rutas Admin
   { path: 'dashboard', component: DashboardComponent },
 ];
