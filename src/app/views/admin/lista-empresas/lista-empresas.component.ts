@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { Empresario } from 'src/app/models/Empresario';
 import { Message } from 'src/app/models/Message';
+import { Oferta } from 'src/app/models/Oferta';
+import { EmpresarioService } from 'src/app/services/EmpresarioService/empresario.service';
+import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
 
 @Component({
   selector: 'app-lista-empresas',
@@ -10,73 +14,74 @@ import { Message } from 'src/app/models/Message';
 })
 export class ListaEmpresasComponent implements OnInit {
 
-//   message: Message | undefined;
+  message: Message | undefined;
 
-//   selectedEmpresa: Empresa = {};
+  selectedEmpresa: Empresario = {};
+  extensionTo: Date = new Date();
+  today: Date = new Date();
+  cols: any[] = [];
 
-  
-//   cols: any[] = [];
+  empresas: Empresario[] = [];
 
-//   // empresas: Empresa[] = [];
+  PublicarComoEmpresaForm: FormGroup = new FormGroup({});
 
-//   PublicarComoEmpresaForm: FormGroup = new FormGroup({});
+  displayPublicarComoEmpresaDialog: boolean = false;
+  displayHabilitarEmpresaDialog: boolean = false;
 
-//   constructor(
-//     // private messageService: MessageService,
-//     // private confirmationService: ConfirmationService,
+  constructor(
+    private messageService: MessageService,
+    private empresarioService: EmpresarioService,
+    private ofertaService: OfertasService
+  ) { }
 
-//   ) { }
+  getEmpresas() {
+    this.empresarioService.getEmpresarios().subscribe(
+      response => this.empresas = response,
+      error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
+    );
+  }
 
-//   // getEmpresas(){
-//     //   this.personsService.getEmpresas().subscribe(
-//     //     response => this.empresas = response,
-//     //     error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
-//     //   );
-//     // }
+  ngOnInit(): void {
 
-ngOnInit(): void {
-}
-//     // this.getEmpresas();
+    this.getEmpresas();
 
-//     this.cols = [
-//       { field: 'razon_social', header: 'Razon Social' },
-//       { field: 'nombre_fantasia', header: 'Nombre Fantasia' },
-//       { field: 'rut', header: 'RUT' },
-//     ];
+    this.cols = [
+      { field: 'razonSocial', header: 'Razon Social' },
+      { field: 'rut', header: 'RUT' },
+    ];
 
-//     this.PublicarComoEmpresaForm = new FormGroup({
-//       titulo: new FormControl('', [Validators.required]),
-//       descripcion: new FormControl('', [Validators.required]),
-//     })
+    this.PublicarComoEmpresaForm = new FormGroup({
+      titulo: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+    })
 
-//   }
+  }
 
-//   ngOnSubmitPublicar(): void{
-//     //   let newOferta: Oferta = {
-//     //     titulo: this.PublicarComoEmpresaForm.controls.titulo.value,
-//     //     descripcion: this.PublicarComoEmpresaForm.controls.descripcion.value,
-//     //   }
+  ngOnSubmitPublicar(): void {
+    let newOferta: Oferta = {
+      titulo: this.PublicarComoEmpresaForm.controls.titulo.value,
+      descripcion: this.PublicarComoEmpresaForm.controls.descripcion.value,
+    }
 
-//     //   this.ofertaService.postOferta(newOferta).suscribe(
-//     //     result => {
-//     //       this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Oferta creada exitosamente' })
-//     //       this.getEmpresas();
-//     //       this.PublicarComoEmpresaForm.reset();
-//     //     },
-//     //     error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
-//     //   );
-//     //   )
-//   }
+    this.ofertaService.agregarOferta(newOferta).subscribe(
+      result => {
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Oferta creada exitosamente' })
+        this.getEmpresas();
+        this.PublicarComoEmpresaForm.reset();
+      },
+      error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
+    );
+      
+  }
 
-//   displayPublicarComoEmpresaDialog: boolean = false;
+  showPublicarComoEmpresa() {
+    this.displayPublicarComoEmpresaDialog = true;
+  }
 
-//     showPublicarComoEmpresa() {
-//       this.displayPublicarComoEmpresaDialog = true;
-//     }
-
-//     showExtenderDuracion(){
-//       this.displayPublicarComoEmpresaDialog = true;
-//     }
+  showExtenderDuracion(empresa: Empresario) {
+    this.selectedEmpresa = empresa;
+    this.displayHabilitarEmpresaDialog = true;
+  }
 
 
 }
