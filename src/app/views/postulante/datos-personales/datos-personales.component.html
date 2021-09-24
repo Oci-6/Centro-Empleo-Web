@@ -16,7 +16,7 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="tipoDocumento">Tipo de Documento</label>
-                        <p-dropdown [options]="tipoDocumento" optionValue="nombre" placeholder="Tipo de Documento"
+                        <p-dropdown [options]="tipoDocumento" optionValue="nombre" placeholder="Seleccione un tipo de Documento"
                             optionLabel="nombre" formControlName="tipoDocumento">
                         </p-dropdown>
                     </div>
@@ -50,7 +50,7 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="sexo">Sexo</label>
-                        <p-dropdown [options]="sexo" formControlName="sexo"></p-dropdown>
+                        <p-dropdown [options]="sexo" formControlName="sexo" placeholder="Seleccione un sexo"></p-dropdown>
                     </div>
 
                     <span class="p-field p-col-12 p-md-6">
@@ -64,20 +64,20 @@
                     <div class="p-field p-col-12 p-md-2">
                         <label for="pais">Pais</label>
                         <p-dropdown [options]="paises" optionLabel="nombre" optionValue="id" formControlName="pais"
-                            inputId="pais" (onChange)="onChangePais()" optionDisabled="inactive" placeholder="sdasa"></p-dropdown>
+                            inputId="pais" (onChange)="onChangePais()" optionDisabled="inactive" placeholder="Seleccione un pais"></p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&paises[selectedPais].nombre == 'Uruguay'">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
                         <label for="departamento">Departamento</label>
                         <p-dropdown [options]="departamentos || []" optionLabel="nombre" optionValue="id"
-                            formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()">
+                            formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()" placeholder="Seleccione un departamento">
                         </p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento&&selectedPais&&paises[selectedPais].nombre == 'Uruguay'">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento&&selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
                         <label for="localidad">Localidad</label>
                         <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
-                            inputId="localidad" optionValue="id" >
+                            inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
                         </p-dropdown>
                     </div>
 
@@ -93,12 +93,14 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerTelefono">Primer Telefono</label>
-                        <input id="primerTelefono" type="text" required pInputText formControlName="primerTelefono">
+                        <p-inputNumber inputId="primerTelefono" [useGrouping]="false"
+                        formControlName="primerTelefono"></p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoTelefono">Segundo Telefono</label>
-                        <input id="segundoTelefono" type="text" required pInputText formControlName="segundoTelefono">
+                        <p-inputNumber inputId="segundoTelefono" [useGrouping]="false"
+                        formControlName="segundoTelefono" [format]="false"></p-inputNumber>
                     </div>
 
                     <!-- <div class="p-field">

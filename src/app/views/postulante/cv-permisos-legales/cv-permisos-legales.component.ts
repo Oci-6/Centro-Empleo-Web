@@ -24,6 +24,7 @@ export class CvPermisosLegalesComponent implements OnInit {
 
   user: any;
   cvPermisosForm: FormGroup = new FormGroup({});
+  submitted: boolean | undefined = false;
 
   postulante: Postulante = {};
 
@@ -33,7 +34,7 @@ export class CvPermisosLegalesComponent implements OnInit {
     this.user = this.authService.getAuth();
 
     this.cvPermisosForm = new FormGroup({
-      visibilidad: new FormControl('', [Validators.required]),
+      visibilidad: new FormControl(''),
       terminosCondiciones: new FormControl('', [Validators.required])
     });
 
@@ -56,24 +57,35 @@ export class CvPermisosLegalesComponent implements OnInit {
     this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
 
-  ngOnSubmit() {
+  async ngOnSubmit() {
+    try{
     let postulante: Postulante = new Postulante();
     postulante.id = this.postulante.id;
     postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;
 
-    this.postulanteService.modificarPostulante(postulante).subscribe(
-      response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-      }
-    )
+   await this.postulanteService.modificarPostulante(postulante).toPromise();
+
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+    this.submitted = true;
+  } catch (error) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+    this.submitted = false;
+  }  
   }
 
   //Cambiar página del steper
-  nextPage() {
-    this.router.navigate(['/perfil']);
+  
+  async nextPage() {
+    if(this.cvPermisosForm.valid){
+      await this.ngOnSubmit();
+      if (this.submitted) {
+      this.router.navigate(['/perfil']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
+    }
+    
+    return;
   }
 
   prevPage() {

@@ -24,6 +24,8 @@ export class InteresesPreferenciasComponent implements OnInit {
 
   postulanteId: number | undefined;
   postulante: Postulante = {};
+  submitted: boolean | undefined = false;
+  checked: boolean | undefined = false;
 
   preferenciaLaboralForm = this.fb.group({
     preferenciasLaborales: this.fb.array([])
@@ -58,7 +60,8 @@ export class InteresesPreferenciasComponent implements OnInit {
 
   }
 
-  ngOnSubmit() {
+  async ngOnSubmit() {
+    try{
     //Formulario normal
     let postulante = new Postulante();
     postulante.id = this.postulanteId;
@@ -69,19 +72,11 @@ export class InteresesPreferenciasComponent implements OnInit {
     postulante.jMtNoche = this.JornadaPreferidaForm.controls.jMtNoche.value;
 
 
-    this.postulanteService.modificarPostulante(postulante).subscribe(
-      response => {
-
-        this.JornadaPreferidaForm.reset;
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-      }
-    );
+   await this.postulanteService.modificarPostulante(postulante).toPromise();
+      
 
     //Formulario con arreglo
-    this.preferenciasLaborales.controls.forEach((element: any, index: number) => {
+    this.preferenciasLaborales.controls.forEach(async(element: any, index: number) => {
 
       let PrefLab: PreferenciaLaboral = new PreferenciaLaboral();
 
@@ -96,16 +91,22 @@ export class InteresesPreferenciasComponent implements OnInit {
       console.log(PrefLab);
 
       if (this.postulanteId)
-        this.postulanteService.postPrefLab(this.postulanteId, PrefLab).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-          }
-        )
+      await  this.postulanteService.postPrefLab(this.postulanteId, PrefLab).toPromise();
+          
     });
+
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.submitted = true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      this.submitted = false;
+    }
+
+    
+    
+    
+    
+    
 
   }
 
@@ -158,8 +159,23 @@ export class InteresesPreferenciasComponent implements OnInit {
   }
 
   //Cambiar página del steper
-  nextPage() {
-    this.router.navigate(['/']);
+  
+  async nextPage() {
+    if(this.JornadaPreferidaForm.controls.jIndiferente.value==true || this.JornadaPreferidaForm.controls.jCompleta.value==true 
+      || this.JornadaPreferidaForm.controls.jMtManiana.value==true || this.JornadaPreferidaForm.controls.jMtTarde.value==true 
+      || this.JornadaPreferidaForm.controls.jMtNoche.value==true){
+        this.checked=true;
+      }
+    if(this.JornadaPreferidaForm.valid&&this.preferenciaLaboralForm.valid&&this.checked){
+      await this.ngOnSubmit();
+      if (this.submitted) {
+      this.router.navigate(['formulario/cv']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
+    }
+    
+    return;
   }
 
   prevPage() {

@@ -99,14 +99,6 @@ export class DatosPersonalesComponent implements OnInit {
       this.paisService.getPaises().subscribe(
         result => {
           this.paises = result;
-          let paisNuevo = {
-          id : -1,
-          nombre : 'Seleccione un Pais',
-          departamentos : [],
-          inactive: true,          
-          };
-          
-          this.paises.unshift(paisNuevo);
         }
       );
 
@@ -134,7 +126,9 @@ export class DatosPersonalesComponent implements OnInit {
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
         this.getLocalidades(this.selectedDepartamento);
-        this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
+        if(this.postulante.fechaNacimiento){
+          this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
+        }
         this.datosPersonalesForm.controls["pais"].setValue(this.selectedPais);
         this.datosPersonalesForm.controls["tipoDocumento"].setValue(this.postulante.tipoDocumento);
         this.datosPersonalesForm.controls["documento"].setValue(this.postulante.documento);
@@ -194,7 +188,7 @@ export class DatosPersonalesComponent implements OnInit {
   onChangePais() {
 
     this.selectedPais = this.datosPersonalesForm.controls.pais.value;
-    if(this.selectedPais&&this.paises[this.selectedPais].departamentos) this.departamentos = this.paises[this.selectedPais].departamentos;
+    if(this.selectedPais&&this.paises[this.selectedPais-1].departamentos) this.departamentos = this.paises[this.selectedPais-1].departamentos;
     this.departamentos?.sort((a:any, b:any) => a.id - b.id)
     // console.log(this.departamentos);
     
@@ -229,7 +223,7 @@ export class DatosPersonalesComponent implements OnInit {
     postulante.paisId = this.datosPersonalesForm.controls.pais.value;
     // console.log(this.selectedLocalidad);
     this.departamentos?.sort((a:any, b:any) => a.id - b.id)
-    if (this.selectedPais&&this.paises[this.selectedPais].nombre == "Uruguay") {
+    if (this.selectedPais&&this.paises[this.selectedPais-1].nombre == "Uruguay") {
       // console.log('asdadasda');
       postulante.localidadId = this.datosPersonalesForm.controls.localidad.value;
       // console.log(postulante.localidadId);
@@ -247,28 +241,41 @@ export class DatosPersonalesComponent implements OnInit {
 
 
     // console.log(postulante);
+    try {
+      await this.postulanteService.modificarPostulante(postulante).toPromise();
+      this.datosPersonalesForm.reset;
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.submitted = true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
+      this.submitted = false;
+    }
+    
+      // response => {
 
-    this.postulanteService.modificarPostulante(postulante).subscribe(
-      response => {
-
-        this.datosPersonalesForm.reset;
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-        this.submitted = true;
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
-        this.submitted = false;
-      }
-    );
+      //   this.datosPersonalesForm.reset;
+      //   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      //   this.submitted = true;
+      // },
+      // error => {
+      //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
+      //   this.submitted = false;
+      // }
+    // );
+    
 
   }
 
   async nextPage() {
-    await this.ngOnSubmit();
-    if (this.submitted) {
+    if(this.datosPersonalesForm.valid){
+      await this.ngOnSubmit();
+      if (this.submitted) {
       this.router.navigate(['formulario/educacionFormacion']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-
+    
     return;
   }
 
