@@ -9,6 +9,10 @@
                     Intereses y Preferencias
                 </ng-template>
 
+                <p-divider align="left" type="dashed">
+                    <b>Jornada laboral preferida</b>
+                </p-divider>
+
                 <!--Jornada Laboral Preferida-->
                 <div class="p-fluid p-formgrid p-grid p-mb-4" [formGroup]="JornadaPreferidaForm"
                     (ngSubmit)="ngOnSubmit()">
@@ -75,7 +79,7 @@
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="areaInteresL">Área de interés laboral</label>
-                                            <p-dropdown [options]="areaInteresL" [formControlName]="i+'areaInteresL'"></p-dropdown>
+                                            <p-dropdown [options]="areaInteresL" [formControlName]="i+'areaInteresL'" placeholder="Seleccione un área de interés laboral"></p-dropdown>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
@@ -109,7 +113,7 @@
                         <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
                         <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
                         </p-button>
-                        <p-button label="Guardar" (onClick)="ngOnSubmit()" icon="pi pi-plus" iconPos="right"></p-button>
+                        <!-- <p-button label="Guardar" (onClick)="ngOnSubmit()" icon="pi pi-plus" iconPos="right"></p-button> -->
                     </div>
                 </ng-template>
 

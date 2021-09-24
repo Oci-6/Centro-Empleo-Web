@@ -162,7 +162,7 @@ export class EducacionFormacionComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
         this.submitted = true;
       } catch (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
         this.submitted = false;
       }
 

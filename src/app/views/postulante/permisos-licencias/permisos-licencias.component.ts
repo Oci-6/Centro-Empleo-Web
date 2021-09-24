@@ -24,6 +24,7 @@ export class PermisosLicenciasComponent implements OnInit {
   postulante: Postulante = {};
   
   selectedTipoD: string | undefined;
+  submitted: boolean | undefined = false;
 
   permisosLicenciasForm = this.fb.group({
     permisosLicencias: this.fb.array([])
@@ -47,31 +48,32 @@ export class PermisosLicenciasComponent implements OnInit {
 
 
   ngOnSubmit() {
-    this.permisosLicencias.controls.forEach((element: any, index: number) => {
+    try{
+    this.permisosLicencias.controls.forEach(async(element: any, index: number) => {
 
       let PL: PermisosLicencias = new PermisosLicencias();
 
       if (element.controls[index + "id"]) {
         PL.id = element.controls[index + "id"].value;
-        console.log('dasda');
+        // console.log('dasda');
       }
       PL.tipoDocumento = element.controls[index + "tipoDocumento"].value;
       PL.especificacion = element.controls[index + "especificacion"].value;     
       PL.vigencia = moment(element.controls[index + "vigencia"].value,'MM-DD-YYYY').toDate();
             
-      console.log(PL);
+      // console.log(PL);
 
       if (this.postulanteId)
-        this.postulanteService.postPermisosLicencias(this.postulanteId, PL).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-          }
-        )
+      await  this.postulanteService.postPermisosLicencias(this.postulanteId, PL).toPromise();
+          
     });
+
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.submitted = true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      this.submitted = false;
+    }
 
   }
 
@@ -117,7 +119,7 @@ export class PermisosLicenciasComponent implements OnInit {
     });
     PermLicForm.addControl(this.permisosLicencias.length + 'tipoDocumento', new FormControl('', Validators.required));
     PermLicForm.addControl(this.permisosLicencias.length + 'vigencia', new FormControl('', Validators.required));
-    PermLicForm.addControl(this.permisosLicencias.length + 'especificacion', new FormControl('', Validators.required));
+    PermLicForm.addControl(this.permisosLicencias.length + 'especificacion', new FormControl(''));
     // console.log(this.permisosLicencias);
     // console.log(this.permisosLicencias.length+'nombreCurso');
     this.permisosLicencias.push(PermLicForm);
@@ -127,9 +129,23 @@ export class PermisosLicenciasComponent implements OnInit {
     this.permisosLicencias.removeAt(permLicIndex);
   }
 
+  tipoDocumentoEspecificacion(index:number, i:any):boolean{
+    return i.controls[index+'tipoDocumento'].value == 'Otro';
+    }
+
   //Cambiar página del steper
-  nextPage() {
-    this.router.navigate(['/formulario/preferenciasLaborales']);
+  
+  async nextPage() {
+    if(this.permisosLicenciasForm.valid){
+      await this.ngOnSubmit();
+      if (this.submitted) {
+      this.router.navigate(['/formulario/preferenciasLaborales']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
+    }
+    
+    return;
   }
 
   prevPage() {

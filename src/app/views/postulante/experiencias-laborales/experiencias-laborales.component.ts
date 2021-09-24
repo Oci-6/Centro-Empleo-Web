@@ -26,6 +26,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
 
   postulanteId: number | undefined;
   postulante: Postulante = {};
+  submitted: boolean | undefined = false;
 
   expLaboralForm = this.fb.group({
     experienciasL: this.fb.array([])
@@ -48,7 +49,8 @@ export class ExperienciasLaboralesComponent implements OnInit {
   }
 
   ngOnSubmit() {
-    this.experienciasL.controls.forEach((element: any, index: number) => {
+    try {
+    this.experienciasL.controls.forEach(async(element: any, index: number) => {
 
       let eL: ExpLaboral = new ExpLaboral();
 
@@ -74,16 +76,15 @@ export class ExperienciasLaboralesComponent implements OnInit {
       console.log(eL);
 
       if (this.postulanteId)
-        this.postulanteService.postExpLaboral(this.postulanteId, eL).subscribe(
-          response => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-          }
-        )
+      await this.postulanteService.postExpLaboral(this.postulanteId, eL).toPromise()
+          
     });
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.submitted = true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
+      this.submitted = false;
+    }
 
   }
 
@@ -109,7 +110,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
           ExpLabForm.addControl(this.experienciasL.length + 'apellidoRef', new FormControl('', Validators.required));
           ExpLabForm.addControl(this.experienciasL.length + 'cargoRef', new FormControl('', Validators.required));
           ExpLabForm.addControl(this.experienciasL.length + 'telefonoRef', new FormControl('', Validators.required));
-          ExpLabForm.addControl(this.experienciasL.length + 'emailRef', new FormControl('', Validators.required));
+          ExpLabForm.addControl(this.experienciasL.length + 'emailRef', new FormControl('', [Validators.required, Validators.email]));
 
           ExpLabForm.controls[this.experienciasL.length + "id"].setValue(experienciaL.id);
           ExpLabForm.controls[this.experienciasL.length + "nombreEmpresa"].setValue(experienciaL.nombreEmp);
@@ -168,8 +169,18 @@ export class ExperienciasLaboralesComponent implements OnInit {
   }
 
   //Cambiar página del steper
-  nextPage() {
-    this.router.navigate(['/formulario/permisosLicencias']);
+  
+  async nextPage() {
+    if(this.expLaboralForm.valid){
+      await this.ngOnSubmit();
+      if (this.submitted) {
+      this.router.navigate(['/formulario/permisosLicencias']);
+      }
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
+    }
+    
+    return;
   }
 
   prevPage() {

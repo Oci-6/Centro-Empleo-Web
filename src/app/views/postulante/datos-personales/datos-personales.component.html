@@ -93,12 +93,14 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerTelefono">Primer Telefono</label>
-                        <input id="primerTelefono" type="text" required pInputText formControlName="primerTelefono">
+                        <p-inputNumber inputId="primerTelefono" [useGrouping]="false"
+                        formControlName="primerTelefono"></p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoTelefono">Segundo Telefono</label>
-                        <input id="segundoTelefono" type="text" required pInputText formControlName="segundoTelefono">
+                        <p-inputNumber inputId="segundoTelefono" [useGrouping]="false"
+                        formControlName="segundoTelefono" [format]="false"></p-inputNumber>
                     </div>
 
                     <!-- <div class="p-field">
