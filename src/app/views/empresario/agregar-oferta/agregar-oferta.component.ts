@@ -14,6 +14,7 @@ import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
 export class AgregarOfertaComponent implements OnInit {
 
   public ofertaForm: FormGroup = new FormGroup({});
+  today: Date = new Date();
 
   constructor(
     private ofertasService: OfertasService,

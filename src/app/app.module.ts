@@ -44,6 +44,7 @@ import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.
 import { ListaPostulantesPartialComponent } from './components/lista-postulantes-partial/lista-postulantes-partial.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
+import {ConfirmationService} from 'primeng/api';
 
 
 
@@ -91,6 +92,7 @@ import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.co
     MessageService,
     AuthService,
     LoginGuard,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

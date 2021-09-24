@@ -30,7 +30,8 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {ChartModule} from 'primeng/chart';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PaginatorModule} from 'primeng/paginator';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -64,6 +65,8 @@ import {PaginatorModule} from 'primeng/paginator';
     ChartModule,
     InputMaskModule,
     PaginatorModule,
+    ConfirmDialogModule,
+    InputTextareaModule,
   ],
   exports: [    
     MenubarModule,
@@ -95,6 +98,8 @@ import {PaginatorModule} from 'primeng/paginator';
     ChartModule,
     InputMaskModule,
     PaginatorModule,
+    ConfirmDialogModule,
+    InputTextareaModule,
   ]
 })
 export class PrimeNgModule { }

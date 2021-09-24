@@ -28,8 +28,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
   { path: 'ofertas', component: OfertasComponent },
-  { path: 'empresas', component: ListaEmpresasComponent },
-  { path: 'postulantes', component: ListaPostulantesComponent },
+  { path: 'postulantes',canActivate: [LoginGuard],  component: ListaPostulantesComponent },
   { path: 'ofertas/:id', component: DetalleOfertaComponent },
 
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
@@ -38,15 +37,17 @@ const routes: Routes = [
   { path: 'formulario/permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
   { path: 'formulario/preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
   { path: 'formulario/cv',canActivate: [LoginGuard], component: CvPermisosLegalesComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'postulaciones', component: MisPostulacionesComponent },
+  { path: 'perfil',canActivate: [LoginGuard],  component: PerfilComponent },
+  { path: 'postulaciones',canActivate: [LoginGuard],  component: MisPostulacionesComponent },
 
   //Rutas Empresa
   { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
-  { path: 'misOfertas', component: MisOfertasComponent },
-  { path: 'agregarOferta', component: AgregarOfertaComponent },
+  { path: 'misOfertas',canActivate: [LoginGuard],  component: MisOfertasComponent },
+  { path: 'agregarOferta',canActivate: [LoginGuard],  component: AgregarOfertaComponent },
   //Rutas Admin
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard',canActivate: [LoginGuard],  component: DashboardComponent },
+  { path: 'empresas',canActivate: [LoginGuard],  component: ListaEmpresasComponent },
+
 ];
 
 @NgModule({
