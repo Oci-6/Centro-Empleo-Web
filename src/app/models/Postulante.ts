@@ -4,6 +4,7 @@ import { Documento } from "./Documento";
 import { ExpLaboral } from "./ExpLaboral";
 import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
+import { Oferta } from "./Oferta";
 import { Pais } from "./Pais";
 import { PermisosLicencias } from "./PermisosLicencias";
 import { PreferenciaLaboral } from "./PreferenciaLaboral";
@@ -66,6 +67,6 @@ export class Postulante {
     preferenciaLaboral?: PreferenciaLaboral[] | undefined;
 
     documentos?: Documento[] | undefined;
-
+    ofertas?: Oferta[] | undefined
     constructor() {}
 }

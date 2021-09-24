@@ -6,6 +6,7 @@
                 <th *ngFor="let col of columns">
                     {{col.header}}
                 </th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
@@ -16,10 +17,15 @@
                     {{oferta[col.field]}}
                 </td>
                 <td>
+                    <span class="p-column-title"><strong>Estado:</strong></span>
+                    {{estado(oferta.fechaCierre)}}
+                </td>
+                <td>
                     <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
-                    <button pButton pRipple type="button" icon="pi pi-users"
-                        (click)="showPostulantes(oferta)" class="p-button-rounded p-button-warning p-mr-2"
-                        pTooltip="Ver postulantes"></button>
+                    <button pButton pRipple type="button" icon="pi pi-users" (click)="showPostulantes(oferta)"
+                        class="p-button-rounded p-button-warning p-mr-2" pTooltip="Ver postulantes"></button>
+                    <button pButton pRipple type="button" icon="pi pi-search-plus" [routerLink]="'/ofertas/'+oferta.id"
+                        class="p-button-rounded p-button-info p-mr-2" pTooltip="Ver oferta"></button>
                     <!-- </ng-container>   -->
                 </td>
             </tr>
@@ -27,7 +33,8 @@
     </p-table>
 </p-card>
 
-<p-dialog class="p-grid p-jc-center"  *ngIf="selectedOferta" [header]="'Postulantes a: '+selectedOferta.titulo"  [(visible)]="displayPostulantesDialog"
-   [style]="{height: '100%',width: '80%'}">
-    <app-lista-postulantes-partial *ngIf="selectedOferta.postulantes" [postulantes]="selectedOferta.postulantes" ></app-lista-postulantes-partial>
+<p-dialog class="p-grid p-jc-center" *ngIf="selectedOferta" [header]="'Postulantes a: '+selectedOferta.titulo"
+    [(visible)]="displayPostulantesDialog" [style]="{height: '100%',width: '80%'}">
+    <app-lista-postulantes-partial *ngIf="selectedOferta.postulantes" [postulantes]="selectedOferta.postulantes">
+    </app-lista-postulantes-partial>
 </p-dialog>

@@ -33,6 +33,10 @@ export class PostulanteService {
     return this.http.put(this.URL + '/', postulante);
   }
 
+  postularse(idOferta: number) {
+    return this.http.get(this.URL + '/postularse/'+idOferta);
+  }
+
   //Capacitaciones y Cursos
   infoCapacitacion(id: number){
     return this.http.get<CapacitacionFormacion>(this.URL + '/capacitacion/' + id);

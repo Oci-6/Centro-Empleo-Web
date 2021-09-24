@@ -28,6 +28,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ChartModule} from 'primeng/chart';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 
@@ -60,6 +61,7 @@ import {ChartModule} from 'primeng/chart';
     InputSwitchModule,
     FileUploadModule,
     ChartModule,
+    PaginatorModule,
   ],
   exports: [    
     MenubarModule,
@@ -89,6 +91,7 @@ import {ChartModule} from 'primeng/chart';
     InputSwitchModule,
     FileUploadModule,
     ChartModule,
+    PaginatorModule,
   ]
 })
 export class PrimeNgModule { }
