@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Oferta } from 'src/app/models/Oferta';
 import { Postulante } from 'src/app/models/Postulante';
@@ -43,6 +44,12 @@ export class MisOfertasComponent implements OnInit {
         });
       }
     )
+  }
+  
+  estado(fechaCierre: Date): string{
+
+    if(moment(fechaCierre).isBefore(new Date())) return "Cerrada"
+    else return "Abierta"
   }
 
   showPostulantes(oferta: Oferta){

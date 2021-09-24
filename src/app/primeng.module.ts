@@ -29,6 +29,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ChartModule} from 'primeng/chart';
 import {InputMaskModule} from 'primeng/inputmask';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 
@@ -62,6 +63,7 @@ import {InputMaskModule} from 'primeng/inputmask';
     FileUploadModule,
     ChartModule,
     InputMaskModule,
+    PaginatorModule,
   ],
   exports: [    
     MenubarModule,
@@ -92,6 +94,7 @@ import {InputMaskModule} from 'primeng/inputmask';
     FileUploadModule,
     ChartModule,
     InputMaskModule,
+    PaginatorModule,
   ]
 })
 export class PrimeNgModule { }

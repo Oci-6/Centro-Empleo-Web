@@ -1,0 +1,9 @@
+.imagen-oferta{
+    max-height: 300px;
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 500px){
+    .p-col-fixed{
+        max-width: 100%;
+    }}

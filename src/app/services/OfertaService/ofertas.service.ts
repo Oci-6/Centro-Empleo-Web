@@ -28,4 +28,11 @@ export class OfertasService {
     return this.http.put(this.URL + '/', oferta);
   }
 
+  buscarOferta(query: string, page: number){
+    return this.http.get<{
+      ofertas: Oferta[],
+      total: number
+    }>(this.URL+"/buscar/?page="+page+query);
+  }
+
 }

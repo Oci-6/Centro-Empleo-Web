@@ -24,72 +24,38 @@
             <h1 class="p-col-12 p-md-4">Ofertas laborales</h1>
             <div class="p-col-12 p-md-8">
                 <div class="p-inputgroup">
-                    <input type="text" pInputText placeholder="Buscar ofertas...">   
-                    <button type="button" pButton pRipple icon="pi pi-refresh" styleClass="p-button-warn"></button>      
+                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                    <input type="text" pInputText placeholder="Buscar ofertas..." [(ngModel)]="query"
+                        (keyup)="onKeyUp()">
                 </div>
             </div>
         </div>
     </ng-template>
     <div class="p-grid">
-    <div class="p-col">
-        <p-card header="Titulo oferta" subheader="Empresa" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-            </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Detalles" class="p-button-outlined p-button-rounded p-button-success "></button>
-            </ng-template>
-        </p-card>
+        <div class="p-col-12 p-md-3 p-ai-stretch vertical-container" *ngFor="let oferta of ofertas">
+            <p-card styleClass="p-card-shadow">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
+                </ng-template>
+                <ng-template pTemplate="title">
+                    <span class="titulo">{{oferta.titulo}}</span>
+                </ng-template>
+                <ng-template pTemplate="subtitle">
+                    {{oferta.empresa?.razonSocial}}
+                </ng-template>
+                <p class="descripcion">{{oferta.descripcion}} </p>
+                <ng-template pTemplate="footer">
+                    <button pButton pRipple type="button" label="Detalles" *ngIf="oferta.id"
+                        [routerLink]="oferta.id.toString()"
+                        class="p-button-outlined p-button-rounded p-button-success "></button>
+                </ng-template>
+            </p-card>
+        </div>
+
     </div>
-    <div class="p-col">
-        <p-card header="Titulo oferta" subheader="Empresa" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-            </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Detalles" class="p-button-outlined p-button-rounded p-button-success "></button>
-            </ng-template>
-        </p-card>
-    </div>
-    <div class="p-col">
-        <p-card header="Titulo oferta" subheader="Empresa" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-            </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Detalles" class="p-button-outlined p-button-rounded p-button-success "></button>
-            </ng-template>
-        </p-card>
-    </div>
-    <div class="p-col">
-        <p-card header="Titulo oferta" subheader="Empresa" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-            </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Detalles" class="p-button-outlined p-button-rounded p-button-success "></button>
-            </ng-template>
-        </p-card>
-    </div>
-    <div class="p-col">
-        <p-card header="Titulo oferta" subheader="Empresa" [style]="{width: '360px'}" styleClass="p-card-shadow">
-            <ng-template pTemplate="header">
-                <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-            </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
-            <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="Detalles" class="p-button-outlined p-button-rounded p-button-success "></button>
-            </ng-template>
-        </p-card>
-    </div>
-</div>
+
+    <ng-template pTemplate="footer">
+        <p-paginator [rows]="12" [totalRecords]="total" (onPageChange)="onPaginacion($event)"></p-paginator>
+
+    </ng-template>
 </p-card>
