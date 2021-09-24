@@ -5,9 +5,8 @@
                 <img style="max-height:250px; max-width: 100%; " [src]="postulante?.foto">
             </div>
             <div class="p-col-12 p-grid p-jc-center">
-                <p-fileUpload *ngIf="perfilPropio" mode="basic" chooseLabel="Cambiar Foto de Perfil"
-                    name="file" url="http://localhost:3000/api/postulante/foto" accept="image/*"
-                    (onUpload)="onUpload()">
+                <p-fileUpload *ngIf="perfilPropio" mode="basic" chooseLabel="Cambiar Foto de Perfil" name="file"
+                    url="http://localhost:3000/api/postulante/foto" accept="image/*" (onUpload)="onUpload()">
                 </p-fileUpload>
             </div>
             <div class="p-col-12 p-grid p-jc-center">
@@ -40,7 +39,7 @@
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <strong>Fecha de nacimiento:</strong> <br>
-                {{postulante.fechaNacimiento}}
+                {{convertirFecha(postulante.fechaNacimiento)}}
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <strong>Teléfono:</strong> <br>
@@ -83,105 +82,18 @@
                 {{postulante.orientacionNE}}
             </div>
 
-            <p-accordion>
-                <p-accordionTab *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0"
-                    header="Capacitaciones">
+            <p-accordion class="p-col-12">
+                <p-accordionTab header='Educación y Formación'>
                     <p-accordion>
-                        <div *ngFor="let CapFor of postulante.capacitacionFormacion;">
-                            <p-accordionTab *ngIf="CapFor.nombre" [header]="CapFor.nombre">
-                                <div class="p-fluid p-formgrid p-grid">
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Area tematic:</strong> <br>
-                                        {{CapFor.areaTematica}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Institución:</strong> <br>
-                                        {{CapFor.institucion}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Fecha de inicio:</strong> <br>
-                                        {{CapFor.fechaInicio}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Duración:</strong> <br>
-                                        {{CapFor.duracion}} {{CapFor.tipoDuracion}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Estado:</strong> <br>
-                                        {{CapFor.estado}}
-                                    </div>
-                                </div>
-                            </p-accordionTab>
-                        </div>
-                    </p-accordion>
-                </p-accordionTab>
-
-                <p-accordionTab *ngIf="postulante.idioma&& postulante.idioma.length > 0" header="Idiomas">
-                    <p-accordion>
-                        <div *ngFor="let Idioma of postulante.idioma;">
-                            <p-accordionTab *ngIf="Idioma.nombre" [header]="Idioma.nombre">
-                                <div class="p-fluid p-formgrid p-grid">
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Especificación:</strong> <br>
-                                        {{Idioma.especificacion}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Habla Conversacional:</strong> <br>
-                                        {{Idioma.hablaConv}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Comprensión Lectora:</strong> <br>
-                                        {{Idioma.compLec}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Escritura:</strong> <br>
-                                        {{Idioma.escritura}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Comprensión Auditiva:</strong> <br>
-                                        {{Idioma.compAud}}
-                                    </div>
-                                </div>
-                            </p-accordionTab>
-                        </div>
-                    </p-accordion>
-                </p-accordionTab>
-
-                <p-accordionTab *ngIf="postulante.conocimientoInfo&& postulante.conocimientoInfo.length > 0"
-                    header="Conocimientos Informaticos">
-                    <p-accordion>
-                        <div *ngFor="let conocInfo of postulante.conocimientoInfo;">
-                            <p-accordionTab *ngIf="conocInfo.nombreApp" [header]="conocInfo.nombreApp">
-                                <div class="p-fluid p-formgrid p-grid">
-
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Categoría:</strong> <br>
-                                        {{conocInfo.categoria}}
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <strong>Nivel de conocimiento:</strong> <br>
-                                        {{conocInfo.nivelConocimiento}}
-                                    </div>
-                                </div>
-                            </p-accordionTab>
-                        </div>
-                    </p-accordion>
-                </p-accordionTab>
-
-            </p-accordion>
-
-            <p-divider class="p-col-12"></p-divider>
-            <!-- <p-accordion>
-                    <p-accordionTab *ngIf="postulante.expLaboral&& postulante.capacitacionFormacion.length > 0" header="Capacitaciones">
+                    <p-accordionTab *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0"
+                        header="Capacitaciones">
                         <p-accordion>
                             <div *ngFor="let CapFor of postulante.capacitacionFormacion;">
                                 <p-accordionTab *ngIf="CapFor.nombre" [header]="CapFor.nombre">
                                     <div class="p-fluid p-formgrid p-grid">
-
+    
                                         <div class="p-field p-col-12 p-md-6">
-                                            <strong>Area tematic:</strong> <br>
+                                            <strong>Area tematica:</strong> <br>
                                             {{CapFor.areaTematica}}
                                         </div>
                                         <div class="p-field p-col-12 p-md-6">
@@ -190,7 +102,7 @@
                                         </div>
                                         <div class="p-field p-col-12 p-md-6">
                                             <strong>Fecha de inicio:</strong> <br>
-                                            {{CapFor.fechaInicio}}
+                                            {{convertirFecha(CapFor.fechaInicio)}}
                                         </div>
                                         <div class="p-field p-col-12 p-md-6">
                                             <strong>Duración:</strong> <br>
@@ -205,9 +117,233 @@
                             </div>
                         </p-accordion>
                     </p-accordionTab>
+    
+                    <p-accordionTab *ngIf="postulante.idioma&& postulante.idioma.length > 0" header="Idiomas">
+                        <p-accordion>
+                            <div *ngFor="let Idioma of postulante.idioma;">
+                                <p-accordionTab *ngIf="Idioma.nombre" [header]="Idioma.nombre">
+                                    <div class="p-fluid p-formgrid p-grid">
+    
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Especificación:</strong> <br>
+                                            {{Idioma.especificacion}}
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Habla Conversacional:</strong> <br>
+                                            {{Idioma.hablaConv}}
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Comprensión Lectora:</strong> <br>
+                                            {{Idioma.compLec}}
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Escritura:</strong> <br>
+                                            {{Idioma.escritura}}
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Comprensión Auditiva:</strong> <br>
+                                            {{Idioma.compAud}}
+                                        </div>
+                                    </div>
+                                </p-accordionTab>
+                            </div>
+                        </p-accordion>
+                    </p-accordionTab>
+    
+                    <p-accordionTab *ngIf="postulante.conocimientoInfo&& postulante.conocimientoInfo.length > 0"
+                        header="Conocimientos Informaticos">
+                        <p-accordion>
+                            <div *ngFor="let conocInfo of postulante.conocimientoInfo;">
+                                <p-accordionTab *ngIf="conocInfo.nombreApp" [header]="conocInfo.nombreApp">
+                                    <div class="p-fluid p-formgrid p-grid">
+    
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Categoría:</strong> <br>
+                                            {{conocInfo.categoria}}
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <strong>Nivel de conocimiento:</strong> <br>
+                                            {{conocInfo.nivelConocimiento}}
+                                        </div>
+                                    </div>
+                                </p-accordionTab>
+                            </div>
+                        </p-accordion>
+                    </p-accordionTab>
+                </p-accordion>
+                </p-accordionTab>
+                
 
-                   
-                </p-accordion> -->
+            </p-accordion>
+
+            <p-divider class="p-col-12"></p-divider>
+            <p-accordion class="p-col-12">
+                <p-accordionTab *ngIf="postulante.expLaboral&& postulante.expLaboral.length > 0"
+                    header="Experiencias Laborales">
+                    <p-accordion>
+                        <div *ngFor="let expLab of postulante.expLaboral;">
+                            <p-accordionTab *ngIf="expLab.nombreEmp" [header]="expLab.nombreEmp">
+                                <div class="p-fluid p-formgrid p-grid">
+
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Nombre de la Empresa:</strong> <br>
+                                        {{expLab.nombreEmp}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Cargo que ocupó:</strong> <br>
+                                        {{expLab.cargo}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Área o Rubro:</strong> <br>
+                                        {{expLab.area}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Nivel Jerárquico:</strong> <br>
+                                        {{expLab.nivelJer}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Tareas Realizadas:</strong> <br>
+                                        {{expLab.tareas}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Período trabajado:</strong> <br>
+                                        Desde {{convertirFecha(expLab.fechaInicio)}}
+                                        <p *ngIf="!expLab.trabajando; else Atrabajando">hasta
+                                            {{convertirFecha(expLab.fechaFin)}}</p>
+                                    </div>
+                                    <ng-template #Atrabajando>
+                                        <label for="trabajando">hasta actualmente trabajando</label>
+                                    </ng-template>
+
+                                    <p-divider class="p-col-12" type="dashed">
+                                        <b>Referencia Laboral</b>
+                                    </p-divider>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Nombre:</strong> <br>
+                                        {{expLab.nombreRef}} {{expLab.apellidoRef}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Cargo:</strong> <br>
+                                        {{expLab.cargoRef}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Telefono:</strong> <br>
+                                        {{expLab.telefonoRef}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Email:</strong> <br>
+                                        {{expLab.emailRef}}
+                                    </div>
+
+
+                                </div>
+                            </p-accordionTab>
+                        </div>
+                    </p-accordion>
+                </p-accordionTab>
+
+
+            </p-accordion>
+
+            <p-divider class="p-col-12"></p-divider>
+            <p-accordion class="p-col-12">
+                <p-accordionTab *ngIf="postulante.permisosLicencias&& postulante.permisosLicencias.length > 0"
+                    header="Permisos y Licencias">
+                    <p-accordion>
+                        <div *ngFor="let permLic of postulante.permisosLicencias;">
+                            <p-accordionTab *ngIf="permLic.tipoDocumento" [header]="permLic.tipoDocumento">
+                                <div class="p-fluid p-formgrid p-grid">
+
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Tipo de documento:</strong> <br>
+                                        {{permLic.tipoDocumento}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Vigencia:</strong> <br>
+                                        {{convertirFecha(permLic.vigencia)}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6" *ngIf="permLic.especificacion">
+                                        <strong>Especificacion:</strong> <br>
+                                        {{permLic.especificacion}}
+                                    </div>
+
+                                </div>
+                            </p-accordionTab>
+                        </div>
+                    </p-accordion>
+                </p-accordionTab>
+
+
+            </p-accordion>
+
+            <p-divider class="p-col-12"></p-divider>
+            <p-accordion class="p-col-12">
+                <p-accordionTab *ngIf="postulante.preferenciaLaboral&& postulante.preferenciaLaboral.length > 0"
+                    header="Intereses y Preferencias">
+                    <p-accordion>
+                        <p-divider align="left" type="dashed">
+                            <b>Jornada laboral preferida</b>
+                        </p-divider>
+                        <div class="p-fluid p-grid p-mb-4">
+                            <div class="p-field-checkbox p-col-12 p-md-6">
+                                <p-checkbox [binary]="true" id="jIndiferente" [(ngModel)]="postulante.jIndiferente"
+                                    [disabled]="true">
+                                </p-checkbox>
+                                <label for="jIndiferente">Indiferente</label>
+                            </div>
+                            <div class="p-field-checkbox p-col-12 p-md-6">
+                                <p-checkbox [binary]="true" id="jCompleta" [(ngModel)]="postulante.jCompleta"
+                                    [disabled]="true">
+                                </p-checkbox>
+                                <label for="jCompleta">Completa</label>
+                            </div>
+
+                            <div class="p-field-checkbox p-col-12 p-md-6">
+                                <p-checkbox [binary]="true" id="jMtManiana" [(ngModel)]="postulante.jMtManiana"
+                                    [disabled]="true">
+                                </p-checkbox>
+                                <label for="jMtManiana">Medio Turno Mañana</label>
+                            </div>
+
+                            <div class="p-field-checkbox p-col-12 p-md-6">
+                                <p-checkbox [binary]="true" id="jMtTarde" [(ngModel)]="postulante.jMtTarde"
+                                    [disabled]="true">
+                                </p-checkbox>
+                                <label for="jMtTarde">Medio Turno Tarde</label>
+                            </div>
+
+                            <div class="p-field-checkbox p-col-12 p-md-6">
+                                <p-checkbox [binary]="true" id="jMtNoche" [(ngModel)]="postulante.jMtNoche"
+                                    [disabled]="true">.
+                                </p-checkbox>
+                                <label for="jMtNoche">Medio Turno Noche</label>
+                            </div>
+                        </div>
+                        <div *ngFor="let intPref of postulante.preferenciaLaboral;">
+                            <p-accordionTab *ngIf="intPref.puestoPreferido" [header]="intPref.puestoPreferido">
+                                <div class="p-fluid p-formgrid p-grid">
+
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Puesto Preferido:</strong> <br>
+                                        {{intPref.puestoPreferido}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Área de interés laboral:</strong> <br>
+                                        {{intPref.areaInteres}}
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <strong>Aspiración salarial nominal:</strong> <br>
+                                        {{intPref.aspiracionSalarial}}
+                                    </div>
+
+                                </div>
+                            </p-accordionTab>
+                        </div>
+                    </p-accordion>
+                </p-accordionTab>
+
+
+            </p-accordion>
         </div>
     </div>
 

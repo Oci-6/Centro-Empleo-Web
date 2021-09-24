@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Postulante } from 'src/app/models/Postulante';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -25,8 +26,6 @@ export class DatosPostulanteComponent implements OnChanges {
 
   postulante: Postulante | undefined;
 
-
-
   ngOnChanges() {
     this.perfilPropio = (this.authService.getAuth().tipo == "Postulante" && this.authService.getAuth().usuario == this.id);
     if (this.id)
@@ -45,6 +44,10 @@ export class DatosPostulanteComponent implements OnChanges {
     let url = this.router.url;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate([url]));
+  }
+
+  convertirFecha(fecha: Date | undefined) {
+    return moment(fecha).format("DD/MM/YYYY");
   }
 
 }

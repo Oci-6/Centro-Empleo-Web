@@ -35,3 +35,10 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 .p-menubar .p-menubar-button {
     color: white;
 }
+
+@media only screen and (max-width: 500px) {
+    .p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+      display: none !important;
+    }
+  }
+
