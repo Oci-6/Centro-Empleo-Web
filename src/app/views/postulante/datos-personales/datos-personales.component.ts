@@ -22,11 +22,12 @@ export class DatosPersonalesComponent implements OnInit {
 
   tipoDocumento: tipoD[] = [];
   submitted: boolean | undefined = false;
+  sumi: boolean | undefined = false;
 
   public paises: Pais[] = [];
   public departamentos: Departamento[] | undefined = [];
   public localidades: Localidad[] | undefined = [];
-
+  
   sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
 
   selectedSexo: string | undefined;
@@ -83,8 +84,8 @@ export class DatosPersonalesComponent implements OnInit {
         fechaN: new FormControl('', [Validators.required]),
 
         pais: new FormControl('', [Validators.required]),
-        departamento: new FormControl('', [Validators.required]),
-        localidad: new FormControl('', [Validators.required]),
+        departamento: new FormControl(''),
+        localidad: new FormControl(''),
         barrio: new FormControl(''),
         direccion: new FormControl('', [Validators.required]),
 
@@ -181,6 +182,8 @@ export class DatosPersonalesComponent implements OnInit {
 
   }
 
+  get f() { return this.datosPersonalesForm.controls; }
+
   uruguay(): boolean {
     return this.datosPersonalesForm.controls.pais.value == this.paises.find(element => element.nombre === "Uruguay")?.id;
   }
@@ -208,7 +211,10 @@ export class DatosPersonalesComponent implements OnInit {
     // console.log(this.selectedPais?.departamentos);
   }
 
-  async ngOnSubmit() {
+  async ngOnSubmit() : Promise<boolean>{
+
+    this.sumi = true;
+
     let postulante = new Postulante();
     postulante.id = this.postulanteId;
     postulante.tipoDocumento = this.datosPersonalesForm.controls.tipoDocumento.value;
@@ -245,10 +251,10 @@ export class DatosPersonalesComponent implements OnInit {
       await this.postulanteService.modificarPostulante(postulante).toPromise();
       this.datosPersonalesForm.reset;
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      this.submitted = true;
+      return true;
     } catch (error) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
-      this.submitted = false;
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      return false;
     }
     
       // response => {
@@ -267,9 +273,9 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   async nextPage() {
+    this.submitted = true;
     if(this.datosPersonalesForm.valid){
-      await this.ngOnSubmit();
-      if (this.submitted) {
+      if (await this.ngOnSubmit()) {
       this.router.navigate(['formulario/educacionFormacion']);
       }
     }else{

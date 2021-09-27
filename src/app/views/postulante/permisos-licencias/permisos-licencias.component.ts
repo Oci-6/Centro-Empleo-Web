@@ -47,7 +47,7 @@ export class PermisosLicenciasComponent implements OnInit {
   }
 
 
-  ngOnSubmit() {
+  ngOnSubmit() : boolean{
     try{
     this.permisosLicencias.controls.forEach(async(element: any, index: number) => {
 
@@ -69,10 +69,10 @@ export class PermisosLicenciasComponent implements OnInit {
     });
 
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      this.submitted = true;
+      return true;
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-      this.submitted = false;
+      return false;
     }
 
   }
@@ -136,9 +136,9 @@ export class PermisosLicenciasComponent implements OnInit {
   //Cambiar página del steper
   
   async nextPage() {
+    this.submitted = true;
     if(this.permisosLicenciasForm.valid){
-      await this.ngOnSubmit();
-      if (this.submitted) {
+      if (this.ngOnSubmit()) {
       this.router.navigate(['/formulario/preferenciasLaborales']);
       }
     }else{
