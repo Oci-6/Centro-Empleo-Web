@@ -24,6 +24,14 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CheckboxModule} from 'primeng/checkbox';
+import {AccordionModule} from 'primeng/accordion';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ChartModule} from 'primeng/chart';
+import {InputMaskModule} from 'primeng/inputmask';
+import {PaginatorModule} from 'primeng/paginator';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -51,6 +59,14 @@ import {CheckboxModule} from 'primeng/checkbox';
     CalendarModule,
     InputNumberModule,
     CheckboxModule,
+    AccordionModule,
+    InputSwitchModule,
+    FileUploadModule,
+    ChartModule,
+    InputMaskModule,
+    PaginatorModule,
+    ConfirmDialogModule,
+    InputTextareaModule,
   ],
   exports: [    
     MenubarModule,
@@ -76,6 +92,14 @@ import {CheckboxModule} from 'primeng/checkbox';
     CalendarModule,
     InputNumberModule,
     CheckboxModule,
+    AccordionModule,
+    InputSwitchModule,
+    FileUploadModule,
+    ChartModule,
+    InputMaskModule,
+    PaginatorModule,
+    ConfirmDialogModule,
+    InputTextareaModule,
   ]
 })
 export class PrimeNgModule { }

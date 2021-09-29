@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { Oferta } from 'src/app/models/Oferta';
+import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
 
 @Component({
   selector: 'app-ofertas',
@@ -7,117 +11,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfertasComponent implements OnInit {
 
-  images: string[] = [];
+  ofertas: Oferta[] = [];
 
-  // cars: [
-  //   {
-  //     albumId: 1,
-  //     id: 1,
-  //     title: "accusamus beatae ad facilis cum similique qui sunt",
-  //     url: "https://via.placeholder.com/600/92c952",
-  //     thumbnailUrl: "https://via.placeholder.com/150/92c952"
-  //   },
-  //   {
-  //   albumId: 1,
-  //     id: 2,
-  //     title: "reprehenderit est deserunt velit ipsam",
-  //     url: "https://via.placeholder.com/600/771796",
-  //     thumbnailUrl: "https://via.placeholder.com/150/771796"
-  //   },
-  //   {
-  //     albumId: 1,
-  //     id: 3,
-  //     title: "officia porro iure quia iusto qui ipsa ut modi",
-  //     url: "https://via.placeholder.com/600/24f355",
-  //     thumbnailUrl: "https://via.placeholder.com/150/24f355"
-  //   },
-  //   {
-  //     albumId: 1,
-  //     id: 3,
-  //     title: "officia porro iure quia iusto qui ipsa ut modi",
-  //     url: "https://via.placeholder.com/600/24f355",
-  //     thumbnailUrl: "https://via.placeholder.com/150/24f355"
-  //   }] = [
-  //     {
-  //       albumId: 1,
-  //       id: 1,
-  //       title: "accusamus beatae ad facilis cum similique qui sunt",
-  //       url: "https://via.placeholder.com/600/92c952",
-  //       thumbnailUrl: "https://via.placeholder.com/150/92c952"
-  //     },
-  //     {
-  //     albumId: 1,
-  //       id: 2,
-  //       title: "reprehenderit est deserunt velit ipsam",
-  //       url: "https://via.placeholder.com/600/771796",
-  //       thumbnailUrl: "https://via.placeholder.com/150/771796"
-  //     },
-  //     {
-  //       albumId: 1,
-  //       id: 3,
-  //       title: "officia porro iure quia iusto qui ipsa ut modi",
-  //       url: "https://via.placeholder.com/600/24f355",
-  //       thumbnailUrl: "https://via.placeholder.com/150/24f355"
-  //     },
-  //     {
-  //       albumId: 1,
-  //       id: 3,
-  //       title: "officia porro iure quia iusto qui ipsa ut modi",
-  //       url: "https://via.placeholder.com/600/24f355",
-  //       thumbnailUrl: "https://via.placeholder.com/150/24f355"
-  //     }]
-  // responsiveOptions: [{
-  //   breakpoint: '1024px',
-  //   numVisible: 3,
-  //   numScroll: 3
-  // },
-  // {
-  //   breakpoint: '768px',
-  //   numVisible: 2,
-  //   numScroll: 2
-  // },
-  // {
-  //   breakpoint: '560px',
-  //   numVisible: 1,
-  //   numScroll: 1
-  // }] = [{
-  //   breakpoint: '1024px',
-  //   numVisible: 3,
-  //   numScroll: 3
-  // },
-  // {
-  //   breakpoint: '768px',
-  //   numVisible: 2,
-  //   numScroll: 2
-  // },
-  // {
-  //   breakpoint: '560px',
-  //   numVisible: 1,
-  //   numScroll: 1
-  // }]
-  constructor() {
-  }
-  //   this.responsiveOptions = [
-  //     {
-  //       breakpoint: '1024px',
-  //       numVisible: 3,
-  //       numScroll: 3
-  //     },
-  //     {
-  //       breakpoint: '768px',
-  //       numVisible: 2,
-  //       numScroll: 2
-  //     },
-  //     {
-  //       breakpoint: '560px',
-  //       numVisible: 1,
-  //       numScroll: 1
-  //     }
-  //   ];
-  // }
+  total: number = 0;
+
+  query: string = "";
+
+  constructor(
+    private ofertasService: OfertasService,
+    private messageService: MessageService,
+    private router: Router,
+  ) { }
+
 
   ngOnInit() {
-    
+    this.ofertasService.buscarOferta("", 0).subscribe(
+      response => {
+        this.ofertas = response.ofertas;
+        this.total = response.total;
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      })
   }
 
+  onKeyUp(){
+    console.log(this.query);
+    this.ofertasService.buscarOferta("&query="+this.query, 0).subscribe(
+      response => {
+        this.ofertas = response.ofertas;
+        this.total = response.total;
+
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      })
+  }
+  onSearch(){
+    console.log(this.query);
+  }
+
+  onPaginacion(e: any){
+    console.log(e.page);
+    let query = "&query="+this.query;
+    this.ofertasService.buscarOferta(query, e.page).subscribe(
+      response => {
+        this.ofertas = response.ofertas;
+        this.total = response.total;
+
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      })
+  }
 }

@@ -1,7 +1,7 @@
 <app-formulario></app-formulario>
 <div class="p-mt-5">
     <p-card>
-        
+
 
         <div class="FormularioComponent-content">
             <p-card>
@@ -16,97 +16,91 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="tipoDocumento">Tipo de Documento</label>
-                        <p-dropdown [options]="tipoDocumento" [(ngModel)]="postulante.tipoDocumento" optionValue="nombre"
-                            placeholder="Tipo de Documento" optionLabel="nombre" formControlName="tipoDocumento">
+                        <p-dropdown [options]="tipoDocumento" optionValue="nombre" placeholder="Seleccione un tipo de Documento"
+                            optionLabel="nombre" formControlName="tipoDocumento">
                         </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="documento">N° de documento (sin puntos ni guiones, con dígito
                             verificador)</label>
-                        <p-inputNumber [(ngModel)]="postulante.documento" mode="decimal" inputId="documento"
-                            [useGrouping]="false" formControlName="documento"></p-inputNumber>
+                        <p-inputNumber mode="decimal" inputId="documento" [useGrouping]="false"
+                            formControlName="documento"></p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerApellido">Primer Apellido</label>
-                        <input id="primerApellido" type="text" required pInputText
-                            [(ngModel)]="postulante.primerApellido" formControlName="primerApellido">
+                        <input id="primerApellido" type="text" required pInputText formControlName="primerApellido">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoApellido">Segundo Apellido</label>
-                        <input id="segundoApellido" type="text" required pInputText
-                            [(ngModel)]="postulante.segundoApellido" formControlName="segundoApellido">
+                        <input id="segundoApellido" type="text" required pInputText formControlName="segundoApellido">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerNombre">Primer Nombre</label>
-                        <input id="primerNombre" type="text" required pInputText [(ngModel)]="postulante.primerNombre"
-                            formControlName="primerNombre">
+                        <input id="primerNombre" type="text" required pInputText formControlName="primerNombre">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoNombre">Segundo Nombre</label>
-                        <input id="segundoNombre" type="text" required pInputText [(ngModel)]="postulante.segundoNombre"
-                            formControlName="segundoNombre">
+                        <input id="segundoNombre" type="text" required pInputText formControlName="segundoNombre">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="sexo">Sexo</label>
-                        <p-dropdown [options]="sexo" [(ngModel)]="postulante.sexo" 
-                            formControlName="sexo"></p-dropdown>
+                        <p-dropdown [options]="sexo" formControlName="sexo" placeholder="Seleccione un sexo"></p-dropdown>
                     </div>
 
                     <span class="p-field p-col-12 p-md-6">
                         <label for="fechaN">Fecha de Nacimiento</label>
-                        <p-calendar inputId="fechaN" [(ngModel)]="selectedFechaN" formControlName="fechaN"
-                            dateFormat="dd-mm-yy" >
-                        </p-calendar>
+                        <p-calendar inputId="fechaN" formControlName="fechaN" dateFormat="dd/mm/yy"></p-calendar>
                     </span>
 
 
 
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais">
+                    <div class="p-field p-col-12 p-md-2">
                         <label for="pais">Pais</label>
-                        <p-dropdown [options]="paises" optionLabel="nombre" optionValue="nombre"
-                            formControlName="pais" [(ngModel)]="selectedPais" inputId="pais" (onChange)="onChangePais()"></p-dropdown>
+                        <p-dropdown [options]="paises" optionLabel="nombre" optionValue="id" formControlName="pais"
+                            inputId="pais" (onChange)="onChangePais()" optionDisabled="inactive" placeholder="Seleccione un pais"></p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento&&selectedPais&&selectedPais.nombre=='Uruguay'">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
                         <label for="departamento">Departamento</label>
-                        <p-dropdown [options]="departamentos" [(ngModel)]="selectedDepartamento.nombre"
-                             optionLabel="nombre" formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()"></p-dropdown>
+                        <p-dropdown [options]="departamentos || []" optionLabel="nombre" optionValue="id"
+                            formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()" placeholder="Seleccione un departamento">
+                        </p-dropdown>
                     </div>
 
-                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedLocalidad&&selectedDepartamento">
+                    <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento&&selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
                         <label for="localidad">Localidad</label>
-                        <p-dropdown [options]="localidades" [(ngModel)]="selectedLocalidad"
-                            optionLabel="nombre" formControlName="localidad" inputId="localidad"></p-dropdown>
+                        <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
+                            inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
+                        </p-dropdown>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="barrio">Barrio</label>
-                        <input inputId="barrio" type="text" required pInputText [(ngModel)]="postulante.barrio" formControlName="barrio">
+                        <input inputId="barrio" type="text" required pInputText formControlName="barrio">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="direccion">Direccion</label>
-                        <input id="direccion" type="text" required pInputText [(ngModel)]="postulante.direccion"
-                            formControlName="direccion">
+                        <input id="direccion" type="text" required pInputText formControlName="direccion">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerTelefono">Primer Telefono</label>
-                        <input id="primerTelefono" type="text" required pInputText
-                            [(ngModel)]="postulante.primerTelefono" formControlName="primerTelefono">
+                        <p-inputNumber inputId="primerTelefono" [useGrouping]="false"
+                        formControlName="primerTelefono"></p-inputNumber>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoTelefono">Segundo Telefono</label>
-                        <input id="segundoTelefono" type="text" required pInputText
-                            [(ngModel)]="postulante.segundoTelefono" formControlName="segundoTelefono">
+                        <p-inputNumber inputId="segundoTelefono" [useGrouping]="false"
+                        formControlName="segundoTelefono" [format]="false"></p-inputNumber>
                     </div>
 
                     <!-- <div class="p-field">
@@ -115,17 +109,17 @@
                             [(ngModel)]="postulante.email" formControlName="email">
                     </div> -->
 
-                    <div class="p-field p-col-12 p-md-6">
+                    <div class="p-field-checkbox p-col-12 p-md-6">
+                        <p-checkbox [binary]="true" id="noticias" formControlName="noticias"></p-checkbox>
                         <label for="noticias"> Desea recibir noticias?</label>
-                        <p-checkbox [(ngModel)]="postulante.recibirOfertas" [binary]="true" id="noticias" formControlName="noticias" ></p-checkbox>
                     </div>
 
-                    
+
                 </div>
 
                 <ng-template pTemplate="footer">
                     <div class="p-grid p-nogutter p-justify-end">
-                        <p-button  label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
                         </p-button>
                     </div>
                 </ng-template>

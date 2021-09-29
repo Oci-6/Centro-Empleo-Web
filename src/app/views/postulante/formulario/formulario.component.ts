@@ -29,19 +29,19 @@ export class FormularioComponent implements OnInit {
     },
     {
       label: 'Experiencia',
-      routerLink: 'payment'
+      routerLink: 'formulario/experienciaLaboral'
     },
     {
       label: 'Permisos',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/permisosLicencias'
     },
     {
       label: 'Intereses ',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/preferenciasLaborales'
     },
     {
       label: 'CV',
-      routerLink: 'confirmation'
+      routerLink: 'formulario/cv'
     }
     ];
   }

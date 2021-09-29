@@ -1,0 +1,27 @@
+<p-card header="Agregar oferta" styleClass="p-card-shadow p-p-3 p-mt-4">
+    <form [formGroup]="ofertaForm" (ngSubmit)="ngOnSubmit()">
+        <div class=" p-fluid p-formgrid p-grid">
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="titulo">Título</label>
+                <input id="titulo" type="text" pInputText formControlName="titulo">
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="fechaCierre">Fecha Cierre</label>
+                <p-calendar inputId="fechaCierre" [minDate]="today" [readonlyInput]="true" formControlName="fechaCierre" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <div class="p-field p-col-12">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" class="p-col-12" rows="10" pInputTextarea
+                    formControlName="descripcion"></textarea>
+            </div>
+
+
+            <p-button [disabled]="!ofertaForm.valid" type="submit" label="Confirmar"></p-button>
+
+
+        </div>
+    </form>
+</p-card>

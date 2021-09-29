@@ -1,0 +1,150 @@
+<app-formulario></app-formulario>
+
+<div class="p-mt-5">
+    <p-card>
+
+        <div class="FormularioComponent-content p-mt-5">
+            <p-card>
+                <ng-template pTemplate="title">
+                    Experiencias Laborales
+                </ng-template>
+
+                <!--Experiencias Laborales-->
+                <div class="p-fluid p-mb-4" [formGroup]="expLaboralForm">
+
+                    <ng-container formArrayName="experienciasL">
+                        <p-accordion>
+
+                            <div class="p-fluid p-grid" *ngFor="let ExpLabForm of experienciasL.controls; let i = index"
+                                [formGroupName]="i">
+
+                                <p-accordionTab header="Experiencia Laboral {{i+1}}" class="p-col-12">
+
+                                    <div class="p-fluid p-formgrid p-grid p-ai-end vertical-container">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nombreEmpresa">Nombre de la Empresa</label>
+                                            <input id="nombreEmpresa" type="text" required pInputText
+                                                [formControlName]="i+'nombreEmpresa'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="cargo">Cargo que ocupó</label>
+                                            <input id="cargo" type="text" required pInputText
+                                                [formControlName]="i+'cargo'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="areaRubro">Área o Rubro</label>
+                                            <p-dropdown [options]="areaRubro" [formControlName]="i+'areaRubro'"
+                                                placeholder="Seleccione un área o rubro">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nivelJerarquico">Nivel Jerárquico</label>
+                                            <p-dropdown [options]="nivelJerarquico"
+                                                [formControlName]="i+'nivelJerarquico'"
+                                                placeholder="Seleccione un nivel jerárquico">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="tareas">Tareas Realizadas</label>
+                                            <input id="tareas" type="text" required pInputText
+                                                [formControlName]="i+'tareas'">
+                                        </div>
+
+
+                                        <span class="p-field p-col-12 p-md-6">
+                                            <label for="fechaInicio">Desde</label>
+                                            <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'"
+                                                dateFormat="dd/mm/yy"></p-calendar>
+                                        </span>
+
+                                        <span class="p-field p-col-12 p-md-6">
+                                            <label for="fechaFin">Hasta</label>
+                                            <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'"
+                                                dateFormat="dd/mm/yy"></p-calendar>
+                                        </span>
+
+                                        <div class="p-field-checkbox p-col-12 p-md-6">
+                                            <p-checkbox [binary]="true" id="trabajando"
+                                                [formControlName]="i+'trabajando'"></p-checkbox>
+                                            <label for="trabajando"> Actualmente trabajando?</label>
+                                        </div>
+
+                                        <!-- <p-divider type="dashed" class="p-field p-col-12 p-md-6">
+                                            <b>Referencia Laboral</b>
+                                        </p-divider> -->
+                                        <p-divider class="p-col-12" type="dashed">
+                                            <b>Referencia Laboral</b>
+                                        </p-divider>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="nombreRef">Nombre</label>
+                                            <input id="nombreRef" type="text" required pInputText
+                                                [formControlName]="i+'nombreRef'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="apellidoRef">Apellido</label>
+                                            <input id="apellidoRef" type="text" required pInputText
+                                                [formControlName]="i+'apellidoRef'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="cargoRef">Cargo</label>
+                                            <input id="cargoRef" type="text" required pInputText
+                                                [formControlName]="i+'cargoRef'">
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="telefonoRef">Telefono</label>
+
+                                            <p-inputNumber inputId="telefonoRef" [useGrouping]="false"
+                                                [formControlName]="i+'telefonoRef'"></p-inputNumber>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="emailRef">Email</label>
+                                            <input id="emailRef" type="text" required pInputText
+                                                [formControlName]="i+'emailRef'">
+                                        </div>
+
+
+                                        <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <p-button (onClick)="deleteExpLab(i)" icon="pi pi-trash"></p-button>
+                                        </div>
+
+                                        <!-- <p-divider class="p-col-12"></p-divider> -->
+                                    </div>
+                                </p-accordionTab>
+                            </div>
+                        </p-accordion>
+
+
+                    </ng-container>
+
+
+                    <!-- <p-button label="Prueba" (onClick)="submit()" icon="pi pi-minus"></p-button> -->
+                    <p-button label="Agregar Experiencia Laboral" (onClick)="addExpLaboral()" icon="pi pi-plus">
+                    </p-button>
+
+                </div>
+
+                <ng-template pTemplate="footer">
+                    <div class="p-grid p-nogutter p-justify-between">
+                        <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        </p-button>
+                        <!-- <p-button label="Guardar" (onClick)="ngOnSubmit()" icon="pi pi-plus" iconPos="right"></p-button> -->
+                    </div>
+                </ng-template>
+
+            </p-card>
+        </div>
+
+    </p-card>
+</div>

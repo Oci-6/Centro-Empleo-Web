@@ -1,11 +1,13 @@
-import { Novedad } from "./Novedad";
+import { User } from "./User";
 import { Oferta } from "./Oferta";
+import { Novedad } from "./Novedad";
 
 
-export class Admin {
-    novedades?: Novedad[] | undefined;
-    ofertas?: Oferta[] | undefined;
+export class Admin extends User{
     
-    constructor() {}
+    ofertas?: Oferta[] | undefined;
+    novedades?: Novedad[] | undefined;
+    constructor(){
+        super();
+    }
 }
-

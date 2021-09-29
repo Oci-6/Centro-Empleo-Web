@@ -1,5 +1,13 @@
+import { CapacitacionFormacion } from "./CapacitacionFormacion";
+import { ConocimientoInfo } from "./ConocimientoInfo";
+import { Documento } from "./Documento";
+import { ExpLaboral } from "./ExpLaboral";
+import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
+import { Oferta } from "./Oferta";
 import { Pais } from "./Pais";
+import { PermisosLicencias } from "./PermisosLicencias";
+import { PreferenciaLaboral } from "./PreferenciaLaboral";
 
 export class Postulante {
 
@@ -13,6 +21,7 @@ export class Postulante {
     segundoApellido?: string | undefined;
     sexo?: string | undefined;
     fechaNacimiento?: Date | undefined;
+    foto?: string | undefined;
 
     //Dirección
     barrio?: string | undefined;
@@ -30,7 +39,7 @@ export class Postulante {
     //Jornada preferida
     jIndiferente?: boolean | undefined;
     jCompleta?: boolean | undefined;
-    jMtMañana?: boolean | undefined;
+    jMtManiana?: boolean | undefined;
     jMtTarde?: boolean | undefined;
     jMtNoche?: boolean | undefined;
 
@@ -50,5 +59,14 @@ export class Postulante {
     paisId?: number | undefined;
     localidadId?: number | undefined;
 
+    capacitacionFormacion?: CapacitacionFormacion[] | undefined;
+    conocimientoInfo?: ConocimientoInfo[] | undefined;
+    idioma?: Idioma[] | undefined;
+    expLaboral?: ExpLaboral[] | undefined;
+    permisosLicencias?: PermisosLicencias[] | undefined;
+    preferenciaLaboral?: PreferenciaLaboral[] | undefined;
+
+    documentos?: Documento[] | undefined;
+    ofertas?: Oferta[] | undefined
     constructor() {}
 }
