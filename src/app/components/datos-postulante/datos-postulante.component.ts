@@ -25,6 +25,7 @@ export class DatosPostulanteComponent implements OnChanges {
   perfilPropio: boolean = false;
 
   postulante: Postulante | undefined;
+  url: string = "";
 
   ngOnChanges() {
     this.perfilPropio = (this.authService.getAuth().tipo == "Postulante" && this.authService.getAuth().usuario == this.id);
@@ -32,11 +33,21 @@ export class DatosPostulanteComponent implements OnChanges {
       this.postulanteService.infoPostulante(this.id).subscribe(
         (response) => {
           this.postulante = response;
+          this.getImagen()
         },
         (error) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
         }
       )
+  }
+
+  async getImagen(){
+    if(this.postulante?.foto){
+      let blob = await this.postulanteService.getBlobDatos(this.postulante.foto).toPromise();
+
+      this.url = URL.createObjectURL(blob);
+
+    }
   }
 
   onUpload() {

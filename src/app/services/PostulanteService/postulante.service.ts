@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CapacitacionFormacion } from 'src/app/models/CapacitacionFormacion';
 import { ConocimientoInfo } from 'src/app/models/ConocimientoInfo';
 import { ExpLaboral } from 'src/app/models/ExpLaboral';
@@ -35,6 +36,16 @@ export class PostulanteService {
 
   postularse(idOferta: number) {
     return this.http.get(this.URL + '/postularse/'+idOferta);
+  }
+
+  buscarPostulantes(filtros: any){
+    return this.http.post<Postulante[]>(this.URL + '/buscar/', filtros);
+  }
+
+  getBlobDatos(url: string){
+   
+
+    return this.http.get(url,{responseType: "blob"})
   }
 
   //Capacitaciones y Cursos

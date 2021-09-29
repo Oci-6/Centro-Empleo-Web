@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 //PrimeImports
-import {MenubarModule} from 'primeng/menubar';
-import {CarouselModule} from 'primeng/carousel';
-import {ButtonModule} from 'primeng/button';
-import {CardModule} from 'primeng/card';
-import {PanelModule} from 'primeng/panel';
-import {AvatarModule} from 'primeng/avatar';
-import {AvatarGroupModule} from 'primeng/avatargroup';
+import { MenubarModule } from 'primeng/menubar';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { PanelModule } from 'primeng/panel';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
@@ -19,20 +19,23 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
-import {ToastModule} from 'primeng/toast';
-import {DropdownModule} from 'primeng/dropdown';
-import {CalendarModule} from 'primeng/calendar';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {CheckboxModule} from 'primeng/checkbox';
-import {AccordionModule} from 'primeng/accordion';
-import {InputSwitchModule} from 'primeng/inputswitch';
-import {FileUploadModule} from 'primeng/fileupload';
-import {ChartModule} from 'primeng/chart';
-import {InputMaskModule} from 'primeng/inputmask';
-import {PaginatorModule} from 'primeng/paginator';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-
+import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { AccordionModule } from 'primeng/accordion';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ChartModule } from 'primeng/chart';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ListboxModule } from 'primeng/listbox';
+import { TreeModule } from 'primeng/tree';
+import {MenuModule} from 'primeng/menu';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 
 @NgModule({
   imports: [
@@ -67,8 +70,12 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     PaginatorModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    ListboxModule,
+    TreeModule,
+    MenuModule,
+    OverlayPanelModule
   ],
-  exports: [    
+  exports: [
     MenubarModule,
     CarouselModule,
     ButtonModule,
@@ -100,6 +107,10 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     PaginatorModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    ListboxModule,
+    TreeModule,
+    MenuModule,
+    OverlayPanelModule
   ]
 })
 export class PrimeNgModule { }

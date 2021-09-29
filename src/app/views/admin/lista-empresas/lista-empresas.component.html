@@ -16,7 +16,7 @@
             {{empresa[col.field]}}
         </td>
           <td>
-              <button pButton pRipple type="button" icon="pi pi-pencil" title="PublicarComoEmpresa" (click)="showPublicarComoEmpresa()"
+              <button pButton pRipple type="button" icon="pi pi-pencil" title="PublicarComoEmpresa" [routerLink]="'/agregarOferta'" [queryParams]="{idEmpresa:empresa.id | json }"
                 class="p-button-rounded p-button-warning p-mr-2" pTooltip="Publicar como Empresa"></button>
               <button pButton pRipple type="button" icon="pi pi-clock" title="DuracionCuenta" class="p-button-rounded p-button-secondary p-mr-2"
                 (click)="showExtenderDuracion(empresa)"></button>
