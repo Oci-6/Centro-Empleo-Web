@@ -38,8 +38,8 @@ export class PostulanteService {
     return this.http.get(this.URL + '/postularse/'+idOferta);
   }
 
-  buscarPostulantes(filtros: any){
-    return this.http.post<Postulante[]>(this.URL + '/buscar/', filtros);
+  buscarPostulantes(filtros: any, page: number){
+    return this.http.get<{postulantes: Postulante[], total: number}>(this.URL + '/buscar/?page='+page+'&filtros='+JSON.stringify(filtros));
   }
 
   getBlobDatos(url: string){

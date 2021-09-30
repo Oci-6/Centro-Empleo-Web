@@ -6,7 +6,7 @@
 
             </div>
             <div class="p-col">
-                <button type="text" pButton label="Basic" (click)="op.toggle($event)"></button>
+                <button type="text"  icon="pi pi-info-circle" pButton label="Más columnas" (click)="op.toggle($event)"></button>
             </div>
         </div>
     </ng-template>
@@ -19,7 +19,25 @@
             {{col.header}}
         </th> -->
                 <th style="width:200px">Nombre</th>
-                <th style="width:75px">Edad</th>
+                <th style="width:100px">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Edad
+                        <p-columnFilter [showClearButton]="false" [showApplyButton]="false" field="sexo"
+                            matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
+                            [showAddButton]="false">
+                            <ng-template pTemplate="filter">
+                                <p-inputNumber [(ngModel)]="edad" [showButtons]="true" buttonLayout="horizontal"
+                                    inputId="horizontal" spinnerMode="horizontal" [step]="1"
+                                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
+                                    incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"  [min]="16" [max]="90"
+                                    (onBlur)="filtrar('fechaNacimiento', calcularEdadInverso())"
+                                    >
+                                </p-inputNumber>
+                            </ng-template>
+
+                        </p-columnFilter>
+                    </div>
+                </th>
                 <th style="width:100px">
                     <div class="p-d-flex p-jc-between p-ai-center">
                         Sexo
@@ -41,8 +59,11 @@
                         matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                         [showAddButton]="false">
                         <ng-template pTemplate="filter">
-                            <!-- <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" (onChange)="filtrar('sexo')"
-                                styleClass="p-m-3"></p-dropdown> -->
+                            
+                            <p-dropdown [options]="departamentos" [(ngModel)]="selectedDepartamento" optionLabel="nombre" optionValue="value" (onChange)="onChangeDepartamento()"
+                            (onChange)="filtrar('departamento', selectedDepartamento)" styleClass="p-m-3"></p-dropdown>
+                            <p-dropdown *ngIf="localidades" [options]="localidades" [(ngModel)]="selectedLocalidad" optionLabel="nombre" optionValue="nombre" (onChange)="filtrar('localidad', selectedLocalidad)"
+                                styleClass="p-m-3"></p-dropdown>
 
                         </ng-template>
 
@@ -70,7 +91,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="areaTOp" [(ngModel)]="selectedArea" (onChange)="filtrar('capacitacionFormacion', [{areaTematica: selectedArea}])"
+                                <p-dropdown [options]="areaTOp" [(ngModel)]="selectedArea" (onChange)="filtrar('areaTematica', selectedArea)"
                                     styleClass="p-m-3"></p-dropdown>
 
                             </ng-template>
@@ -78,10 +99,66 @@
                         </p-columnFilter>
                     </div>
                 </th>
-                <th style="width:200px" *ngIf="idiomas">Idiomas</th>
-                <th style="width:200px" *ngIf="experiencias">Experiencias - Rubro</th>
-                <th style="width:200px" *ngIf="permisos">Permisos</th>
-                <th style="width:200px" *ngIf="intereses">Areas de interes</th>
+                <th style="width:200px" *ngIf="idiomasColumn">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Idiomas
+                        <p-columnFilter [showClearButton]="false" [showApplyButton]="false" field="sexo"
+                            matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
+                            [showAddButton]="false">
+                            <ng-template pTemplate="filter">
+                                <p-dropdown [options]="idiomas" [(ngModel)]="selectedIdioma" (onChange)="filtrar('idioma', selectedIdioma)"
+                                    styleClass="p-m-3"></p-dropdown>
+
+                            </ng-template>
+
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="width:200px" *ngIf="experiencias">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Experiencias - Rubro
+                        <p-columnFilter [showClearButton]="false" [showApplyButton]="false" field="sexo"
+                            matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
+                            [showAddButton]="false">
+                            <ng-template pTemplate="filter">
+                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres" (onChange)="filtrar('interes', selectedInteres)"
+                                    styleClass="p-m-3"></p-dropdown>
+
+                            </ng-template>
+
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="width:200px" *ngIf="permisos">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Permisos
+                        <p-columnFilter [showClearButton]="false" [showApplyButton]="false" field="sexo"
+                            matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
+                            [showAddButton]="false">
+                            <ng-template pTemplate="filter">
+                                <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedDocumento" (onChange)="filtrar('permisos', selectedDocumento)"
+                                    styleClass="p-m-3"></p-dropdown>
+
+                            </ng-template>
+
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th style="width:200px" *ngIf="intereses">
+                    <div class="p-d-flex p-jc-between p-ai-center">
+                        Áreas de interés
+                        <p-columnFilter [showClearButton]="false" [showApplyButton]="false" field="sexo"
+                            matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
+                            [showAddButton]="false">
+                            <ng-template pTemplate="filter">
+                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres" (onChange)="filtrar('interes', selectedInteres)"
+                                    styleClass="p-m-3"></p-dropdown>
+
+                            </ng-template>
+
+                        </p-columnFilter>
+                    </div>
+                </th>
                 <th style="width:100px" alignFrozen="right"  pFrozenColumn [frozen]="true">Acciones</th>
             </tr>
         </ng-template>
@@ -95,7 +172,7 @@
                     <span class="p-column-title">Nombre</span>
                     {{postulante.primerNombre}} {{postulante.primerApellido}}
                 </td>
-                <td style="width:75px">
+                <td style="width:100px">
                     <span class="p-column-title">Edad</span>
                     {{calcularEdad(postulante.fechaNacimiento)}}
                 </td>
@@ -126,12 +203,12 @@
                     </ng-container>
                     </p>
                 </td>
-                <td style="width:200px" *ngIf="idiomas">
+                <td style="width:200px" *ngIf="idiomasColumn">
                     <span class="p-column-title">Idiomas</span>
                     <p  class="columnas-texto">
                     <ng-container *ngFor="let idioma of postulante.idioma">
                         <div *ngIf="idioma.nombre=='Otro'; else otro">
-                            {{idioma.nombre}}: {{idioma.especificacion}},
+                            {{idioma.nombre}}: {{idioma.especificacion}}
                         </div>
                         <ng-template #otro>
                             {{idioma.nombre}}
@@ -154,7 +231,7 @@
                     <p  class="columnas-texto">
                     <ng-container *ngFor="let perm of postulante.permisosLicencias">
                         <div *ngIf="perm.tipoDocumento=='Otro'; else otroPerm">
-                            {{perm.tipoDocumento}}: {{perm.especificacion}},
+                            {{perm.tipoDocumento}}: {{perm.especificacion}}
                         </div>
                         <ng-template #otroPerm>
                             {{perm.tipoDocumento}}
@@ -184,12 +261,15 @@
         </ng-template>
     </p-table>
 
-    <p-dialog class="p-grid p-jc-center" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog"
+    <ng-template pTemplate="footer">
+        <p-paginator [rows]="10" [totalRecords]="totalRows" (onPageChange)="onPaginacion($event)"></p-paginator>
+
+    </ng-template>
+</p-card>
+<p-dialog class="p-grid p-jc-center" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog"
         [style]="{height: '100%',width: '100%'}" [draggable]="false">
         <app-datos-postulante *ngIf="selectedPostulante.id" [id]="selectedPostulante.id"></app-datos-postulante>
     </p-dialog>
-</p-card>
-
 <p-overlayPanel #op>
     <ng-template pTemplate>
         <div class="p-fluid p-formgrid p-grid p-mb-4">
@@ -201,7 +281,7 @@
             </div>
 
             <div class="p-field-checkbox p-col-12 p-md-6">
-                <p-checkbox [binary]="true" id="idioma" [(ngModel)]="idiomas"></p-checkbox>
+                <p-checkbox [binary]="true" id="idioma" [(ngModel)]="idiomasColumn"></p-checkbox>
                 <label for="idioma">Idiomas</label>
             </div>
 
@@ -210,6 +290,11 @@
                 <label for="exp">Experencias por rubro</label>
             </div>
 
+            <div class="p-field-checkbox p-col-12 p-md-6">
+                <p-checkbox [binary]="true" id="permiso" [(ngModel)]="permisos">
+                </p-checkbox>
+                <label for="permiso">Permisos</label>
+            </div> 
             <div class="p-field-checkbox p-col-12 p-md-6">
                 <p-checkbox [binary]="true" id="interes" [(ngModel)]="intereses">
                 </p-checkbox>

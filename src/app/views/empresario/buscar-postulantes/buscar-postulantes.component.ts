@@ -62,9 +62,9 @@ export class BuscarPostulantesComponent implements OnInit {
     }
     console.log(this.filtros);
 
-    this.postulanteService.buscarPostulantes(this.filtros).subscribe(
-      response => this.postulantes = response
-    )
+    // this.postulanteService.buscarPostulantes(this.filtros).subscribe(
+    //   response => this.postulantes = response
+    // )
   }
 
   nodeUnselect(event: any) {
