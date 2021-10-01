@@ -19,9 +19,6 @@ export class CvPermisosLegalesComponent implements OnInit {
     private postulanteService: PostulanteService,
     private router: Router) { }
 
-
-  uploadedFiles: any[] = [];
-
   user: any;
   cvPermisosForm: FormGroup = new FormGroup({});
   submitted: boolean | undefined = false;
@@ -29,6 +26,7 @@ export class CvPermisosLegalesComponent implements OnInit {
   postulante: Postulante = {};
 
   terminosCondiciones: boolean = false;
+  file: File | undefined;
 
   ngOnInit(): void {
     this.user = this.authService.getAuth();
@@ -41,50 +39,59 @@ export class CvPermisosLegalesComponent implements OnInit {
     this.postulanteService.infoPostulante(this.user.usuario).subscribe(
       (result) => {
         this.postulante = result;
-        if (result.documentos)
-          this.uploadedFiles = result.documentos;
-        console.log(this.uploadedFiles);
-        
       }
     )
   }
 
-  onUpload(event: any) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
+  onFileSelected(event: any) {
 
-    this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
+    const file: File = event.target.files[0];
+
+    if (file) {
+
+      this.file = file;
+
+
+    }
   }
 
   async ngOnSubmit() {
-    try{
-    let postulante: Postulante = new Postulante();
-    postulante.id = this.postulante.id;
-    postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;
+    try {
+      let postulante: Postulante = new Postulante();
+      postulante.id = this.postulante.id;
+      postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;
 
-   await this.postulanteService.modificarPostulante(postulante).toPromise();
+      await this.postulanteService.modificarPostulante(postulante).toPromise();
 
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-    this.submitted = true;
-  } catch (error) {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-    this.submitted = false;
-  }  
+      if (this.file) {
+        const formData = new FormData();
+
+        formData.append("file", this.file);
+
+        await this.postulanteService.postCV(formData).toPromise();
+      }
+
+
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.submitted = true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      this.submitted = false;
+    }
   }
 
   //Cambiar página del steper
-  
+
   async nextPage() {
-    if(this.cvPermisosForm.valid){
+    if (this.cvPermisosForm.valid) {
       await this.ngOnSubmit();
       if (this.submitted) {
-      this.router.navigate(['/perfil']);
+        this.router.navigate(['/perfil']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 
@@ -92,11 +99,5 @@ export class CvPermisosLegalesComponent implements OnInit {
     this.router.navigate(['formulario/preferenciasLaborales']);
   }
 
-  deleteDocumento(documento: any){
-    console.log(this.uploadedFiles);
-    let index = this.uploadedFiles.indexOf(documento);
-    console.log(index);
-    this.uploadedFiles.splice(index, 1);
-
-  }
+ 
 }
