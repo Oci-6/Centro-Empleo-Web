@@ -72,4 +72,9 @@ export class DetalleOfertaComponent implements OnInit {
         }
       )
   }
+
+  convertirFecha(fecha: Date | undefined) {
+    return moment(fecha).format("DD/MM/YYYY");
+  }
+  
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
@@ -38,14 +39,16 @@ export class ListaPostulantesPartialComponent implements OnChanges {
       { field: 'fechaNacimiento', header: 'Fecha de Nacimiento' },
       { field: 'visibilidad', header: 'Visibilidad' },
     ];
-
-
     
   }
 
   showInfoPostulante(postulante: Postulante): void {
     this.selectedPostulante = postulante;
     this.displayInfoPostulanteDialog = true;
+  }
+
+  convertirFecha(fecha: Date | undefined) {
+    return moment(fecha).format("DD/MM/YYYY");
   }
 
 }

@@ -3,9 +3,8 @@
             styleClass="p-datatable-gridlines p-datatable-striped" [responsive]="true">
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns">
-                        {{col.header}}
-                    </th>  
+                    <th>Titulo</th>
+                    <th>Fecha de Cierre</th>  
                     <th>Empresa</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -13,9 +12,13 @@
             </ng-template>
             <ng-template pTemplate="body" let-oferta let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns">
-                        <span class="p-column-title"><strong>{{col.header}}:</strong></span>
-                        {{oferta[col.field]}}
+                    <td>
+                        <span class="p-column-title"><strong>Titulo:</strong></span>
+                        {{oferta.titulo}}
+                    </td>
+                    <td>
+                        <span class="p-column-title"><strong>Fecha de cierre:</strong></span>
+                        {{convertirFecha(oferta.fechaCierre)}}
                     </td>
                     <td>
                         <span class="p-column-title"><strong>Empresa:</strong></span>

@@ -8,8 +8,9 @@ import { Oferta } from "./Oferta";
 import { Pais } from "./Pais";
 import { PermisosLicencias } from "./PermisosLicencias";
 import { PreferenciaLaboral } from "./PreferenciaLaboral";
+import { User } from "./User";
 
-export class Postulante {
+export class Postulante extends User{
 
     //Datos Básicos
     id?: number | undefined;
@@ -67,6 +68,9 @@ export class Postulante {
     preferenciaLaboral?: PreferenciaLaboral[] | undefined;
 
     documentos?: Documento[] | undefined;
-    ofertas?: Oferta[] | undefined
-    constructor() {}
+    ofertas?: Oferta[] | undefined;
+
+    constructor() {
+        super();
+    }
 }

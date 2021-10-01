@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Oferta } from 'src/app/models/Oferta';
 import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
@@ -63,5 +64,9 @@ export class OfertasComponent implements OnInit {
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
       })
+  }
+
+  convertirFecha(fecha: Date | undefined) {
+    return moment(fecha).format("DD/MM/YYYY");
   }
 }

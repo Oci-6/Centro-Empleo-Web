@@ -21,10 +21,10 @@ export class MisPostulacionesComponent implements OnInit {
   ofertas: Oferta[] = [];
 
   ngOnInit(): void {
-    this.cols = [
-      { field: 'titulo', header: 'Título' },
-      { field: 'fechaCierre', header: 'Fecha de cierre' },
-    ];
+    // this.cols = [
+    //   { field: 'titulo', header: 'Título' },
+    //   { field: 'fechaCierre', header: 'Fecha de cierre' },
+    // ];
 
     this.postulanteService.infoPostulante(this.authService.getAuth().usuario).subscribe(
       response => {
@@ -41,6 +41,10 @@ export class MisPostulacionesComponent implements OnInit {
     }
     return "Abierta"
 
+  }
+
+  convertirFecha(fecha: Date | undefined) {
+    return moment(fecha).format("DD/MM/YYYY");
   }
 
 }

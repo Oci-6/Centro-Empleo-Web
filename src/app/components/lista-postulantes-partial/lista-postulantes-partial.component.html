@@ -12,7 +12,7 @@
             <tr>
                 <td *ngFor="let col of columns">
                     <span class="p-column-title">{{col.header}}</span>
-                    {{postulante[col.field]}}
+                    {{col.field=='fechaNacimiento'?convertirFecha(postulante[col.field]):postulante[col.field]}}
                 </td>
                 <td>
                     <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
