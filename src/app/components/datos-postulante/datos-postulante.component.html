@@ -2,12 +2,17 @@
     <div class="p-col-12 p-md-3 p-fluid">
         <div class=" p-grid p-jc-center">
             <div class="p-col-12 p-grid p-jc-center ">
-                <img style="max-height:250px; max-width: 100%; " [src]="this.url | safe: 'url'">
+                <img style="max-height:250px; max-width: 100%; " [src]="this.fotoPerfil | safe: 'url'">
             </div>
             <div class="p-col-12 p-grid p-jc-center">
-                <p-fileUpload *ngIf="perfilPropio" mode="basic" chooseLabel="Cambiar Foto de Perfil" name="file"
+
+
+                <p-fileUpload *ngIf="perfilPropio" mode="basic" chooseLabel="Cambiar Foto" name="file"
                     url="http://localhost:3000/api/postulante/foto" accept="image/*" (onUpload)="onUpload()">
                 </p-fileUpload>
+            </div>
+            <div class="p-col-12 p-grid p-jc-center">
+                <a style="width: 50%;" pButton target="_blank" type="button" label="Curriculum" icon="pi pi-search" [href]="cv | safe: 'url'"></a>
             </div>
             <div class="p-col-12 p-grid p-jc-center">
                 <div *ngIf="perfilPropio" class="p-field p-grid p-mt-2">
@@ -85,94 +90,95 @@
             <p-accordion class="p-col-12" >
                 <p-accordionTab header='Educación y Formación'>
                     <p-accordion>
-                    <p-accordionTab *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0"
-                        header="Capacitaciones">
-                        <p-accordion>
-                            <div *ngFor="let CapFor of postulante.capacitacionFormacion;">
-                                <p-accordionTab *ngIf="CapFor.nombre" [header]="CapFor.nombre">
-                                    <div class="p-fluid p-formgrid p-grid">
-    
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Area tematica:</strong> <br>
-                                            {{CapFor.areaTematica}}
+                        <p-accordionTab
+                            *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0"
+                            header="Capacitaciones">
+                            <p-accordion>
+                                <div *ngFor="let CapFor of postulante.capacitacionFormacion;">
+                                    <p-accordionTab *ngIf="CapFor.nombre" [header]="CapFor.nombre">
+                                        <div class="p-fluid p-formgrid p-grid">
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Area tematica:</strong> <br>
+                                                {{CapFor.areaTematica}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Institución:</strong> <br>
+                                                {{CapFor.institucion}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Fecha de inicio:</strong> <br>
+                                                {{convertirFecha(CapFor.fechaInicio)}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Duración:</strong> <br>
+                                                {{CapFor.duracion}} {{CapFor.tipoDuracion}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Estado:</strong> <br>
+                                                {{CapFor.estado}}
+                                            </div>
                                         </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Institución:</strong> <br>
-                                            {{CapFor.institucion}}
+                                    </p-accordionTab>
+                                </div>
+                            </p-accordion>
+                        </p-accordionTab>
+
+                        <p-accordionTab *ngIf="postulante.idioma&& postulante.idioma.length > 0" header="Idiomas">
+                            <p-accordion>
+                                <div *ngFor="let Idioma of postulante.idioma;">
+                                    <p-accordionTab *ngIf="Idioma.nombre" [header]="Idioma.nombre">
+                                        <div class="p-fluid p-formgrid p-grid">
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Especificación:</strong> <br>
+                                                {{Idioma.especificacion}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Habla Conversacional:</strong> <br>
+                                                {{Idioma.hablaConv}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Comprensión Lectora:</strong> <br>
+                                                {{Idioma.compLec}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Escritura:</strong> <br>
+                                                {{Idioma.escritura}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Comprensión Auditiva:</strong> <br>
+                                                {{Idioma.compAud}}
+                                            </div>
                                         </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Fecha de inicio:</strong> <br>
-                                            {{convertirFecha(CapFor.fechaInicio)}}
+                                    </p-accordionTab>
+                                </div>
+                            </p-accordion>
+                        </p-accordionTab>
+
+                        <p-accordionTab *ngIf="postulante.conocimientoInfo&& postulante.conocimientoInfo.length > 0"
+                            header="Conocimientos Informaticos">
+                            <p-accordion>
+                                <div *ngFor="let conocInfo of postulante.conocimientoInfo;">
+                                    <p-accordionTab *ngIf="conocInfo.nombreApp" [header]="conocInfo.nombreApp">
+                                        <div class="p-fluid p-formgrid p-grid">
+
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Categoría:</strong> <br>
+                                                {{conocInfo.categoria}}
+                                            </div>
+                                            <div class="p-field p-col-12 p-md-6">
+                                                <strong>Nivel de conocimiento:</strong> <br>
+                                                {{conocInfo.nivelConocimiento}}
+                                            </div>
                                         </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Duración:</strong> <br>
-                                            {{CapFor.duracion}} {{CapFor.tipoDuracion}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Estado:</strong> <br>
-                                            {{CapFor.estado}}
-                                        </div>
-                                    </div>
-                                </p-accordionTab>
-                            </div>
-                        </p-accordion>
-                    </p-accordionTab>
-    
-                    <p-accordionTab *ngIf="postulante.idioma&& postulante.idioma.length > 0" header="Idiomas">
-                        <p-accordion>
-                            <div *ngFor="let Idioma of postulante.idioma;">
-                                <p-accordionTab *ngIf="Idioma.nombre" [header]="Idioma.nombre">
-                                    <div class="p-fluid p-formgrid p-grid">
-    
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Especificación:</strong> <br>
-                                            {{Idioma.especificacion}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Habla Conversacional:</strong> <br>
-                                            {{Idioma.hablaConv}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Comprensión Lectora:</strong> <br>
-                                            {{Idioma.compLec}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Escritura:</strong> <br>
-                                            {{Idioma.escritura}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Comprensión Auditiva:</strong> <br>
-                                            {{Idioma.compAud}}
-                                        </div>
-                                    </div>
-                                </p-accordionTab>
-                            </div>
-                        </p-accordion>
-                    </p-accordionTab>
-    
-                    <p-accordionTab *ngIf="postulante.conocimientoInfo&& postulante.conocimientoInfo.length > 0"
-                        header="Conocimientos Informaticos">
-                        <p-accordion>
-                            <div *ngFor="let conocInfo of postulante.conocimientoInfo;">
-                                <p-accordionTab *ngIf="conocInfo.nombreApp" [header]="conocInfo.nombreApp">
-                                    <div class="p-fluid p-formgrid p-grid">
-    
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Categoría:</strong> <br>
-                                            {{conocInfo.categoria}}
-                                        </div>
-                                        <div class="p-field p-col-12 p-md-6">
-                                            <strong>Nivel de conocimiento:</strong> <br>
-                                            {{conocInfo.nivelConocimiento}}
-                                        </div>
-                                    </div>
-                                </p-accordionTab>
-                            </div>
-                        </p-accordion>
-                    </p-accordionTab>
-                </p-accordion>
+                                    </p-accordionTab>
+                                </div>
+                            </p-accordion>
+                        </p-accordionTab>
+                    </p-accordion>
                 </p-accordionTab>
-                
+
 
             </p-accordion>
 

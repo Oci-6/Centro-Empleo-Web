@@ -4,12 +4,16 @@
 
         <h2>Curriculum Vitae</h2>
         <div class="FormularioComponent-content">
-            <p-fileUpload mode="basic" name="file"
+            <!-- <p-fileUpload mode="basic" name="file"
                 [url]="'http://localhost:3000/api/upload/documento/'+user.usuario+'&Curriculum'"
                 (onUpload)="onUpload($event)" chooseLabel="Agregar Curriculum Vitae" accept="application/pdf">
 
-            </p-fileUpload>
-            
+            </p-fileUpload> -->
+            <input type="file" accept="pdf" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+            <div>
+                <p-button [label]="file?.name || 'No file uploaded yet.'" icon="pi pi-paperclip" (click)="fileUpload.click()"></p-button>
+            </div>
         </div>
 
         <p-divider>
@@ -46,7 +50,8 @@
         <ng-template pTemplate="footer">
             <div class="p-grid p-nogutter p-justify-between">
                 <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-                <p-button label="Terminar e ir al perfil" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" [disabled]="!terminosCondiciones"></p-button>
+                <p-button label="Terminar e ir al perfil" (onClick)="nextPage()" icon="pi pi-angle-right"
+                    iconPos="right" [disabled]="!terminosCondiciones"></p-button>
                 <!-- <p-button label="Guardar" [disabled]="!terminosCondiciones" (onClick)="ngOnSubmit()" icon="pi pi-plus"
                     iconPos="right"></p-button> -->
             </div>

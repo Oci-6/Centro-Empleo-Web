@@ -1,6 +1,5 @@
 import { CapacitacionFormacion } from "./CapacitacionFormacion";
 import { ConocimientoInfo } from "./ConocimientoInfo";
-import { Documento } from "./Documento";
 import { ExpLaboral } from "./ExpLaboral";
 import { Idioma } from "./Idioma";
 import { Localidad } from "./Localidad";
@@ -23,6 +22,7 @@ export class Postulante extends User{
     sexo?: string | undefined;
     fechaNacimiento?: Date | undefined;
     foto?: string | undefined;
+    curriculum?: string | undefined;
 
     //Dirección
     barrio?: string | undefined;
@@ -67,10 +67,10 @@ export class Postulante extends User{
     permisosLicencias?: PermisosLicencias[] | undefined;
     preferenciaLaboral?: PreferenciaLaboral[] | undefined;
 
-    documentos?: Documento[] | undefined;
     ofertas?: Oferta[] | undefined;
 
     constructor() {
         super();
     }
+   
 }
