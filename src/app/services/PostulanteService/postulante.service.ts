@@ -43,9 +43,12 @@ export class PostulanteService {
   }
 
   getBlobDatos(url: string){
-   
-
     return this.http.get(url,{responseType: "blob"})
+  }
+
+  postCV(formData: FormData){
+    return this.http.post<{message: string}>(this.URL+'/curriculum', formData);
+
   }
 
   //Capacitaciones y Cursos

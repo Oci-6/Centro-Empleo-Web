@@ -25,7 +25,8 @@ export class DatosPostulanteComponent implements OnChanges {
   perfilPropio: boolean = false;
 
   postulante: Postulante | undefined;
-  url: string = "";
+  fotoPerfil: string = "";
+  cv: string = "";
 
   ngOnChanges() {
     this.perfilPropio = (this.authService.getAuth().tipo == "Postulante" && this.authService.getAuth().usuario == this.id);
@@ -33,7 +34,8 @@ export class DatosPostulanteComponent implements OnChanges {
       this.postulanteService.infoPostulante(this.id).subscribe(
         (response) => {
           this.postulante = response;
-          this.getImagen()
+          this.getImagen();
+          this.getCV();
         },
         (error) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
@@ -41,11 +43,24 @@ export class DatosPostulanteComponent implements OnChanges {
       )
   }
 
-  async getImagen(){
-    if(this.postulante?.foto){
-      let blob = await this.postulanteService.getBlobDatos(this.postulante.foto).toPromise();
+  async getImagen() {
+    if (this.postulante?.foto) {
+      if (this.postulante?.foto.includes("uploads")) {
+        let blob = await this.postulanteService.getBlobDatos(this.postulante.foto).toPromise();
 
-      this.url = URL.createObjectURL(blob);
+        this.fotoPerfil = URL.createObjectURL(blob);
+
+      } else {
+        this.fotoPerfil = this.postulante?.foto
+      }
+    }
+  }
+
+  async getCV() {
+    if (this.postulante?.curriculum) {
+      let blob = await this.postulanteService.getBlobDatos(this.postulante.curriculum).toPromise();
+
+      this.cv = URL.createObjectURL(blob);
 
     }
   }
