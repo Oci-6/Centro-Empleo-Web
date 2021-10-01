@@ -2,7 +2,7 @@
     <div class="p-col-12 p-md-3 p-fluid">
         <div class=" p-grid p-jc-center">
             <div class="p-col-12 p-grid p-jc-center ">
-                <img style="max-height:250px; max-width: 100%; " [src]="postulante?.foto">
+                <img style="max-height:250px; max-width: 100%; " [src]="this.url | safe: 'url'">
             </div>
             <div class="p-col-12 p-grid p-jc-center">
                 <p-fileUpload *ngIf="perfilPropio" mode="basic" chooseLabel="Cambiar Foto de Perfil" name="file"

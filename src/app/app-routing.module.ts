@@ -7,6 +7,7 @@ import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empre
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
+import { BuscarPostulantesComponent } from './views/empresario/buscar-postulantes/buscar-postulantes.component';
 import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
 import { HomeComponent } from './views/home/home.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
 
   //Rutas Empresa
   { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
+  { path: 'buscarPostulantes',canActivate: [LoginGuard],  component: BuscarPostulantesComponent },
   { path: 'misOfertas',canActivate: [LoginGuard],  component: MisOfertasComponent },
   { path: 'agregarOferta',canActivate: [LoginGuard],  component: AgregarOfertaComponent },
   //Rutas Admin

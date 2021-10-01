@@ -5,6 +5,8 @@ import { MessageService } from 'primeng/api';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
+import { Output, EventEmitter } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lista-postulantes-partial',
@@ -21,6 +23,16 @@ export class ListaPostulantesPartialComponent implements OnChanges {
 
   cols: any[] = [];
 
+    //Filtros
+
+    sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
+    selectedSexo: string = "";
+
+    @Output() newItemEvent = new EventEmitter<{
+      filtro: string,
+      valor: string
+    }>();
+
   constructor(
     private postulanteService: PostulanteService,
     private messageService: MessageService,
@@ -32,14 +44,13 @@ export class ListaPostulantesPartialComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.cols = [
-      { field: 'primerNombre', header: 'Primer Nombre' },
-      { field: 'primerApellido', header: 'Primer Apellido' },
-      { field: 'documento', header: 'Documento' },
-      { field: 'sexo', header: 'Sexo' },
-      { field: 'fechaNacimiento', header: 'Fecha de Nacimiento' },
-      { field: 'visibilidad', header: 'Visibilidad' },
     ];
     
+  }
+
+  calcularEdad(fechaNac: Date): number{
+    
+    return moment().diff(fechaNac, 'years',false);
   }
 
   showInfoPostulante(postulante: Postulante): void {
@@ -47,8 +58,17 @@ export class ListaPostulantesPartialComponent implements OnChanges {
     this.displayInfoPostulanteDialog = true;
   }
 
-  convertirFecha(fecha: Date | undefined) {
-    return moment(fecha).format("DD/MM/YYYY");
+
+  filtrar(filtro: string){
+    filtro;
+    this.selectedSexo;
+    this.newItemEvent.emit({
+      filtro: filtro,
+      valor: this.selectedSexo
+    });
+
+    
+
   }
 
 }
