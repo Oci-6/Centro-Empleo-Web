@@ -19,6 +19,9 @@
                         <p-dropdown [options]="tipoDocumento" optionValue="nombre" placeholder="Seleccione un tipo de Documento"
                             optionLabel="nombre" formControlName="tipoDocumento">
                         </p-dropdown>
+                        <div *ngIf="submitted && f.tipoDocumento.errors" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.tipoDocumento.errors.required">Seleccione un tipo de documento</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -26,11 +29,17 @@
                             verificador)</label>
                         <p-inputNumber mode="decimal" inputId="documento" [useGrouping]="false"
                             formControlName="documento"></p-inputNumber>
+                        <div *ngIf="f.documento.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.documento.errors.required">Ingrese un documento</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerApellido">Primer Apellido</label>
                         <input id="primerApellido" type="text" required pInputText formControlName="primerApellido">
+                        <div *ngIf="f.primerApellido.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.primerApellido.errors.required">Ingrese un apellido</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -41,6 +50,9 @@
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerNombre">Primer Nombre</label>
                         <input id="primerNombre" type="text" required pInputText formControlName="primerNombre">
+                        <div *ngIf="f.primerNombre.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.primerNombre.errors.required">Ingrese un nombre</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -51,11 +63,17 @@
                     <div class="p-field p-col-12 p-md-6">
                         <label for="sexo">Sexo</label>
                         <p-dropdown [options]="sexo" formControlName="sexo" placeholder="Seleccione un sexo"></p-dropdown>
+                        <div *ngIf="f.sexo.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.sexo.errors.required">Seleccione un sexo</small>
+                        </div>
                     </div>
 
                     <span class="p-field p-col-12 p-md-6">
                         <label for="fechaN">Fecha de Nacimiento</label>
                         <p-calendar inputId="fechaN" formControlName="fechaN" dateFormat="dd/mm/yy"></p-calendar>
+                        <div *ngIf="f.fechaN.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.fechaN.errors.required">Ingrese una fecha de nacimiento</small>
+                        </div>
                     </span>
 
 
@@ -65,6 +83,9 @@
                         <label for="pais">Pais</label>
                         <p-dropdown [options]="paises" optionLabel="nombre" optionValue="id" formControlName="pais"
                             inputId="pais" (onChange)="onChangePais()" optionDisabled="inactive" placeholder="Seleccione un pais"></p-dropdown>
+                        <div *ngIf="f.pais.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.pais.errors.required">Seleccione un país</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2" *ngIf="selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
@@ -72,6 +93,9 @@
                         <p-dropdown [options]="departamentos || []" optionLabel="nombre" optionValue="id"
                             formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()" placeholder="Seleccione un departamento">
                         </p-dropdown>
+                        <div *ngIf="f.departamento.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.departamento.errors.required">Seleccione un departamento</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-2" *ngIf="selectedDepartamento&&selectedPais&&paises[selectedPais-1].nombre == 'Uruguay'">
@@ -79,6 +103,9 @@
                         <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
                             inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
                         </p-dropdown>
+                        <div *ngIf="f.localidad.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.localidad.errors.required">Seleccione una localidad</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -89,12 +116,18 @@
                     <div class="p-field p-col-12 p-md-6">
                         <label for="direccion">Direccion</label>
                         <input id="direccion" type="text" required pInputText formControlName="direccion">
+                        <div *ngIf="f.direccion.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.direccion.errors.required">Ingrese una dirección</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerTelefono">Primer Telefono</label>
                         <p-inputNumber inputId="primerTelefono" [useGrouping]="false"
                         formControlName="primerTelefono"></p-inputNumber>
+                        <div *ngIf="f.primerTelefono.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.primerTelefono.errors.required">Ingrese un telefono</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -111,7 +144,7 @@
 
                     <div class="p-field-checkbox p-col-12 p-md-6">
                         <p-checkbox [binary]="true" id="noticias" formControlName="noticias"></p-checkbox>
-                        <label for="noticias"> Desea recibir noticias?</label>
+                        <label for="noticias"> Desea recibir noticias?</label>                       
                     </div>
 
 

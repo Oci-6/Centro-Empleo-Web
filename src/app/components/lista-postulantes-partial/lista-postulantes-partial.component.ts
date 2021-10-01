@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
@@ -44,8 +45,6 @@ export class ListaPostulantesPartialComponent implements OnChanges {
   ngOnChanges(): void {
     this.cols = [
     ];
-
-
     
   }
 
@@ -59,6 +58,7 @@ export class ListaPostulantesPartialComponent implements OnChanges {
     this.displayInfoPostulanteDialog = true;
   }
 
+
   filtrar(filtro: string){
     filtro;
     this.selectedSexo;
@@ -68,6 +68,7 @@ export class ListaPostulantesPartialComponent implements OnChanges {
     });
 
     
+
   }
 
 }

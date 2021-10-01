@@ -1,29 +1,120 @@
-<div class="p-grid p-jc-center p-mt-4">
+<!-- <div class="p-grid p-jc-center p-mt-4">
     <div class="p-col p-md-6 p-xl-4">
-        <p-card header="Solicitar acceso" styleClass="p-card-shadow p-p-3 p-text-center">
+        <p-card header="Registrarse como Empresa" styleClass="p-card-shadow p-p-3 p-text-center">
             <form [formGroup]="accesoForm" (ngSubmit)="ngOnSubmit()">
                 <div class="p-grid p-formgrid p-flex-column p-fluid">
                     <div class="p-col">
-                        <!-- <p-message *ngIf="!loginForm.valid" severity="error" text="Faltan Campos"></p-message> -->
+                        
                     </div>
+
                     <div class="p-col p-mt-4">
                         <span class="p-float-label">
-                            <input id="username" type="text" formControlName="username" pInputText>
-                            <label for="username">Email</label>
+                            <input id="rut" type="text" formControlName="rut" pInputText>
+                            <label for="rut">RUT</label>
                         </span>
                     </div>
+
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <input id="email" type="text" formControlName="email" pInputText>
+                            <label for="email">Email</label>
+                        </span>  
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.email.errors.required">Ingrese un
+                                email</small>
+                            <small class="p-error" *ngIf="f.email.errors.email">Por favor ingrese un
+                                email válido</small>
+                        </div>
+                    </div>
+
                     <div class="p-col p-mt-4">
                         <span class="p-float-label">
                             <p-password id="password" [toggleMask]="true" [feedback]="false" formControlName="password"></p-password>
                             <label for="password">Contraseña</label>
                         </span>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.password.errors.required">Por favor ingrese una
+                                contraseña</small>
+                            <small class="p-error" *ngIf="f.password.errors.minlength">La contraseña debe contener
+                                al menos 6 caracteres</small>
+                        </div>
                     </div>
                     <div class="p-col p-mt-4">
                         <span class="p-float-label">
-                            <p-password id="password" [toggleMask]="true" formControlName="password"></p-password>
-                            <label for="password">Repetir contraseña</label>
+                            <p-password id="confirmPassword" [toggleMask]="true" formControlName="confirmPassword"></p-password>
+                            <label for="confirmPassword">Repetir contraseña</label>
+                        </span>
+                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.confirmPassword.errors.required">Por favor confirme la
+                                contraseña</small>
+                            <small class="p-error" *ngIf="f.confirmPassword.errors.mustMatch">Las contraseñas deben
+                                coincidir</small>
+                        </div>
+                    </div>
+                    <div class="p-col p-mt-5">
+                        <p-button type="submit" label="Solicitar acceso" icon="pi pi-check"></p-button>
+                    </div>        
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div> -->
+
+<div class="p-grid p-jc-center p-mt-4">
+    <div class="p-col p-md-6 p-xl-4">
+        <p-card header="Registrarse como Empresa" styleClass="p-card-shadow p-p-3 p-text-center">
+            <form [formGroup]="datosAdicionalesForm" (ngSubmit)="ngOnSubmit2()">
+                <div class="p-grid p-formgrid p-flex-column p-fluid">
+                    
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <input id="razonSocial" type="text" formControlName="razonSocial" pInputText>
+                            <label for="razonSocial">Razon Social</label>
                         </span>
                     </div>
+
+                    <div class="p-col p-mt-4">
+                        
+                        <p-dropdown [options]="departamentos || []" optionLabel="nombre" optionValue="id"
+                            formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()" placeholder="Seleccione un departamento">
+                        </p-dropdown>
+                        <div *ngIf="g.departamento.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.departamento.errors.required">Seleccione un departamento</small>
+                        </div>
+                    </div>
+
+                    <div class="p-col p-mt-4" >
+                        
+                        <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
+                            inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
+                        </p-dropdown>
+                        <div *ngIf="g.localidad.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.localidad.errors.required">Seleccione una localidad</small>
+                        </div>
+                    </div>
+
+                    <div class="p-field-checkbox p-col p-mt-4">  
+                        <p-checkbox [binary]="true" id="mostrarNombreE" formControlName="mostrarNombreE">
+                        </p-checkbox>
+                        <label for="mostrarNombreE">Mostrar el nombre de la empresa?</label>
+                    </div>
+
+                    <div class="p-col p-mt-2">
+                        <span class="p-float-label">
+                            <input id="nombreAmostrar" type="text" formControlName="nombreAmostrar" pInputText>
+                            <label for="nombreAmostrar">Nombre a mostrar de la empresa</label>
+                        </span>
+                    </div>
+
+                    <div class="p-field p-col p-mt-4">
+                        <label for="telefono">Telefono de contacto</label>
+                        <p-inputNumber inputId="telefono" [useGrouping]="false"
+                        formControlName="telefono" placeholder="Telefono de contacto"></p-inputNumber>
+                        <div *ngIf="g.telefono.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.telefono.errors.required">Ingrese un telefono</small>
+                        </div>
+                    </div>
+                    
                     <div class="p-col p-mt-5">
                         <p-button type="submit" label="Solicitar acceso" icon="pi pi-check"></p-button>
                     </div>        

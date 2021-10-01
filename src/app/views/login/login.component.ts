@@ -21,12 +21,17 @@ export class LoginComponent implements OnInit {
 
     user: SocialUser = new SocialUser;
     loggedIn: boolean = false;
+    submitted = false;
+    
     constructor(
         private socialAuthService: SocialAuthService,
         private auth: AuthService,
         private messageService: MessageService, private router: Router) { }
 
     ngOnSubmit() {
+        
+        this.submitted = true;
+
         let user = new User();
         user.email = this.loginForm.controls.email.value;
         user.contraseña = this.loginForm.controls.contraseña.value;

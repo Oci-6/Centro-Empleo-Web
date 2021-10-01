@@ -42,3 +42,10 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
     }
   }
 
+/* .p-accordion p-accordiontab:last-child .p-accordion-header:not(.p-highlight) .p-accordion-header-link{
+    background-color: rgb(203, 252, 197) !important; 
+} */
+
+.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{
+    background-color: rgb(189, 253, 183) !important; 
+}

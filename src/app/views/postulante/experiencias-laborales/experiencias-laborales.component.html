@@ -26,12 +26,18 @@
                                             <label for="nombreEmpresa">Nombre de la Empresa</label>
                                             <input id="nombreEmpresa" type="text" required pInputText
                                                 [formControlName]="i+'nombreEmpresa'">
+                                            <div *ngIf="ExpLabForm.get(i+'nombreEmpresa')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'nombreEmpresa')?.errors?.required">Ingrese el nombre de la empresa</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="cargo">Cargo que ocupó</label>
                                             <input id="cargo" type="text" required pInputText
                                                 [formControlName]="i+'cargo'">
+                                            <div *ngIf="ExpLabForm.get(i+'cargo')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'cargo')?.errors?.required">Ingrese el cargo que ocupó en la empresa</small>
+                                            </div>    
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
@@ -39,6 +45,9 @@
                                             <p-dropdown [options]="areaRubro" [formControlName]="i+'areaRubro'"
                                                 placeholder="Seleccione un área o rubro">
                                             </p-dropdown>
+                                            <div *ngIf="ExpLabForm.get(i+'areaRubro')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'areaRubro')?.errors?.required">Seleccione el área o rubro de la empresa</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
@@ -47,12 +56,18 @@
                                                 [formControlName]="i+'nivelJerarquico'"
                                                 placeholder="Seleccione un nivel jerárquico">
                                             </p-dropdown>
+                                            <div *ngIf="ExpLabForm.get(i+'nivelJerarquico')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'nivelJerarquico')?.errors?.required">Seleccione el nivel jerárquico</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="tareas">Tareas Realizadas</label>
                                             <input id="tareas" type="text" required pInputText
                                                 [formControlName]="i+'tareas'">
+                                            <div *ngIf="ExpLabForm.get(i+'tareas')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'tareas')?.errors?.required">Ingrese las tareas realizadas</small>
+                                            </div>
                                         </div>
 
 
@@ -60,12 +75,18 @@
                                             <label for="fechaInicio">Desde</label>
                                             <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'"
                                                 dateFormat="dd/mm/yy"></p-calendar>
+                                            <div *ngIf="ExpLabForm.get(i+'fechaInicio')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'fechaInicio')?.errors?.required">Seleccione la fecha en la que comenzó a trabajar en la empresa</small>
+                                            </div>
                                         </span>
 
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="fechaFin">Hasta</label>
                                             <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'"
                                                 dateFormat="dd/mm/yy"></p-calendar>
+                                            <div *ngIf="ExpLabForm.get(i+'fechaFin')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'fechaFin')?.errors?.required">Seleccione la fecha hasta la que trabajó en la empresa</small>
+                                            </div>
                                         </span>
 
                                         <div class="p-field-checkbox p-col-12 p-md-6">
@@ -85,31 +106,46 @@
                                             <label for="nombreRef">Nombre</label>
                                             <input id="nombreRef" type="text" required pInputText
                                                 [formControlName]="i+'nombreRef'">
+                                            <div *ngIf="ExpLabForm.get(i+'nombreRef')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'nombreRef')?.errors?.required">Ingrese el nombre de la referencia laboral</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="apellidoRef">Apellido</label>
                                             <input id="apellidoRef" type="text" required pInputText
                                                 [formControlName]="i+'apellidoRef'">
+                                            <div *ngIf="ExpLabForm.get(i+'apellidoRef')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'apellidoRef')?.errors?.required">Ingrese el apellido de la referencia laboral</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="cargoRef">Cargo</label>
                                             <input id="cargoRef" type="text" required pInputText
                                                 [formControlName]="i+'cargoRef'">
+                                            <div *ngIf="ExpLabForm.get(i+'cargoRef')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'cargoRef')?.errors?.required">Ingrese el cargo de la referencia laboral</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="telefonoRef">Telefono</label>
-
                                             <p-inputNumber inputId="telefonoRef" [useGrouping]="false"
                                                 [formControlName]="i+'telefonoRef'"></p-inputNumber>
+                                            <div *ngIf="ExpLabForm.get(i+'telefonoRef')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'telefonoRef')?.errors?.required">Ingrese el teléfono de la referencia laboral</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="emailRef">Email</label>
                                             <input id="emailRef" type="text" required pInputText
                                                 [formControlName]="i+'emailRef'">
+                                            <div *ngIf="ExpLabForm.get(i+'emailRef')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ExpLabForm.get(i+'emailRef')?.errors?.required">Ingrese el email de la referencia laboral</small>
+                                                <small class="p-error" id="username-help" *ngIf="ExpLabForm.get(i+'emailRef')?.errors?.email">Por favor ingrese un email válido</small>
+                                            </div>
                                         </div>
 
 

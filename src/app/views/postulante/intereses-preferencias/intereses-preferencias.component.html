@@ -75,16 +75,25 @@
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="puestoPref">Puesto Preferido</label>
                                             <input id="puestoPref" type="text" required pInputText [formControlName]="i+'puestoPref'">
+                                            <div *ngIf="PrefLabForm.get(i+'puestoPref')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PrefLabForm.get(i+'puestoPref')?.errors?.required">Ingrese puesto preferido</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="areaInteresL">Área de interés laboral</label>
                                             <p-dropdown [options]="areaInteresL" [formControlName]="i+'areaInteresL'" placeholder="Seleccione un área de interés laboral"></p-dropdown>
+                                            <div *ngIf="PrefLabForm.get(i+'areaInteresL')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PrefLabForm.get(i+'areaInteresL')?.errors?.required">Seleccione área de interés laboral</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="aspSalarial">Aspiración salarial nominal</label>
                                             <p-inputNumber mode="decimal" inputId="aspSalarial" [useGrouping]="false" [formControlName]="i+'aspSalarial'"></p-inputNumber>
+                                            <div *ngIf="PrefLabForm.get(i+'aspSalarial')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PrefLabForm.get(i+'aspSalarial')?.errors?.required">Ingrese aspiración salarial nominal</small>
+                                            </div>
                                         </div>
 
                                         <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->

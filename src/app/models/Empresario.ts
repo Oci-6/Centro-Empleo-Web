@@ -1,19 +1,32 @@
+import { Localidad } from "./Localidad";
 import { Oferta } from "./Oferta"
+import { User } from "./User";
 
-export class Empresario {
+export class Empresario extends User{
 
     rut?: number | undefined;
-
 
     razonSocial?: string | undefined;
 
     estado?: boolean | undefined;
 
-
     fechaExpiracion?: Date | undefined;
 
     ofertas?: Oferta[] | undefined;
 
+    email?: string | undefined;
 
-constructor(){ }
+    telefono?: string | undefined;
+
+    nombreAmostrar?: string | undefined;
+
+    mostrarNombreE?: boolean | undefined;
+
+    localidad?: Localidad | undefined;
+
+
+constructor(){
+    super();
 }
+}
+

@@ -81,14 +81,14 @@ export class EducacionFormacionComponent implements OnInit {
       this.educacionFormacionForm = new FormGroup({
         nivelEducativo: new FormControl('', [Validators.required]),
         estadoNE: new FormControl('', [Validators.required]),
-        orientacionNE: new FormControl('', [Validators.required]),
+        orientacionNE: new FormControl(''),
       });
 
       this.getInfoPostulante(this.postulanteId);
 
     }
   }
-    async ngOnSubmit() {
+    async ngOnSubmit(): Promise<boolean> {
       try {
       let postulante = new Postulante();
       postulante.id = this.postulanteId;
@@ -160,10 +160,10 @@ export class EducacionFormacionComponent implements OnInit {
       
         
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-        this.submitted = true;
+        return true;
       } catch (error) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-        this.submitted = false;
+        return false;
       }
 
     }
@@ -231,7 +231,7 @@ export class EducacionFormacionComponent implements OnInit {
             });
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'id', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
-            IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('', Validators.required)),
+            IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('')),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
@@ -268,6 +268,8 @@ export class EducacionFormacionComponent implements OnInit {
   get IdiomasArreglo() {
     return this.agregarIdiomaForm.get('IdiomasArreglo') as FormArray;
   }
+
+  get f() { return this.educacionFormacionForm.controls; }
 
   //Add FormGroups a los arreglos
   addCapFor() {
@@ -334,9 +336,9 @@ export class EducacionFormacionComponent implements OnInit {
   //Cambiar página del steper
   
   async nextPage() {
+    this.submitted = true;
     if(this.educacionFormacionForm.valid&&this.agregarIdiomaForm.valid&&this.capacitacionFormacionForm.valid&&this.conocimientosInformaticosForm.valid){
-      await this.ngOnSubmit();
-      if (this.submitted) {
+      if (await this.ngOnSubmit()) {
       this.router.navigate(['formulario/experienciaLaboral']);
       }
     }else{

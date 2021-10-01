@@ -60,7 +60,7 @@ export class InteresesPreferenciasComponent implements OnInit {
 
   }
 
-  async ngOnSubmit() {
+  async ngOnSubmit() : Promise<boolean>{
     try{
     //Formulario normal
     let postulante = new Postulante();
@@ -96,10 +96,10 @@ export class InteresesPreferenciasComponent implements OnInit {
     });
 
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      this.submitted = true;
+      return true;
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-      this.submitted = false;
+      return false;
     }
 
     
@@ -161,14 +161,14 @@ export class InteresesPreferenciasComponent implements OnInit {
   //Cambiar página del steper
   
   async nextPage() {
+    this.submitted = true;
     if(this.JornadaPreferidaForm.controls.jIndiferente.value==true || this.JornadaPreferidaForm.controls.jCompleta.value==true 
       || this.JornadaPreferidaForm.controls.jMtManiana.value==true || this.JornadaPreferidaForm.controls.jMtTarde.value==true 
       || this.JornadaPreferidaForm.controls.jMtNoche.value==true){
         this.checked=true;
       }
     if(this.JornadaPreferidaForm.valid&&this.preferenciaLaboralForm.valid&&this.checked){
-      await this.ngOnSubmit();
-      if (this.submitted) {
+      if (await this.ngOnSubmit()) {
       this.router.navigate(['formulario/cv']);
       }
     }else{

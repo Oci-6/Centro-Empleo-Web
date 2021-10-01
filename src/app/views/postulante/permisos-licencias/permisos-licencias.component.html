@@ -26,18 +26,27 @@
                                             <label for="tipoDocumento">Tipo de documento</label>
                                             <p-dropdown [options]="tipoDocumento" [formControlName]="i+'tipoDocumento'" placeholder="Seleccione un tipo de documento"> 
                                             </p-dropdown>
+                                            <div *ngIf="PermLicForm.get(i+'tipoDocumento')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PermLicForm.get(i+'tipoDocumento')?.errors?.required">Seleccione el tipo de documento</small>
+                                            </div>
                                         </div>
 
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="vigencia">Vigencia</label>
                                             <p-calendar inputId="vigencia" [formControlName]="i+'vigencia'"
                                                 dateFormat="dd/mm/yy"></p-calendar>
+                                            <div *ngIf="PermLicForm.get(i+'vigencia')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PermLicForm.get(i+'vigencia')?.errors?.required">Seleccione la fecha de vigencia del documento</small>
+                                            </div>
                                         </span>
                                         
                                         <div class="p-field p-col-12 p-md-6" *ngIf="tipoDocumentoEspecificacion(i,PermLicForm)">
                                             <label for="especificacion">Especificacion</label>
                                             <input id="especificacion" type="text" required pInputText
                                                 [formControlName]="i+'especificacion'">
+                                            <div *ngIf="PermLicForm.get(i+'especificacion')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="PermLicForm.get(i+'especificacion')?.errors?.required">Ingrese la especificación del documento</small>
+                                            </div>
                                         </div>
 
                                         <!-- <button pButton pRipple type="button" class="p-button-rounded" (onClick)="deleteCapFor(i)" icon="pi pi-trash"></button> -->

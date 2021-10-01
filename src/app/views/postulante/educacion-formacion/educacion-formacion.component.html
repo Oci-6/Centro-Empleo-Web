@@ -21,12 +21,18 @@
                     <div class="p-field p-col-12 p-md-6">
                         <label for="nivelEducativo">Indique el máximo nivel educativo alcanzado</label>
                         <p-dropdown [options]="nivelEducativo" formControlName="nivelEducativo" placeholder="Seleccione un nivel educativo" (onChange)="onChangeNivelE()"></p-dropdown>
+                        <div *ngIf="f.nivelEducativo.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.nivelEducativo.errors.required">Seleccione un nivel educativo</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="estadoNE">Estado</label>
                         <p-dropdown [options]="estadoNE" formControlName="estadoNE" placeholder="Seleccione un estado">
                         </p-dropdown>
+                        <div *ngIf="f.estadoNE.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="f.estadoNE.errors.required">Seleccione un estado para el nivel educativo</small>
+                        </div>
                     </div>
 
                     <div class="p-field p-col-12 p-md-6"
@@ -34,7 +40,7 @@
                         || selectedNE=='Magisterio - Profesorado'|| selectedNE=='Terciario no universitario'
                         || selectedNE=='Universitario'|| selectedNE=='Posgrado - Master - Doctorado'">
                         <label for="orientacionNE">Orientación del máximo nivel educativo alcanzado</label>
-                        <input id="orientacionNE" type="text" required pInputText formControlName="orientacionNE">
+                        <input id="orientacionNE" type="text" required pInputText formControlName="orientacionNE"> 
                     </div>
 
                 </div>
@@ -61,39 +67,61 @@
                                             <label for="nombreCurso">Nombre del Curso</label>
                                             <input id="nombreCurso" type="text" required pInputText
                                                 [formControlName]="i+'nombreCurso'">
+                                            <div *ngIf="CapForForm.get(i+'nombreCurso')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'nombreCurso')?.errors?.required">Ingrese un nombre del curso</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="areaT">Área temática</label>
                                             <p-dropdown [options]="areaT" [formControlName]="i+'areaT'" placeholder="Seleccione un área temática">
                                             </p-dropdown>
+                                            <div *ngIf="CapForForm.get(i+'areaT')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'areaT')?.errors?.required">Seleccione un área temática</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="institucion">Institución Educativa</label>
                                             <input id="institucion" type="text" required pInputText
                                                 [formControlName]="i+'institucion'">
+                                            <div *ngIf="CapForForm.get(i+'institucion')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'institucion')?.errors?.required">Ingrese una institución educativa</small>
+                                            </div>    
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="fechaInicio">Fecha de inicio</label>
                                             <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'" dateFormat="dd/mm/yy"></p-calendar>
+                                            <div *ngIf="CapForForm.get(i+'fechaInicio')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'fechaInicio')?.errors?.required">Seleccione una fecha de inicio</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="duracion">Duración</label>
                                             <p-inputNumber mode="decimal" inputId="duracion" [useGrouping]="false" [formControlName]="i+'duracion'"></p-inputNumber>
+                                            <div *ngIf="CapForForm.get(i+'duracion')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'duracion')?.errors?.required">Ingrese la duración del curso</small>
+                                            </div>
                                         </div>
+
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="duracion">Tipo de duración</label>
                                             <p-dropdown [options]="tipoDuracion" [formControlName]="i+'tipoDuracion'" placeholder="Seleccione un tipo de duración">
                                             </p-dropdown>
+                                            <div *ngIf="CapForForm.get(i+'tipoDuracion')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'tipoDuracion')?.errors?.required">Seleccione el tipo de duración del curso</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="estadoCurso">Estado del Curso</label>
                                             <p-dropdown [options]="estadoCurso" [formControlName]="i+'estadoCurso'" placeholder="Seleccione un estado del curso">
                                             </p-dropdown>
+                                            <div *ngIf="CapForForm.get(i+'estadoCurso')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="CapForForm.get(i+'estadoCurso')?.errors?.required">Seleccione el estado del curso</small>
+                                            </div>
                                         </div>
 
 
@@ -138,18 +166,27 @@
                                             <label for="nombreApp">Nombre de la Aplicación</label>
                                             <input id="nombreApp" type="text" required pInputText
                                                 [formControlName]="i+'nombreApp'">
+                                            <div *ngIf="ConIForm.get(i+'nombreApp')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ConIForm.get(i+'nombreApp')?.errors?.required">Ingrese el nombre de la aplicación</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="categoriaCI">Categoria</label>
                                             <p-dropdown [options]="categoriaCI" [formControlName]="i+'categoriaCI'" placeholder="Seleccione una categoria">
                                             </p-dropdown>
+                                            <div *ngIf="ConIForm.get(i+'categoriaCI')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ConIForm.get(i+'categoriaCI')?.errors?.required">Seleccione la categoria de la aplicación</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="nivelC">Nivel de Conocimiento</label>
                                             <p-dropdown [options]="nivelC" [formControlName]="i+'nivelC'" placeholder="Seleccione un nivel de conocimiento">
                                             </p-dropdown>
+                                            <div *ngIf="ConIForm.get(i+'nivelC')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="ConIForm.get(i+'nivelC')?.errors?.required">Seleccione el nivel de Conocimiento</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
@@ -190,6 +227,9 @@
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="idioma">Idioma</label>
                                             <p-dropdown [options]="idiomas" [formControlName]="i+'idioma'" placeholder="Seleccione un idioma"></p-dropdown>
+                                            <div *ngIf="IdiomaForm.get(i+'idioma')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="IdiomaForm.get(i+'idioma')?.errors?.required">Seleccione un idioma</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6" *ngIf="idiomaEspecificacion(i,IdiomaForm)">
@@ -202,24 +242,36 @@
                                             <label for="hablaConv">Habla / Conversación</label>
                                             <p-dropdown [options]="hablaConv" [formControlName]="i+'hablaConv'" placeholder="Seleccione un nivel">
                                             </p-dropdown>
+                                            <div *ngIf="IdiomaForm.get(i+'hablaConv')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="IdiomaForm.get(i+'hablaConv')?.errors?.required">Seleccione el nivel de Habla / Conversación</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="compAud">Comprensión Auditiva</label>
                                             <p-dropdown [options]="compAud" [formControlName]="i+'compAud'" placeholder="Seleccione un nivel">
                                             </p-dropdown>
+                                            <div *ngIf="IdiomaForm.get(i+'compAud')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="IdiomaForm.get(i+'compAud')?.errors?.required">Seleccione el nivel de Comprensión Auditiva</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="compLec">Comprensión Lectora</label>
                                             <p-dropdown [options]="compLec" [formControlName]="i+'compLec'" placeholder="Seleccione un nivel">
                                             </p-dropdown>
+                                            <div *ngIf="IdiomaForm.get(i+'compLec')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="IdiomaForm.get(i+'compLec')?.errors?.required">Seleccione el nivel de Comprensión Lectora</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
                                             <label for="escritura">Escritura</label>
                                             <p-dropdown [options]="escritura" [formControlName]="i+'escritura'" placeholder="Seleccione un nivel">
                                             </p-dropdown>
+                                            <div *ngIf="IdiomaForm.get(i+'escritura')?.errors&&submitted" class="invalid-feedback">
+                                                <small class="p-error" *ngIf="IdiomaForm.get(i+'escritura')?.errors?.required">Seleccione el nivel de Escritura</small>
+                                            </div>
                                         </div>
 
                                         <div class="p-field p-col-12 p-md-6">
