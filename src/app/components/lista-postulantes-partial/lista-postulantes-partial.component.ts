@@ -6,7 +6,7 @@ import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
 import { Output, EventEmitter } from '@angular/core';
-import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-lista-postulantes-partial',

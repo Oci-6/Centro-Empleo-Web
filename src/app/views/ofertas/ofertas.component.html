@@ -23,7 +23,7 @@
                 <ng-template pTemplate="subtitle">
                     {{oferta.empresa?.razonSocial}}
                 </ng-template>
-                <p class="descripcion">{{oferta.descripcion}} </p>
+                <!-- <p class="descripcion">{{oferta.descripcion}} </p> -->
                 <ng-template pTemplate="footer">
                     <button pButton pRipple type="button" label="Detalles" *ngIf="oferta.id"
                         [routerLink]="oferta.id.toString()"
@@ -31,7 +31,6 @@
                 </ng-template>
             </p-card>
         </div>
-
     </div>
 
     <ng-template pTemplate="footer">

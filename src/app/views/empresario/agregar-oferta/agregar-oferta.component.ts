@@ -44,7 +44,7 @@ export class AgregarOfertaComponent implements OnInit {
     let oferta = new Oferta();
 
     oferta.titulo = this.ofertaForm.controls.titulo.value;
-    oferta.descripcion = this.ofertaForm.controls.descripcion.value;
+    // oferta.descripcion = this.ofertaForm.controls.descripcion.value;
     oferta.fechaCierre = moment(this.ofertaForm.controls.fechaCierre.value, 'MM-DD-YYYY').toDate()
 
     if(this.idEmpresa){

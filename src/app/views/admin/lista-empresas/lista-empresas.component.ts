@@ -59,8 +59,9 @@ export class ListaEmpresasComponent implements OnInit {
 
   ngOnSubmitPublicar(): void {
     let newOferta: Oferta = {
-      titulo: this.PublicarComoEmpresaForm.controls.titulo.value,
-      descripcion: this.PublicarComoEmpresaForm.controls.descripcion.value,
+      // titulo: this.PublicarComoEmpresaForm.controls.titulo.value,
+
+      // descripcion: this.PublicarComoEmpresaForm.controls.descripcion.value,
     }
 
     this.ofertaService.agregarOferta(newOferta).subscribe(
