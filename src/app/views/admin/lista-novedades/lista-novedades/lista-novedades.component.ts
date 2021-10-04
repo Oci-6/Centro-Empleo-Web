@@ -22,10 +22,13 @@ export class ListaNovedadesComponent implements OnInit {
 
   novedades: Novedad[] = [];
 
-  PublicarComoNovedadForm: FormGroup = new FormGroup({});
+  PublicarNovedadForm: FormGroup = new FormGroup({});
 
   displayVerDetalleDialog: boolean = false;
   displayCompartirDialog: boolean = false;
+  displayFormularioNovedadDialog: boolean = false;
+  public novedadForm: FormGroup = new FormGroup({});
+  submitted = false;
 
   constructor(
     private messageService: MessageService,
@@ -40,6 +43,32 @@ export class ListaNovedadesComponent implements OnInit {
     );
   }
 
+
+  ngOnSubmit() {
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.novedadForm.invalid) {
+      return;
+    }
+    let novedad = new Novedad();
+    novedad.titulo = this.novedadForm.controls.titulo.value;
+    novedad.contenido = this.novedadForm.controls.contenido.value;
+
+    this.novedadService.crearNovedad(novedad).subscribe(
+      response => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad publicada correctamente' });
+
+        //this.router.navigate(['/login']);
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al publicar la novedad' });
+      }
+    );
+  }
+  
+
   ngOnInit(): void {
 
     this.getNovedades();
@@ -47,33 +76,37 @@ export class ListaNovedadesComponent implements OnInit {
     this.cols = [
       { field: 'titulo', header: 'Titulo' },
       { field: 'contenido', header: 'Contenido' },
+      { field: 'imagen', header: 'Imagen' },
+
 
     ];
-/*
+
+    /*
+
     this.PublicarComoNovedadForm = new FormGroup({
       titulo: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
     })
 */
   }
-/*
   ngOnSubmitPublicar(): void {
-    let newOferta: Oferta = {
-      titulo: this.PublicarComoEmpresaForm.controls.titulo.value,
-      descripcion: this.PublicarComoEmpresaForm.controls.descripcion.value,
+    let newNovedad: Novedad = {
+      titulo: this.PublicarNovedadForm.controls.titulo.value,
+      contenido: this.PublicarNovedadForm.controls.contenido.value,
     }
 
-    this.ofertaService.agregarOferta(newOferta).subscribe(
+    this.novedadService.crearNovedad(newNovedad).subscribe(
       result => {
-        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Oferta creada exitosamente' })
-        this.getEmpresas();
-        this.PublicarComoEmpresaForm.reset();
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Novedad creada exitosamente' })
+        this.PublicarNovedadForm.reset();
       },
       error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
     );
+
+
+    
       
   }
-*/
   verDetalle(novedad:Novedad) {
     this.selectedNovedad = novedad;
     this.displayVerDetalleDialog = true;
@@ -85,8 +118,8 @@ export class ListaNovedadesComponent implements OnInit {
   }
 
   publicarNovedad() {
-    // this.selectedNovedad = novedad;
-    // this.displayHabilitarEmpresaDialog = true;
+     this.selectedNovedad;
+     this.displayFormularioNovedadDialog = true;
    }
 
 
