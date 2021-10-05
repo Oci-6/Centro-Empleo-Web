@@ -22,7 +22,6 @@ export class ListaNovedadesComponent implements OnInit {
 
   novedades: Novedad[] = [];
 
-  PublicarNovedadForm: FormGroup = new FormGroup({});
 
   displayVerDetalleDialog: boolean = false;
   displayCompartirDialog: boolean = false;
@@ -47,7 +46,6 @@ export class ListaNovedadesComponent implements OnInit {
   ngOnSubmit() {
 
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.novedadForm.invalid) {
       return;
@@ -56,6 +54,7 @@ export class ListaNovedadesComponent implements OnInit {
     novedad.titulo = this.novedadForm.controls.titulo.value;
     novedad.contenido = this.novedadForm.controls.contenido.value;
 
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'JAJAJA' });
     this.novedadService.crearNovedad(novedad).subscribe(
       response => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad publicada correctamente' });
@@ -89,16 +88,19 @@ export class ListaNovedadesComponent implements OnInit {
     })
 */
   }
+
+  get f() { return this.novedadForm.controls; }
+
   ngOnSubmitPublicar(): void {
     let newNovedad: Novedad = {
-      titulo: this.PublicarNovedadForm.controls.titulo.value,
-      contenido: this.PublicarNovedadForm.controls.contenido.value,
+      titulo: this.novedadForm.controls.titulo.value,
+      contenido: this.novedadForm.controls.contenido.value,
     }
 
     this.novedadService.crearNovedad(newNovedad).subscribe(
       result => {
         this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Novedad creada exitosamente' })
-        this.PublicarNovedadForm.reset();
+        this.novedadForm.reset();
       },
       error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
     );
