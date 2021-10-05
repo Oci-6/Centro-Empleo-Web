@@ -43,7 +43,7 @@ export class InteresesPreferenciasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.postulanteId = this.authService.getUser();
+    this.postulanteId = this.authService.getUser().id;
     if (this.postulanteId) {
 
       this.JornadaPreferidaForm = new FormGroup({

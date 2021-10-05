@@ -43,7 +43,7 @@ export class DetalleOfertaComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No existe oferta con tal id' });
         }
         if (result&&this.postulante.tipo === "Postulante") {
-          this.postulado = this.oferta.postulantes?.find(element => element.id === this.postulante.usuario) != undefined;
+          this.postulado = this.oferta.postulantes?.find(element => element.id === this.postulante.usuario.id) != undefined;
         }
         
         

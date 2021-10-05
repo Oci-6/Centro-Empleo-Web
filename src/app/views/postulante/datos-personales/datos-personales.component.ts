@@ -27,7 +27,7 @@ export class DatosPersonalesComponent implements OnInit {
   public paises: Pais[] = [];
   public departamentos: Departamento[] | undefined = [];
   public localidades: Localidad[] | undefined = [];
-  
+
   sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
 
   selectedSexo: string | undefined;
@@ -71,7 +71,7 @@ export class DatosPersonalesComponent implements OnInit {
   ngOnInit(): void {
 
     // Route params
-    this.postulanteId = this.authService.getUser();
+    this.postulanteId = this.authService.getUser().id;
     if (this.postulanteId) {
       this.datosPersonalesForm = new FormGroup({
         tipoDocumento: new FormControl('', [Validators.required]),
@@ -118,16 +118,16 @@ export class DatosPersonalesComponent implements OnInit {
         // console.log(this.postulante);
         this.selectedPais = result.pais?.id;
         if (result.pais?.departamentos) this.departamentos = result.pais?.departamentos;
-        this.departamentos?.sort((a:any, b:any) => a.id - b.id)
-        if (this.departamentos&&this.selectedDepartamento&&result.localidad?.departamento?.nombre) this.departamentos[this.selectedDepartamento-1] = result.localidad?.departamento;
-        if(result.localidad) this.selectedLocalidad = result.localidad.id;
+        this.departamentos?.sort((a: any, b: any) => a.id - b.id)
+        if (this.departamentos && this.selectedDepartamento && result.localidad?.departamento?.nombre) this.departamentos[this.selectedDepartamento - 1] = result.localidad?.departamento;
+        if (result.localidad) this.selectedLocalidad = result.localidad.id;
         this.selectedFechaN = this.convertirFecha(result.fechaNacimiento);
-        if(result.localidad?.departamento)this.selectedDepartamento = result.localidad.departamento.id;
+        if (result.localidad?.departamento) this.selectedDepartamento = result.localidad.departamento.id;
         // console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
         this.getLocalidades(this.selectedDepartamento);
-        if(this.postulante.fechaNacimiento){
+        if (this.postulante.fechaNacimiento) {
           this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
         }
         this.datosPersonalesForm.controls["pais"].setValue(this.selectedPais);
@@ -145,11 +145,11 @@ export class DatosPersonalesComponent implements OnInit {
         this.datosPersonalesForm.controls["segundoTelefono"].setValue(this.postulante.segundoTelefono);
         this.datosPersonalesForm.controls["noticias"].setValue(this.postulante.recibirOfertas);
         this.datosPersonalesForm.controls["localidad"].setValue(this.postulante.localidad?.id);
-        
+
         console.log(this.postulante);
         // console.log(this.selectedLocalidad);
         // console.log(this.selectedPais);
-        
+
 
         //  if(result.pais?.nombre=='Uruguay'){
         //    if(result.localidad) this.selectedLocalidad = result.localidad;
@@ -168,7 +168,7 @@ export class DatosPersonalesComponent implements OnInit {
     this.paisService.getLocalidades(departamento).subscribe(
       result => {
         this.localidades = result;
-        this.localidades?.sort((a:any, b:any) => a.id - b.id)
+        this.localidades?.sort((a: any, b: any) => a.id - b.id)
 
       },
     );
@@ -191,27 +191,27 @@ export class DatosPersonalesComponent implements OnInit {
   onChangePais() {
 
     this.selectedPais = this.datosPersonalesForm.controls.pais.value;
-    if(this.selectedPais&&this.paises[this.selectedPais-1].departamentos) this.departamentos = this.paises[this.selectedPais-1].departamentos;
-    this.departamentos?.sort((a:any, b:any) => a.id - b.id)
+    if (this.selectedPais && this.paises[this.selectedPais - 1].departamentos) this.departamentos = this.paises[this.selectedPais - 1].departamentos;
+    this.departamentos?.sort((a: any, b: any) => a.id - b.id)
     // console.log(this.departamentos);
-    
-    
+
+
   }
 
   onChangeDepartamento() {
     this.selectedDepartamento = this.datosPersonalesForm.controls.departamento.value;
-    if (this.selectedDepartamento&&this.departamentos) this.localidades = this.departamentos[this.selectedDepartamento-1].localidades;
-    if (this.selectedDepartamento&&this.departamentos) console.log(this.departamentos[this.selectedDepartamento-1]);
-    this.localidades?.sort((a:any, b:any) => a.id - b.id);
+    if (this.selectedDepartamento && this.departamentos) this.localidades = this.departamentos[this.selectedDepartamento - 1].localidades;
+    if (this.selectedDepartamento && this.departamentos) console.log(this.departamentos[this.selectedDepartamento - 1]);
+    this.localidades?.sort((a: any, b: any) => a.id - b.id);
 
-    
+
     // console.log(this.selectedDepartamento);
 
-    
+
     // console.log(this.selectedPais?.departamentos);
   }
 
-  async ngOnSubmit() : Promise<boolean>{
+  async ngOnSubmit(): Promise<boolean> {
 
     this.sumi = true;
 
@@ -228,12 +228,12 @@ export class DatosPersonalesComponent implements OnInit {
     // postulante.pais = this.datosPersonalesForm.controls.pais.value;
     postulante.paisId = this.datosPersonalesForm.controls.pais.value;
     // console.log(this.selectedLocalidad);
-    this.departamentos?.sort((a:any, b:any) => a.id - b.id)
-    if (this.selectedPais&&this.paises[this.selectedPais-1].nombre == "Uruguay") {
+    this.departamentos?.sort((a: any, b: any) => a.id - b.id)
+    if (this.selectedPais && this.paises[this.selectedPais - 1].nombre == "Uruguay") {
       // console.log('asdadasda');
       postulante.localidadId = this.datosPersonalesForm.controls.localidad.value;
       // console.log(postulante.localidadId);
-      
+
       // let localidad: number | undefined = this.selectedLocalidad;
       // if(localidad)console.log(localidad);
       // if(localidad) postulante.localidadId = localidad;
@@ -256,32 +256,36 @@ export class DatosPersonalesComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
       return false;
     }
-    
-      // response => {
 
-      //   this.datosPersonalesForm.reset;
-      //   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
-      //   this.submitted = true;
-      // },
-      // error => {
-      //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
-      //   this.submitted = false;
-      // }
+    // response => {
+
+    //   this.datosPersonalesForm.reset;
+    //   this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+    //   this.submitted = true;
+    // },
+    // error => {
+    //   this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear la clase' });
+    //   this.submitted = false;
+    // }
     // );
-    
+
 
   }
 
   async nextPage() {
     this.submitted = true;
-    if(this.datosPersonalesForm.valid){
-      if (await this.ngOnSubmit()) {
-      this.router.navigate(['formulario/educacionFormacion']);
+    if (this.datosPersonalesForm.valid) {
+      if (this.datosPersonalesForm.touched) {
+        if (await this.ngOnSubmit()) {
+          this.router.navigate(['formulario/educacionFormacion']);
+        }
+      }else{
+        this.router.navigate(['formulario/educacionFormacion']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 

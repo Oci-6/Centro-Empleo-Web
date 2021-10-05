@@ -40,7 +40,7 @@ export class PermisosLicenciasComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.postulanteId = this.authService.getUser();
+    this.postulanteId = this.authService.getUser().id;
     if (this.postulanteId) {
       this.getInfoPostulante(this.postulanteId);
     }

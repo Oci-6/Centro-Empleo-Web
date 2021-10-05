@@ -1,5 +1,6 @@
 import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/Auth/auth.service';
 
@@ -63,7 +64,7 @@ export class NavbarComponent implements OnInit {
 
         },
         {
-          label: 'LogOut',
+          label: 'Cerrar Sesión',
           icon: 'pi pi-sign-out',
           styleClass: 'mr-5',
           command: this.authService.logout
