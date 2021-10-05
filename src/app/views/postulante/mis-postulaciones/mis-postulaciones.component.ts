@@ -26,7 +26,7 @@ export class MisPostulacionesComponent implements OnInit {
     //   { field: 'fechaCierre', header: 'Fecha de cierre' },
     // ];
 
-    this.postulanteService.infoPostulante(this.authService.getAuth().usuario).subscribe(
+    this.postulanteService.infoPostulante(this.authService.getAuth().usuario.id).subscribe(
       response => {
         if (response.ofertas)
           this.ofertas = response.ofertas

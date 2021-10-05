@@ -24,16 +24,20 @@ export class DatosPostulanteComponent implements OnChanges {
 
   perfilPropio: boolean = false;
 
-  postulante: Postulante | undefined;
+  postulante: Postulante = {};
   fotoPerfil: string = "";
   cv: string = "";
+  visibilidad: boolean = false;
+  file: File | undefined;
 
   ngOnChanges() {
-    this.perfilPropio = (this.authService.getAuth().tipo == "Postulante" && this.authService.getAuth().usuario == this.id);
+    this.perfilPropio = (this.authService.getAuth().tipo == "Postulante" && this.authService.getAuth().usuario.id == this.id);
     if (this.id)
       this.postulanteService.infoPostulante(this.id).subscribe(
         (response) => {
           this.postulante = response;
+          if(this.postulante.visibilidad)
+            this.visibilidad = this.postulante.visibilidad
           this.getImagen();
           this.getCV();
         },
@@ -65,11 +69,40 @@ export class DatosPostulanteComponent implements OnChanges {
     }
   }
 
-  onUpload() {
-    this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
-    let url = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([url]));
+
+  onFileSelected(event: any) {
+
+    const file: File = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      this.postulanteService.postFoto(formData).subscribe(
+        response => {
+          this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
+          let url = this.router.url;
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+            this.router.navigate([url]));
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
+        }
+      );
+    }
+  }
+
+  onVisibilidad(){
+    let post: Postulante = new Postulante();
+    post.id = this.postulante.id;
+    post.visibilidad = this.visibilidad
+    this.postulanteService.modificarPostulante(post).subscribe(
+      (response) => {
+
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
+      }
+    )
   }
 
   convertirFecha(fecha: Date | undefined) {

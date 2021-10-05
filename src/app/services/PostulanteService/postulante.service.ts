@@ -50,6 +50,11 @@ export class PostulanteService {
     return this.http.post<{message: string}>(this.URL+'/curriculum', formData);
 
   }
+  
+  postFoto(formData: FormData){
+    return this.http.post<{message: string}>(this.URL+'/foto', formData);
+
+  }
 
   //Capacitaciones y Cursos
   infoCapacitacion(id: number){

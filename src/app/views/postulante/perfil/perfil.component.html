@@ -1,7 +1,15 @@
     <p-card styleClass="p-card-shadow p-p-3 p-mt-4"> 
         <ng-template pTemplate="title">
-            Mi Perfil
+            <div class="p-grid p-ai-center p-vertical-container">
+                <div class="p-col-fixed">
+                    <span>Mi perfil</span>
+    
+                </div>
+                <div class="p-col">
+                    <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded" routerLink="/formulario/datosPersonales"></button>
+                </div>
+            </div>
         </ng-template>
 
-        <app-datos-postulante [id]="auth.usuario"></app-datos-postulante>
+        <app-datos-postulante [id]="auth.usuario.id"></app-datos-postulante>
     </p-card>

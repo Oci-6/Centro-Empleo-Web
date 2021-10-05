@@ -14,7 +14,6 @@ export class EmpresarioService {
 
   constructor(private http: HttpClient) { }
   
-  //Datos Personales
   registrarEmpresario(user: User){
     return this.http.post(this.URL + '/', user);
   }

@@ -36,7 +36,7 @@ export class CvPermisosLegalesComponent implements OnInit {
       terminosCondiciones: new FormControl('', [Validators.required])
     });
 
-    this.postulanteService.infoPostulante(this.user.usuario).subscribe(
+    this.postulanteService.infoPostulante(this.user.usuario.id).subscribe(
       (result) => {
         this.postulante = result;
       }

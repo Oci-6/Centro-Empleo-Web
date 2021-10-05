@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 
 @Injectable({
@@ -17,26 +18,27 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
-    window.location.reload();
+    window.location.href =
+      window.location.href.slice(0, window.location.href.indexOf('/', 7));
   }
 
-  getUser():number | undefined{
+  getUser(): any | undefined {
     let aux = localStorage.getItem("auth");
-    if(aux){
-      return JSON.parse(aux).usuario; 
+    if (aux) {
+      return JSON.parse(aux).usuario;
     }
     return undefined;
   }
 
-  getAuth():any | undefined{
+  getAuth(): any | undefined {
     let aux = localStorage.getItem("auth");
-    if(aux){
-      return JSON.parse(aux); 
+    if (aux) {
+      return JSON.parse(aux);
     }
     return undefined;
   }
 
-  signInWithSocial(user: User){
+  signInWithSocial(user: User) {
     return this.http.post(this.URL + '/signInSocial', user);
   }
 
