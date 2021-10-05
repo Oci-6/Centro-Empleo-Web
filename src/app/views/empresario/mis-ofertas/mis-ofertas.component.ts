@@ -26,9 +26,8 @@ export class MisOfertasComponent implements OnInit {
   selectedOferta: Oferta | undefined
   ngOnInit(): void {
     this.cols = [
-      { field: 'titulo', header: 'Título' },
-      { field: 'descripcion', header: 'Descripción' },
-      { field: 'fechaCreacion', header: 'Fecha Creación' },
+      { field: 'vacante', header: 'Vacante' },
+      { field: 'funcionesTareas', header: 'Funciones y Tareas' },
       { field: 'fechaCierre', header: 'Fecha Cierre' },
     ];
 
@@ -56,6 +55,10 @@ export class MisOfertasComponent implements OnInit {
     if(oferta.postulantes) this.postulantes = oferta.postulantes;
     this.selectedOferta = oferta;
     this.displayPostulantesDialog = true;
+  }
+
+  convertirFecha(fecha: Date) {
+    return moment(fecha).format("DD-MM-YYYY");
   }
 
 }

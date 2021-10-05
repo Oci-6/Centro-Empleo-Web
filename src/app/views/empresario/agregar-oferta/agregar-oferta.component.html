@@ -1,27 +1,100 @@
 <p-card header="Agregar oferta" styleClass="p-card-shadow p-p-3 p-mt-4">
-    <form [formGroup]="ofertaForm" (ngSubmit)="ngOnSubmit()">
+    <form [formGroup]="ofertaForm">
         <div class=" p-fluid p-formgrid p-grid">
 
             <div class="p-field p-col-12 p-md-6">
-                <label for="titulo">Título</label>
-                <input id="titulo" type="text" pInputText formControlName="titulo">
+                <label for="vacante">Vacante o Puesto ofrecido</label>
+                <input id="vacante" type="text" pInputText formControlName="vacante"
+                    placeholder="Nombre de la vacante que se solicita.">
+                <div *ngIf="f.vacante.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.vacante.errors.required">Ingrese la vacante o puesto
+                        ofrecido</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="areaTrabajo">Área de Trabajo</label>
+                <p-dropdown [options]="areaTrabajo" formControlName="areaTrabajo"
+                    placeholder="Seleccione un área de trabajo">
+                </p-dropdown>
+                <div *ngIf="f.areaTrabajo.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.areaTrabajo.errors.required">Seleccione el área de trabajo para la
+                        oferta</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="funcionesTareas">Funciones y tareas del puesto</label>
+                <input id="funcionesTareas" type="text" pInputText formControlName="funcionesTareas"
+                    placeholder="Funciones y tareas a realizar">
+                <div *ngIf="f.funcionesTareas.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.funcionesTareas.errors.required">Ingrese las vacante funciones y
+                        tareas del puesto</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="requisitosExcluyentes">Requisitos excluyentes</label>
+                <input id="requisitosExcluyentes" type="text" pInputText formControlName="requisitosExcluyentes"
+                    placeholder="Requisitos que debe cumplir el postulante para presentarse al llamado.">
+                <div *ngIf="f.requisitosExcluyentes.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.requisitosExcluyentes.errors.required">Ingrese requisitos
+                        excluyentes para el puesto</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="requisitosValorar">Requisitos a valorar (Opcional)</label>
+                <input id="requisitosValorar" type="text" pInputText formControlName="requisitosValorar"
+                    placeholder="Requisitos que se valorarán para el puesto pero que no son excluyentes.">
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="horario">Horario de trabajo</label>
+                <input id="horario" type="text" pInputText formControlName="horario"
+                    placeholder="Días y horario del trabajo ofrecido.">
+                <div *ngIf="f.horario.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.horario.errors.required">Ingrese el horario para el puesto</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label>Rango salarial (Opcional)</label>
+                <div class="p-formgroup-inline">
+                    <div class="p-field">
+                        <p-inputNumber inputId="salarioDesde" [useGrouping]="false" formControlName="salarioDesde"
+                            placeholder="Desde"></p-inputNumber>
+                    </div>
+                    <div class="p-field">
+                        <p-inputNumber inputId="salarioHasta" [useGrouping]="false" formControlName="salarioHasta"
+                            placeholder="Hasta"></p-inputNumber>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="lugar">Lugar de Trabajo</label>
+                <input id="lugar" type="text" pInputText formControlName="lugar"
+                    placeholder="Lugar donde se desarrollará la actividad">
+                <div *ngIf="f.lugar.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.lugar.errors.required">Ingrese el lugar de trabajo</small>
+                </div>
             </div>
 
             <div class="p-field p-col-12 p-md-6">
                 <label for="fechaCierre">Fecha Cierre</label>
-                <p-calendar inputId="fechaCierre" [minDate]="today" [readonlyInput]="true" formControlName="fechaCierre" dateFormat="dd/mm/yy"></p-calendar>
+                <p-calendar inputId="fechaCierre" [minDate]="today" [readonlyInput]="true" formControlName="fechaCierre"
+                    dateFormat="dd/mm/yy"></p-calendar>
             </div>
-
-            <div class="p-field p-col-12">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" class="p-col-12" rows="10" pInputTextarea
-                    formControlName="descripcion"></textarea>
-            </div>
-
-
-            <p-button [disabled]="!ofertaForm.valid" type="submit" label="Confirmar"></p-button>
-
 
         </div>
     </form>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid p-nogutter p-justify-end">
+            <p-button (onClick)="enviar()" type="submit" label="Confirmar"></p-button>
+        </div>
+    </ng-template>
+    
+
 </p-card>

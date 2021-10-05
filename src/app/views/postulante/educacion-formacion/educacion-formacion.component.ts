@@ -302,7 +302,7 @@ export class EducacionFormacionComponent implements OnInit {
     const IdiomaForm = this.fb.group({
     });
     IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('', Validators.required)),
+    IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('')),
     IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
     IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
     IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),

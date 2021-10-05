@@ -1,36 +1,54 @@
 <p-card *ngIf="oferta" styleClass="p-card-shadow p-p-3 p-mt-4">
     <ng-template pTemplate="title">
-        {{oferta.titulo}}
+        {{oferta.vacante}}
     </ng-template>
-    <ng-template pTemplate="subtitle">
-        {{oferta.empresa?.razonSocial}}
+    <ng-template pTemplate="subtitle" *ngIf="oferta.empresa?.visibilidad">
+        {{oferta.empresa?.nombreFantasia}}
     </ng-template>
     <div class="p-grid">
 
-        <div class="p-col-fixed">
+        <!-- <div class="p-col-fixed">
             <img alt="Card" class="imagen-oferta" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-        </div>
-        <div class="p-col">
+        </div> -->
+        <div class="p-col-12">
 
             <p-message *ngIf="ofertaAbierta()" severity="error" text="Oferta cerrada"></p-message>
-            <p>
-                
-                {{oferta.descripcion}}
-            </p>
+            <h4>Funciones y Tareas:</h4><p>{{oferta.funcionesTareas}}</p>
+        
+            
+            
         </div>
-       
 
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Área de trabajo:</h4><p>{{oferta.areaTrabajo}}</p>
+
+        </div>
+
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Requisitos excluyentes:</h4><p>{{oferta.requisitosExcluyentes}}</p>
+        </div>
+
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Requisitos a valorar:</h4><p>{{oferta.requisitosValorar}}</p>
+        </div>
+
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Horario:</h4><p>{{oferta.horario}}</p>
+        </div>
+
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Rango salarial:</h4><p>{{oferta.salarioDesde}} - {{oferta.salarioHasta}}</p>
+        </div>
+
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Lugar:</h4><p>{{oferta.lugar}}</p>
+        </div>
+        
     </div>
     <ng-template pTemplate="footer">
         <div class="p-grid p-nogutter p-justify-between">
             <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
-                    <label><strong>Fecha de publicacion:</strong> {{convertirFecha(oferta.fechaCreacion)}}</label>
-                </div>
-
-                <div class="p-field p-col-12 p-md-6">
-                    <label><strong>Fecha de cierre:</strong> {{convertirFecha(oferta.fechaCierre)}}</label>
-                </div>
+                <label><strong>Fecha de cierre:</strong> {{convertirFecha(oferta.fechaCierre)}}</label>
             </div>
             <p-button *ngIf="(this.postulante&&this.postulante.tipo=='Postulante'&&!this.postulado)||!this.postulante&&!ofertaAbierta()" label="Postularse" (click)="postularse()"></p-button>
             <button  pButton pRipple type="button" class="p-button-danger" *ngIf="this.postulado" [disabled]="true" label="Ya se encuentra postulado"></button>

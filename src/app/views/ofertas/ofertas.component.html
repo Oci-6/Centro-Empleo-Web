@@ -14,16 +14,17 @@
     <div class="p-grid">
         <div class="p-col-12 p-md-3 p-ai-stretch vertical-container" *ngFor="let oferta of ofertas">
             <p-card styleClass="p-card-shadow">
-                <ng-template pTemplate="header">
+                <!-- <ng-template pTemplate="header">
                     <img alt="Card" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
-                </ng-template>
+                </ng-template> -->
                 <ng-template pTemplate="title">
-                    <span class="titulo">{{oferta.titulo}}</span>
+                    <span class="titulo">{{oferta.vacante}}</span>
                 </ng-template>
-                <ng-template pTemplate="subtitle">
-                    {{oferta.empresa?.razonSocial}}
+                <ng-template pTemplate="subtitle" *ngIf="oferta.empresa?.visibilidad==true">
+                    {{oferta.empresa?.nombreFantasia}}
                 </ng-template>
-                <p class="descripcion">{{oferta.descripcion}} </p>
+                <p class="descripcion">Funciones y Tareas: {{oferta.funcionesTareas}}</p>
+                <p class="descripcion">Requisitos excluyentes: {{oferta.requisitosExcluyentes}}</p>
                 <ng-template pTemplate="footer">
                     <button pButton pRipple type="button" label="Detalles" *ngIf="oferta.id"
                         [routerLink]="oferta.id.toString()"
@@ -31,7 +32,6 @@
                 </ng-template>
             </p-card>
         </div>
-
     </div>
 
     <ng-template pTemplate="footer">

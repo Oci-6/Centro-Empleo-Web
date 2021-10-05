@@ -23,7 +23,7 @@ export class DetalleOfertaComponent implements OnInit {
     private postulanteService: PostulanteService
   ) { }
 
-  oferta: Oferta = {};
+  oferta: Oferta | undefined;
   postulante: any | undefined;
   postulado: boolean = false;
 
@@ -36,6 +36,8 @@ export class DetalleOfertaComponent implements OnInit {
     this.ofertasService.infoOferta(ofertaId).subscribe(
       result => {
         this.oferta = result;
+        console.log(this.oferta.empresa?.visibilidad);
+        
         if(!result){
           this.router.navigate(['ofertas']);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No existe oferta con tal id' });
@@ -55,13 +57,13 @@ export class DetalleOfertaComponent implements OnInit {
 
   ofertaAbierta(): boolean {
 
-    return moment(this.oferta.fechaCierre).isBefore(new Date());
+    return moment(this.oferta?.fechaCierre).isBefore(new Date());
   }
 
   postularse() {
     if (!this.postulante) this.router.navigate(['login']);
 
-    if (this.oferta.id&&this.postulante)
+    if (this.oferta?.id&&this.postulante)
       this.postulanteService.postularse(this.oferta.id).subscribe(
         response => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Postulado correctamente' });

@@ -18,9 +18,9 @@ export class Empresario extends User{
 
     telefono?: string | undefined;
 
-    nombreAmostrar?: string | undefined;
+    nombreFantasia?: string | undefined;
 
-    mostrarNombreE?: boolean | undefined;
+    visibilidad?: boolean | undefined;
 
     localidad?: Localidad | undefined;
 

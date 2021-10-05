@@ -25,7 +25,7 @@
             <tr>
                 <td *ngFor="let col of columns">
                     <span class="p-column-title">{{col.header}}</span>
-                    {{oferta[col.field]}}
+                    {{col.field!='fechaCierre'?oferta[col.field]:convertirFecha(oferta[col.field])}}
                 </td>
                 <td>
                     <span class="p-column-title"><strong>Estado:</strong></span>
@@ -44,7 +44,7 @@
     </p-table>
 </p-card>
 
-<p-dialog class="p-grid p-jc-center" *ngIf="selectedOferta" [header]="'Postulantes a: '+selectedOferta.titulo"
+<p-dialog class="p-grid p-jc-center" *ngIf="selectedOferta" [header]="'Postulantes a: '+selectedOferta.vacante"
     [(visible)]="displayPostulantesDialog" [style]="{height: '100%',width: '80%'}">
     <app-lista-postulantes-partial *ngIf="selectedOferta.postulantes" [postulantes]="selectedOferta.postulantes">
     </app-lista-postulantes-partial>

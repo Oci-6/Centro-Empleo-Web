@@ -63,6 +63,11 @@ export class MenuComponent implements OnInit {
       if (user.tipo === "Empresa") {
         this.items.push(
           {
+            label: 'Modificar información',
+            icon: 'pi pi-pw pi-pencil',
+            routerLink: 'datosAdicionales'
+          },
+          {
             label: 'Mis Ofertas Laborales',
             icon: 'pi pi-pw pi-book',
             routerLink: 'misOfertas'
