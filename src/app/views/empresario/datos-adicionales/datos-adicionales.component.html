@@ -1,0 +1,66 @@
+<div class="p-grid p-jc-center p-mt-4">
+    <div class="p-col p-md-6 p-xl-4">
+        <p-card header="Datos adicionales" styleClass="p-card-shadow p-p-3 p-text-center">
+            <form [formGroup]="datosAdicionalesForm" (ngSubmit)="ngOnSubmit()">
+                <div class="p-grid p-formgrid p-flex-column p-fluid">
+
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <input id="razonSocial" type="text" formControlName="razonSocial" pInputText>
+                            <label for="razonSocial">Razon Social</label>
+                        </span>
+                    </div>
+
+                    <div class="p-col p-mt-4">
+
+                        <p-dropdown [options]="departamentos || []" optionLabel="nombre" optionValue="id"
+                            formControlName="departamento" inputId="departamento" (onChange)="onChangeDepartamento()"
+                            placeholder="Seleccione un departamento">
+                        </p-dropdown>
+                        <div *ngIf="g.departamento.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.departamento.errors.required">Seleccione un
+                                departamento</small>
+                        </div>
+                    </div>
+
+                    <div class="p-col p-mt-4">
+
+                        <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
+                            inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
+                        </p-dropdown>
+                        <div *ngIf="g.localidad.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.localidad.errors.required">Seleccione una
+                                localidad</small>
+                        </div>
+                    </div>
+
+                    <div class="p-field-checkbox p-col p-mt-4">
+                        <p-checkbox [binary]="true" id="mostrarNombreE" formControlName="mostrarNombreE">
+                        </p-checkbox>
+                        <label for="mostrarNombreE">Mostrar el nombre de la empresa?</label>
+                    </div>
+
+                    <div class="p-col p-mt-4">
+                        <span class="p-float-label">
+                            <input id="nombreAmostrar" type="text" formControlName="nombreAmostrar" pInputText>
+                            <label for="nombreAmostrar">Nombre a mostrar de la empresa</label>
+                        </span>
+                    </div>
+
+                    <div class="p-field p-col p-mt-4">
+                        <label for="telefono">Telefono de contacto</label>
+                        <p-inputNumber inputId="telefono" [useGrouping]="false" formControlName="telefono"
+                            placeholder="Telefono de contacto"></p-inputNumber>
+                        <div *ngIf="g.telefono.errors&&submitted" class="invalid-feedback">
+                            <small class="p-error" *ngIf="g.telefono.errors.required">Ingrese un telefono</small>
+                        </div>
+                    </div>
+
+                    <div class="p-col p-mt-5">
+                        <p-button type="submit" label="Solicitar acceso" icon="pi pi-check"></p-button>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>

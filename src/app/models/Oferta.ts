@@ -5,9 +5,9 @@ import { Postulante } from "./Postulante"
 export class Oferta{
 
     id?: number | undefined;
-    titulo?: string | undefined;
     vacante?: string | undefined;
     areaTrabajo?: string | undefined;
+    funcionesTareas?: string | undefined;
     requisitosExcluyentes?: string | undefined;
     requisitosValorar?: string | undefined;
     horario?: string | undefined;
