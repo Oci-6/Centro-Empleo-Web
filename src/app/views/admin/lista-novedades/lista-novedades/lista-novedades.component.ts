@@ -32,9 +32,9 @@ export class ListaNovedadesComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private novedadService: NovedadService,
-    private ofertaService: OfertasService
   ) { }
 
+  
   getNovedades() {
     this.novedadService.getAll().subscribe( 
       response => this.novedades = response,
@@ -53,12 +53,11 @@ export class ListaNovedadesComponent implements OnInit {
     let novedad = new Novedad();
     novedad.titulo = this.novedadForm.controls.titulo.value;
     novedad.contenido = this.novedadForm.controls.contenido.value;
+    novedad.imagen = this.novedadForm.controls.imagen.value;
 
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'JAJAJA' });
     this.novedadService.crearNovedad(novedad).subscribe(
       response => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad publicada correctamente' });
-
         //this.router.navigate(['/login']);
       },
       error => {
@@ -75,11 +74,18 @@ export class ListaNovedadesComponent implements OnInit {
     this.cols = [
       { field: 'titulo', header: 'Titulo' },
       { field: 'contenido', header: 'Contenido' },
-      { field: 'imagen', header: 'Imagen' },
 
 
     ];
 
+    this.novedadForm = new FormGroup({
+      titulo: new FormControl('', [Validators.required]),
+      contenido: new FormControl('', [Validators.required]),
+      imagen: new FormControl('', [Validators.required]),
+
+    })
+
+    
     /*
 
     this.PublicarComoNovedadForm = new FormGroup({

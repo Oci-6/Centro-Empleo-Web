@@ -101,7 +101,7 @@
     [style]="{ width: '50vw' }" [baseZIndex]="10000">
       <div class="p-grid p-formgrid p-flex-column p-fluid">
         <div align="center">
-        <img src = "file:///C:/Users/Facu/Desktop/novedad.jpg" height="500px" width="500px">
+        <img src = {{selectedNovedad.imagen}} height="500px" width="500px">
     </div>
         <div >
             <strong> </strong> <br>
@@ -120,22 +120,24 @@
     <div class="p-col">
       <p-message *ngIf="message" severity="{{ message.type }}" text="{{ message.msg }}"></p-message>
     </div>
+    
     <div class="p-col p-mt-3">
       <span class="p-float-label">
-        <input id="titulo" type="text" formControlName="true" pInputText/>
+        <input id="titulo" type="text" formControlName="titulo" pInputText/>
         <label for="titulo">Título</label>
       </span>
     </div>
+    <br>
     <div class="p-col p-mt-3">
       <span class="p-float-label">
-        <textarea id="contenido" name="contenido" formControlName="true" rows="12" cols="122"> </textarea>
+        <textarea id="contenido" name="contenido" formControlName="contenido" rows="12" cols="122"> </textarea>
         <label for="contenido">Contenido</label>
       </span>
     </div>
     <div class="p-col p-mt-3">
       
       <label for="myfile">Adjuntar imagen:    </label>
-      <input type="file" id="myfile" accept=".jpg,.png" multiple name="myfile"><br><br>
+      <input type="file" id="myfile" accept=".jpg,.png" formControlName="imagen" multiple name="myfile"><br><br>
     </div>
     <div class="p-col p-mt-5">
       <p-button type="submit" label="Confirmar" icon="pi pi-check"></p-button>
