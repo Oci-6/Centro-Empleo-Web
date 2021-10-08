@@ -48,6 +48,15 @@ export class ListaNovedadesComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.novedadForm.invalid) {
+      if(this.novedadForm.controls.titulo.value == ""){
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese un título' });
+      }
+      if(this.novedadForm.controls.contenido.value == ""){
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese un contenido' });
+      }
+      if(this.novedadForm.controls.imagen.value == ""){
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese una imágen' });
+      }
       return;
     }
     let novedad = new Novedad();
@@ -59,6 +68,7 @@ export class ListaNovedadesComponent implements OnInit {
       response => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad publicada correctamente' });
         //this.router.navigate(['/login']);
+        
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al publicar la novedad' });
