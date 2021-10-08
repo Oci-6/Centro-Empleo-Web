@@ -5,6 +5,7 @@ import { LoginGuard } from './guards/login.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
+import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
 import { BuscarPostulantesComponent } from './views/empresario/buscar-postulantes/buscar-postulantes.component';
@@ -23,6 +24,7 @@ import { InteresesPreferenciasComponent } from './views/postulante/intereses-pre
 import { MisPostulacionesComponent } from './views/postulante/mis-postulaciones/mis-postulaciones.component';
 import { PerfilComponent } from './views/postulante/perfil/perfil.component';
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
+import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/recuperar-contrasenia/recuperar-contrasenia.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
 
 const routes: Routes = [
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'ofertas', component: OfertasComponent },
   { path: 'postulantes',canActivate: [LoginGuard],  component: ListaPostulantesComponent },
   { path: 'ofertas/:id', component: DetalleOfertaComponent },
+  { path: 'cambiarContrasenia', component: CambiarContraseniaComponent },
+  { path: 'recuperarContrasenia', component: RecuperarContraseniaComponent },
 
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },

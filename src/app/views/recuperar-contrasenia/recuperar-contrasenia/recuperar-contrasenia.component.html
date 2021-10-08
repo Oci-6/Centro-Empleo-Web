@@ -1,0 +1,30 @@
+<div class="p-grid p-jc-center p-mt-4">
+    <div class="p-col p-md-6 p-xl-4">
+        <p-card header="Recuperar cuenta" styleClass="p-card-shadow p-p-3 p-text-center">
+            <form [formGroup]="recuperarForm" (ngSubmit)="ngOnSubmit()">
+                <div class="p-grid p-formgrid p-flex-column p-fluid">
+                    <div class="p-col">
+                        <p>
+                            Ingrese el correo electronico asociado a su cuenta. Se enviara un correo electronico donde se le daran instrucciones para recuperar su contraseña
+                        </p>
+                    </div>
+                    <div class="p-col p-mt-3">
+                        <span class="p-float-label">
+                            <input id="email" type="email" formControlName="email" pInputText>
+                            <label for="email">Email</label>
+                        </span>
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <small class="p-error" id="username-help" *ngIf="f.email.errors.required">Ingrese un
+                                email</small>
+                            <small class="p-error" id="username-help" *ngIf="f.email.errors.email">Por favor ingrese un
+                                email válido</small>
+                        </div>
+                    </div>
+                    <div class="p-col p-mt-5">
+                        <p-button type="submit" label="Enviar correo" icon="pi pi-inbox"></p-button>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { MenuItem, MessageService } from 'primeng/api';
+import { LazyLoadEvent, MessageService, SortEvent } from 'primeng/api';
 import { Departamento } from 'src/app/models/Departamento';
 import { Localidad } from 'src/app/models/Localidad';
 import { Message } from 'src/app/models/Message';
@@ -61,6 +61,8 @@ export class ListaPostulantesComponent implements OnInit {
   permisos: boolean = false;
   intereses: boolean = false;
   edad: number = 0;
+
+  loading: boolean = true;
   constructor(
     private postulanteService: PostulanteService,
     private messageService: MessageService,
@@ -69,14 +71,16 @@ export class ListaPostulantesComponent implements OnInit {
   ) { }
 
   postulantes: Postulante[] = [];
-
-  ngOnInit(): void {
-
+  sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async ngOnInit(): Promise<void> {
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
+        this.loading = !this.loading
 
       },
       (error) => {
@@ -85,6 +89,8 @@ export class ListaPostulantesComponent implements OnInit {
           summary: 'Info',
           detail: error.message ? error.message : 'Error interno del sistema',
         });
+        this.loading = !this.loading
+
       }
     )
 
@@ -107,15 +113,18 @@ export class ListaPostulantesComponent implements OnInit {
   }
 
 
-  filtrar(filtro: string, valor: any) {
+  async filtrar(filtro: string, valor: any) {
     this.filtros[filtro] = valor;
     console.log(this.filtros);
+    this.loading = !this.loading
+    await this.sleep(2000);
 
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
+        this.loading = !this.loading
 
       }
     )
@@ -129,23 +138,41 @@ export class ListaPostulantesComponent implements OnInit {
   }
 
   onChangeDepartamento() {
-    if (this.selectedDepartamento&&this.departamentos) {
-      
-      let departamento = this.departamentos.find( element => element.nombre == this.selectedDepartamento );
-      if(departamento) this.localidades = departamento.localidades;
+    if (this.selectedDepartamento && this.departamentos) {
+
+      let departamento = this.departamentos.find(element => element.nombre == this.selectedDepartamento);
+      if (departamento) this.localidades = departamento.localidades;
     }
-    this.localidades?.sort((a:any, b:any) => a.id - b.id);
+    this.localidades?.sort((a: any, b: any) => a.id - b.id);
 
   }
 
-  onPaginacion(e: any){
+  onPaginacion(e: any) {
+    this.loading = !this.loading
+
     this.postulanteService.buscarPostulantes(this.filtros, e.page).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
+        this.loading = !this.loading
 
       }
     )
+  }
+
+  async customSort(event: LazyLoadEvent) {
+    let sortBy = event.sortField;
+    let sortOrderBy = event.sortOrder == -1 ? 'ASC' : 'DESC';
+    if (sortBy)
+      this.filtros[sortBy] = sortOrderBy;
+    this.loading = !this.loading;
+
+    let result = await this.postulanteService.buscarPostulantes(this.filtros, 0).toPromise();
+    this.loading = !this.loading;
+
+    this.postulantes = result.postulantes;
+    this.totalRows = result.total;
+
   }
 }

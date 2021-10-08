@@ -2,7 +2,7 @@
     <div class="p-col p-md-6 p-xl-4">
         <p-card header="Iniciar Sesión" styleClass="p-card-shadow p-p-3 p-text-center">
             <div class="p-col p-mt-1">
-                No tienes cuenta?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/registrar" >Registrate</a>
+                ¿No tienes cuenta?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/registrar" >Registrate</a>
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="ngOnSubmit()">
                 <div class="p-grid p-formgrid p-flex-column p-fluid">
@@ -21,6 +21,9 @@
                             <label for="contraseña">Contraseña</label>
                         </span>
                     </div>
+                    <div class="p-col p-mt-2">
+                        <a [ngStyle]="{color:'var(--blue-500)'}" href="/recuperarContrasenia">¿Olvidaste tu contraseña?</a>
+                    </div>
                     <div class="p-col p-mt-5">
                         <p-button type="submit" label="Ingresar" icon="pi pi-check"></p-button>
                     </div>
@@ -34,7 +37,7 @@
                         <p-button label="Ingresar con Facebook" icon="pi pi-facebook" (onClick)="signInWithFB()"></p-button>
                     </div>
                     <div class="p-col p-mt-5">
-                        Eres una empresa?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/solicitar_acceso">Solicitar acceso</a>
+                        ¿Eres una empresa?  <a [ngStyle]="{color:'var(--blue-500)'}" href="/solicitar_acceso">Solicitar acceso</a>
                     </div>
                     
                 </div>

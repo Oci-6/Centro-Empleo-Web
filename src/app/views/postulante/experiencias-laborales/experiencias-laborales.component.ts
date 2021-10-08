@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { ExpLaboral } from 'src/app/models/ExpLaboral';
 import { Postulante } from 'src/app/models/Postulante';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -39,6 +39,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
     private fb: FormBuilder,
     private postulanteService: PostulanteService,
     private authService: AuthService,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -48,37 +49,37 @@ export class ExperienciasLaboralesComponent implements OnInit {
     }
   }
 
-  ngOnSubmit() : boolean{
+  ngOnSubmit(): boolean {
     try {
-    this.experienciasL.controls.forEach(async(element: any, index: number) => {
+      this.experienciasL.controls.forEach(async (element: any, index: number) => {
 
-      let eL: ExpLaboral = new ExpLaboral();
+        let eL: ExpLaboral = new ExpLaboral();
 
-      if (element.controls[index + "id"]) {
-        eL.id = element.controls[index + "id"].value;
-        console.log('dasda');
-      }
-      eL.nombreEmp = element.controls[index + "nombreEmpresa"].value;
-      eL.cargo = element.controls[index + "cargo"].value;
-      eL.area = element.controls[index + "areaRubro"].value;
-      eL.nivelJer = element.controls[index + "nivelJerarquico"].value;
-      eL.tareas = element.controls[index + "tareas"].value;
-      eL.fechaInicio = moment(element.controls[index + "fechaInicio"].value, 'MM-DD-YYYY').toDate();
-      eL.fechaFin = moment(element.controls[index + "fechaFin"].value, 'MM-DD-YYYY').toDate();
-      eL.trabajando = element.controls[index + "trabajando"].value;
+        if (element.controls[index + "id"]) {
+          eL.id = element.controls[index + "id"].value;
+          console.log('dasda');
+        }
+        eL.nombreEmp = element.controls[index + "nombreEmpresa"].value;
+        eL.cargo = element.controls[index + "cargo"].value;
+        eL.area = element.controls[index + "areaRubro"].value;
+        eL.nivelJer = element.controls[index + "nivelJerarquico"].value;
+        eL.tareas = element.controls[index + "tareas"].value;
+        eL.fechaInicio = moment(element.controls[index + "fechaInicio"].value, 'MM-DD-YYYY').toDate();
+        eL.fechaFin = moment(element.controls[index + "fechaFin"].value, 'MM-DD-YYYY').toDate();
+        eL.trabajando = element.controls[index + "trabajando"].value;
 
-      eL.nombreRef = element.controls[index + "nombreRef"].value;
-      eL.apellidoRef = element.controls[index + "apellidoRef"].value;
-      eL.cargoRef = element.controls[index + "cargoRef"].value;
-      eL.telefonoRef = element.controls[index + "telefonoRef"].value;
-      eL.emailRef = element.controls[index + "emailRef"].value;
+        eL.nombreRef = element.controls[index + "nombreRef"].value;
+        eL.apellidoRef = element.controls[index + "apellidoRef"].value;
+        eL.cargoRef = element.controls[index + "cargoRef"].value;
+        eL.telefonoRef = element.controls[index + "telefonoRef"].value;
+        eL.emailRef = element.controls[index + "emailRef"].value;
 
-      console.log(eL);
+        console.log(eL);
 
-      if (this.postulanteId)
-      await this.postulanteService.postExpLaboral(this.postulanteId, eL).toPromise()
-          
-    });
+        if (this.postulanteId)
+          await this.postulanteService.postExpLaboral(this.postulanteId, eL).toPromise()
+
+      });
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
       return true;
     } catch (error) {
@@ -165,21 +166,40 @@ export class ExperienciasLaboralesComponent implements OnInit {
   }
 
   deleteExpLab(expLabIndex: number) {
-    this.experienciasL.removeAt(expLabIndex);
+    let form: any = this.experienciasL.at(expLabIndex);
+    console.log(form.controls[expLabIndex + 'id']);
+
+    if (
+      form.controls[expLabIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar es experiencia laboral?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deleteExpLaboral(form.controls[expLabIndex + 'id'].value).toPromise();
+          this.experienciasL.removeAt(expLabIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
+        },
+
+      });
+    }else{
+      this.experienciasL.removeAt(expLabIndex);
+    }
   }
 
   //Cambiar página del steper
-  
+
   async nextPage() {
     this.submitted = true;
-    if(this.expLaboralForm.valid){
+    if (this.expLaboralForm.valid) {
       if (this.ngOnSubmit()) {
-      this.router.navigate(['/formulario/permisosLicencias']);
+        this.router.navigate(['/formulario/permisosLicencias']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 

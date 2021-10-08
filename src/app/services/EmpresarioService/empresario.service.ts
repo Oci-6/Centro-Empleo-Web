@@ -34,4 +34,11 @@ export class EmpresarioService {
     return this.http.get<Oferta[]>(this.URL + '/ofertas');
   }
 
+  buscarEmpresario(query: string,page: number,){
+    return this.http.get<{
+      empresas: Empresario[],
+      total: number
+    }>(this.URL+"/buscar/?page="+page+query); 
+  }
+
 }

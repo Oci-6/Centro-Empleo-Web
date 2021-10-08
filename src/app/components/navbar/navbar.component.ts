@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    let auth = localStorage.getItem('auth');
+    let auth = this.authService.getAuth();
 
     if (auth == null) {
       this.items = [
@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
       this.items = [
         
         {
-          label: 'Bienvenido',
+          label: 'Bienvenido '+ auth.usuario.email,
           icon: 'pi pi-user',
           styleClass: 'mr-5',
 

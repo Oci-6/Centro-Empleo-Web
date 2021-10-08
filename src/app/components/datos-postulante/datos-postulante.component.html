@@ -11,7 +11,7 @@
                     name="file" url="http://localhost:3000/api/postulante/foto" accept="image/*"
                     (onUpload)="onUpload()">
                 </p-fileUpload> -->
-                <input type="file" accept="pdf" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                <input type="file" accept="image/*" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
                     <p-button style="width: 100%" [label]="file?.name || 'Cambiar foto'" icon="pi pi-paperclip"
                         (click)="fileUpload.click()"></p-button>

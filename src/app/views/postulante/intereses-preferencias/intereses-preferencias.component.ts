@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Postulante } from 'src/app/models/Postulante';
 import { PreferenciaLaboral } from 'src/app/models/PreferenciaLaboral';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -40,7 +40,8 @@ export class InteresesPreferenciasComponent implements OnInit {
     private fb: FormBuilder,
     private postulanteService: PostulanteService,
     private authService: AuthService,
-  ) { }
+    private confirmationService: ConfirmationService
+    ) { }
 
   ngOnInit(): void {
     this.postulanteId = this.authService.getUser().id;
@@ -155,7 +156,26 @@ export class InteresesPreferenciasComponent implements OnInit {
   }
 
   deletePrefLab(prefLabIndex: number) {
-    this.preferenciasLaborales.removeAt(prefLabIndex);
+    let form: any = this.preferenciasLaborales.at(prefLabIndex);
+    console.log(form.controls[prefLabIndex + 'id']);
+
+    if (
+      form.controls[prefLabIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar esta preferencia laboral?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deletePreferenciaLaboral(form.controls[prefLabIndex + 'id'].value).toPromise();
+          this.preferenciasLaborales.removeAt(prefLabIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Preferencia Laboral borrada' });
+        },
+
+      });
+    }else{
+      this.preferenciasLaborales.removeAt(prefLabIndex);
+    }
   }
 
   //Cambiar página del steper

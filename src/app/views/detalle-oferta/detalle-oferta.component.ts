@@ -36,7 +36,6 @@ export class DetalleOfertaComponent implements OnInit {
     this.ofertasService.infoOferta(ofertaId).subscribe(
       result => {
         this.oferta = result;
-        console.log(this.oferta.empresa?.visibilidad);
         
         if(!result){
           this.router.navigate(['ofertas']);

@@ -71,6 +71,7 @@ export class EducacionFormacionComponent implements OnInit {
     private fb: FormBuilder,
     private postulanteService: PostulanteService,
     private authService: AuthService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
@@ -322,16 +323,72 @@ export class EducacionFormacionComponent implements OnInit {
 
   //Borrar FormGroups de los arreglos
   deleteCapFor(capForIndex: number) {
-    this.capacitaciones.removeAt(capForIndex);
+    let form: any = this.capacitaciones.at(capForIndex);
+    console.log(form.controls[capForIndex + 'id']);
+
+    if (
+      form.controls[capForIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar esta Capacitación?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deleteCapacitacion(form.controls[capForIndex + 'id'].value).toPromise();
+          this.capacitaciones.removeAt(capForIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Capacitación borrada' });
+        },
+
+      });
+    }else{
+      this.capacitaciones.removeAt(capForIndex);
+    }
   }
 
   deleteConI(conIIndex: number) {
-    this.conocimientosI.removeAt(conIIndex);
+    let form: any = this.conocimientosI.at(conIIndex);
+    console.log(form.controls[conIIndex + 'id']);
+
+    if (
+      form.controls[conIIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar este conocimiento informatico?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deleteCI(form.controls[conIIndex + 'id'].value).toPromise();
+          this.conocimientosI.removeAt(conIIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Conocimiento Laboral borrada' });
+        },
+
+      });
+    }else{
+      this.conocimientosI.removeAt(conIIndex);
+    }
   }
 
   deleteIdioma(idiomaIndex: number) {
-    this.IdiomasArreglo.removeAt(idiomaIndex);
-  }
+    let form: any = this.IdiomasArreglo.at(idiomaIndex);
+    console.log(form.controls[idiomaIndex + 'id']);
+
+    if (
+      form.controls[idiomaIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar es experiencia laboral?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deleteIdioma(form.controls[idiomaIndex + 'id'].value).toPromise();
+          this.IdiomasArreglo.removeAt(idiomaIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
+        },
+
+      });
+    }else{
+      this.IdiomasArreglo.removeAt(idiomaIndex);
+    }  }
 
   //Cambiar página del steper
   

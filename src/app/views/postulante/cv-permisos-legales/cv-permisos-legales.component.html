@@ -9,10 +9,10 @@
                 (onUpload)="onUpload($event)" chooseLabel="Agregar Curriculum Vitae" accept="application/pdf">
 
             </p-fileUpload> -->
-            <input type="file" accept="pdf" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            <input type="file" accept=".pdf" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
             <div>
-                <p-button [label]="file?.name || 'No file uploaded yet.'" icon="pi pi-paperclip" (click)="fileUpload.click()"></p-button>
+                <p-button [label]="file?.name || 'Ningún archivo subido'" icon="pi pi-paperclip" (click)="fileUpload.click()"></p-button>
             </div>
         </div>
 

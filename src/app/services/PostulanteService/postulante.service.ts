@@ -69,7 +69,10 @@ export class PostulanteService {
   putCapacitacion(capacitacion: CapacitacionFormacion){
     return this.http.put<CapacitacionFormacion>(this.URL + '/capacitacion/' , capacitacion);
   }
-
+  deleteCapacitacion(id: number){
+    return this.http.delete(this.URL+"/capacitacion/"+id);
+  }
+  
   //Conocimientos Informáticos
   infoCI(id: number){
     return this.http.get<ConocimientoInfo>(this.URL + '/conocimientoInfo/' + id);
@@ -83,7 +86,10 @@ export class PostulanteService {
   putConocimientoI(CI: ConocimientoInfo){
     return this.http.put<ConocimientoInfo>(this.URL + '/conocimientoInfo/' , CI);
   }
-
+  deleteCI(id: number){
+    return this.http.delete(this.URL+"/conocimientoInfo/"+id);
+  }
+  
   //Idiomas
   infoIdioma(id: number){
     return this.http.get<Idioma>(this.URL + '/idioma/' + id);
@@ -97,7 +103,10 @@ export class PostulanteService {
   putIdioma(idioma: Idioma){
     return this.http.put<Idioma>(this.URL + '/idioma/' , idioma);
   }
-
+  deleteIdioma(id: number){
+    return this.http.delete(this.URL+"/idioma/"+id);
+  }
+  
   //Experiencias Laborales
   infoExpLaboral(id: number){
     return this.http.get<ExpLaboral>(this.URL + '/expLaboral/' + id);
@@ -111,6 +120,9 @@ export class PostulanteService {
   putExpLaboral(expLaboral: ExpLaboral){
     return this.http.put<ExpLaboral>(this.URL + '/expLaboral/' , expLaboral);
   }
+  deleteExpLaboral(id: number){
+    return this.http.delete(this.URL+"/expLaboral/"+id);
+  }
 
   //Permisos y Licencias
   infoPermisosLicencias(id: number){
@@ -119,13 +131,16 @@ export class PostulanteService {
   PermisosLicenciasPostulante(idPostulante: number){
     return this.http.get<PermisosLicencias[]>(this.URL + '/permisosLicencias/' + idPostulante);
   }
-  postPermisosLicencias(idPostulante: number, expLaboral: PermisosLicencias){
-    return this.http.post<PermisosLicencias>(this.URL + '/permisosLicencia/' + idPostulante, expLaboral);
+  postPermisosLicencias(idPostulante: number, permisosLicencia: PermisosLicencias){
+    return this.http.post<PermisosLicencias>(this.URL + '/permisosLicencia/' + idPostulante, permisosLicencia);
   }
   putPermisosLicencias(PL: PermisosLicencias){
     return this.http.put<PermisosLicencias>(this.URL + '/permisosLicencia/' , PL);
   }
-
+  deletePermisosLicencias(id: number){
+    return this.http.delete(this.URL+"/permisosLicencia/"+id);
+  }
+  
   //Intereses y Preferencias
   infoPrefLab(id: number){
     return this.http.get<PreferenciaLaboral>(this.URL + '/preferenciaLaboral/' + id);
@@ -139,6 +154,9 @@ export class PostulanteService {
   putPrefLab(PL: PreferenciaLaboral){
     return this.http.put<PreferenciaLaboral>(this.URL + '/preferenciaLaboral/' , PL);
   }
-
+  deletePreferenciaLaboral(id: number){
+    return this.http.delete(this.URL+"/preferenciaLaboral/"+id);
+  }
+  
 }
 

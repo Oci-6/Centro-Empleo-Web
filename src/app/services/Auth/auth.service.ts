@@ -22,6 +22,14 @@ export class AuthService {
       window.location.href.slice(0, window.location.href.indexOf('/', 7));
   }
 
+  cambiarContrasenia(data: {token: string, email:string, contraseña: string}){
+    return this.http.post(this.URL + '/cambiarContrasenia', data);
+  }
+
+  recuperarContrasenia(data: {email: string}){
+    return this.http.post(this.URL + '/recuperarContrasenia', data);
+  }
+
   getUser(): any | undefined {
     let aux = localStorage.getItem("auth");
     if (aux) {

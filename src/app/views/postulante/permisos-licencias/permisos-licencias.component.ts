@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PermisosLicencias } from 'src/app/models/PermisosLicencias';
 import { Postulante } from 'src/app/models/Postulante';
 import { AuthService } from 'src/app/services/Auth/auth.service';
@@ -37,6 +37,7 @@ export class PermisosLicenciasComponent implements OnInit {
     private fb: FormBuilder,
     private postulanteService: PostulanteService,
     private authService: AuthService,
+    private confirmationService: ConfirmationService
     ) { }
 
   ngOnInit(): void {
@@ -126,7 +127,26 @@ export class PermisosLicenciasComponent implements OnInit {
   }
 
   deletePermLic(permLicIndex: number) {
-    this.permisosLicencias.removeAt(permLicIndex);
+    let form: any = this.permisosLicencias.at(permLicIndex);
+    console.log(form.controls[permLicIndex + 'id']);
+
+    if (
+      form.controls[permLicIndex + 'id']) {
+      this.confirmationService.confirm({
+        message: '¿Seguro quiere eliminar este permiso o licencia?',
+        header: 'Confirmar',
+        icon: 'pi pi-info-warning',
+        accept: async () => {
+          await this.postulanteService.deletePermisosLicencias(form.controls[permLicIndex + 'id'].value).toPromise();
+          this.permisosLicencias.removeAt(permLicIndex);
+
+          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Permiso borrada' });
+        },
+
+      });
+    }else{
+      this.permisosLicencias.removeAt(permLicIndex);
+    }
   }
 
   tipoDocumentoEspecificacion(index:number, i:any):boolean{

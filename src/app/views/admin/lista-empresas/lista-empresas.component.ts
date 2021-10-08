@@ -22,13 +22,13 @@ export class ListaEmpresasComponent implements OnInit {
   extensionTo: Date = new Date();
   today: Date = new Date();
   cols: any[] = [];
-
+  query: string = "";
   empresas: Empresario[] = [];
 
   PublicarComoEmpresaForm: FormGroup = new FormGroup({});
 
-  displayPublicarComoEmpresaDialog: boolean = false;
   displayHabilitarEmpresaDialog: boolean = false;
+  total: number = 0;
 
   constructor(
     private messageService: MessageService,
@@ -37,16 +37,19 @@ export class ListaEmpresasComponent implements OnInit {
     private adminService: AdminService
   ) { }
 
-  getEmpresas() {
-    this.empresarioService.getEmpresarios().subscribe(
-      response => this.empresas = response,
-      error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
-    );
-  }
 
   ngOnInit(): void {
 
-    this.getEmpresas();
+    this.empresarioService.buscarEmpresario("", 0).subscribe(
+      response => {
+        this.empresas = response.empresas;
+        this.total = response.total;
+
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      })
+  
 
     this.cols = [
       { field: 'razonSocial', header: 'Razon Social' },
@@ -54,19 +57,19 @@ export class ListaEmpresasComponent implements OnInit {
     ];
   }
 
-  estado(fechaCierre: Date): string{
+  estado(fechaCierre: Date): string {
 
-    if(moment(fechaCierre).isBefore(new Date())) return "Inactiva"
+    if (moment(fechaCierre).isBefore(new Date())) return "Inactiva"
     else return "Activa"
   }
 
 
   showExtenderDuracion(empresa: Empresario) {
     this.selectedEmpresa = empresa;
-    
+
     if (empresa.fechaExpiracion)
       this.extensionTo = moment(empresa.fechaExpiracion).toDate();
-      
+
     this.displayHabilitarEmpresaDialog = true;
   }
 
@@ -74,12 +77,27 @@ export class ListaEmpresasComponent implements OnInit {
     this.selectedEmpresa.fechaExpiracion = this.extensionTo;
     this.adminService.habilitarEmpresa(this.selectedEmpresa).subscribe(
       response => {
+        this.displayHabilitarEmpresaDialog = false;
         this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Empresa habilitada exitosamente' })
       },
       error => {
+        this.displayHabilitarEmpresaDialog = false;
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
       }
     )
+  }
+
+  buscarEmpresas(){
+    console.log(this.query);
+    this.empresarioService.buscarEmpresario("&query="+this.query, 0).subscribe(
+      response => {
+        this.empresas = response.empresas;
+        this.total = response.total;
+
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      })
   }
 
 }
