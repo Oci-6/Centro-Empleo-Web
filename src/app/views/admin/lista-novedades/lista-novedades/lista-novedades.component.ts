@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, UrlHandlingStrategy } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Message } from 'src/app/models/Message';
 import { Novedad } from 'src/app/models/Novedad';
+import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
 import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
+import { ListaEmpresasComponent } from '../../lista-empresas/lista-empresas.component';
 
 @Component({
   selector: 'app-lista-novedades',
@@ -21,6 +24,7 @@ export class ListaNovedadesComponent implements OnInit {
   cols: any[] = [];
 
   novedades: Novedad[] = [];
+  idAdmin: number | undefined;
 
 
   displayVerDetalleDialog: boolean = false;
@@ -32,6 +36,9 @@ export class ListaNovedadesComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private novedadService: NovedadService,
+    private activatedRoute: ActivatedRoute,
+    private adminService: AdminService,
+
   ) { }
 
   
@@ -43,27 +50,39 @@ export class ListaNovedadesComponent implements OnInit {
   }
 
 
-  ngOnSubmit() {
+  async ngOnSubmit() {
 
     this.submitted = true;
     // stop here if form is invalid
     if (this.novedadForm.invalid) {
       if(this.novedadForm.controls.titulo.value == ""){
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese un título' });
+        this.messageService.add({ severity: 'error', summary: 'Faltan campos', detail: 'Ingrese un título' });
       }
       if(this.novedadForm.controls.contenido.value == ""){
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese un contenido' });
+        this.messageService.add({ severity: 'error', summary: 'Faltan campos', detail: 'Ingrese un contenido' });
       }
       if(this.novedadForm.controls.imagen.value == ""){
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ingrese una imágen' });
+        this.messageService.add({ severity: 'error', summary: 'Faltan campos', detail: 'Ingrese una imágen' });
       }
+
+
       return;
     }
+    var hoy = new Date();
     let novedad = new Novedad();
     novedad.titulo = this.novedadForm.controls.titulo.value;
     novedad.contenido = this.novedadForm.controls.contenido.value;
     novedad.imagen = this.novedadForm.controls.imagen.value;
-
+    novedad.fechaPublicacion = hoy;
+    
+    this.novedadForm.controls.titulo.setValue("");
+    this.novedadForm.controls.contenido.setValue("");
+    this.novedadForm.controls.imagen.setValue("");
+    
+    
+    if(this.idAdmin){
+      novedad.admin = await this.adminService.infoAdmin(this.idAdmin).toPromise();
+    }
     this.novedadService.crearNovedad(novedad).subscribe(
       response => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad publicada correctamente' });
@@ -84,7 +103,7 @@ export class ListaNovedadesComponent implements OnInit {
     this.cols = [
       { field: 'titulo', header: 'Titulo' },
       { field: 'contenido', header: 'Contenido' },
-
+      { field: 'fechaPublicacion', header: 'Fecha de Publicación' },
 
     ];
 
@@ -93,7 +112,9 @@ export class ListaNovedadesComponent implements OnInit {
       contenido: new FormControl('', [Validators.required]),
       imagen: new FormControl('', [Validators.required]),
 
-    })
+    });
+    const routeParams = this.activatedRoute.snapshot.queryParamMap;
+    this.idAdmin = Number(routeParams.get('idAdmin'));
 
     
     /*

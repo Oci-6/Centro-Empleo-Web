@@ -11,6 +11,7 @@ export class Novedad{
   
     contenido?: string | undefined;
 
+    fechaPublicacion?: Date | undefined;
 
   
     admin?: Admin | undefined;
