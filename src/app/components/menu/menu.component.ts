@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Ofertas Laborales',
             icon: 'pi pi-pw pi-users',
-            routerLink: 'ofertas'
+            routerLink: 'ofertasAdmin'
           },
           {
             label: 'Novedades',

@@ -4,6 +4,7 @@ import { DatosPostulanteComponent } from './components/datos-postulante/datos-po
 import { LoginGuard } from './guards/login.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
+import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
@@ -52,6 +53,7 @@ const routes: Routes = [
   //Rutas Admin
   { path: 'dashboard',canActivate: [LoginGuard],  component: DashboardComponent },
   { path: 'empresas',canActivate: [LoginGuard],  component: ListaEmpresasComponent },
+  { path: 'ofertasAdmin',canActivate: [LoginGuard],  component: ListaOfertasComponent },
 
 ];
 

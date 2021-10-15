@@ -48,6 +48,7 @@ import {ConfirmationService} from 'primeng/api';
 import { BuscarPostulantesComponent } from './views/empresario/buscar-postulantes/buscar-postulantes.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/datos-adicionales.component';
+import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas.component';
 
 
 
@@ -84,6 +85,7 @@ import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/
     BuscarPostulantesComponent,
     SafePipe,
     DatosAdicionalesComponent,
+    ListaOfertasComponent,
   ],
   imports: [
     BrowserModule,

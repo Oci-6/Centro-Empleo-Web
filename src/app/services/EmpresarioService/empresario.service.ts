@@ -34,4 +34,7 @@ export class EmpresarioService {
     return this.http.get<Oferta[]>(this.URL + '/ofertas');
   }
 
+  enviarCorreo(){
+    return this.http.post(this.URL+'/send-email', {});
+  }
 }
