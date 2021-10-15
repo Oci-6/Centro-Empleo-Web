@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { LazyLoadEvent, MessageService, SortEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem, MessageService, SortEvent } from 'primeng/api';
 import { Departamento } from 'src/app/models/Departamento';
 import { Localidad } from 'src/app/models/Localidad';
 import { Message } from 'src/app/models/Message';
@@ -21,8 +21,6 @@ export class ListaPostulantesComponent implements OnInit {
   selectedPostulante: any = {};
 
   displayInfoPostulanteDialog: boolean = false;
-
-  cols: any[] = [];
 
   // //Filtros
   sexo: string[] = ['Masculino', 'Femenino', 'Otro'];
@@ -61,8 +59,10 @@ export class ListaPostulantesComponent implements OnInit {
   permisos: boolean = false;
   intereses: boolean = false;
   edad: number = 0;
+  items: MenuItem[] = [];
+  itemsCopy: any[] = [];
+  refresh: boolean = false;
 
-  loading: boolean = true;
   constructor(
     private postulanteService: PostulanteService,
     private messageService: MessageService,
@@ -71,26 +71,23 @@ export class ListaPostulantesComponent implements OnInit {
   ) { }
 
   postulantes: Postulante[] = [];
-  sleep(ms:number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+
+
   async ngOnInit(): Promise<void> {
+  
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
-        this.loading = !this.loading
-
-      },
+          },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Info',
           detail: error.message ? error.message : 'Error interno del sistema',
         });
-        this.loading = !this.loading
-
+    
       }
     )
 
@@ -115,17 +112,15 @@ export class ListaPostulantesComponent implements OnInit {
 
   async filtrar(filtro: string, valor: any) {
     this.filtros[filtro] = valor;
-    console.log(this.filtros);
-    this.loading = !this.loading
-    await this.sleep(2000);
-
+    this.itemsCopy.push({label: filtro});
+    this.items = [];
+    this.items = this.itemsCopy;
+    console.log(this.items);
+    
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
-        this.totalRows = response.total;
-        console.log(this.postulantes);
-        this.loading = !this.loading
-
+        this.totalRows = response.total;    
       }
     )
 
@@ -148,15 +143,13 @@ export class ListaPostulantesComponent implements OnInit {
   }
 
   onPaginacion(e: any) {
-    this.loading = !this.loading
 
     this.postulanteService.buscarPostulantes(this.filtros, e.page).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
-        this.loading = !this.loading
-
+    
       }
     )
   }
@@ -166,10 +159,10 @@ export class ListaPostulantesComponent implements OnInit {
     let sortOrderBy = event.sortOrder == -1 ? 'ASC' : 'DESC';
     if (sortBy)
       this.filtros[sortBy] = sortOrderBy;
-    this.loading = !this.loading;
+    
 
     let result = await this.postulanteService.buscarPostulantes(this.filtros, 0).toPromise();
-    this.loading = !this.loading;
+    
 
     this.postulantes = result.postulantes;
     this.totalRows = result.total;

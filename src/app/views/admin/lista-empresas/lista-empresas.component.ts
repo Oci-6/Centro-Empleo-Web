@@ -57,10 +57,11 @@ export class ListaEmpresasComponent implements OnInit {
     ];
   }
 
-  estado(fechaCierre: Date): string {
-
-    if (moment(fechaCierre).isBefore(new Date())) return "Inactiva"
-    else return "Activa"
+  estado(fechaExpiracion: Date): string {
+    console.log(fechaExpiracion);
+    
+    if (moment(fechaExpiracion).isBefore(new Date())||!fechaExpiracion) return "Inactiva"
+    return "Activa"
   }
 
 

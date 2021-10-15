@@ -34,8 +34,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ListboxModule } from 'primeng/listbox';
 import { TreeModule } from 'primeng/tree';
-import {MenuModule} from 'primeng/menu';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { MenuModule } from 'primeng/menu';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ListboxModule,
     TreeModule,
     MenuModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    BreadcrumbModule
   ],
   exports: [
     MenubarModule,
@@ -110,7 +112,8 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ListboxModule,
     TreeModule,
     MenuModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    BreadcrumbModule
   ]
 })
 export class PrimeNgModule { }

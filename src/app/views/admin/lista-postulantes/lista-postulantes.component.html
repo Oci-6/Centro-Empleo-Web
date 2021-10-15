@@ -9,11 +9,15 @@
                 <button type="text" icon="pi pi-info-circle" pButton label="Más columnas"
                     (click)="op.toggle($event)"></button>
             </div>
+            <div class="p-col">
+
+            <p-breadcrumb [model]="items"></p-breadcrumb>
+</div>
         </div>
     </ng-template>
 
-    <p-table [columns]="cols" [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped"
-        [scrollable]="true" scrollHeight="400px" scrollDirection="both" [loading]="loading" [responsive]="true" sortMode="single"
+    <p-table [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped"
+        [scrollable]="true" scrollHeight="400px" scrollDirection="both" [responsive]="true" sortMode="single"
         [lazy]="true" (onLazyLoad)="customSort($event)">
         <ng-template pTemplate="header" let-columns>
             <tr>

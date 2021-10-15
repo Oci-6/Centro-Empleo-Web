@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
+import { EmpresaActivaGuard } from './guards/empresa-activa.guard';
 import { LoginGuard } from './guards/login.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
@@ -8,7 +9,6 @@ import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
-import { BuscarPostulantesComponent } from './views/empresario/buscar-postulantes/buscar-postulantes.component';
 import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/datos-adicionales.component';
 import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.component';
 import { SolicitarAccesoComponent } from './views/empresario/solicitar-acceso/solicitar-acceso.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
   { path: 'ofertas', component: OfertasComponent },
-  { path: 'postulantes',canActivate: [LoginGuard],  component: ListaPostulantesComponent },
+  { path: 'postulantes',canActivate: [LoginGuard, EmpresaActivaGuard],  component: ListaPostulantesComponent },
   { path: 'ofertas/:id', component: DetalleOfertaComponent },
   { path: 'cambiarContrasenia', component: CambiarContraseniaComponent },
   { path: 'recuperarContrasenia', component: RecuperarContraseniaComponent },
@@ -48,10 +48,9 @@ const routes: Routes = [
 
   //Rutas Empresa
   { path: 'solicitar_acceso', component: SolicitarAccesoComponent },
-  { path: 'datosAdicionales', component: DatosAdicionalesComponent },
-  { path: 'buscarPostulantes',canActivate: [LoginGuard],  component: BuscarPostulantesComponent },
+  { path: 'datosAdicionales',canActivate: [LoginGuard], component: DatosAdicionalesComponent },
   { path: 'misOfertas',canActivate: [LoginGuard],  component: MisOfertasComponent },
-  { path: 'agregarOferta',canActivate: [LoginGuard],  component: AgregarOfertaComponent },
+  { path: 'agregarOferta',canActivate: [LoginGuard, EmpresaActivaGuard],  component: AgregarOfertaComponent },
   
   //Rutas Admin
   { path: 'dashboard',canActivate: [LoginGuard],  component: DashboardComponent },

@@ -45,7 +45,6 @@ import { ListaPostulantesPartialComponent } from './components/lista-postulantes
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
 import {ConfirmationService} from 'primeng/api';
-import { BuscarPostulantesComponent } from './views/empresario/buscar-postulantes/buscar-postulantes.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/datos-adicionales.component';
 import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/recuperar-contrasenia/recuperar-contrasenia.component';
@@ -83,7 +82,6 @@ import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar
     ListaPostulantesPartialComponent,
     AgregarOfertaComponent,
     DetalleOfertaComponent,
-    BuscarPostulantesComponent,
     SafePipe,
     DatosAdicionalesComponent,
     RecuperarContraseniaComponent,
