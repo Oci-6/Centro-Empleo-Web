@@ -5,6 +5,7 @@ import { EmpresaActivaGuard } from './guards/empresa-activa.guard';
 import { LoginGuard } from './guards/login.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
+import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-novedades/lista-novedades.component';
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'ofertas/:id', component: DetalleOfertaComponent },
   { path: 'cambiarContrasenia', component: CambiarContraseniaComponent },
   { path: 'recuperarContrasenia', component: RecuperarContraseniaComponent },
+  { path: 'novedades',canActivate: [LoginGuard],  component: ListaNovedadesComponent },
 
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },

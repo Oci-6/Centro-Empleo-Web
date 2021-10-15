@@ -49,6 +49,7 @@ import { SafePipe } from './pipes/safe.pipe';
 import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/datos-adicionales.component';
 import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/recuperar-contrasenia/recuperar-contrasenia.component';
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
+import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-novedades/lista-novedades.component';
 
 
 
@@ -86,6 +87,7 @@ import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar
     DatosAdicionalesComponent,
     RecuperarContraseniaComponent,
     CambiarContraseniaComponent,
+    ListaNovedadesComponent
   ],
   imports: [
     BrowserModule,
