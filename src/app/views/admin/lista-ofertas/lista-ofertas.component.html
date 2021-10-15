@@ -2,13 +2,11 @@
     <ng-template pTemplate="title">
         <div class="p-grid p-ai-center p-vertical-container">
             <div class="p-col-fixed">
-                <span>Mis ofertas laborales</span>
+                <span>Ofertas laborales</span>
 
             </div>
-            <div class="p-col">
-                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded" routerLink="/agregarOferta"></button>
-            </div>
         </div>
+        
     </ng-template>
     <p-table [columns]="cols" [value]="ofertas" [scrollLeft]="true"
         styleClass="p-datatable-gridlines p-datatable-striped" [responsive]="true">

@@ -14,12 +14,12 @@
                 <input type="file" accept="image/*" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
                     <p-button style="width: 100%" [label]="file?.name || 'Cambiar foto'" icon="pi pi-paperclip"
-                        (click)="fileUpload.click()"></p-button>
+                        (click)="fileUpload.click()" *ngIf="perfilPropio"></p-button>
             </div>
             <div class="p-col-12 p-grid p-jc-center">
 
                     <a pButton target="_blank" type="button" label="Curriculum" icon="pi pi-search"
-                        [href]="cv | safe: 'url'"></a>
+                        [href]="cv | safe: 'url'" *ngIf="postulante.curriculum"></a>
             </div>
             <div class="p-col-12 p-grid p-jc-center ">
                 <div *ngIf="perfilPropio" class="p-field p-grid p-ai-center vertical-container">
@@ -95,7 +95,8 @@
             </div>
 
             <p-accordion class="p-col-12">
-                <p-accordionTab header='Educación y Formación'>
+                <p-accordionTab *ngIf="postulante.capacitacionFormacion && postulante.capacitacionFormacion.length > 0
+                    || postulante.idioma&& postulante.idioma.length > 0 || postulante.conocimientoInfo&& postulante.conocimientoInfo.length > 0" header='Educación y Formación'>
                     <p-accordion>
                         <p-accordionTab
                             *ngIf="postulante.capacitacionFormacion&& postulante.capacitacionFormacion.length > 0"
@@ -189,7 +190,8 @@
 
             </p-accordion>
 
-            <p-divider class="p-col-12"></p-divider>
+            <p-divider class="p-col-12" *ngIf="postulante.expLaboral&& postulante.expLaboral.length > 0"></p-divider>
+
             <p-accordion class="p-col-12">
                 <p-accordionTab *ngIf="postulante.expLaboral&& postulante.expLaboral.length > 0"
                     header="Experiencias Laborales">
@@ -258,7 +260,8 @@
 
             </p-accordion>
 
-            <p-divider class="p-col-12"></p-divider>
+            <p-divider class="p-col-12" *ngIf="postulante.permisosLicencias&& postulante.permisosLicencias.length > 0"></p-divider>
+
             <p-accordion class="p-col-12">
                 <p-accordionTab *ngIf="postulante.permisosLicencias&& postulante.permisosLicencias.length > 0"
                     header="Permisos y Licencias">
@@ -289,7 +292,8 @@
 
             </p-accordion>
 
-            <p-divider class="p-col-12"></p-divider>
+            <p-divider class="p-col-12" *ngIf="postulante.preferenciaLaboral&& postulante.preferenciaLaboral.length > 0"></p-divider>
+
             <p-accordion class="p-col-12">
                 <p-accordionTab *ngIf="postulante.preferenciaLaboral&& postulante.preferenciaLaboral.length > 0"
                     header="Intereses y Preferencias">

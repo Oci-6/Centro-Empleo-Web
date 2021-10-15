@@ -41,4 +41,7 @@ export class EmpresarioService {
     }>(this.URL+"/buscar/?page="+page+query); 
   }
 
+  enviarCorreo(){
+    return this.http.post(this.URL+'/send-email', {});
+  }
 }

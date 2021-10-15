@@ -50,6 +50,7 @@ import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/
 import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/recuperar-contrasenia/recuperar-contrasenia.component';
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-novedades/lista-novedades.component';
+import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas.component';
 
 
 
@@ -87,7 +88,8 @@ import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-nov
     DatosAdicionalesComponent,
     RecuperarContraseniaComponent,
     CambiarContraseniaComponent,
-    ListaNovedadesComponent
+    ListaNovedadesComponent,
+    ListaOfertasComponent,
   ],
   imports: [
     BrowserModule,

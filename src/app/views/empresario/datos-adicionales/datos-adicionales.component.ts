@@ -25,6 +25,7 @@ export class DatosAdicionalesComponent implements OnInit {
   paisId = 186;
   empresaId = this.auth.getAuth().usuario.id;
   empresa: Empresario = {};
+  mostrarNombre: boolean = false;
 
   constructor(
     private empresarioService: EmpresarioService,
@@ -42,7 +43,7 @@ export class DatosAdicionalesComponent implements OnInit {
       localidad: new FormControl(''),
       telefono: new FormControl('', [Validators.required]),
       mostrarNombreE: new FormControl('', [Validators.required]),
-      nombreAmostrar: new FormControl('', [Validators.required]),
+      nombreAmostrar: new FormControl(''),
     });
 
     this.getDL(this.paisId);
@@ -68,6 +69,16 @@ export class DatosAdicionalesComponent implements OnInit {
     this.localidades?.sort((a:any, b:any) => a.id - b.id);
   }
 
+  mostrarN() : boolean{
+    this.mostrarNombre = this.datosAdicionalesForm.controls.mostrarNombreE.value;
+    if(this.mostrarNombre){
+      return true;
+    } else{
+      return false;
+    }
+     
+  }
+
   ngOnSubmit() {
     let empresario = new Empresario();
     empresario.id = this.auth.getAuth().usuario.id;
@@ -79,10 +90,10 @@ export class DatosAdicionalesComponent implements OnInit {
 
     this.empresarioService.modificarEmpresario(empresario).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario creado correctamente' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Solicitud de acceso enviada exitosamente' });
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el usuario' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al enviar la solicitud' });
       }
     );
   }
