@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Novedades',
             icon: 'pi pi-pw pi-users',
-            routerLink: 'novedades'
+            routerLink: 'novedadesAdmin'
           },
           {
             label: 'Dashboard de Seguimiento',

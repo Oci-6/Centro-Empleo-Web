@@ -51,6 +51,8 @@ import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/rec
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-novedades/lista-novedades.component';
 import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas.component';
+import { AgregarNovedadComponent } from './views/admin/agregar-novedad/agregar-novedad.component';
+import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
 
 
 
@@ -90,6 +92,9 @@ import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas
     CambiarContraseniaComponent,
     ListaNovedadesComponent,
     ListaOfertasComponent,
+    AgregarNovedadComponent,
+    DetalleNovedadComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
         {
           label: 'Novedades',
           icon: 'pi pi-exclamation-circle',
+          routerLink: ['/novedades']
 
         },
       ];
@@ -68,6 +69,7 @@ export class NavbarComponent implements OnInit {
         {
           label: 'Novedades',
           icon: 'pi pi-exclamation-circle',
+          routerLink: ['/novedades']
 
         },
         {
