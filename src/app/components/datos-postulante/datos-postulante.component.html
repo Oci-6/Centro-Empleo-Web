@@ -15,11 +15,16 @@
 
                     <p-button style="width: 100%" [label]="file?.name || 'Cambiar foto'" icon="pi pi-paperclip"
                         (click)="fileUpload.click()" *ngIf="perfilPropio"></p-button>
+                        
+
             </div>
             <div class="p-col-12 p-grid p-jc-center">
 
                     <a pButton target="_blank" type="button" label="Curriculum" icon="pi pi-search"
                         [href]="cv | safe: 'url'" *ngIf="postulante.curriculum"></a>
+
+                    <a pButton target="_blank" type="button" label="Curriculum Generado" icon="pi pi-search"
+                    [href]="pdf | safe: 'url'" *ngIf="pdf!=''"></a>
             </div>
             <div class="p-col-12 p-grid p-jc-center ">
                 <div *ngIf="perfilPropio" class="p-field p-grid p-ai-center vertical-container">
@@ -27,7 +32,7 @@
                     <div class="p-col-3">
                         <p-inputSwitch id="Visibilidad" (onChange)="onVisibilidad()" [(ngModel)]="visibilidad">
                         </p-inputSwitch>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>

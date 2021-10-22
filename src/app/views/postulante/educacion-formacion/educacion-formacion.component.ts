@@ -409,6 +409,17 @@ export class EducacionFormacionComponent implements OnInit {
     this.router.navigate(['formulario/datosPersonales']);
   }
 
+  mostrarOrientacion() : boolean{
+    if(this.selectedNE=='Bachillerato Liceo'|| this.selectedNE=='Técnico Profesional UTU' 
+    || this.selectedNE=='Magisterio - Profesorado'|| this.selectedNE=='Terciario no universitario'
+    || this.selectedNE=='Universitario'|| this.selectedNE=='Posgrado - Master - Doctorado' || this.selectedNE=='Bachillerato UTU'){
+      return true;
+    } else{
+      return false;
+    }
+     
+  }
+
   
 
   // submit() {

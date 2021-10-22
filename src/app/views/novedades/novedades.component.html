@@ -15,16 +15,22 @@
         <div class="p-col-12 p-md-3 p-ai-stretch vertical-container" *ngFor="let novedad of novedades">
             <p-card styleClass="p-card-shadow">
                 <ng-template pTemplate="header" *ngIf="novedad.imagen">
-                    <img style="max-height:250px; max-width: 100%;" [src]="novedad.imagen" #img>
+                    <img style="height:150px; max-width: 100%;" [src]="novedad.imagen" #img>
                 </ng-template>
                 <ng-template pTemplate="title">
                     <span class="titulo">{{novedad.titulo}}</span>
                 </ng-template>
                 <p class="descripcion">{{novedad.contenido}}</p>
                 <ng-template pTemplate="footer">
-                    <button pButton pRipple type="button" label="Detalles" *ngIf="novedad.id"
-                        [routerLink]="'/detalleNovedad/'+novedad.id"
-                        class="p-button-outlined p-button-rounded p-button-success "></button>
+                    <div class="p-grid p-nogutter p-justify-between">
+                        <button pButton pRipple type="button" label="Detalles" *ngIf="novedad.id"
+                            [routerLink]="'/detalleNovedad/'+novedad.id"
+                            class="p-button-outlined p-button-rounded p-button-success "></button>
+
+                        <button pButton pRipple type="button" label="Compartir" *ngIf="novedad.id"
+                            class="p-button-outlined p-button-rounded p-button-success"
+                            (click)="compartir(novedad)"></button>
+                    </div>
                 </ng-template>
             </p-card>
         </div>
@@ -35,3 +41,18 @@
 
     </ng-template>
 </p-card>
+
+<p-dialog header="Compartir" [(visible)]="displayCompartirDialog" [breakpoints]="[{ '80px': '30vw' }]"
+    [style]="{ width: '18vw' }" [baseZIndex]="10000">
+
+    <div class="p-grid p-formgrid p-flex-column p-fluid">
+        <a pButton pRipple type="button" label="Facebook" class="p-button-raised p-button-info p-mb-2" 
+            [href]="'https://www.facebook.com/sharer/sharer.php?u='+url"></a>
+        <button pButton pRipple type="button" label="WhatsApp" class="p-button-raised p-button-success p-mb-2"></button>
+        <button pButton pRipple type="button" label="Twitter" class="p-button-raised p-button-primary p-mb-2"></button>
+        <button pButton pRipple type="button" label="Email" class="p-button-raised p-button-help p-mb-2"></button>
+        <button pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></button>
+    </div>
+
+
+</p-dialog>

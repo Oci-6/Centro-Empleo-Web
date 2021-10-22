@@ -36,9 +36,7 @@
                     </div>
 
                     <div class="p-field p-col-12 p-md-6"
-                        *ngIf="selectedNE=='Bachillerato Liceo o UTU'|| selectedNE=='Técnico Profesional UTU' 
-                        || selectedNE=='Magisterio - Profesorado'|| selectedNE=='Terciario no universitario'
-                        || selectedNE=='Universitario'|| selectedNE=='Posgrado - Master - Doctorado'">
+                        *ngIf="mostrarOrientacion()==true">
                         <label for="orientacionNE">Orientación del máximo nivel educativo alcanzado</label>
                         <input id="orientacionNE" type="text" required pInputText formControlName="orientacionNE"> 
                     </div>
