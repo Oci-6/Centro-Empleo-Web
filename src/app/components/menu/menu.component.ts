@@ -93,11 +93,6 @@ export class MenuComponent implements OnInit {
             routerLink: 'perfil'
           },
           {
-            label: 'Ofertas Laborales',
-            icon: 'pi pi-pw pi-users',
-            routerLink: 'ofertas'
-          },
-          {
             label: 'Mis postulaciones',
             icon: 'pi pi-pw pi-users',
             routerLink: 'postulaciones'

@@ -47,11 +47,16 @@
 
     <div class="p-grid p-formgrid p-flex-column p-fluid">
         <a pButton pRipple type="button" label="Facebook" class="p-button-raised p-button-info p-mb-2" 
-            [href]="'https://www.facebook.com/sharer/sharer.php?u='+url"></a>
-        <button pButton pRipple type="button" label="WhatsApp" class="p-button-raised p-button-success p-mb-2"></button>
-        <button pButton pRipple type="button" label="Twitter" class="p-button-raised p-button-primary p-mb-2"></button>
+            [href]="'https://www.facebook.com/sharer/sharer.php?u='+url">
+        </a>
+        <a pButton pRipple type="button" label="WhatsApp" class="p-button-raised p-button-success p-mb-2"
+            [href]="'https://api.whatsapp.com/send?text='+url">
+        </a>
+        <a pButton pRipple type="button" label="Twitter" class="p-button-raised p-button-primary p-mb-2"
+        [href]="'http://twitter.com/share?url='+url+'&text=Mira esta novedad del Centro Comercial de San José. Titulo de la novedad: '+selectedNovedad.titulo">
+        </a>
         <button pButton pRipple type="button" label="Email" class="p-button-raised p-button-help p-mb-2"></button>
-        <button pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></button>
+        <a pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></a>
     </div>
 
 
