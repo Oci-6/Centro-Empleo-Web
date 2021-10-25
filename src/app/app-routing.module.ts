@@ -11,6 +11,7 @@ import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas
 import { ListaPostulantesComponent } from './views/admin/lista-postulantes/lista-postulantes.component';
 import { CambiarContraseniaComponent } from './views/cambiar-contrasenia/cambiar-contrasenia.component';
 import { DetalleOfertaComponent } from './views/detalle-oferta/detalle-oferta.component';
+import { AgregarNovedadComponent } from './views/admin/agregar-novedad/agregar-novedad.component';
 import { AgregarOfertaComponent } from './views/empresario/agregar-oferta/agregar-oferta.component';
 import { DatosAdicionalesComponent } from './views/empresario/datos-adicionales/datos-adicionales.component';
 import { MisOfertasComponent } from './views/empresario/mis-ofertas/mis-ofertas.component';
@@ -29,6 +30,8 @@ import { PerfilComponent } from './views/postulante/perfil/perfil.component';
 import { PermisosLicenciasComponent } from './views/postulante/permisos-licencias/permisos-licencias.component';
 import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/recuperar-contrasenia/recuperar-contrasenia.component';
 import { RegistrarComponent } from './views/registrar/registrar.component';
+import { NovedadesComponent } from './views/novedades/novedades.component';
+import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -39,7 +42,9 @@ const routes: Routes = [
   { path: 'ofertas/:id', component: DetalleOfertaComponent },
   { path: 'cambiarContrasenia', component: CambiarContraseniaComponent },
   { path: 'recuperarContrasenia', component: RecuperarContraseniaComponent },
-  { path: 'novedades',canActivate: [LoginGuard],  component: ListaNovedadesComponent },
+  { path: 'novedades', component: NovedadesComponent },
+  { path: 'detalleNovedad/:id', component: DetalleNovedadComponent },
+  
 
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
   { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
@@ -60,6 +65,8 @@ const routes: Routes = [
   { path: 'dashboard',canActivate: [LoginGuard],  component: DashboardComponent },
   { path: 'empresas',canActivate: [LoginGuard],  component: ListaEmpresasComponent },
   { path: 'ofertasAdmin',canActivate: [LoginGuard],  component: ListaOfertasComponent },
+  { path: 'agregarNovedad',canActivate: [LoginGuard],  component: AgregarNovedadComponent },
+  { path: 'novedadesAdmin',canActivate: [LoginGuard],  component: ListaNovedadesComponent },
 
 ];
 

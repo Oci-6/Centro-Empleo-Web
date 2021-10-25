@@ -1,0 +1,37 @@
+<p-card header="Agregar Novedad" styleClass="p-card-shadow p-p-3 p-mt-4">
+    <form [formGroup]="novedadForm">
+        <div class=" p-fluid p-formgrid p-grid">
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="tituloNovedad">Titulo de la novedad</label>
+                <input id="tituloNovedad" type="text" pInputText formControlName="tituloNovedad"
+                    placeholder="Titulo de la novedad">
+                <div *ngIf="f.tituloNovedad.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.tituloNovedad.errors.required">Ingrese un titulo para la novedad</small>
+                </div>
+            </div>
+
+            <div class="p-field p-col-12 p-md-6">
+                <label for="contenidoNovedad">Contenido de la novedad</label>
+                <textarea id="contenidoNovedad" type="text" pInputTextarea formControlName="contenidoNovedad"
+                    placeholder="Contenido de la novedad" [autoResize]="true" rows="5" cols="30"></textarea>
+                <div *ngIf="f.contenidoNovedad.errors&&submitted" class="invalid-feedback">
+                    <small class="p-error" *ngIf="f.contenidoNovedad.errors.required">Ingrese contenido para la novedad</small>
+                </div>
+            </div>
+
+            <input type="file" accept="image/*" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+            <div>
+                <p-button [label]="file?.name || 'Ningún archivo subido'" icon="pi pi-paperclip" (click)="fileUpload.click()"></p-button>
+            </div>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="p-grid p-nogutter p-justify-end">
+            <p-button (onClick)="enviar()" type="submit" label="Confirmar"></p-button>
+        </div>
+    </ng-template>
+    
+
+</p-card>

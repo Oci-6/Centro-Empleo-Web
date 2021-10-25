@@ -14,7 +14,7 @@ export class NovedadService {
   constructor(private http: HttpClient) { }
   
   //Datos Personales
-  crearNovedad(novedad: Novedad){
+  crearNovedad(novedad: FormData){
     return this.http.post(this.URL + '/', novedad);
   }
   getAll(){
@@ -25,6 +25,18 @@ export class NovedadService {
   }
   modificarNovedad(novedad: Novedad) {
     return this.http.put(this.URL + '/', novedad);
+  }
+  getBlobDatos(url: string){
+    return this.http.get(url,{responseType: "blob"})
+  }
+  buscarNovedad(query: string, page: number){
+    return this.http.get<{
+      novedades: Novedad[],
+      total: number
+    }>(this.URL+"/buscar/?page="+page+query);
+  }
+  ultimasNovedades(){
+    return this.http.get<Novedad[]>(this.URL+'/ultimasNovedades');
   }
 
 

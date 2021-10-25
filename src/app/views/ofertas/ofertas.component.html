@@ -20,8 +20,8 @@
                 <ng-template pTemplate="title">
                     <span class="titulo">{{oferta.vacante}}</span>
                 </ng-template>
-                <ng-template pTemplate="subtitle" *ngIf="oferta.empresa?.visibilidad==true">
-                    {{oferta.empresa?.nombreFantasia}}
+                <ng-template pTemplate="subtitle">
+                    {{oferta.empresa?.visibilidad?oferta.empresa?.nombreFantasia:"Anónimo"}}
                 </ng-template>
                 <p class="descripcion">Funciones y Tareas: {{oferta.funcionesTareas}}</p>
                 <p class="descripcion">Requisitos excluyentes: {{oferta.requisitosExcluyentes}}</p>
