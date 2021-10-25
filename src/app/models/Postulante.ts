@@ -53,6 +53,7 @@ export class Postulante extends User{
     visibilidad?: boolean | undefined;
     estado?: boolean | undefined;
     recibirOfertas?: boolean | undefined;
+    terminosCondiciones?: boolean | undefined;
 
     //Relaciones con otros datos
     pais?: Pais | undefined;

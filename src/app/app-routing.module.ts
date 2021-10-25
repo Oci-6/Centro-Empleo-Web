@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DatosPostulanteComponent } from './components/datos-postulante/datos-postulante.component';
 import { EmpresaActivaGuard } from './guards/empresa-activa.guard';
 import { LoginGuard } from './guards/login.guard';
+import { PerfilCompletoGuard } from './guards/perfil-completo.guard';
 import { DashboardComponent } from './views/admin/dashboard/dashboard.component';
 import { ListaEmpresasComponent } from './views/admin/lista-empresas/lista-empresas.component';
 import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-novedades/lista-novedades.component';
@@ -46,7 +47,7 @@ const routes: Routes = [
   { path: 'formulario/permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
   { path: 'formulario/preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
   { path: 'formulario/cv',canActivate: [LoginGuard], component: CvPermisosLegalesComponent },
-  { path: 'perfil',canActivate: [LoginGuard],  component: PerfilComponent },
+  { path: 'perfil',canActivate: [LoginGuard,PerfilCompletoGuard],  component: PerfilComponent },
   { path: 'postulaciones',canActivate: [LoginGuard],  component: MisPostulacionesComponent },
 
   //Rutas Empresa

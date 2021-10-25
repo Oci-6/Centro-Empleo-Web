@@ -14,14 +14,19 @@ export class AdminService {
   private URL: string = 'http://localhost:3000/api/admin';
 
   constructor(private http: HttpClient) { }
-  
-  habilitarEmpresa(empresa: Empresario){
+
+  habilitarEmpresa(empresa: Empresario) {
     return this.http.put(this.URL + '/habilitar', empresa);
   }
-    registrarAdmin(user: User){
+  
+  getEstadisticas() {
+    return this.http.get<any>(this.URL + '/datos')
+  }
+
+  registrarAdmin(user: User) {
     return this.http.post(this.URL + '/', user);
   }
-  getAllAdmin(){
+  getAllAdmin() {
     return this.http.get<Admin[]>(this.URL + '/');
   }
   infoAdmin(id: number) {
@@ -32,19 +37,19 @@ export class AdminService {
   }
 
   //Novedades
-  infoNovedad(id: number){
+  infoNovedad(id: number) {
     return this.http.get<Novedad>(this.URL + '/novedad/' + id);
   }
-  
-  postNovedad(idAdmin: number, novedad: Novedad){
+
+  postNovedad(idAdmin: number, novedad: Novedad) {
     return this.http.post<Novedad>(this.URL + '/novedad/' + idAdmin, novedad);
   }
 
-  putNovedad(novedad: Novedad){
-    return this.http.put<Novedad>(this.URL + '/novedad/' , novedad);
+  putNovedad(novedad: Novedad) {
+    return this.http.put<Novedad>(this.URL + '/novedad/', novedad);
   }
 
- 
+
 
 }
 

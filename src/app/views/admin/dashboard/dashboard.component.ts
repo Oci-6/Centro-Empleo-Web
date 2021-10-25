@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/AdminService/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,31 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-  cols = [
-    { field: 200, header: 'Postulantes en la plataforma' },
-    { field: 60, header: 'Empresarios en la plataforma' },
-    { field: 80, header: 'Novedades' },
-    { field: 230, header: 'Ofertas laborales' }
-  ];
+  constructor(private adminService: AdminService) { }
+  cols: any[]  = [];
 
   data: any;
+  datos: any;
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+    this.datos = await this.adminService.getEstadisticas().toPromise();
+
+    this.cols = [
+      { field: this.datos.ofertas, header: 'Ofertas en la plataforma' },
+      { field: this.datos.empresasTotal, header: 'Empresas registradas en la plataforma' },
+      { field: this.datos.empresasActivas, header: 'Empresas activas en la plataforma' },
+      { field: this.datos.empresasTotal-this.datos.empresasActivas, header: 'Empresas inactivas en la plataforma' },
+      { field: this.datos.promedioPostulaciones, header: 'Promedio de postulados' },
+      { field: this.datos.novedades, header: 'Total novedades' },
+    ];
     this.data = {
-      labels: ['A','B','C'],
+      labels: ['Invisibles','Visibles'],
       datasets: [
           {
-              data: [300, 50, 100],
+              data: [this.datos.postulantesTotal-this.datos.postulantesVisibles, this.datos.postulantesVisibles],
               backgroundColor: [
                   "#42A5F5",
                   "#66BB6A",
-                  "#FFA726"
+                  // "#FFA726"
               ],
               hoverBackgroundColor: [
                   "#64B5F6",
                   "#81C784",
-                  "#FFB74D"
+                  // "#FFB74D"
               ]
           }
       ]
