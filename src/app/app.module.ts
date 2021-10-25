@@ -53,6 +53,8 @@ import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-nov
 import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas.component';
 import { AgregarNovedadComponent } from './views/admin/agregar-novedad/agregar-novedad.component';
 import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 
@@ -94,6 +96,7 @@ import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad
     ListaOfertasComponent,
     AgregarNovedadComponent,
     DetalleNovedadComponent,
+
     
   ],
   imports: [
@@ -104,6 +107,7 @@ import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad
     BrowserAnimationsModule,
     HttpClientModule,
     SocialLoginModule,
+    FontAwesomeModule,
   ],
   providers: [
     MessageService,

@@ -21,6 +21,7 @@ export class ListaNovedadesComponent implements OnInit {
 
   selectedNovedad: Novedad = {};
   cols: any[] = [];
+  url: string = "";
 
   novedades: Novedad[] = [];
   idAdmin: number | undefined;
@@ -54,14 +55,17 @@ export class ListaNovedadesComponent implements OnInit {
 
     ];
   }
-
-  compartir(novedad:Novedad) {
-    this.selectedNovedad = novedad;
-    this.displayCompartirDialog = true;
-  }
-
+  
   convertirFecha(fecha: Date | undefined) {
     return moment(fecha).format("DD/MM/YYYY");
+  }
+
+  compartir(novedad:Novedad) {
+    this.url= window.location.hostname+window.location.pathname + '/'+ novedad.id;
+    this.selectedNovedad = novedad;
+    this.displayCompartirDialog = true;
+    console.log(window.location.href);
+    
   }
 
 }

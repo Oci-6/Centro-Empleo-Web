@@ -15,6 +15,7 @@ export class DatosPostulanteComponent implements OnChanges {
 
   @Input()
   id?: number;
+  
 
   constructor(
     private postulanteService: PostulanteService,
@@ -27,6 +28,7 @@ export class DatosPostulanteComponent implements OnChanges {
   postulante: Postulante = {};
   fotoPerfil: string = "";
   cv: string = "";
+  pdf: string = "";
   visibilidad: boolean = false;
   file: File | undefined;
 
@@ -40,6 +42,7 @@ export class DatosPostulanteComponent implements OnChanges {
             this.visibilidad = this.postulante.visibilidad
           this.getImagen();
           this.getCV();
+          if(this.postulante.id) (this.getPDF(this.postulante.id))
         },
         (error) => {
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
@@ -109,4 +112,10 @@ export class DatosPostulanteComponent implements OnChanges {
     return moment(fecha).format("DD/MM/YYYY");
   }
 
+  async getPDF(id: number) {
+    
+    let blob = await this.postulanteService.getCV(id).toPromise();
+
+    this.pdf = URL.createObjectURL(blob);
+  }
 }

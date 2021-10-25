@@ -157,6 +157,10 @@ export class PostulanteService {
   deletePreferenciaLaboral(id: number){
     return this.http.delete(this.URL+"/preferenciaLaboral/"+id);
   }
+
+  getCV(id:number){
+    return this.http.get(this.URL+'/getPDF/'+id, {responseType: "blob"});
+  }
   
 }
 

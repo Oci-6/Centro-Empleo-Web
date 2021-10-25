@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'cambiarContrasenia', component: CambiarContraseniaComponent },
   { path: 'recuperarContrasenia', component: RecuperarContraseniaComponent },
   { path: 'novedades', component: NovedadesComponent },
-  { path: 'detalleNovedad/:id', component: DetalleNovedadComponent },
+  { path: 'novedades/:id', component: DetalleNovedadComponent },
   
 
   { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },

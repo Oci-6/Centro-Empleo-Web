@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Novedad } from 'src/app/models/Novedad';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,6 +17,11 @@ export class NovedadesComponent implements OnInit {
   novedades: Novedad[] = [];
   total: number = 0;
   query: string = "";
+  displayCompartirDialog: boolean = false;
+  selectedNovedad: Novedad = {};
+  url: string = "";
+
+  faCoffee = faCoffee;
 
   constructor(
     private messageService: MessageService,
@@ -67,6 +73,14 @@ export class NovedadesComponent implements OnInit {
 
   convertirFecha(fecha: Date | undefined) {
     return moment(fecha).format("DD/MM/YYYY");
+  }
+
+  compartir(novedad:Novedad) {
+    this.url= window.location.hostname+window.location.pathname + '/'+ novedad.id;
+    this.selectedNovedad = novedad;
+    this.displayCompartirDialog = true;
+    console.log(window.location.href);
+    
   }
 
   

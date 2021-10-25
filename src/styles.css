@@ -14,9 +14,12 @@ body {
     /* background: rgb(215,215,215);
 background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba(106,106,106,1) 30%, rgba(73,73,73,1) 59%, rgba(45,45,45,1) 81%, rgba(106,106,106,0.9780287114845938) 100%); */
     /* rgb(36, 36, 36); */
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% ); 
- 
+    /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(90,92,106,1) 0%, rgba(32,45,58,1) 81.3% );  */
+    background-color: #e5e5e5;
+    background: radial-gradient(circle, transparent 20%, #e5e5e5 20%, #e5e5e5 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5e5 20%, #e5e5e5 80%, transparent 80%, transparent) 12.5px 12.5px, linear-gradient(#edffeb 1px, transparent 1px) 0 -0.5px, linear-gradient(90deg, #edffeb 1px, #e5e5e5 1px) -0.5px 0;
+    background-size: 25px 25px, 25px 25px, 12.5px 12.5px, 12.5px 12.5px;
 }
+
 
 .p-menubar {
     background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% );
