@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import * as moment from 'moment';
 import { AuthService } from 'src/app/services/Auth/auth.service';
+import { ConfirmationService, ConfirmEventType, MenuItem, MessageService } from 'primeng/api';
+import { EmpresarioService } from 'src/app/services/EmpresarioService/empresario.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,9 +12,16 @@ import { AuthService } from 'src/app/services/Auth/auth.service';
 export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
+  
 
-  constructor(private authService: AuthService){}
+  constructor(
+    private authService: AuthService,
+    private empresarioService: EmpresarioService,
+    private confirmationService: ConfirmationService, 
+    private messageService: MessageService
+    ){}
   ngOnInit() {
+    
     let user = this.authService.getAuth();
     if (user) {
       if (user.tipo === "Admin") {
@@ -28,17 +37,17 @@ export class MenuComponent implements OnInit {
             routerLink: 'postulantes'
           },
           {
-            label: 'Ofertas Laborales',
+            label: 'Listar Ofertas Laborales',
             icon: 'pi pi-pw pi-users',
             routerLink: 'ofertasAdmin'
           },
           {
-            label: 'Novedades',
+            label: 'Listar Novedades',
             icon: 'pi pi-pw pi-users',
             routerLink: 'novedadesAdmin'
           },
           {
-            label: 'Dashboard de Seguimiento',
+            label: 'Panel de Seguimiento',
             icon: 'pi pi-pw pi-users',
             routerLink: 'dashboard'
           },
@@ -61,6 +70,44 @@ export class MenuComponent implements OnInit {
       // }
 
       if (user.tipo === "Empresa") {
+        //Si es empresa y no tiene acceso
+      if(user.tipo=='Empresa' && moment(user.usuario.fechaExpiracion).isBefore(new Date())){
+        this.items.push(
+        {
+        label: 'Solicitar Acceso',
+        icon: 'pi pi-exclamation-triangle',
+        style: '',
+        styleClass: 'rojo',
+        command: () => {
+          this.confirmationService.confirm({
+            message: 'Se enviará un correo al administrador solicitando acceso. ¿Desea continuar?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.empresarioService.enviarCorreo().subscribe(
+                  response => {
+                    this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Correo enviado exitosamente' })
+                  },
+                  error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error al enviar el correo' })
+                  }
+                );
+            },
+            reject: (type: any) => {
+                switch(type) {
+                    case ConfirmEventType.REJECT:
+                        this.messageService.add({severity:'error', summary:'Rechazado', detail:'No se envió el correo'});
+                    break;
+                    case ConfirmEventType.CANCEL:
+                        this.messageService.add({severity:'warn', summary:'Cancelado', detail:'No se envió el correo'});
+                    break;
+                }
+            }
+        });
+        }
+        })
+      }
+
         this.items.push(
           {
             label: 'Modificar información',
@@ -73,16 +120,12 @@ export class MenuComponent implements OnInit {
             routerLink: 'misOfertas'
           },
           {
-            label: 'Listar Postulantes',
+            label: 'Buscar Candidatos',
             icon: 'pi pi-pw pi-users',
             routerLink: 'postulantes'
           },
-          {
-            label: 'Novedades',
-            icon: 'pi pi-pw pi-users',
-            routerLink: 'novedades'
-          },
         );
+        
       }
 
       if (user.tipo === "Postulante") {

@@ -24,6 +24,7 @@ export class ListaEmpresasComponent implements OnInit {
   cols: any[] = [];
   query: string = "";
   empresas: Empresario[] = [];
+  empresaC: Empresario = {};
 
   PublicarComoEmpresaForm: FormGroup = new FormGroup({});
 
@@ -40,6 +41,16 @@ export class ListaEmpresasComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getEmpresas();
+  
+
+    this.cols = [
+      { field: 'razonSocial', header: 'Razon Social' },
+      { field: 'rut', header: 'RUT' },
+    ];
+  }
+
+  getEmpresas(){
     this.empresarioService.buscarEmpresario("", 0).subscribe(
       response => {
         this.empresas = response.empresas;
@@ -49,17 +60,9 @@ export class ListaEmpresasComponent implements OnInit {
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
       })
-  
-
-    this.cols = [
-      { field: 'razonSocial', header: 'Razon Social' },
-      { field: 'rut', header: 'RUT' },
-    ];
   }
 
   estado(fechaExpiracion: Date): string {
-    console.log(fechaExpiracion);
-    
     if (moment(fechaExpiracion).isBefore(new Date())||!fechaExpiracion) return "Inactiva"
     return "Activa"
   }
@@ -89,7 +92,6 @@ export class ListaEmpresasComponent implements OnInit {
   }
 
   buscarEmpresas(){
-    console.log(this.query);
     this.empresarioService.buscarEmpresario("&query="+this.query, 0).subscribe(
       response => {
         this.empresas = response.empresas;
@@ -99,6 +101,23 @@ export class ListaEmpresasComponent implements OnInit {
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
       })
+  }
+
+  inhabilitarEmpresa(empresa:Empresario){
+    this.empresaC = new Empresario();
+    this.empresaC.id = empresa.id;
+    this.empresaC.fechaExpiracion = moment().subtract(1,'days').toDate();
+    console.log(this.empresaC);
+    this.empresarioService.modificarEmpresario(this.empresaC).subscribe(
+      result=>{
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Empresa inhabilitada exitosamente' })
+        this.getEmpresas();
+      },
+      error=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error interno del sistema' });
+      }
+      
+    );
   }
 
 }

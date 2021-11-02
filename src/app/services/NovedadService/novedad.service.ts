@@ -23,7 +23,7 @@ export class NovedadService {
   getNovedad(id: number) {
     return this.http.get<Novedad>(this.URL + '/' + id);
   }
-  modificarNovedad(novedad: Novedad) {
+  modificarNovedad(novedad: FormData) {
     return this.http.put(this.URL + '/', novedad);
   }
   getBlobDatos(url: string){
@@ -37,6 +37,9 @@ export class NovedadService {
   }
   ultimasNovedades(){
     return this.http.get<Novedad[]>(this.URL+'/ultimasNovedades');
+  }
+  deleteNovedad(novedadId: number) {
+    return this.http.delete(this.URL + '/' + novedadId);
   }
 
 

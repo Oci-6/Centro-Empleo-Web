@@ -6,7 +6,7 @@
 
             </div>
         </div>
-        
+
     </ng-template>
     <p-table [columns]="cols" [value]="ofertas" [scrollLeft]="true"
         styleClass="p-datatable-gridlines p-datatable-striped" [responsive]="true">
@@ -31,10 +31,19 @@
                 </td>
                 <td>
                     <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
+                    <button pButton pRipple type="button" icon="pi pi-pencil" title="Editar"
+                        class="p-button-rounded p-button-secondary p-mr-2" [routerLink]="'/modificarOferta/'+oferta.id" pTooltip="Editar Oferta">
+                    </button>
+                    <button pButton pRipple type="button" icon="pi pi-times" pTooltip="Cerrar Oferta"
+                        class="p-button-rounded p-button-danger p-mr-2" (click)="cerrarOferta(oferta)">
+                    </button>
                     <button pButton pRipple type="button" icon="pi pi-users" (click)="showPostulantes(oferta)"
                         class="p-button-rounded p-button-warning p-mr-2" pTooltip="Ver postulantes"></button>
                     <button pButton pRipple type="button" icon="pi pi-search-plus" [routerLink]="'/ofertas/'+oferta.id"
                         class="p-button-rounded p-button-info p-mr-2" pTooltip="Ver oferta"></button>
+                    <button pButton pRipple type="button" icon="pi pi-trash" title="Eliminar"
+                        class="p-button-rounded p-button-danger p-mr-2" (click)="ngOnDelete(oferta.id)" pTooltip="Eliminar Oferta">
+                    </button>
                     <!-- </ng-container>   -->
                 </td>
             </tr>
@@ -43,7 +52,7 @@
 </p-card>
 
 <p-dialog class="p-grid p-jc-center" *ngIf="selectedOferta" [header]="'Postulantes a: '+selectedOferta.vacante"
-    [(visible)]="displayPostulantesDialog" [style]="{height: '100%',width: '80%'}" >
+    [(visible)]="displayPostulantesDialog" [style]="{height: '100%',width: '80%'}">
     <app-lista-postulantes-partial *ngIf="selectedOferta.postulantes" [postulantes]="selectedOferta.postulantes">
     </app-lista-postulantes-partial>
 </p-dialog>

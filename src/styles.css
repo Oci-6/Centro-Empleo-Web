@@ -22,7 +22,9 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 
 
 .p-menubar {
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% );
+    /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% ); */
+    background: rgb(43,150,53);
+    background: linear-gradient(0deg, rgba(43,150,53,0.6) 0%, rgba(43,130,53,0.6) 48%, rgba(43,100,53,0.6) 100%);
 }
 
 .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
@@ -39,8 +41,10 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 }
 
 .p-menubar.p-menubar-mobile-active .p-menubar-root-list {
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% )
+    background: rgb(43,150,53);
+    background: linear-gradient(0deg, rgba(43,150,53,0.6) 0%, rgba(43,130,53,0.6) 48%, rgba(43,100,53,0.6) 100%);
 }
+
 .p-menubar .p-menubar-button {
     color: white;
 }
@@ -62,3 +66,7 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 .file-input {
     display: none;
   }
+
+/* .p-panelmenu .p-panelmenu-panel:first-child .p-panelmenu-header .rojo  > a{
+    background-color: red;
+} */

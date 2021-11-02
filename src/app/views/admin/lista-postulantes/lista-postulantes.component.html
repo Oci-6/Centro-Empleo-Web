@@ -11,14 +11,14 @@
             </div>
             <div class="p-col">
 
-            <p-breadcrumb [model]="items"></p-breadcrumb>
-</div>
+                <p-breadcrumb [model]="items"></p-breadcrumb>
+            </div>
         </div>
     </ng-template>
 
-    <p-table [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped"
-        [scrollable]="true" scrollHeight="400px" scrollDirection="both" [responsive]="true" sortMode="single"
-        [lazy]="true" (onLazyLoad)="customSort($event)">
+    <p-table [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped" [scrollable]="true"
+        scrollHeight="400px" scrollDirection="both" [responsive]="true" sortMode="single" [lazy]="true"
+        (onLazyLoad)="customSort($event)">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <!-- <th *ngFor="let col of columns">
@@ -171,7 +171,10 @@
                         </p-columnFilter>
                     </div>
                 </th>
-                <th style="width:100px" alignFrozen="right" pFrozenColumn [frozen]="true">Acciones</th>
+                <th style="width:200px" *ngIf="esAdmin()">
+                    Visibilidad
+                </th>
+                <th style="width:150px" alignFrozen="right" pFrozenColumn [frozen]="true">Acciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-postulante let-columns="columns">
@@ -262,11 +265,19 @@
                         </ng-container>
                     </p>
                 </td>
-                <td style="width:100px" alignFrozen="right" pFrozenColumn [frozen]="true">
+                <td style="width:200px" *ngIf="esAdmin()">
+                    {{postulante.visibilidad  ? 'Visible' : 'Invisible' }}
+                </td>
+                <td style="width:150px" alignFrozen="right" pFrozenColumn [frozen]="true">
                     <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
                     <button pButton pRipple type="button" icon="pi pi-search-plus" title="DetallarInfo"
                         (click)="showInfoPostulante(postulante)" class="p-button-rounded p-button-warning p-mr-2"
-                        pTooltip="Informacion del postulante"></button>
+                        pTooltip="Informacion del postulante">
+                    </button>
+                    <button pButton pRipple type="button" icon="pi pi-eye-slash" title="OcultarPostulante"
+                        (click)="ocultarPostulante(postulante)" class="p-button-rounded p-button-secondary p-mr-2"
+                        pTooltip="OcultarPostulante">
+                    </button>
                     <!-- </ng-container>   -->
                 </td>
             </tr>

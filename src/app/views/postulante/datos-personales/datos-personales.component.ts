@@ -275,6 +275,8 @@ export class DatosPersonalesComponent implements OnInit {
   async nextPage() {
     this.submitted = true;
     if (this.datosPersonalesForm.valid) {
+      console.log('asdada');
+      
       if (this.datosPersonalesForm.touched) {
         if (await this.ngOnSubmit()) {
           this.router.navigate(['formulario/educacionFormacion']);

@@ -32,6 +32,7 @@ import { RecuperarContraseniaComponent } from './views/recuperar-contrasenia/rec
 import { RegistrarComponent } from './views/registrar/registrar.component';
 import { NovedadesComponent } from './views/novedades/novedades.component';
 import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
+import { ModificarOfertaComponent } from './views/empresario/modificar-oferta/modificar-oferta.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'datosAdicionales',canActivate: [LoginGuard], component: DatosAdicionalesComponent },
   { path: 'misOfertas',canActivate: [LoginGuard],  component: MisOfertasComponent },
   { path: 'agregarOferta',canActivate: [LoginGuard, EmpresaActivaGuard],  component: AgregarOfertaComponent },
+  { path: 'modificarOferta/:id',canActivate: [LoginGuard, EmpresaActivaGuard],  component: ModificarOfertaComponent },
   
   //Rutas Admin
   { path: 'dashboard',canActivate: [LoginGuard],  component: DashboardComponent },

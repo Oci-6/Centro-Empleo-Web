@@ -17,6 +17,9 @@ export class OfertasComponent implements OnInit {
   total: number = 0;
 
   query: string = "";
+  url: string = "";
+  selectedOferta: Oferta = {};
+  displayCompartirDialog: boolean = false;
 
   constructor(
     private ofertasService: OfertasService,
@@ -68,5 +71,13 @@ export class OfertasComponent implements OnInit {
 
   convertirFecha(fecha: Date | undefined) {
     return moment(fecha).format("DD/MM/YYYY");
+  }
+
+  compartir(oferta:Oferta) {
+    this.url= window.location.hostname+window.location.pathname + '/'+ oferta.id;
+    this.selectedOferta = oferta;
+    this.displayCompartirDialog = true;
+    console.log(window.location.href);
+    
   }
 }

@@ -102,14 +102,17 @@ export class DatosAdicionalesComponent implements OnInit {
   
 
   getEmpresa(empresaId: number){
-
+    
     this.empresarioService.infoEmpresario(empresaId).subscribe(
       result => {
         this.empresa = result;
-        console.log(this.empresa);    
+        console.log(this.empresa); 
+        if (result.localidad?.departamento) this.selectedDepartamento = result.localidad.departamento.id;
+        if (this.selectedDepartamento&&this.departamentos) this.localidades = this.departamentos[this.selectedDepartamento-1].localidades;
+        this.selectedLocalidad = result.localidad?.id;  
         this.datosAdicionalesForm.controls["razonSocial"].setValue(this.empresa.razonSocial);
-        this.datosAdicionalesForm.controls["departamento"].setValue(this.empresa.localidad?.departamento?.nombre);
-        this.datosAdicionalesForm.controls["localidad"].setValue(this.empresa.localidad?.id);
+        this.datosAdicionalesForm.controls["departamento"].setValue(this.selectedDepartamento);        
+        this.datosAdicionalesForm.controls["localidad"].setValue(this.selectedLocalidad);
         this.datosAdicionalesForm.controls["telefono"].setValue(this.empresa.telefono);
         this.datosAdicionalesForm.controls["mostrarNombreE"].setValue(this.empresa.visibilidad);
         this.datosAdicionalesForm.controls["nombreAmostrar"].setValue(this.empresa.nombreFantasia);
@@ -117,4 +120,4 @@ export class DatosAdicionalesComponent implements OnInit {
     );
 
   }
-}
+} 

@@ -34,5 +34,9 @@ export class OfertasService {
       total: number
     }>(this.URL+"/buscar/?page="+page+query);
   }
+  
+  deleteOferta(OfertaId: number) {
+    return this.http.delete(this.URL + '/' + OfertaId);
+  }
 
 }

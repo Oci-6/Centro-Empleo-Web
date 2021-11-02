@@ -54,6 +54,7 @@ import { ListaOfertasComponent } from './views/admin/lista-ofertas/lista-ofertas
 import { AgregarNovedadComponent } from './views/admin/agregar-novedad/agregar-novedad.component';
 import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModificarOfertaComponent } from './views/empresario/modificar-oferta/modificar-oferta.component';
 
 
 
@@ -96,6 +97,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ListaOfertasComponent,
     AgregarNovedadComponent,
     DetalleNovedadComponent,
+    ModificarOfertaComponent,
 
     
   ],

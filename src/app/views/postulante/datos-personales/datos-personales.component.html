@@ -36,7 +36,7 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerApellido">Primer Apellido</label>
-                        <input id="primerApellido" type="text" required pInputText formControlName="primerApellido">
+                        <input id="primerApellido" type="text" pInputText formControlName="primerApellido">
                         <div *ngIf="f.primerApellido.errors&&submitted" class="invalid-feedback">
                             <small class="p-error" *ngIf="f.primerApellido.errors.required">Ingrese un apellido</small>
                         </div>
@@ -44,12 +44,12 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoApellido">Segundo Apellido</label>
-                        <input id="segundoApellido" type="text" required pInputText formControlName="segundoApellido">
+                        <input id="segundoApellido" type="text" pInputText formControlName="segundoApellido">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="primerNombre">Primer Nombre</label>
-                        <input id="primerNombre" type="text" required pInputText formControlName="primerNombre">
+                        <input id="primerNombre" type="text" pInputText formControlName="primerNombre">
                         <div *ngIf="f.primerNombre.errors&&submitted" class="invalid-feedback">
                             <small class="p-error" *ngIf="f.primerNombre.errors.required">Ingrese un nombre</small>
                         </div>
@@ -57,7 +57,7 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="segundoNombre">Segundo Nombre</label>
-                        <input id="segundoNombre" type="text" required pInputText formControlName="segundoNombre">
+                        <input id="segundoNombre" type="text" pInputText formControlName="segundoNombre">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
@@ -110,12 +110,12 @@
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="barrio">Barrio</label>
-                        <input inputId="barrio" type="text" required pInputText formControlName="barrio">
+                        <input inputId="barrio" type="text" pInputText formControlName="barrio">
                     </div>
 
                     <div class="p-field p-col-12 p-md-6">
                         <label for="direccion">Direccion</label>
-                        <input id="direccion" type="text" required pInputText formControlName="direccion">
+                        <input id="direccion" type="text" pInputText formControlName="direccion">
                         <div *ngIf="f.direccion.errors&&submitted" class="invalid-feedback">
                             <small class="p-error" *ngIf="f.direccion.errors.required">Ingrese una dirección</small>
                         </div>

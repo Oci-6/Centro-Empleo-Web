@@ -25,8 +25,8 @@
 
                     <div class="p-col p-mt-4">
 
-                        <p-dropdown [options]="localidades || []" optionLabel="nombre" formControlName="localidad"
-                            inputId="localidad" optionValue="id" placeholder="Seleccione una localidad">
+                        <p-dropdown [options]="localidades || []" optionLabel="nombre" optionValue="id" 
+                            formControlName="localidad" inputId="localidad"  placeholder="Seleccione una localidad">
                         </p-dropdown>
                         <div *ngIf="g.localidad.errors&&submitted" class="invalid-feedback">
                             <small class="p-error" *ngIf="g.localidad.errors.required">Seleccione una

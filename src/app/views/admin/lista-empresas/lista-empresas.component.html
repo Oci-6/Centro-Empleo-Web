@@ -35,9 +35,14 @@
         <td>
           <button pButton pRipple type="button" icon="pi pi-pencil" [routerLink]="'/agregarOferta'"
             [queryParams]="{idEmpresa:empresa.id | json }" class="p-button-rounded p-button-warning p-mr-2"
-            pTooltip="Publicar como Empresa"></button>
+            pTooltip="Publicar como Empresa">
+          </button>
           <button pButton pRipple type="button" icon="pi pi-clock" pTooltip="Habilitar Empresa"
-            class="p-button-rounded p-button-secondary p-mr-2" (click)="showExtenderDuracion(empresa)"></button>
+            class="p-button-rounded p-button-success p-mr-2" (click)="showExtenderDuracion(empresa)">
+          </button>
+          <button pButton pRipple type="button" icon="pi pi-times" pTooltip="Inhabilitar Empresa"
+            class="p-button-rounded p-button-danger p-mr-2" (click)="inhabilitarEmpresa(empresa)">
+          </button>
         </td>
       </tr>
     </ng-template>

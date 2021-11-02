@@ -6,6 +6,7 @@ import { Departamento } from 'src/app/models/Departamento';
 import { Localidad } from 'src/app/models/Localidad';
 import { Message } from 'src/app/models/Message';
 import { Postulante } from 'src/app/models/Postulante';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 import { PaisService } from 'src/app/services/PaisService/pais.service';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
 
@@ -62,12 +63,15 @@ export class ListaPostulantesComponent implements OnInit {
   items: MenuItem[] = [];
   itemsCopy: any[] = [];
   refresh: boolean = false;
+  user: any;
+  postulante: Postulante = {};
 
   constructor(
     private postulanteService: PostulanteService,
     private messageService: MessageService,
     private router: Router,
     private paisService: PaisService,
+    private auth: AuthService,
   ) { }
 
   postulantes: Postulante[] = [];
@@ -167,5 +171,28 @@ export class ListaPostulantesComponent implements OnInit {
     this.postulantes = result.postulantes;
     this.totalRows = result.total;
 
+  }
+
+  esAdmin(): boolean{
+    this.user = this.auth.getAuth(); 
+    if(this.user.tipo=='Admin'){
+      return true;
+    }
+    return false;
+  }
+
+  ocultarPostulante(postulante:Postulante){
+    this.postulante = new Postulante();
+    this.postulante.id = postulante.id;
+    this.postulante.visibilidad = false;
+    this.postulanteService.modificarPostulante(this.postulante).subscribe(
+      result=>{
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Postulante ocultado exitosamente' });
+        postulante.visibilidad=false;
+      },
+      error=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al ocultar al postulante' });
+      }
+    );
   }
 }

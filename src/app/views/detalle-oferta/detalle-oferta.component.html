@@ -10,18 +10,18 @@
         <!-- <div class="p-col-fixed">
             <img alt="Card" class="imagen-oferta" src="https://cherie.com.uy/wp-content/uploads/2020/06/placeholder-1.png">
         </div> -->
-        <div class="p-col-12">
-
-            <p-message *ngIf="ofertaAbierta()" severity="error" text="Oferta cerrada"></p-message>
-            <h4>Funciones y Tareas:</h4><p>{{oferta.funcionesTareas}}</p>
-        
-            
-            
-        </div>
 
         <div class="p-col-6">
             <h4 class="p-mt-5">Área de trabajo:</h4><p>{{oferta.areaTrabajo}}</p>
+        </div>
 
+        <div class="p-col-6">
+            <h4 class="p-mt-5">Lugar:</h4><p>{{oferta.lugar}}</p>
+        </div>
+        
+        <div class="p-col-12">
+            <p-message *ngIf="ofertaAbierta()" severity="error" text="Oferta cerrada"></p-message>
+            <h4>Funciones y Tareas:</h4><p>{{oferta.funcionesTareas}}</p>
         </div>
 
         <div class="p-col-6">
@@ -40,9 +40,7 @@
             <h4 class="p-mt-5">Rango salarial:</h4><p>{{oferta.salarioDesde}} - {{oferta.salarioHasta}}</p>
         </div>
 
-        <div class="p-col-6">
-            <h4 class="p-mt-5">Lugar:</h4><p>{{oferta.lugar}}</p>
-        </div>
+        
         
     </div>
     <ng-template pTemplate="footer">
