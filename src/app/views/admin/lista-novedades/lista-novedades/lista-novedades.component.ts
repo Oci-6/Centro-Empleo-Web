@@ -167,6 +167,20 @@ export class ListaNovedadesComponent implements OnInit {
     }
   }
 
+  getNovedad(novedadId: number){
+    this.novedadService.getNovedad(novedadId).subscribe(
+      response => {
+        this.novedad = response;
+        console.log(this.novedad);
+        
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
+      }
+    )
+  }
+
+
   enviarCorreo(){
     if(this.selectedNovedad.id) this.adminService.enviarNovedad(this.selectedNovedad.id).subscribe(
       response => {
