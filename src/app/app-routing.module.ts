@@ -46,13 +46,15 @@ const routes: Routes = [
   { path: 'novedades', component: NovedadesComponent },
   { path: 'novedades/:id', component: DetalleNovedadComponent },
   
-
-  { path: 'formulario/datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
-  { path: 'formulario/educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
-  { path: 'formulario/experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
-  { path: 'formulario/permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
-  { path: 'formulario/preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
-  { path: 'formulario/cv',canActivate: [LoginGuard], component: CvPermisosLegalesComponent },
+{path: 'formulario',canActivate: [LoginGuard], component: FormularioComponent , children: [
+  
+  { path: 'datosPersonales',canActivate: [LoginGuard], component: DatosPersonalesComponent },
+  { path: 'educacionFormacion',canActivate: [LoginGuard], component: EducacionFormacionComponent },
+  { path: 'experienciaLaboral',canActivate: [LoginGuard], component: ExperienciasLaboralesComponent },
+  { path: 'permisosLicencias',canActivate: [LoginGuard], component: PermisosLicenciasComponent },
+  { path: 'preferenciasLaborales',canActivate: [LoginGuard], component: InteresesPreferenciasComponent },
+  { path: 'cv',canActivate: [LoginGuard], component: CvPermisosLegalesComponent },
+]},
   { path: 'perfil',canActivate: [LoginGuard,PerfilCompletoGuard],  component: PerfilComponent },
   { path: 'postulaciones',canActivate: [LoginGuard],  component: MisPostulacionesComponent },
 

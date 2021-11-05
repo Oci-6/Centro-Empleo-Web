@@ -18,20 +18,30 @@ export class AdminService {
   habilitarEmpresa(empresa: Empresario) {
     return this.http.put(this.URL + '/habilitar', empresa);
   }
-  
-  getEstadisticas() {
-    return this.http.get<any>(this.URL + '/datos')
+
+  enviarOferta(id: number) {
+    return this.http.get(this.URL + '/enviarOferta/' + id);
   }
 
-  registrarAdmin(user: User) {
+  enviarNovedad(id: number) {
+    return this.http.get(this.URL + '/enviarNovedad/' + id);
+  }
+
+  getEstadisticas(query: string) {
+    return this.http.get<any>(this.URL + '/datos' + query);
+  }
+    registrarAdmin(user: User){
     return this.http.post(this.URL + '/', user);
   }
+
   getAllAdmin() {
     return this.http.get<Admin[]>(this.URL + '/');
   }
+
   infoAdmin(id: number) {
     return this.http.get<Admin>(this.URL + '/' + id);
   }
+
   modificarAdmin(admin: Admin) {
     return this.http.put(this.URL + '/', admin);
   }

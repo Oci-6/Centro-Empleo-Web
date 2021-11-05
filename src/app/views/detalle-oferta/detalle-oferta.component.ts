@@ -41,7 +41,7 @@ export class DetalleOfertaComponent implements OnInit {
           this.router.navigate(['ofertas']);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No existe oferta con tal id' });
         }
-        if (result&&this.postulante.tipo === "Postulante") {
+        if (result&&this.postulante&&this.postulante.tipo === "Postulante") {
           this.postulado = this.oferta.postulantes?.find(element => element.id === this.postulante.usuario.id) != undefined;
         }
         
@@ -68,8 +68,11 @@ export class DetalleOfertaComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Postulado correctamente' });
           this.postulado = true;
         },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al postularse' });
+        error => {          
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: (error.error.message) ?? 'Error del servidor' });
+          if(error.error.message="Perfil incompleto"){
+            this.router.navigate(['/formulario/datosPersonales'])
+          }
         }
       )
   }

@@ -60,8 +60,6 @@ export class CvPermisosLegalesComponent implements OnInit {
       let postulante: Postulante = new Postulante();
       postulante.id = this.postulante.id;
       postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;  
-      postulante.terminosCondiciones = this.cvPermisosForm.controls.terminosCondiciones.value;
-console.log(postulante);
 
       await this.postulanteService.modificarPostulante(postulante).toPromise();
 

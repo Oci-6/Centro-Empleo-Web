@@ -1,8 +1,13 @@
 <div class="p-grid">
     <div class="p-col-12 p-md-3 p-fluid">
         <div class=" p-grid p-jc-center">
-            <div class="p-col-12 p-grid p-jc-center ">
+            <div class="p-col-12 p-grid p-formgrid p-jc-center ">
                 <img style="max-height:250px; max-width: 100%; " [src]="this.fotoPerfil | safe: 'url'" #img>
+
+                <div class="p-field p-col-12">
+                    <p-skeleton *ngIf="!this.fotoPerfil" height="250px" width="100%"></p-skeleton>
+                </div>
+
             </div>
             <div class="p-col-12 p-grid p-jc-center">
 
@@ -13,22 +18,25 @@
                 </p-fileUpload> -->
                 <input type="file" accept="image/*" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
-                    <p-button style="width: 100%" [label]="file?.name || 'Cambiar foto'" icon="pi pi-paperclip"
-                        (click)="fileUpload.click()" *ngIf="perfilPropio"></p-button>
-                        
+                <p-button style="width: 100%" [label]="file?.name || 'Cambiar foto'" icon="pi pi-paperclip"
+                    (click)="fileUpload.click()" *ngIf="perfilPropio"></p-button>
+
 
             </div>
             <div class="p-col-12 p-grid p-jc-center">
 
-                    <a pButton target="_blank" type="button" label="Curriculum" icon="pi pi-search"
-                        [href]="cv | safe: 'url'" *ngIf="postulante.curriculum"></a>
+                <a pButton target="_blank" type="button" label="Curriculum" icon="pi pi-search"
+                    [href]="cv | safe: 'url'" *ngIf="postulante.curriculum"></a>
+            </div>
+            <div class="p-col-12 p-grid p-jc-center">
 
-                    <a pButton target="_blank" type="button" label="Curriculum Generado" icon="pi pi-search"
-                    [href]="pdf | safe: 'url'" *ngIf="pdf!=''"></a>
+                <a pButton target="_blank" type="button" label="Curriculum Generado" icon="pi pi-search"
+                    [href]="pdf | safe: 'url'" [loading]="pdf==''"></a>
             </div>
             <div class="p-col-12 p-grid p-jc-center ">
                 <div *ngIf="perfilPropio" class="p-field p-grid p-ai-center vertical-container">
-                    <label for="Visibilidad" class="p-col-9"><strong>¿Deseo que mis datos sean visibles en la bolsa de trabajo?</strong></label>
+                    <label for="Visibilidad" class="p-col-9"><strong>¿Deseo que mis datos sean visibles en la bolsa de
+                            trabajo?</strong></label>
                     <div class="p-col-3">
                         <p-inputSwitch id="Visibilidad" (onChange)="onVisibilidad()" [(ngModel)]="visibilidad">
                         </p-inputSwitch>

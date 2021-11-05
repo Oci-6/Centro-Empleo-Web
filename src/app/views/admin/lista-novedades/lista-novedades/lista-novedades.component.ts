@@ -167,19 +167,16 @@ export class ListaNovedadesComponent implements OnInit {
     }
   }
 
-  getNovedad(novedadId: number){
-    this.novedadService.getNovedad(novedadId).subscribe(
+  enviarCorreo(){
+    if(this.selectedNovedad.id) this.adminService.enviarNovedad(this.selectedNovedad.id).subscribe(
       response => {
-        this.novedad = response;
-        console.log(this.novedad);
-        
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Novedad compartida exitosamente' });
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error interno del sistema' })
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ?? 'Error interno del sistema' })
+
       }
     )
   }
-
-  
 
 }
