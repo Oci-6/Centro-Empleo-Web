@@ -161,5 +161,16 @@ export class ListaNovedadesComponent implements OnInit {
      this.displayFormularioNovedadDialog = true;
    }
 
+  enviarCorreo(){
+    if(this.selectedNovedad.id) this.adminService.enviarNovedad(this.selectedNovedad.id).subscribe(
+      response => {
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Novedad compartida exitosamente' });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ?? 'Error interno del sistema' })
+
+      }
+    )
+  }
 
 }

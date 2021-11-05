@@ -44,7 +44,7 @@ export class ListaPostulantesComponent implements OnInit {
   selectedDocumento: string = "";
 
   public departamentos: Departamento[] = [];
-  public localidades: Localidad[] | undefined = [];
+  public localidades: Localidad[] | undefined;
 
   selectedDepartamento: string | undefined;
   selectedLocalidad: string | undefined;
@@ -59,8 +59,7 @@ export class ListaPostulantesComponent implements OnInit {
   permisos: boolean = false;
   intereses: boolean = false;
   edad: number = 0;
-  items: MenuItem[] = [];
-  itemsCopy: any[] = [];
+  items: any[] = [];
   refresh: boolean = false;
 
   constructor(
@@ -74,20 +73,20 @@ export class ListaPostulantesComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
-  
+
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
         console.log(this.postulantes);
-          },
+      },
       (error) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Info',
           detail: error.message ? error.message : 'Error interno del sistema',
         });
-    
+
       }
     )
 
@@ -110,22 +109,42 @@ export class ListaPostulantesComponent implements OnInit {
   }
 
 
-  async filtrar(filtro: string, valor: any) {
+  filtrar(filtro: string, valor: any, header: string) {
     this.filtros[filtro] = valor;
-    this.itemsCopy.push({label: filtro});
-    this.items = [];
-    this.items = this.itemsCopy;
-    console.log(this.items);
-    
+
+    this.items = this.items.filter((value) => value.filtro !== filtro);
+    this.items.push({ filtro: filtro, header: header, valor: filtro == "fechaNacimiento" ? "Edad: " + this.edad : valor });
+
     this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
       response => {
         this.postulantes = response.postulantes;
-        this.totalRows = response.total;    
+        this.totalRows = response.total;
+      }
+    )
+
+  }
+
+  borrarFiltro(filtro: string) {
+    if (filtro == '') {
+      this.filtros = {};
+      this.items = [];
+    }
+    else {
+      this.filtros[filtro] = undefined;
+      this.items = this.items.filter((value) => value.filtro !== filtro);
+    }
+
+
+    this.postulanteService.buscarPostulantes(this.filtros, 0).subscribe(
+      response => {
+        this.postulantes = response.postulantes;
+        this.totalRows = response.total;
       }
     )
 
 
   }
+
 
   calcularEdadInverso(): Date {
     return moment(new Date()).subtract(this.edad, 'years').toDate();
@@ -137,9 +156,10 @@ export class ListaPostulantesComponent implements OnInit {
 
       let departamento = this.departamentos.find(element => element.nombre == this.selectedDepartamento);
       if (departamento) this.localidades = departamento.localidades;
+
     }
     this.localidades?.sort((a: any, b: any) => a.id - b.id);
-
+    this.filtrar('departamento', this.selectedDepartamento, 'Departamento')
   }
 
   onPaginacion(e: any) {
@@ -148,8 +168,7 @@ export class ListaPostulantesComponent implements OnInit {
       response => {
         this.postulantes = response.postulantes;
         this.totalRows = response.total;
-        console.log(this.postulantes);
-    
+
       }
     )
   }
@@ -159,10 +178,10 @@ export class ListaPostulantesComponent implements OnInit {
     let sortOrderBy = event.sortOrder == -1 ? 'ASC' : 'DESC';
     if (sortBy)
       this.filtros[sortBy] = sortOrderBy;
-    
+
 
     let result = await this.postulanteService.buscarPostulantes(this.filtros, 0).toPromise();
-    
+
 
     this.postulantes = result.postulantes;
     this.totalRows = result.total;

@@ -59,7 +59,7 @@ export class CvPermisosLegalesComponent implements OnInit {
     try {
       let postulante: Postulante = new Postulante();
       postulante.id = this.postulante.id;
-      postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;
+      postulante.visibilidad = this.cvPermisosForm.controls.visibilidad.value;  
 
       await this.postulanteService.modificarPostulante(postulante).toPromise();
 

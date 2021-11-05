@@ -126,7 +126,7 @@ export class DatosPersonalesComponent implements OnInit {
         // console.log(this.postulante.fechaNacimiento);
         // console.log(result.localidad);
         // console.log(this.selectedDepartamento);
-        this.getLocalidades(this.selectedDepartamento);
+        if(this.selectedDepartamento) this.getLocalidades(this.selectedDepartamento);
         if (this.postulante.fechaNacimiento) {
           this.datosPersonalesForm.controls["fechaN"].setValue((moment(this.postulante.fechaNacimiento, 'YYYY-MM-DD').toDate()));
         }

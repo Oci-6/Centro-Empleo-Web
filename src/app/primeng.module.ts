@@ -36,7 +36,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { TreeModule } from 'primeng/tree';
 import { MenuModule } from 'primeng/menu';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { TagModule } from 'primeng/tag';
+import {SkeletonModule} from 'primeng/skeleton';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     TreeModule,
     MenuModule,
     OverlayPanelModule,
-    BreadcrumbModule
+    TagModule,
+    SkeletonModule
   ],
   exports: [
     MenubarModule,
@@ -113,7 +115,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     TreeModule,
     MenuModule,
     OverlayPanelModule,
-    BreadcrumbModule
+    TagModule,
+    SkeletonModule
   ]
 })
 export class PrimeNgModule { }

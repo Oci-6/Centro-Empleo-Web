@@ -5,20 +5,29 @@
                 <span>Bolsa de trabajo</span>
 
             </div>
-            <div class="p-col">
-                <button type="text" icon="pi pi-info-circle" pButton label="Más columnas"
+            <div class="p-col-fixed">
+                <button type="text" icon="pi pi-info-circle" pButton label="Más columnas" class="p-mr-3"
                     (click)="op.toggle($event)"></button>
-            </div>
-            <div class="p-col">
+                <p-button *ngIf="items.length>0" (click)="borrarFiltro('')"  label="Borrar filtros" icon="pi pi-times"
+                    styleClass="p-button-danger" ></p-button>
 
-            <p-breadcrumb [model]="items"></p-breadcrumb>
-</div>
+            </div>
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="subtitle">
+        <div class="p-grid p-ai-center p-vertical-container">
+            <p-tag *ngFor="let item of items" (click)="borrarFiltro(item.filtro)" styleClass="p-mr-2" severity="success"
+                [value]="item.valor" [rounded]="true"></p-tag>
+
+           
+
         </div>
     </ng-template>
 
-    <p-table [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped"
-        [scrollable]="true" scrollHeight="400px" scrollDirection="both" [responsive]="true" sortMode="single"
-        [lazy]="true" (onLazyLoad)="customSort($event)">
+    <p-table [value]="postulantes" styleClass="p-datatable-gridlines p-datatable-striped" [scrollable]="true"
+        scrollHeight="400px" scrollDirection="both" [responsive]="true" sortMode="single" [lazy]="true"
+        (onLazyLoad)="customSort($event)">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <!-- <th *ngFor="let col of columns">
@@ -37,7 +46,7 @@
                                     inputId="horizontal" spinnerMode="horizontal" [step]="1"
                                     decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
                                     incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="16"
-                                    [max]="90" (onBlur)="filtrar('fechaNacimiento', calcularEdadInverso())">
+                                    [max]="90" (onBlur)="filtrar('fechaNacimiento', calcularEdadInverso(), 'Edad')">
                                 </p-inputNumber>
                             </ng-template>
 
@@ -52,7 +61,7 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo"
-                                    (onChange)="filtrar('sexo', selectedSexo)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('sexo', selectedSexo, 'Sexo')" styleClass="p-m-3"></p-dropdown>
 
                             </ng-template>
 
@@ -68,12 +77,13 @@
                             <ng-template pTemplate="filter">
 
                                 <p-dropdown [options]="departamentos" [(ngModel)]="selectedDepartamento"
-                                    optionLabel="nombre" optionValue="value" (onChange)="onChangeDepartamento()"
-                                    (onChange)="filtrar('departamento', selectedDepartamento)" styleClass="p-m-3">
+                                    optionLabel="nombre" optionValue="nombre" (onChange)="onChangeDepartamento()"
+                                    styleClass="p-m-3" placeholder="Seleccione un departamento">
                                 </p-dropdown>
                                 <p-dropdown *ngIf="localidades" [options]="localidades" [(ngModel)]="selectedLocalidad"
                                     optionLabel="nombre" optionValue="nombre"
-                                    (onChange)="filtrar('localidad', selectedLocalidad)" styleClass="p-m-3">
+                                    (onChange)="filtrar('localidad', selectedLocalidad, 'Localidad')" styleClass="p-m-3"
+                                    placeholder="Seleccione una localidad">
                                 </p-dropdown>
 
                             </ng-template>
@@ -89,7 +99,8 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="nivelEducativo" [(ngModel)]="selectedNE"
-                                    (onChange)="filtrar('nivelEducativo', selectedNE)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('nivelEducativo', selectedNE, 'Nivel Educativo')"
+                                    styleClass="p-m-3"></p-dropdown>
 
                             </ng-template>
 
@@ -104,7 +115,8 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="areaTOp" [(ngModel)]="selectedArea"
-                                    (onChange)="filtrar('areaTematica', selectedArea)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('areaTematica', selectedArea, 'Áreas de formación')"
+                                    styleClass="p-m-3"></p-dropdown>
 
                             </ng-template>
 
@@ -119,7 +131,8 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="idiomas" [(ngModel)]="selectedIdioma"
-                                    (onChange)="filtrar('idioma', selectedIdioma)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('idioma', selectedIdioma,'Idioma')" styleClass="p-m-3">
+                                </p-dropdown>
 
                             </ng-template>
 
@@ -133,8 +146,9 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres"
-                                    (onChange)="filtrar('interes', selectedInteres)" styleClass="p-m-3"></p-dropdown>
+                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedRubro"
+                                    (onChange)="filtrar('rubro', selectedRubro,'Exp. Rubro')" styleClass="p-m-3">
+                                </p-dropdown>
 
                             </ng-template>
 
@@ -149,7 +163,8 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedDocumento"
-                                    (onChange)="filtrar('permisos', selectedDocumento)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('permisos', selectedDocumento,'Permisos')" styleClass="p-m-3">
+                                </p-dropdown>
 
                             </ng-template>
 
@@ -164,7 +179,8 @@
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
                                 <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres"
-                                    (onChange)="filtrar('interes', selectedInteres)" styleClass="p-m-3"></p-dropdown>
+                                    (onChange)="filtrar('interes', selectedInteres, 'Intereses')" styleClass="p-m-3">
+                                </p-dropdown>
 
                             </ng-template>
 
@@ -278,10 +294,12 @@
 
     </ng-template>
 </p-card>
+
 <p-dialog class="p-grid p-jc-center" header="Informacion del postulante" [(visible)]="displayInfoPostulanteDialog"
     [style]="{height: '100%',width: '100%'}" [draggable]="false">
     <app-datos-postulante *ngIf="selectedPostulante.id" [id]="selectedPostulante.id"></app-datos-postulante>
 </p-dialog>
+
 <p-overlayPanel #op>
     <ng-template pTemplate>
         <div class="p-fluid p-formgrid p-grid p-mb-4">

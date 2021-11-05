@@ -14,7 +14,6 @@ import {
 } from 'angularx-social-login';
 import { HomeComponent } from './views/home/home.component';
 import { PrimeNgModule } from './primeng.module';
-import { PostulantesComponent } from './views/postulantes/postulantes.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
@@ -57,7 +56,6 @@ import { ListaNovedadesComponent } from './views/admin/lista-novedades/lista-nov
   declarations: [
     AppComponent,
     HomeComponent,
-    PostulantesComponent,
     MenuComponent,
     NavbarComponent,
     CarruselComponent,
