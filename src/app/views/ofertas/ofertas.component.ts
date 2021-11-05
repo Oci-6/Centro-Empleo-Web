@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 import { Oferta } from 'src/app/models/Oferta';
+import { AdminService } from 'src/app/services/AdminService/admin.service';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
 
 @Component({
@@ -25,6 +27,8 @@ export class OfertasComponent implements OnInit {
     private ofertasService: OfertasService,
     private messageService: MessageService,
     private router: Router,
+    public authService: AuthService,
+    private adminService: AdminService
   ) { }
 
 
@@ -79,5 +83,17 @@ export class OfertasComponent implements OnInit {
     this.displayCompartirDialog = true;
     console.log(window.location.href);
     
+  }
+
+  enviarCorreo(){
+    if(this.selectedOferta.id) this.adminService.enviarOferta(this.selectedOferta.id).subscribe(
+      response => {
+        this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Oferta compartida exitosamente' });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ?? 'Error interno del sistema' })
+
+      }
+    )
   }
 }
