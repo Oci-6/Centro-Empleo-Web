@@ -24,9 +24,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-novedad let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
+        <td *ngFor="let col of columns" class="tdnovedad">
           <span class="p-column-title">{{col.header}}</span>
-          {{novedad[col.field]==novedad.fechaPublicacion?convertirFecha(novedad.fechaPublicacion):novedad[col.field]}}
+          <p class="novedadTexto">{{novedad[col.field]==novedad.fechaPublicacion?convertirFecha(novedad.fechaPublicacion):novedad[col.field]}}</p>
         </td>
         <td>
 
@@ -49,8 +49,8 @@
 </p-card>
 
 
-<p-dialog header="Compartir" [(visible)]="displayCompartirDialog" [breakpoints]="[{ '80px': '30vw' }]"
-  [style]="{ width: '18vw' }" [baseZIndex]="10000">
+<p-dialog header="Compartir" [(visible)]="displayCompartirDialog" [breakpoints]="[{ '80px': '50vw' }]"
+   [baseZIndex]="10000">
 
   <div class="p-grid p-formgrid p-flex-column p-fluid">
     <a pButton pRipple type="button" label="Facebook" class="p-button-raised p-button-info p-mb-2"

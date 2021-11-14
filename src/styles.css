@@ -70,3 +70,20 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 /* .p-panelmenu .p-panelmenu-panel:first-child .p-panelmenu-header .rojo  > a{
     background-color: red;
 } */
+
+@media only screen and (max-width: 500px) {
+    .novedad-imagen {
+      max-height: 400px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .novedadTexto {
+      overflow: hidden;
+      width: 80%;
+    }
+    .tdnovedad{
+        width: 100%;
+        display: block;
+    }
+}

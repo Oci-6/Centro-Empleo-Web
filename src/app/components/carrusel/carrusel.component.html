@@ -3,9 +3,9 @@
         <h1 class="nov">Novedades del Centro</h1>
     </ng-template>
     <ng-template let-novedad pTemplate="item" >
-                <div>
-                    <a [routerLink]="'/novedades/'+novedad.id">
-                        <img src="{{novedad.imagen}}" class="novedad-imagen" style="height: 700px;"/>
+                <div >
+                    <a [routerLink]="'/novedades/'+novedad.id" >
+                        <img src="{{novedad.imagen}}" class="novedad-imagen" style="max-height: 700px;"/>
                     </a>
                 </div>        
     </ng-template>

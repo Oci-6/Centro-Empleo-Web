@@ -285,16 +285,14 @@
                     {{postulante.visibilidad  ? 'Visible' : 'Invisible' }}
                 </td>
                 <td style="width:150px" alignFrozen="right" pFrozenColumn [frozen]="true">
-                    <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
                     <button pButton pRipple type="button" icon="pi pi-search-plus" title="DetallarInfo"
                         (click)="showInfoPostulante(postulante)" class="p-button-rounded p-button-warning p-mr-2"
                         pTooltip="Informacion del postulante">
                     </button>
                     <button pButton pRipple type="button" icon="pi pi-eye-slash" title="OcultarPostulante"
                         (click)="ocultarPostulante(postulante)" class="p-button-rounded p-button-secondary p-mr-2"
-                        pTooltip="OcultarPostulante">
+                        pTooltip="Ocultar Postulante" *ngIf="esAdmin()">
                     </button>
-                    <!-- </ng-container>   -->
                 </td>
             </tr>
         </ng-template>

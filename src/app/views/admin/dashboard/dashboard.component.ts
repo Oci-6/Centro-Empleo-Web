@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
         { field: this.datos.empresasTotal, header: 'Empresas' , color: 'green-300'},
         { field: this.datos.empresasActivas, header: 'Empresas activas' , color: 'green-300'},
         { field: this.datos.empresasTotal-this.datos.empresasActivas, header: 'Empresas inactivas', color: 'green-300' },
-        { field: this.datos.novedades, header: 'Total novedades', color: 'yellow-300' },
+        { field: this.datos.novedades, header: 'Total novedades', color: 'purple-300' },
       ];
     this.data = {
       labels: ['Invisibles','Visibles'],

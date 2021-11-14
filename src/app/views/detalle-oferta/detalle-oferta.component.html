@@ -1,6 +1,7 @@
 <p-card *ngIf="oferta" styleClass="p-card-shadow p-p-3 p-mt-4">
     <ng-template pTemplate="title">
         {{oferta.vacante}}
+        <p-message *ngIf="ofertaAbierta()" severity="error" text="Oferta cerrada"></p-message>
     </ng-template>
     <ng-template pTemplate="subtitle" *ngIf="oferta.empresa?.visibilidad">
         {{oferta.empresa?.nombreFantasia}}
@@ -20,7 +21,7 @@
         </div>
         
         <div class="p-col-12">
-            <p-message *ngIf="ofertaAbierta()" severity="error" text="Oferta cerrada"></p-message>
+            
             <h4>Funciones y Tareas:</h4><p>{{oferta.funcionesTareas}}</p>
         </div>
 
@@ -45,7 +46,7 @@
     </div>
     <ng-template pTemplate="footer">
         <div class="p-grid p-nogutter p-justify-between">
-            <div class="p-fluid p-formgrid p-grid">
+            <div class="p-fluid p-formgrid p-grid p-mb-4">
                 <label><strong>Fecha de cierre:</strong> {{convertirFecha(oferta.fechaCierre)}}</label>
             </div>
             <p-button *ngIf="(this.postulante&&this.postulante.tipo=='Postulante'&&!this.postulado)||!this.postulante&&!ofertaAbierta()" label="Postularse" (click)="postularse()"></p-button>

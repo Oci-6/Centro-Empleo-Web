@@ -31,7 +31,6 @@ export class MisOfertasComponent implements OnInit {
   ngOnInit(): void {
     this.cols = [
       { field: 'vacante', header: 'Vacante' },
-      { field: 'funcionesTareas', header: 'Funciones y Tareas' },
       { field: 'fechaCierre', header: 'Fecha Cierre' },
     ];
     this.getOfertas();
