@@ -54,6 +54,8 @@ import { AgregarNovedadComponent } from './views/admin/agregar-novedad/agregar-n
 import { DetalleNovedadComponent } from './views/detalle-novedad/detalle-novedad.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModificarOfertaComponent } from './views/empresario/modificar-oferta/modificar-oferta.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -108,6 +110,12 @@ import { ModificarOfertaComponent } from './views/empresario/modificar-oferta/mo
     HttpClientModule,
     SocialLoginModule,
     FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     MessageService,
