@@ -5,13 +5,14 @@ import { Admin } from 'src/app/models/Admin';
 import { Novedad } from 'src/app/models/Novedad';
 import { Oferta } from 'src/app/models/Oferta';
 import { User } from 'src/app/models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  private URL: string = 'http://localhost:3000/api/admin';
+  private URL: string = environment.apiURL+'admin';
 
   constructor(private http: HttpClient) { }
 
