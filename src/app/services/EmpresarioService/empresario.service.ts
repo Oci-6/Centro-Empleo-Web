@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Empresario } from 'src/app/models/Empresario';
 import { Oferta } from 'src/app/models/Oferta';
 import { User } from 'src/app/models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { User } from 'src/app/models/User';
 export class EmpresarioService {
 
 
-  private URL: string = 'http://localhost:3000/api/empresa';
+  private URL: string = environment.apiURL+'empresa';
 
   constructor(private http: HttpClient) { }
   

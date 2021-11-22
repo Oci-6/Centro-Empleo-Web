@@ -9,13 +9,14 @@ import { PermisosLicencias } from 'src/app/models/PermisosLicencias';
 import { Postulante } from 'src/app/models/Postulante';
 import { PreferenciaLaboral } from 'src/app/models/PreferenciaLaboral';
 import { User } from 'src/app/models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostulanteService {
 
-  private URL: string = 'http://localhost:3000/api/postulante';
+  private URL: string = environment.apiURL+'postulante';
 
   constructor(private http: HttpClient) { }
   
