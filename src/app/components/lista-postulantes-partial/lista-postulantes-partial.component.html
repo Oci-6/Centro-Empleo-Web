@@ -5,13 +5,8 @@
             <th>Nombre</th>
             <th>Edad</th>
             <th>Sexo</th>
-            <th>Domicilio</th>
+            <!-- <th>Domicilio</th> -->
             <th>Nivel educativo</th>
-            <th>Areas tematicas</th>
-            <th>Idiomas</th>
-            <th>Experencias - Rubro</th>
-            <th>Permisos</th>
-            <th>Areas de interes</th>
             <th>Acciones</th>
         </tr>
     </ng-template>
@@ -30,7 +25,7 @@
                 <span class="p-column-title">Sexo</span>
                 {{postulante.sexo}}
             </td>
-            <td>
+            <!-- <td>
                 <span class="p-column-title">Domicilio</span>
                 <div *ngIf="postulante.localidad; else pais">
                     {{postulante.pais?.nombre}}, {{postulante.localidad?.departamento?.nombre}},
@@ -39,50 +34,10 @@
                 <ng-template #pais>
                     {{postulante.pais?.nombre}}
                 </ng-template>
-            </td>
+            </td> -->
             <td>
                 <span class="p-column-title">Nivel educativo</span>
                 {{postulante.nivelEducativo}}
-            </td>
-            <td>
-                <span class="p-column-title">Areas tematicas</span>
-                <div *ngFor="let cap of postulante.capacitacionFormacion">
-                    {{cap.areaTematica}}
-                </div>
-            </td>
-            <td>
-                <span class="p-column-title">Idiomas</span>
-                <div *ngFor="let idioma of postulante.idioma">
-                    <div *ngIf="idioma.nombre=='Otro'; else otro">
-                        {{idioma.nombre}}: {{idioma.especificacion}},
-                    </div>
-                    <ng-template #otro>
-                        {{idioma.nombre}}
-                    </ng-template>
-                </div>
-            </td>
-            <td>
-                <span class="p-column-title">Experencias</span>
-                <div *ngFor="let exp of postulante.expLaboral">
-                    {{exp.area}}
-                </div>
-            </td>
-            <td>
-                <span class="p-column-title">Permisos</span>
-                <div *ngFor="let perm of postulante.permisosLicencias">
-                    <div *ngIf="perm.tipoDocumento=='Otro'; else otroPerm">
-                        {{perm.tipoDocumento}}: {{perm.especificacion}},
-                    </div>
-                    <ng-template #otroPerm>
-                        {{perm.tipoDocumento}}
-                    </ng-template>
-                </div>
-            </td>
-            <td>
-                <span class="p-column-title">Areas de interes</span>
-                <div *ngFor="let preferencia of postulante.preferenciaLaboral">
-                    {{preferencia.areaInteres}}
-                </div>
             </td>
             <td>
                 <button pButton pRipple type="button" icon="pi pi-search-plus" title="DetallarInfo"

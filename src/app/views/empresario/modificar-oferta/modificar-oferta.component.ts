@@ -129,8 +129,8 @@ export class ModificarOfertaComponent implements OnInit {
     this.submitted = true;
     if(this.ofertaForm.valid){
       if (await this.ngOnSubmit()) {
-        if(this.idEmpresa){
-          this.router.navigate(['/empresas']);
+        if(this.user.tipo=='Admin'){
+          this.router.navigate(['/ofertasAdmin']);
         }
         else{
           this.router.navigate(['/misOfertas']);

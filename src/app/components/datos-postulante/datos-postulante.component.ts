@@ -53,7 +53,7 @@ export class DatosPostulanteComponent implements OnChanges {
   async getImagen() {
     if (this.postulante?.foto) {
       if (this.postulante?.foto.includes("uploads")) {
-        let blob = await this.postulanteService.getBlobDatos(this.postulante.foto).toPromise();
+        let blob = await this.postulanteService.getBlobDatos('http://localhost:3000/' + this.postulante.foto).toPromise();
 
         this.fotoPerfil = URL.createObjectURL(blob);
 
