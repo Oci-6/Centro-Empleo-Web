@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PostulanteService {
 
-  private URL: string = environment.apiURL+'postulante';
+  private URL: string = environment.apiURL+ 'api/'+'postulante';
 
   constructor(private http: HttpClient) { }
   

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class OfertasService {
 
-  private URL: string = environment.apiURL+'ofertas';
+  private URL: string = environment.apiURL+ 'api/'+'ofertas';
 
   constructor(private http: HttpClient) { }
   

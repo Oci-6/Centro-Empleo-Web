@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
 
-  private URL: string = environment.apiURL+'admin';
+  private URL: string = environment.apiURL+ 'api/'+'admin';
 
   constructor(private http: HttpClient) { }
 

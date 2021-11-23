@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { Postulante } from 'src/app/models/Postulante';
 import { AuthService } from 'src/app/services/Auth/auth.service';
 import { PostulanteService } from 'src/app/services/PostulanteService/postulante.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-datos-postulante',
@@ -53,7 +54,7 @@ export class DatosPostulanteComponent implements OnChanges {
   async getImagen() {
     if (this.postulante?.foto) {
       if (this.postulante?.foto.includes("uploads")) {
-        let blob = await this.postulanteService.getBlobDatos('http://localhost:3000/' + this.postulante.foto).toPromise();
+        let blob = await this.postulanteService.getBlobDatos(environment.apiURL+ this.postulante.foto).toPromise();
 
         this.fotoPerfil = URL.createObjectURL(blob);
 
@@ -65,7 +66,7 @@ export class DatosPostulanteComponent implements OnChanges {
 
   async getCV() {
     if (this.postulante?.curriculum) {
-      let blob = await this.postulanteService.getBlobDatos(this.postulante.curriculum).toPromise();
+      let blob = await this.postulanteService.getBlobDatos(environment.apiURL+ 'api/' + this.postulante.curriculum).toPromise();
 
       this.cv = URL.createObjectURL(blob);
 
