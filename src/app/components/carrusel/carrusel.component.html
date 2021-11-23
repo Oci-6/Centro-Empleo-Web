@@ -5,7 +5,7 @@
     <ng-template let-novedad pTemplate="item" >
                 <div >
                     <a [routerLink]="'/novedades/'+novedad.id" >
-                        <img src="{{novedad.imagen}}" class="novedad-imagen" style="max-height: 700px;"/>
+                        <img src="{{apiURL + novedad.imagen}}" class="novedad-imagen" style="max-height: 700px;"/>
                     </a>
                 </div>        
     </ng-template>

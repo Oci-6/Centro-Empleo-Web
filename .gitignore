@@ -78,4 +78,4 @@ typings/
 .fusebox/
 package-lock.json
 
-dist/
+dist

@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { Novedad } from 'src/app/models/Novedad';
 import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-carrusel',
@@ -15,6 +16,8 @@ export class CarruselComponent implements OnInit {
   images: string[] | undefined;
   novedades: Novedad[] = [];
   total: number = 0;
+
+  apiURL = environment.apiURL;
 
   constructor(
     private messageService: MessageService,
