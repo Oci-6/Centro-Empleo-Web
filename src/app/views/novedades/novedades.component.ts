@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { Novedad } from 'src/app/models/Novedad';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class NovedadesComponent implements OnInit {
   displayCompartirDialog: boolean = false;
   selectedNovedad: Novedad = {};
   url: string = "";
+
+  apiURL = environment.apiURL;
 
   faCoffee = faCoffee;
 

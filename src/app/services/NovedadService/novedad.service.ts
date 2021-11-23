@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NovedadService {
 
-  private URL: string = environment.apiURL+'novedad';
+  private URL: string = environment.apiURL+ 'api/'+'novedad';
 
   constructor(private http: HttpClient) { }
   

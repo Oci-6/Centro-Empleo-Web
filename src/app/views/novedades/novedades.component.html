@@ -15,7 +15,7 @@
         <div class="p-col-12 p-md-3 p-ai-stretch vertical-container" *ngFor="let novedad of novedades">
             <p-card styleClass="p-card-shadow">
                 <ng-template pTemplate="header" *ngIf="novedad.imagen">
-                    <img style="height:150px; max-width: 100%;" [src]="novedad.imagen" #img>
+                    <img style="height:150px; max-width: 100%;" [src]="apiURL + novedad.imagen" #img>
                 </ng-template>
                 <ng-template pTemplate="title">
                     <span class="titulo">{{novedad.titulo}}</span>

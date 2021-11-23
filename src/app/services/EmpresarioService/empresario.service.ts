@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class EmpresarioService {
 
 
-  private URL: string = environment.apiURL+'empresa';
+  private URL: string = environment.apiURL+ 'api/'+'empresa';
 
   constructor(private http: HttpClient) { }
   

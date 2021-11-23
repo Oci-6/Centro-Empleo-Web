@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PaisService {
 
-  private URL = environment.apiURL+'pais';
+  private URL = environment.apiURL+ 'api/'+'pais';
   
   constructor(private http: HttpClient) { }
 
