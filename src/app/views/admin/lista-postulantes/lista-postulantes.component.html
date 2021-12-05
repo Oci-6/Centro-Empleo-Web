@@ -1,4 +1,4 @@
-<p-card styleClass="p-card-shadow p-p-3 p-mt-4">
+<p-card styleClass="p-card-shadow p-p-3 p-mt-4" >
     <ng-template pTemplate="title">
         <div class="p-grid p-ai-center p-vertical-container">
             <div class="p-col-fixed">
@@ -60,7 +60,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo"
+                                <p-dropdown [options]="sexo" [(ngModel)]="selectedSexo" placeholder="Seleccione un sexo"
                                     (onChange)="filtrar('sexo', selectedSexo, 'Sexo')" styleClass="p-m-3"></p-dropdown>
 
                             </ng-template>
@@ -98,7 +98,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="nivelEducativo" [(ngModel)]="selectedNE"
+                                <p-dropdown [options]="nivelEducativo" [(ngModel)]="selectedNE" placeholder="Seleccione un nivel educativo"
                                     (onChange)="filtrar('nivelEducativo', selectedNE, 'Nivel Educativo')"
                                     styleClass="p-m-3"></p-dropdown>
 
@@ -114,7 +114,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="areaTOp" [(ngModel)]="selectedArea"
+                                <p-dropdown [options]="areaTOp" [(ngModel)]="selectedArea" placeholder="Seleccione un area de formación"
                                     (onChange)="filtrar('areaTematica', selectedArea, 'Áreas de formación')"
                                     styleClass="p-m-3"></p-dropdown>
 
@@ -130,7 +130,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="idiomas" [(ngModel)]="selectedIdioma"
+                                <p-dropdown [options]="idiomas" [(ngModel)]="selectedIdioma" placeholder="Seleccione un idioma"
                                     (onChange)="filtrar('idioma', selectedIdioma,'Idioma')" styleClass="p-m-3">
                                 </p-dropdown>
 
@@ -146,7 +146,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedRubro"
+                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedRubro" placeholder="Seleccione un rubro"
                                     (onChange)="filtrar('rubro', selectedRubro,'Exp. Rubro')" styleClass="p-m-3">
                                 </p-dropdown>
 
@@ -162,7 +162,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedDocumento"
+                                <p-dropdown [options]="tipoDocumento" [(ngModel)]="selectedDocumento" placeholder="Seleccione un permiso"
                                     (onChange)="filtrar('permisos', selectedDocumento,'Permisos')" styleClass="p-m-3">
                                 </p-dropdown>
 
@@ -178,7 +178,7 @@
                             matchMode="between" display="menu" [showMatchModes]="false" [showOperator]="false"
                             [showAddButton]="false">
                             <ng-template pTemplate="filter">
-                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres"
+                                <p-dropdown [options]="areaRubro" [(ngModel)]="selectedInteres" placeholder="Seleccione un interes"
                                     (onChange)="filtrar('interes', selectedInteres, 'Intereses')" styleClass="p-m-3">
                                 </p-dropdown>
 
@@ -228,8 +228,8 @@
                 <td style="width:200px;" *ngIf="areaT">
                     <span class="p-column-title">Áreas de formación</span>
                     <p class="columnas-texto">
-                        <ng-container *ngFor="let cap of postulante.capacitacionFormacion">
-                            {{cap.areaTematica}}
+                        <ng-container *ngFor="let cap of onlyUnique(postulante.capacitacionFormacion, 'areaTematica')">
+                            {{cap}}
                             <br>
                         </ng-container>
                     </p>
@@ -237,13 +237,14 @@
                 <td style="width:200px" *ngIf="idiomasColumn">
                     <span class="p-column-title">Idiomas</span>
                     <p class="columnas-texto">
-                        <ng-container *ngFor="let idioma of postulante.idioma">
-                            <div *ngIf="idioma.nombre=='Otro'; else otro">
+                        <ng-container *ngFor="let idioma of onlyUnique(postulante.idioma, 'nombre')">
+                            <!-- <div *ngIf="idioma.nombre=='Otro'; else otro">
                                 {{idioma.nombre}}: {{idioma.especificacion}}
                             </div>
                             <ng-template #otro>
                                 {{idioma.nombre}}
-                            </ng-template>
+                            </ng-template> -->
+                            {{idioma}}
                             <br>
 
                         </ng-container>
@@ -252,21 +253,22 @@
                 <td style="width:200px" *ngIf="experiencias">
                     <span class="p-column-title">Experiencias</span>
                     <p class="columnas-texto">
-                        <ng-container *ngFor="let exp of postulante.expLaboral">
-                            {{exp.area}}
+                        <ng-container *ngFor="let exp of  onlyUnique(postulante.expLaboral, 'area')">
+                            {{exp}}
                             <br>
                         </ng-container>
                 </td>
                 <td style="width:200px" *ngIf="permisos">
                     <span class="p-column-title">Permisos</span>
                     <p class="columnas-texto">
-                        <ng-container *ngFor="let perm of postulante.permisosLicencias">
-                            <div *ngIf="perm.tipoDocumento=='Otro'; else otroPerm">
+                        <ng-container *ngFor="let perm of  onlyUnique(postulante.permisosLicencias, 'tipoDocumento')">
+                            <!-- <div *ngIf="perm.tipoDocumento=='Otro'; else otroPerm">
                                 {{perm.tipoDocumento}}: {{perm.especificacion}}
                             </div>
                             <ng-template #otroPerm>
                                 {{perm.tipoDocumento}}
-                            </ng-template>
+                            </ng-template> -->
+                            {{perm}}
                             <br>
 
                         </ng-container>
@@ -275,8 +277,8 @@
                 <td style="width:200px" *ngIf="intereses">
                     <span class="p-column-title">Areas de interes</span>
                     <p class="columnas-texto">
-                        <ng-container *ngFor="let preferencia of postulante.preferenciaLaboral">
-                            {{preferencia.areaInteres}}
+                        <ng-container *ngFor="let preferencia of onlyUnique(postulante.preferenciaLaboral, 'areaInteres')">
+                            {{preferencia}}
                             <br>
                         </ng-container>
                     </p>

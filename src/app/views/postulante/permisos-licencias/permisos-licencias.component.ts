@@ -15,14 +15,14 @@ import { PostulanteService } from 'src/app/services/PostulanteService/postulante
 })
 export class PermisosLicenciasComponent implements OnInit {
 
-  tipoDocumento: string[] = ['Ninguno', 'Carné de salud', 'Carné Cuida Coches', 'Carné de Aplicación de productos fitosanitarios', 'Carné de clasificador', 
-  'Carné de Foguista', 'Carné de Manipulación de alimentos', 'Libreta de conducir Cat. A', 'Libreta de conducir Cat. B', 'Libreta de conducir Cat. C',
-  'Libreta de conducir Cat. D', 'Libreta de conducir Cat. E', 'Libreta de conducir Cat. F', 'Libreta de conducir Cat. G1', 'Libreta de conducir Cat. G2', 
-  'Libreta de conducir Cat. G3', 'Libreta de conducir Cat. H', 'Porte de armas', 'Otro']
+  tipoDocumento: string[] = ['Ninguno', 'Carné de salud', 'Carné Cuida Coches', 'Carné de Aplicación de productos fitosanitarios', 'Carné de clasificador',
+    'Carné de Foguista', 'Carné de Manipulación de alimentos', 'Libreta de conducir Cat. A', 'Libreta de conducir Cat. B', 'Libreta de conducir Cat. C',
+    'Libreta de conducir Cat. D', 'Libreta de conducir Cat. E', 'Libreta de conducir Cat. F', 'Libreta de conducir Cat. G1', 'Libreta de conducir Cat. G2',
+    'Libreta de conducir Cat. G3', 'Libreta de conducir Cat. H', 'Porte de armas', 'Otro']
 
   postulanteId: number | undefined;
   postulante: Postulante = {};
-  
+
   selectedTipoD: string | undefined;
   submitted: boolean | undefined = false;
 
@@ -38,7 +38,7 @@ export class PermisosLicenciasComponent implements OnInit {
     private postulanteService: PostulanteService,
     private authService: AuthService,
     private confirmationService: ConfirmationService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.postulanteId = this.authService.getUser().id;
@@ -48,26 +48,26 @@ export class PermisosLicenciasComponent implements OnInit {
   }
 
 
-  ngOnSubmit() : boolean{
-    try{
-    this.permisosLicencias.controls.forEach(async(element: any, index: number) => {
+  ngOnSubmit(): boolean {
+    try {
+      this.permisosLicencias.controls.forEach(async (element: any, index: number) => {
 
-      let PL: PermisosLicencias = new PermisosLicencias();
+        let PL: PermisosLicencias = new PermisosLicencias();
 
-      if (element.controls[index + "id"]) {
-        PL.id = element.controls[index + "id"].value;
-        // console.log('dasda');
-      }
-      PL.tipoDocumento = element.controls[index + "tipoDocumento"].value;
-      PL.especificacion = element.controls[index + "especificacion"].value;     
-      PL.vigencia = moment(element.controls[index + "vigencia"].value,'MM-DD-YYYY').toDate();
-            
-      // console.log(PL);
+        if (element.controls[index + "id"]) {
+          PL.id = element.controls[index + "id"].value;
+          // console.log('dasda');
+        }
+        PL.tipoDocumento = element.controls[index + "tipoDocumento"].value;
+        PL.especificacion = element.controls[index + "especificacion"].value;
+        PL.vigencia = moment(element.controls[index + "vigencia"].value, 'MM-DD-YYYY').toDate();
 
-      if (this.postulanteId)
-      await  this.postulanteService.postPermisosLicencias(this.postulanteId, PL).toPromise();
-          
-    });
+        // console.log(PL);
+
+        if (this.postulanteId)
+          await this.postulanteService.postPermisosLicencias(this.postulanteId, PL).toPromise();
+
+      });
 
       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
@@ -130,40 +130,41 @@ export class PermisosLicenciasComponent implements OnInit {
     let form: any = this.permisosLicencias.at(permLicIndex);
     console.log(form.controls[permLicIndex + 'id']);
 
-    if (form.controls[permLicIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar este permiso o licencia?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar este permiso o licencia?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (form.controls[permLicIndex + 'id']) {
           await this.postulanteService.deletePermisosLicencias(form.controls[permLicIndex + 'id'].value).toPromise();
           this.permisosLicencias.removeAt(permLicIndex);
+        } else {
+          this.permisosLicencias.removeAt(permLicIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Permiso borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Permiso borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.permisosLicencias.removeAt(permLicIndex);
-    }
   }
 
-  tipoDocumentoEspecificacion(index:number, i:any):boolean{
-    return i.controls[index+'tipoDocumento'].value == 'Otro';
-    }
+  tipoDocumentoEspecificacion(index: number, i: any): boolean {
+    return i.controls[index + 'tipoDocumento'].value == 'Otro';
+  }
 
   //Cambiar página del steper
-  
+
   async nextPage() {
     this.submitted = true;
-    if(this.permisosLicenciasForm.valid){
+    if (this.permisosLicenciasForm.valid) {
       if (this.ngOnSubmit()) {
-      this.router.navigate(['/formulario/preferenciasLaborales']);
+        this.router.navigate(['/formulario/preferenciasLaborales']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 

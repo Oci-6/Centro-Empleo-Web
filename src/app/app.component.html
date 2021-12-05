@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<p-toast></p-toast>
+<p-toast [baseZIndex]="100"></p-toast>
 
 <div *ngIf="auth; else elseBlock">
     <div class="p-grid">
@@ -17,3 +17,10 @@
 </ng-template>
 
 <router-outlet></router-outlet>
+<p-confirmDialog  #cd [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="Cancelar" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Aceptar" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+

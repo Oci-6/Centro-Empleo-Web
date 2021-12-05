@@ -21,19 +21,21 @@
         </p-carousel>
    </div>
 </div> -->
-
-<!-- <footer class="layout-footer">
+<footer class="layout-footer" *ngIf="!this.authService.getUser()">
     <p-card header="Contacto">
         <div class="p-grid">
             <div class="p-col">
                 <h4>Nuestras oficinas</h4>
+                Artigas 525 , San José de Mayo, San José 
             </div>
             <div class="p-col">
                 <h4>Teléfono</h4>
+                <a href="tel:4342 2052">4342 2052</a>
             </div>
             <div class="p-col">
                 <h4>Email</h4>
+                <a href="mailto:info@ccisanjose.com.uy">info@ccisanjose.com.uy</a>
             </div>
         </div>
     </p-card>
-</footer> -->
+</footer>

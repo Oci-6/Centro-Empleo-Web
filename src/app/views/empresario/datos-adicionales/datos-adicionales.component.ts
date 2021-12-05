@@ -33,7 +33,7 @@ export class DatosAdicionalesComponent implements OnInit {
     private messageService: MessageService,
     private router: Router, 
     private formBuilder: FormBuilder,
-    private auth: AuthService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class DatosAdicionalesComponent implements OnInit {
     });
 
     this.getDL(this.paisId);
-    this.getEmpresa(this.empresaId);
+
   }
 
   getDL(paisId:number){
@@ -57,6 +57,9 @@ export class DatosAdicionalesComponent implements OnInit {
         this.departamentos = result;
         this.departamentos?.sort((a:any, b:any) => a.id - b.id)
         if (this.departamentos&&this.selectedDepartamento) this.localidades = result[this.selectedDepartamento-1].localidades;
+
+        this.getEmpresa(this.empresaId);
+
       }
     );
 
@@ -89,7 +92,13 @@ export class DatosAdicionalesComponent implements OnInit {
     empresario.telefono = this.datosAdicionalesForm.controls.telefono.value;
 
     this.empresarioService.modificarEmpresario(empresario).subscribe(
-      response => {
+      async response => {
+
+        let emp = await this.empresarioService.infoEmpresario(this.auth.getAuth().usuario.id).toPromise();
+        let auth = this.auth.getAuth();
+        auth.usuario = emp;
+        localStorage.setItem('auth', JSON.stringify(auth));
+        
         this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Solicitud de acceso enviada exitosamente' });
       },
       error => {
@@ -116,6 +125,7 @@ export class DatosAdicionalesComponent implements OnInit {
         this.datosAdicionalesForm.controls["telefono"].setValue(this.empresa.telefono);
         this.datosAdicionalesForm.controls["mostrarNombreE"].setValue(this.empresa.visibilidad);
         this.datosAdicionalesForm.controls["nombreAmostrar"].setValue(this.empresa.nombreFantasia);
+
       }
     );
 

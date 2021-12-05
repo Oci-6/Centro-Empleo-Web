@@ -61,6 +61,8 @@ export class DatosPostulanteComponent implements OnChanges {
       } else {
         this.fotoPerfil = this.postulante?.foto
       }
+    }else{
+      this.fotoPerfil = 'assets/user-icon-placeholder-1.png'
     }
   }
 

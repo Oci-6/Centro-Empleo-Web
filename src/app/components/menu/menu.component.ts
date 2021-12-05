@@ -81,7 +81,7 @@ export class MenuComponent implements OnInit {
         command: () => {
           this.confirmationService.confirm({
             message: 'Se enviará un correo al administrador solicitando acceso. ¿Desea continuar?',
-            header: 'Confirmation',
+            header: 'Enviar correo',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.empresarioService.enviarCorreo().subscribe(

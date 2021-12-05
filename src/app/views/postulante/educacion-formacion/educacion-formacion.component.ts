@@ -89,8 +89,8 @@ export class EducacionFormacionComponent implements OnInit {
 
     }
   }
-    async ngOnSubmit(): Promise<boolean> {
-      try {
+  async ngOnSubmit(): Promise<boolean> {
+    try {
       let postulante = new Postulante();
       postulante.id = this.postulanteId;
       postulante.nivelEducativo = this.educacionFormacionForm.controls.nivelEducativo.value;
@@ -98,11 +98,11 @@ export class EducacionFormacionComponent implements OnInit {
       postulante.orientacionNE = this.educacionFormacionForm.controls.orientacionNE.value;
 
       await this.postulanteService.modificarPostulante(postulante).toPromise();
-      
+
 
       // a
 
-      this.capacitaciones.controls.forEach(async(element: any, index: number) => {
+      this.capacitaciones.controls.forEach(async (element: any, index: number) => {
 
         let cF: CapacitacionFormacion = new CapacitacionFormacion();
 
@@ -118,11 +118,11 @@ export class EducacionFormacionComponent implements OnInit {
         cF.duracion = element.controls[index + "duracion"].value;
 
         if (this.postulanteId)
-        await  this.postulanteService.postCapacitacion(this.postulanteId, cF).toPromise();
-          
+          await this.postulanteService.postCapacitacion(this.postulanteId, cF).toPromise();
+
       });
 
-      this.conocimientosI.controls.forEach(async(element: any, index: number) => {
+      this.conocimientosI.controls.forEach(async (element: any, index: number) => {
 
         let cI: ConocimientoInfo = new ConocimientoInfo();
 
@@ -132,13 +132,13 @@ export class EducacionFormacionComponent implements OnInit {
         cI.nombreApp = element.controls[index + "nombreApp"].value;
         cI.categoria = element.controls[index + "categoriaCI"].value;
         cI.nivelConocimiento = element.controls[index + "nivelC"].value;
-        
+
 
         if (this.postulanteId)
-         await this.postulanteService.postCI(this.postulanteId, cI).toPromise();
+          await this.postulanteService.postCI(this.postulanteId, cI).toPromise();
       });
 
-      this.IdiomasArreglo.controls.forEach(async(element: any, index: number) => {
+      this.IdiomasArreglo.controls.forEach(async (element: any, index: number) => {
 
         let Idiomas: Idioma = new Idioma();
 
@@ -151,86 +151,86 @@ export class EducacionFormacionComponent implements OnInit {
         Idiomas.compAud = element.controls[index + "compAud"].value;
         Idiomas.compLec = element.controls[index + "compLec"].value;
         Idiomas.escritura = element.controls[index + "escritura"].value;
-        
+
 
         if (this.postulanteId)
-        await  this.postulanteService.postIdioma(this.postulanteId, Idiomas).toPromise();
-            
+          await this.postulanteService.postIdioma(this.postulanteId, Idiomas).toPromise();
+
       });
 
-      
-        
-        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
-        return true;
-      } catch (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-        return false;
-      }
 
+
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
+      return true;
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
+      return false;
     }
-  
 
-    getInfoPostulante(postulanteId: number) {
-
-      this.postulanteService.infoPostulante(postulanteId).subscribe(
-        result => {
-          this.postulante = result;
-          this.selectedNE = result.nivelEducativo;
-          this.selectedEstadoNE = result.estadoNE;
-
-          this.educacionFormacionForm.controls["nivelEducativo"].setValue(this.postulante.nivelEducativo);
-          this.educacionFormacionForm.controls["estadoNE"].setValue(this.postulante.estadoNE);
-          this.educacionFormacionForm.controls["orientacionNE"].setValue(this.postulante.orientacionNE);
-
-          this.postulante.capacitacionFormacion?.forEach((capacitacion: CapacitacionFormacion) => {
-            const CapForForm = this.fb.group({
-            });
-            CapForForm.addControl(this.capacitaciones.length + 'id', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required));
-            CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required));
-
-            CapForForm.controls[this.capacitaciones.length + "id"].setValue(capacitacion.id);
-            CapForForm.controls[this.capacitaciones.length + "nombreCurso"].setValue(capacitacion.nombre);
-            CapForForm.controls[this.capacitaciones.length + "areaT"].setValue(capacitacion.areaTematica);
-            CapForForm.controls[this.capacitaciones.length + "institucion"].setValue(capacitacion.institucion);
-            CapForForm.controls[this.capacitaciones.length + "fechaInicio"].setValue((moment(capacitacion.fechaInicio, 'YYYY-MM-DD').toDate()));
-            CapForForm.controls[this.capacitaciones.length + "estadoCurso"].setValue(capacitacion.estado);
-            CapForForm.controls[this.capacitaciones.length + "tipoDuracion"].setValue(capacitacion.tipoDuracion);
-            CapForForm.controls[this.capacitaciones.length + "duracion"].setValue(capacitacion.duracion);
-            // console.log(this.capacitaciones);
-            // console.log(this.capacitaciones.length+'nombreCurso');
-            this.capacitaciones.push(CapForForm);
-          })
+  }
 
 
-          this.postulante.conocimientoInfo?.forEach((conocimientoI: ConocimientoInfo) => {
+  getInfoPostulante(postulanteId: number) {
 
-            const ConIForm = this.fb.group({
-            });
-            ConIForm.addControl(this.conocimientosI.length + 'id', new FormControl('', Validators.required));
-            ConIForm.addControl(this.conocimientosI.length + 'nombreApp', new FormControl('', Validators.required)),
+    this.postulanteService.infoPostulante(postulanteId).subscribe(
+      result => {
+        this.postulante = result;
+        this.selectedNE = result.nivelEducativo;
+        this.selectedEstadoNE = result.estadoNE;
+
+        this.educacionFormacionForm.controls["nivelEducativo"].setValue(this.postulante.nivelEducativo);
+        this.educacionFormacionForm.controls["estadoNE"].setValue(this.postulante.estadoNE);
+        this.educacionFormacionForm.controls["orientacionNE"].setValue(this.postulante.orientacionNE);
+
+        this.postulante.capacitacionFormacion?.forEach((capacitacion: CapacitacionFormacion) => {
+          const CapForForm = this.fb.group({
+          });
+          CapForForm.addControl(this.capacitaciones.length + 'id', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required));
+          CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required));
+
+          CapForForm.controls[this.capacitaciones.length + "id"].setValue(capacitacion.id);
+          CapForForm.controls[this.capacitaciones.length + "nombreCurso"].setValue(capacitacion.nombre);
+          CapForForm.controls[this.capacitaciones.length + "areaT"].setValue(capacitacion.areaTematica);
+          CapForForm.controls[this.capacitaciones.length + "institucion"].setValue(capacitacion.institucion);
+          CapForForm.controls[this.capacitaciones.length + "fechaInicio"].setValue((moment(capacitacion.fechaInicio, 'YYYY-MM-DD').toDate()));
+          CapForForm.controls[this.capacitaciones.length + "estadoCurso"].setValue(capacitacion.estado);
+          CapForForm.controls[this.capacitaciones.length + "tipoDuracion"].setValue(capacitacion.tipoDuracion);
+          CapForForm.controls[this.capacitaciones.length + "duracion"].setValue(capacitacion.duracion);
+          // console.log(this.capacitaciones);
+          // console.log(this.capacitaciones.length+'nombreCurso');
+          this.capacitaciones.push(CapForForm);
+        })
+
+
+        this.postulante.conocimientoInfo?.forEach((conocimientoI: ConocimientoInfo) => {
+
+          const ConIForm = this.fb.group({
+          });
+          ConIForm.addControl(this.conocimientosI.length + 'id', new FormControl('', Validators.required));
+          ConIForm.addControl(this.conocimientosI.length + 'nombreApp', new FormControl('', Validators.required)),
             ConIForm.addControl(this.conocimientosI.length + 'categoriaCI', new FormControl('', Validators.required)),
             ConIForm.addControl(this.conocimientosI.length + 'nivelC', new FormControl('', Validators.required));
 
-            ConIForm.controls[this.conocimientosI.length + "id"].setValue(conocimientoI.id);
-            ConIForm.controls[this.conocimientosI.length + "nombreApp"].setValue(conocimientoI.nombreApp);
-            ConIForm.controls[this.conocimientosI.length + "categoriaCI"].setValue(conocimientoI.categoria);
-            ConIForm.controls[this.conocimientosI.length + "nivelC"].setValue(conocimientoI.nivelConocimiento);
-            // console.log(this.conocimientosI);
-            // console.log(this.conocimientosI.length + 'nombreCurso');
-            this.conocimientosI.push(ConIForm);
+          ConIForm.controls[this.conocimientosI.length + "id"].setValue(conocimientoI.id);
+          ConIForm.controls[this.conocimientosI.length + "nombreApp"].setValue(conocimientoI.nombreApp);
+          ConIForm.controls[this.conocimientosI.length + "categoriaCI"].setValue(conocimientoI.categoria);
+          ConIForm.controls[this.conocimientosI.length + "nivelC"].setValue(conocimientoI.nivelConocimiento);
+          // console.log(this.conocimientosI);
+          // console.log(this.conocimientosI.length + 'nombreCurso');
+          this.conocimientosI.push(ConIForm);
+        });
+
+        this.postulante.idioma?.forEach((idioma: Idioma) => {
+
+          const IdiomaForm = this.fb.group({
           });
-
-          this.postulante.idioma?.forEach((idioma:Idioma)=>{
-
-            const IdiomaForm = this.fb.group({
-            });
-            IdiomaForm.addControl(this.IdiomasArreglo.length + 'id', new FormControl('', Validators.required)),
+          IdiomaForm.addControl(this.IdiomasArreglo.length + 'id', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('')),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
@@ -238,24 +238,24 @@ export class EducacionFormacionComponent implements OnInit {
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
             IdiomaForm.addControl(this.IdiomasArreglo.length + 'escritura', new FormControl('', Validators.required));
 
-            IdiomaForm.controls[this.IdiomasArreglo.length + "id"].setValue(idioma.id);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "idioma"].setValue(idioma.nombre);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "especificacion"].setValue(idioma.especificacion);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "hablaConv"].setValue(idioma.hablaConv);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "compAud"].setValue(idioma.compAud);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "compLec"].setValue(idioma.compLec);
-            IdiomaForm.controls[this.IdiomasArreglo.length + "escritura"].setValue(idioma.escritura);
-            // console.log(this.IdiomasArreglo);
-            // console.log(this.IdiomasArreglo.length + 'nombreCurso');
-            this.IdiomasArreglo.push(IdiomaForm);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "id"].setValue(idioma.id);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "idioma"].setValue(idioma.nombre);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "especificacion"].setValue(idioma.especificacion);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "hablaConv"].setValue(idioma.hablaConv);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "compAud"].setValue(idioma.compAud);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "compLec"].setValue(idioma.compLec);
+          IdiomaForm.controls[this.IdiomasArreglo.length + "escritura"].setValue(idioma.escritura);
+          // console.log(this.IdiomasArreglo);
+          // console.log(this.IdiomasArreglo.length + 'nombreCurso');
+          this.IdiomasArreglo.push(IdiomaForm);
 
-          });
-          
-        }
+        });
 
-      );
-    }
-  
+      }
+
+    );
+  }
+
 
   //Get de arreglos
   get capacitaciones() {
@@ -277,23 +277,23 @@ export class EducacionFormacionComponent implements OnInit {
     const CapForForm = this.fb.group({
     });
     CapForForm.addControl(this.capacitaciones.length + 'nombreCurso', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required)),
-    CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required)),
-    // console.log(this.capacitaciones);
-    // console.log(this.capacitaciones.length+'nombreCurso');
-    this.capacitaciones.push(CapForForm);
+      CapForForm.addControl(this.capacitaciones.length + 'areaT', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'institucion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'fechaInicio', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'duracion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'tipoDuracion', new FormControl('', Validators.required)),
+      CapForForm.addControl(this.capacitaciones.length + 'estadoCurso', new FormControl('', Validators.required)),
+      // console.log(this.capacitaciones);
+      // console.log(this.capacitaciones.length+'nombreCurso');
+      this.capacitaciones.push(CapForForm);
   }
 
   addConocimientosI() {
     const ConIForm = this.fb.group({
     });
     ConIForm.addControl(this.conocimientosI.length + 'nombreApp', new FormControl('', Validators.required)),
-    ConIForm.addControl(this.conocimientosI.length + 'categoriaCI', new FormControl('', Validators.required)),
-    ConIForm.addControl(this.conocimientosI.length + 'nivelC', new FormControl('', Validators.required));
+      ConIForm.addControl(this.conocimientosI.length + 'categoriaCI', new FormControl('', Validators.required)),
+      ConIForm.addControl(this.conocimientosI.length + 'nivelC', new FormControl('', Validators.required));
     // console.log(this.conocimientosI);
     // console.log(this.conocimientosI.length + 'nombreCurso');
     this.conocimientosI.push(ConIForm);
@@ -303,22 +303,22 @@ export class EducacionFormacionComponent implements OnInit {
     const IdiomaForm = this.fb.group({
     });
     IdiomaForm.addControl(this.IdiomasArreglo.length + 'idioma', new FormControl('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('')),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
-    IdiomaForm.addControl(this.IdiomasArreglo.length + 'escritura', new FormControl('', Validators.required));
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'especificacion', new FormControl('')),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'hablaConv', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'compAud', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'compLec', new FormControl('', Validators.required)),
+      IdiomaForm.addControl(this.IdiomasArreglo.length + 'escritura', new FormControl('', Validators.required));
     console.log(this.IdiomasArreglo);
     // console.log(this.IdiomasArreglo.length + 'nombreCurso');
     this.IdiomasArreglo.push(IdiomaForm);
   }
 
-  onChangeNivelE(){
+  onChangeNivelE() {
     this.selectedNE = this.educacionFormacionForm.controls.nivelEducativo.value
   }
 
-  idiomaEspecificacion(index:number, i:any):boolean{
-  return i.controls[index+'idioma'].value == 'Otro';
+  idiomaEspecificacion(index: number, i: any): boolean {
+    return i.controls[index + 'idioma'].value == 'Otro';
   }
 
   //Borrar FormGroups de los arreglos
@@ -326,82 +326,86 @@ export class EducacionFormacionComponent implements OnInit {
     let form: any = this.capacitaciones.at(capForIndex);
     console.log(form.controls[capForIndex + 'id']);
 
-    if (
-      form.controls[capForIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar esta Capacitación?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar esta Capacitación?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (
+          form.controls[capForIndex + 'id']) {
           await this.postulanteService.deleteCapacitacion(form.controls[capForIndex + 'id'].value).toPromise();
           this.capacitaciones.removeAt(capForIndex);
+        } else {
+          this.capacitaciones.removeAt(capForIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Capacitación borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Capacitación borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.capacitaciones.removeAt(capForIndex);
-    }
   }
 
   deleteConI(conIIndex: number) {
     let form: any = this.conocimientosI.at(conIIndex);
     console.log(form.controls[conIIndex + 'id']);
 
-    if (
-      form.controls[conIIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar este conocimiento informatico?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar este conocimiento informatico?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (
+          form.controls[conIIndex + 'id']) {
           await this.postulanteService.deleteCI(form.controls[conIIndex + 'id'].value).toPromise();
           this.conocimientosI.removeAt(conIIndex);
+        } else {
+          this.conocimientosI.removeAt(conIIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Conocimiento Laboral borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Conocimiento Laboral borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.conocimientosI.removeAt(conIIndex);
-    }
   }
 
   deleteIdioma(idiomaIndex: number) {
     let form: any = this.IdiomasArreglo.at(idiomaIndex);
     console.log(form.controls[idiomaIndex + 'id']);
 
-    if (
-      form.controls[idiomaIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar es experiencia laboral?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar es experiencia laboral?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (
+          form.controls[idiomaIndex + 'id']) {
           await this.postulanteService.deleteIdioma(form.controls[idiomaIndex + 'id'].value).toPromise();
           this.IdiomasArreglo.removeAt(idiomaIndex);
+        } else {
+          this.IdiomasArreglo.removeAt(idiomaIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.IdiomasArreglo.removeAt(idiomaIndex);
-    }  }
+  }
 
   //Cambiar página del steper
-  
+
   async nextPage() {
     this.submitted = true;
-    if(this.educacionFormacionForm.valid&&this.agregarIdiomaForm.valid&&this.capacitacionFormacionForm.valid&&this.conocimientosInformaticosForm.valid){
+    if (this.educacionFormacionForm.valid && this.agregarIdiomaForm.valid && this.capacitacionFormacionForm.valid && this.conocimientosInformaticosForm.valid) {
       if (await this.ngOnSubmit()) {
-      this.router.navigate(['formulario/experienciaLaboral']);
+        this.router.navigate(['formulario/experienciaLaboral']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 
@@ -409,18 +413,18 @@ export class EducacionFormacionComponent implements OnInit {
     this.router.navigate(['formulario/datosPersonales']);
   }
 
-  mostrarOrientacion() : boolean{
-    if(this.selectedNE=='Bachillerato Liceo'|| this.selectedNE=='Técnico Profesional UTU' 
-    || this.selectedNE=='Magisterio - Profesorado'|| this.selectedNE=='Terciario no universitario'
-    || this.selectedNE=='Universitario'|| this.selectedNE=='Posgrado - Master - Doctorado' || this.selectedNE=='Bachillerato UTU'){
+  mostrarOrientacion(): boolean {
+    if (this.selectedNE == 'Bachillerato Liceo' || this.selectedNE == 'Técnico Profesional UTU'
+      || this.selectedNE == 'Magisterio - Profesorado' || this.selectedNE == 'Terciario no universitario'
+      || this.selectedNE == 'Universitario' || this.selectedNE == 'Posgrado - Master - Doctorado' || this.selectedNE == 'Bachillerato UTU') {
       return true;
-    } else{
+    } else {
       return false;
     }
-     
+
   }
 
-  
+
 
   // submit() {
   //   console.log(this.capacitaciones.controls);
@@ -433,7 +437,7 @@ export class EducacionFormacionComponent implements OnInit {
   //   console.log(this.IdiomasArreglo.controls);
   // }
 
-  
+
 
 }
 

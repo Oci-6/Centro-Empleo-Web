@@ -73,7 +73,7 @@
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="fechaInicio">Desde</label>
                                             <p-calendar inputId="fechaInicio" [formControlName]="i+'fechaInicio'"
-                                                dateFormat="dd/mm/yy"></p-calendar>
+                                                dateFormat="dd/mm/yy"  [maxDate]="hoy" ></p-calendar>
                                             <div *ngIf="ExpLabForm.get(i+'fechaInicio')?.errors&&submitted" class="invalid-feedback">
                                                 <small class="p-error" *ngIf="ExpLabForm.get(i+'fechaInicio')?.errors?.required">Seleccione la fecha en la que comenzó a trabajar en la empresa</small>
                                             </div>
@@ -81,7 +81,7 @@
 
                                         <span class="p-field p-col-12 p-md-6">
                                             <label for="fechaFin">Hasta</label>
-                                            <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'"
+                                            <p-calendar inputId="fechaFin" [formControlName]="i+'fechaFin'" [minDate]="ExpLabForm.get(i+'fechaInicio')?.value"
                                                 dateFormat="dd/mm/yy"></p-calendar>
                                             <div *ngIf="ExpLabForm.get(i+'fechaFin')?.errors&&submitted" class="invalid-feedback">
                                                 <small class="p-error" *ngIf="ExpLabForm.get(i+'fechaFin')?.errors?.required">Seleccione la fecha hasta la que trabajó en la empresa</small>
@@ -171,8 +171,8 @@
 
                 <ng-template pTemplate="footer">
                     <div class="p-grid p-nogutter p-justify-between">
-                        <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-                        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
+                        <p-button label="Atrás" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+                        <p-button label="Siguiente" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right">
                         </p-button>
                         <!-- <p-button label="Guardar" (onClick)="ngOnSubmit()" icon="pi pi-plus" iconPos="right"></p-button> -->
                     </div>
@@ -184,4 +184,3 @@
     </p-card>
 </div>
 
-<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>

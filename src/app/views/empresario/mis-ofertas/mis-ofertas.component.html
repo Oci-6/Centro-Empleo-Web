@@ -43,7 +43,7 @@
                     <button pButton pRipple type="button" icon="pi pi-search-plus" [routerLink]="'/ofertas/'+oferta.id"
                         class="p-button-rounded p-button-info p-mr-2" pTooltip="Ver oferta">
                     </button>
-                    <button pButton pRipple type="button" icon="pi pi-times" pTooltip="Cerrar Oferta"
+                    <button pButton *ngIf="estado(oferta.fechaCierre) != 'Cerrada'" pRipple type="button" icon="pi pi-times" pTooltip="Cerrar Oferta"
                         class="p-button-rounded p-button-danger p-mr-2" (click)="cerrarOferta(oferta)">
                     </button>
                     <!-- </ng-container>   -->
