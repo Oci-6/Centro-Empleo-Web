@@ -50,7 +50,7 @@ export class AgregarNovedadComponent implements OnInit {
     try {
       await this.novedadService.crearNovedad(formData).toPromise();
       this.novedadForm.reset;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
 
     } catch (error) {

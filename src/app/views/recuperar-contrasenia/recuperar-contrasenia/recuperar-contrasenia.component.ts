@@ -50,7 +50,7 @@ export class RecuperarContraseniaComponent implements OnInit {
 
     this.authService.recuperarContrasenia(datos).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Correo enviado, revise su casilla de entrada' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Correo enviado, revise su casilla de entrada' });
 
         this.router.navigate(['/login']);
       },

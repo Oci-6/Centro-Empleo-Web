@@ -69,7 +69,7 @@ export class PermisosLicenciasComponent implements OnInit {
           
     });
 
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
@@ -130,8 +130,7 @@ export class PermisosLicenciasComponent implements OnInit {
     let form: any = this.permisosLicencias.at(permLicIndex);
     console.log(form.controls[permLicIndex + 'id']);
 
-    if (
-      form.controls[permLicIndex + 'id']) {
+    if (form.controls[permLicIndex + 'id']) {
       this.confirmationService.confirm({
         message: '¿Seguro quiere eliminar este permiso o licencia?',
         header: 'Confirmar',

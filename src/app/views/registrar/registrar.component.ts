@@ -36,7 +36,7 @@ export class RegistrarComponent implements OnInit {
 
     this.postulanteService.registrarPostulante(postulante).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario creado correctamente' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Usuario creado correctamente' });
 
         this.router.navigate(['/login']);
       },

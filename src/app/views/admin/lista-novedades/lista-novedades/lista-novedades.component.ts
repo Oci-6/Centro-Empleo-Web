@@ -80,7 +80,7 @@ export class ListaNovedadesComponent implements OnInit {
       accept: () => {
         this.novedadService.deleteNovedad(id).subscribe(
           result => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Novedad eliminada exitosamente' });
+            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Novedad eliminada exitosamente' });
             this.getNovedades();
           },
           error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error en el servidor' })
@@ -109,7 +109,7 @@ export class ListaNovedadesComponent implements OnInit {
       await this.novedadService.modificarNovedad(formData).toPromise();
       this.editarNovedadForm.reset;
       this.displayEditarNovedadDialog = false;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
 
     } catch (error) {

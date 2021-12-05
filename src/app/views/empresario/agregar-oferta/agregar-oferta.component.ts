@@ -78,7 +78,7 @@ export class AgregarOfertaComponent implements OnInit {
     try {
       await this.ofertasService.agregarOferta(oferta).toPromise();
       this.ofertaForm.reset;
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Datos guardados correctamente' });
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });

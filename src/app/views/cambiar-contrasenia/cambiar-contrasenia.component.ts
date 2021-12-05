@@ -58,7 +58,7 @@ export class CambiarContraseniaComponent implements OnInit {
 
     this.authService.cambiarContrasenia(datos).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contraseña cambiada correctamente' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Contraseña cambiada correctamente' });
 
         this.router.navigate(['/login']);
       },

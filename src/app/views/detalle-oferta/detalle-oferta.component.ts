@@ -65,7 +65,7 @@ export class DetalleOfertaComponent implements OnInit {
     if (this.oferta?.id&&this.postulante)
       this.postulanteService.postularse(this.oferta.id).subscribe(
         response => {
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Postulado correctamente' });
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Postulado correctamente' });
           this.postulado = true;
         },
         error => {          

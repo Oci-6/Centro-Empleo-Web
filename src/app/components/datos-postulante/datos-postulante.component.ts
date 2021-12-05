@@ -83,7 +83,7 @@ export class DatosPostulanteComponent implements OnChanges {
       formData.append("file", file);
       this.postulanteService.postFoto(formData).subscribe(
         response => {
-          this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
+          this.messageService.add({ severity: 'info', summary: 'Archivo subido', detail: '' });
           let url = this.router.url;
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
             this.router.navigate([url]));
