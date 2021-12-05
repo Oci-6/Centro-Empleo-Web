@@ -75,7 +75,7 @@ export class ListaOfertasComponent implements OnInit {
       accept: () => {
         this.ofertasService.deleteOferta(id).subscribe(
           result => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Oferta eliminada exitosamente' });
+            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Oferta eliminada exitosamente' });
             this.getOfertas();
           },
           error => this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message ? error.message : 'Error en el servidor' })

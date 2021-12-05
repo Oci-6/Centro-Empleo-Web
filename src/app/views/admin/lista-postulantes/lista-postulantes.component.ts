@@ -206,7 +206,7 @@ export class ListaPostulantesComponent implements OnInit {
     this.postulante.visibilidad = false;
     this.postulanteService.modificarPostulante(this.postulante).subscribe(
       result=>{
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Postulante ocultado exitosamente' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Postulante ocultado exitosamente' });
         postulante.visibilidad=false;
       },
       error=>{

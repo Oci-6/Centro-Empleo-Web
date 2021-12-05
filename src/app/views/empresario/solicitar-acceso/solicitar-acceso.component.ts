@@ -51,7 +51,7 @@ export class SolicitarAccesoComponent implements OnInit {
         this.empresa = response;
         console.log(this.empresa);
         localStorage.setItem('auth', JSON.stringify(response));
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuario creado correctamente' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Usuario creado correctamente' });
         this.router.navigate(['/datosAdicionales']).then(() =>
         window.location.reload());
       },

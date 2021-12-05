@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             response => {
                 localStorage.setItem('auth', JSON.stringify(response));
 
-                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logeado correctamente' });
+                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Logeado correctamente' });
                 window.location.href = '/';
                 // this.auth.getUserInfo().subscribe(
                 //     response => {

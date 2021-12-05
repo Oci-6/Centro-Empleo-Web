@@ -90,7 +90,7 @@ export class DatosAdicionalesComponent implements OnInit {
 
     this.empresarioService.modificarEmpresario(empresario).subscribe(
       response => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Solicitud de acceso enviada exitosamente' });
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Solicitud de acceso enviada exitosamente' });
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al enviar la solicitud' });
