@@ -40,7 +40,7 @@
           <button pButton pRipple type="button" icon="pi pi-clock" pTooltip="Habilitar Empresa"
             class="p-button-rounded p-button-success p-mr-2" (click)="showExtenderDuracion(empresa)">
           </button>
-          <button pButton pRipple type="button" icon="pi pi-times" pTooltip="Inhabilitar Empresa"
+          <button *ngIf="estado(empresa.fechaExpiracion) == 'Activa'" pButton pRipple type="button" icon="pi pi-times" pTooltip="Inhabilitar Empresa"
             class="p-button-rounded p-button-danger p-mr-2" (click)="inhabilitarEmpresa(empresa)">
           </button>
         </td>

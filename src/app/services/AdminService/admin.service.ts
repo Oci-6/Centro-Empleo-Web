@@ -20,6 +20,9 @@ export class AdminService {
     return this.http.put(this.URL + '/habilitar', empresa);
   }
 
+  inhabilitarEmpresa(empresa: Empresario) {
+    return this.http.put(this.URL + '/inhabilitar', empresa);
+  }
   enviarOferta(id: number) {
     return this.http.get(this.URL + '/enviarOferta/' + id);
   }
