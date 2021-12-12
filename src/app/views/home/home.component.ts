@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import {PanelModule} from 'primeng/panel';
+import { Novedad } from 'src/app/models/Novedad';
 import { AuthService } from 'src/app/services/Auth/auth.service';
+import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +42,8 @@ export class HomeComponent implements OnInit {
     numScroll: 1
   }]
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private novedadService: NovedadService
   ) {
     this.responsiveOptions = [
       {
@@ -61,6 +64,14 @@ export class HomeComponent implements OnInit {
     ];
   }
 
+  novedades: Novedad[] = [];
+
   ngOnInit() {
+    this.novedadService.ultimasNovedades().subscribe(
+      response => {
+        this.novedades = response;
+      })
+
+    
   }
 }

@@ -68,8 +68,8 @@ export class DatosPostulanteComponent implements OnChanges {
 
   async getCV() {
     if (this.postulante?.curriculum) {
-      let blob = await this.postulanteService.getBlobDatos(environment.apiURL+ 'api/' + this.postulante.curriculum).toPromise();
-
+      let blob = await this.postulanteService.getBlobDatos(environment.apiURL + this.postulante.curriculum).toPromise();
+      
       this.cv = URL.createObjectURL(blob);
 
     }

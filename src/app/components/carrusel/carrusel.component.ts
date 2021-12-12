@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Novedad } from 'src/app/models/Novedad';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CarruselComponent implements OnInit {
   
-  images: string[] | undefined;
+  @Input()
   novedades: Novedad[] = [];
   total: number = 0;
 
@@ -29,17 +29,8 @@ export class CarruselComponent implements OnInit {
 
   ngOnInit() {
 
-    this.images = [];
 
-    this.novedadService.ultimasNovedades().subscribe(
-      response => {
-        this.novedades = response;
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
-      })
-
-    
+   
   }
 
 }

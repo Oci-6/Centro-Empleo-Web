@@ -74,7 +74,7 @@
     <div class="p-fluid p-formgrid p-grid">
 
       <div class="p-field p-col-12 p-text-center" *ngIf="novedad.imagen">
-        <img [src]=" apiURL+novedad.imagen | safe: 'url'" style="max-height:250px; max-width: 100%;"  #img>
+        <img [src]="(file ? novedad.imagen : apiURL + novedad.imagen )| safe: 'url'" style="max-height:250px; max-width: 100%;"  #img>
       </div>
 
       <div class="p-field p-col-12 p-md-6">

@@ -1,6 +1,6 @@
 <!-- <h1 class="titulo-novedades">Novedades del Centro</h1> -->
 
-<app-carrusel></app-carrusel>
+<app-carrusel *ngIf="novedades.length > 0" [novedades]="novedades"></app-carrusel>
 
 <!-- <div class="p-grid p-pt-5">
     <div class="p-col">
@@ -21,12 +21,12 @@
         </p-carousel>
    </div>
 </div> -->
-<footer class="layout-footer" *ngIf="!this.authService.getUser()">
+<footer [ngClass]="novedades.length > 0 ? 'layout-footer' : 'sticky-footer'" *ngIf="!this.authService.getUser()">
     <p-card header="Contacto">
         <div class="p-grid">
             <div class="p-col">
                 <h4>Nuestras oficinas</h4>
-                Artigas 525 , San José de Mayo, San José 
+                Artigas 525 , San José de Mayo, San José
             </div>
             <div class="p-col">
                 <h4>Teléfono</h4>

@@ -1,12 +1,12 @@
-<p-carousel [value]="novedades" [numVisible]="1" [numScroll]="1" [circular]="true"  styleClass="p-mt-3" *ngIf="images">
+<p-carousel [value]="novedades" [numVisible]="1" [numScroll]="1" [circular]="true" styleClass="p-mt-3">
     <ng-template pTemplate="header">
         <h1 class="nov">Novedades del Centro</h1>
     </ng-template>
-    <ng-template let-novedad pTemplate="item" >
-                <div >
-                    <a [routerLink]="'/novedades/'+novedad.id" >
-                        <img src="{{apiURL + novedad.imagen}}" class="novedad-imagen" style="max-height: 700px;"/>
-                    </a>
-                </div>        
+    <ng-template let-novedad pTemplate="item">
+        <div>
+            <a [routerLink]="'/novedades/'+novedad.id">
+                <img src="{{apiURL + novedad.imagen}}" class="novedad-imagen" style="max-height: 700px;" />
+            </a>
+        </div>
     </ng-template>
 </p-carousel>
