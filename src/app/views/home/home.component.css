@@ -9,3 +9,9 @@
     width: 100%;
     bottom: 0;
 }
+
+.layout-footer {
+    bottom: 0px;
+    width: 100%;
+    z-index: 102;
+}
