@@ -7,7 +7,7 @@
             </div>
             <div class="p-col">
                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded"
-                    routerLink="/agregarOferta"></button>
+                    routerLink="/agregarOferta" pTooltip="Agregar Oferta"></button>
             </div>
         </div>
     </ng-template>
@@ -35,7 +35,7 @@
                 <td>
                     <!-- <ng-container *ngIf="rol && rol.includes('ADMIN')">  -->
                     <button pButton pRipple type="button" icon="pi pi-pencil" title="Editar"
-                        class="p-button-rounded p-button-secondary p-mr-2" [routerLink]="'/modificarOferta/'+oferta.id">
+                        class="p-button-rounded p-button-secondary p-mr-2" [routerLink]="'/modificarOferta/'+oferta.id" pTooltip="Editar Oferta">
                     </button>
                     <button pButton pRipple type="button" icon="pi pi-users" (click)="showPostulantes(oferta)"
                         class="p-button-rounded p-button-warning p-mr-2" pTooltip="Ver postulantes">

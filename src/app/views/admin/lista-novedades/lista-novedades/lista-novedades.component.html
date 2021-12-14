@@ -31,15 +31,15 @@
         <td>
 
           <button pButton pRipple type="button" icon="pi pi-pencil" title="Editar"
-            class="p-button-rounded p-button-warning p-mr-2" (click)="showEditarNovedadDialog(novedad)">
+            class="p-button-rounded p-button-warning p-mr-2" (click)="showEditarNovedadDialog(novedad)" pTooltip="Editar">
           </button>
           <button pButton pRipple type="button" icon="pi pi-trash" title="Eliminar"
-            class="p-button-rounded p-button-danger p-mr-2" (click)="ngOnDelete(novedad.id)">
+            class="p-button-rounded p-button-danger p-mr-2" (click)="ngOnDelete(novedad.id)" pTooltip="Eliminar">
           </button>
           <button pButton pRipple type="button" icon="pi pi-search-plus" title="Ver detalle"
-            class="p-button-rounded p-button-info p-mr-2" [routerLink]="'/novedades/'+novedad.id"></button>
+            class="p-button-rounded p-button-info p-mr-2" [routerLink]="'/novedades/'+novedad.id" pTooltip="Ver detalle"></button>
           <button pButton pRipple type="button" icon="pi pi-share-alt" title="Compartir"
-            class="p-button-rounded p-button-secondary p-mr-2" (click)="compartir(novedad)"></button>
+            class="p-button-rounded p-button-secondary p-mr-2" (click)="compartir(novedad)" pTooltip="Compartir"></button>
 
 
         </td>
@@ -63,7 +63,7 @@
       [href]="'http://twitter.com/share?url='+url+'&text=Mira esta novedad del Centro Comercial de San José. Titulo de la novedad: '+selectedNovedad.titulo">
     </a>
     <button pButton pRipple type="button" label="Email" (click)="enviarCorreo()" class="p-button-raised p-button-help p-mb-2"></button>
-    <a pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></a>
+    <!-- <a pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></a> -->
   </div>
 
 
