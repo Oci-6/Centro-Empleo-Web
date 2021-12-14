@@ -41,7 +41,7 @@ export class ListaPostulantesComponent implements OnInit {
 
   selectedInteres: string = "";
 
-  tipoDocumento: string[] = ['Ninguno', 'Carné de salud', 'Carné Cuida Coches', 'Carné de Aplicación de productos fitosanitarios', 'Carné de clasificador', 'Carné de Foguista', 'Carné de Manipulación de alimentos', 'Libreta de conducir Cat. A', 'Libreta de conducir Cat. B', 'Libreta de conducir Cat. C', 'Libreta de conducir Cat. D', 'Libreta de conducir Cat. E', 'Libreta de conducir Cat. F', 'Libreta de conducir Cat. G1', 'Libreta de conducir Cat. G2', 'Libreta de conducir Cat. G3', 'Libreta de conducir Cat. H', 'Porte de armas', 'Otro'];
+  tipoDocumento: string[] = ['Carné de salud', 'Carné Cuida Coches', 'Carné de Aplicación de productos fitosanitarios', 'Carné de clasificador', 'Carné de Foguista', 'Carné de Manipulación de alimentos', 'Libreta de conducir Cat. A', 'Libreta de conducir Cat. B', 'Libreta de conducir Cat. C', 'Libreta de conducir Cat. D', 'Libreta de conducir Cat. E', 'Libreta de conducir Cat. F', 'Libreta de conducir Cat. G1', 'Libreta de conducir Cat. G2', 'Libreta de conducir Cat. G3', 'Libreta de conducir Cat. H', 'Porte de armas', 'Otro'];
   selectedDocumento: string = "";
 
   public departamentos: Departamento[] = [];
@@ -75,6 +75,18 @@ export class ListaPostulantesComponent implements OnInit {
 
   postulantes: Postulante[] = [];
 
+  onlyUnique(myObjects: any[], key: string): Set<any> {
+    let res = new Set();
+    for (const object of myObjects) {
+      if (object[key] == 'Otro')
+        res.add(object['especificacion']);
+      else
+        res.add(object[key]);
+
+    }
+
+    return res;
+  }
 
   async ngOnInit(): Promise<void> {
 
@@ -192,24 +204,24 @@ export class ListaPostulantesComponent implements OnInit {
 
   }
 
-  esAdmin(): boolean{
-    this.user = this.auth.getAuth(); 
-    if(this.user.tipo=='Admin'){
+  esAdmin(): boolean {
+    this.user = this.auth.getAuth();
+    if (this.user.tipo == 'Admin') {
       return true;
     }
     return false;
   }
 
-  ocultarPostulante(postulante:Postulante){
+  ocultarPostulante(postulante: Postulante) {
     this.postulante = new Postulante();
     this.postulante.id = postulante.id;
     this.postulante.visibilidad = false;
     this.postulanteService.modificarPostulante(this.postulante).subscribe(
-      result=>{
+      result => {
         this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Postulante ocultado exitosamente' });
-        postulante.visibilidad=false;
+        postulante.visibilidad = false;
       },
-      error=>{
+      error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al ocultar al postulante' });
       }
     );

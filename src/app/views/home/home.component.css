@@ -1,5 +1,17 @@
-.titulo-novedades{
+.titulo-novedades {
     color: white;
     text-align: center;
     font-size: 5rem;
+}
+
+.sticky-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.layout-footer {
+    bottom: 0px;
+    width: 100%;
+    z-index: 102;
 }

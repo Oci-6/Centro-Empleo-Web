@@ -8,6 +8,7 @@ import { Novedad } from 'src/app/models/Novedad';
 import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
 import { OfertasService } from 'src/app/services/OfertaService/ofertas.service';
+import { environment } from 'src/environments/environment';
 import { ListaEmpresasComponent } from '../../lista-empresas/lista-empresas.component';
 
 @Component({
@@ -26,6 +27,8 @@ export class ListaNovedadesComponent implements OnInit {
   cols: any[] = [];
   submitted: boolean | undefined = false;
   url: string = "";
+
+  apiURL: string = environment.apiURL;
 
   novedades: Novedad[] = [];
   idAdmin: number | undefined;
@@ -76,6 +79,7 @@ export class ListaNovedadesComponent implements OnInit {
   
   ngOnDelete(id: number): void {
     this.confirmationService.confirm({
+      header: 'Eliminar novedad',
       message: 'Seguro que quieres eliminar la novedad?',
       accept: () => {
         this.novedadService.deleteNovedad(id).subscribe(
@@ -110,6 +114,7 @@ export class ListaNovedadesComponent implements OnInit {
       this.editarNovedadForm.reset;
       this.displayEditarNovedadDialog = false;
       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
+      this.file = undefined;
       return true;
 
     } catch (error) {
@@ -145,14 +150,15 @@ export class ListaNovedadesComponent implements OnInit {
   async enviarEdit() {
     this.submitted = true;
     if(this.editarNovedadForm.valid){
-      if (await this.ngOnEdit()) {
-        
+      if (await this.ngOnEdit()) 
+        this.displayEditarNovedadDialog = false;
+
     }else{
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
     
     return;
-    }
+    
   }
 
   onFileSelected(event: any) {

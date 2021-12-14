@@ -28,6 +28,8 @@ export class ExperienciasLaboralesComponent implements OnInit {
   postulante: Postulante = {};
   submitted: boolean | undefined = false;
 
+  hoy: Date = moment(new Date()).subtract(1, 'day').toDate();
+
   expLaboralForm = this.fb.group({
     experienciasL: this.fb.array([])
   });
@@ -105,7 +107,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
           ExpLabForm.addControl(this.experienciasL.length + 'tareas', new FormControl('', Validators.required));
           ExpLabForm.addControl(this.experienciasL.length + 'fechaInicio', new FormControl('', Validators.required));
           ExpLabForm.addControl(this.experienciasL.length + 'fechaFin', new FormControl('', Validators.required));
-          ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl('', Validators.required));
+          ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl(false, Validators.required));
 
           ExpLabForm.addControl(this.experienciasL.length + 'nombreRef', new FormControl('', Validators.required));
           ExpLabForm.addControl(this.experienciasL.length + 'apellidoRef', new FormControl('', Validators.required));
@@ -153,7 +155,7 @@ export class ExperienciasLaboralesComponent implements OnInit {
     ExpLabForm.addControl(this.experienciasL.length + 'tareas', new FormControl('', Validators.required));
     ExpLabForm.addControl(this.experienciasL.length + 'fechaInicio', new FormControl('', Validators.required));
     ExpLabForm.addControl(this.experienciasL.length + 'fechaFin', new FormControl('', Validators.required));
-    ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl(''));
+    ExpLabForm.addControl(this.experienciasL.length + 'trabajando', new FormControl(false));
 
     ExpLabForm.addControl(this.experienciasL.length + 'nombreRef', new FormControl('', Validators.required));
     ExpLabForm.addControl(this.experienciasL.length + 'apellidoRef', new FormControl('', Validators.required));
@@ -169,23 +171,24 @@ export class ExperienciasLaboralesComponent implements OnInit {
     let form: any = this.experienciasL.at(expLabIndex);
     console.log(form.controls[expLabIndex + 'id']);
 
-    if (
-      form.controls[expLabIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar es experiencia laboral?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
-          await this.postulanteService.deleteExpLaboral(form.controls[expLabIndex + 'id'].value).toPromise();
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar es experiencia laboral?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (
+          form.controls[expLabIndex + 'id']) {
+          this.postulanteService.deleteExpLaboral(form.controls[expLabIndex + 'id'].value).toPromise();
           this.experienciasL.removeAt(expLabIndex);
+        } else {
+          this.experienciasL.removeAt(expLabIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Experiencia Laboral borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.experienciasL.removeAt(expLabIndex);
-    }
   }
 
   //Cambiar página del steper

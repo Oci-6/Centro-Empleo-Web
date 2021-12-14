@@ -41,7 +41,7 @@ export class InteresesPreferenciasComponent implements OnInit {
     private postulanteService: PostulanteService,
     private authService: AuthService,
     private confirmationService: ConfirmationService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.postulanteId = this.authService.getUser().id;
@@ -61,53 +61,53 @@ export class InteresesPreferenciasComponent implements OnInit {
 
   }
 
-  async ngOnSubmit() : Promise<boolean>{
-    try{
-    //Formulario normal
-    let postulante = new Postulante();
-    postulante.id = this.postulanteId;
-    postulante.jIndiferente = this.JornadaPreferidaForm.controls.jIndiferente.value;
-    postulante.jCompleta = this.JornadaPreferidaForm.controls.jCompleta.value;
-    postulante.jMtManiana = this.JornadaPreferidaForm.controls.jMtManiana.value;
-    postulante.jMtTarde = this.JornadaPreferidaForm.controls.jMtTarde.value;
-    postulante.jMtNoche = this.JornadaPreferidaForm.controls.jMtNoche.value;
+  async ngOnSubmit(): Promise<boolean> {
+    try {
+      //Formulario normal
+      let postulante = new Postulante();
+      postulante.id = this.postulanteId;
+      postulante.jIndiferente = this.JornadaPreferidaForm.controls.jIndiferente.value;
+      postulante.jCompleta = this.JornadaPreferidaForm.controls.jCompleta.value;
+      postulante.jMtManiana = this.JornadaPreferidaForm.controls.jMtManiana.value;
+      postulante.jMtTarde = this.JornadaPreferidaForm.controls.jMtTarde.value;
+      postulante.jMtNoche = this.JornadaPreferidaForm.controls.jMtNoche.value;
 
 
-   await this.postulanteService.modificarPostulante(postulante).toPromise();
-      
+      await this.postulanteService.modificarPostulante(postulante).toPromise();
 
-    //Formulario con arreglo
-    this.preferenciasLaborales.controls.forEach(async(element: any, index: number) => {
 
-      let PrefLab: PreferenciaLaboral = new PreferenciaLaboral();
+      //Formulario con arreglo
+      this.preferenciasLaborales.controls.forEach(async (element: any, index: number) => {
 
-      if (element.controls[index + "id"]) {
-        PrefLab.id = element.controls[index + "id"].value;
-        console.log('dasda');
-      }
-      PrefLab.puestoPreferido = element.controls[index + "puestoPref"].value;
-      PrefLab.areaInteres = element.controls[index + "areaInteresL"].value;
-      PrefLab.aspiracionSalarial = element.controls[index + "aspSalarial"].value;
+        let PrefLab: PreferenciaLaboral = new PreferenciaLaboral();
 
-      console.log(PrefLab);
+        if (element.controls[index + "id"]) {
+          PrefLab.id = element.controls[index + "id"].value;
+          console.log('dasda');
+        }
+        PrefLab.puestoPreferido = element.controls[index + "puestoPref"].value;
+        PrefLab.areaInteres = element.controls[index + "areaInteresL"].value;
+        PrefLab.aspiracionSalarial = element.controls[index + "aspSalarial"].value;
 
-      if (this.postulanteId)
-      await  this.postulanteService.postPrefLab(this.postulanteId, PrefLab).toPromise();
-          
-    });
+        console.log(PrefLab);
 
-    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
+        if (this.postulanteId)
+          await this.postulanteService.postPrefLab(this.postulanteId, PrefLab).toPromise();
+
+      });
+
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
     } catch (error) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error' });
       return false;
     }
 
-    
-    
-    
-    
-    
+
+
+
+
+
 
   }
 
@@ -116,7 +116,7 @@ export class InteresesPreferenciasComponent implements OnInit {
       result => {
         this.postulante = result;
         console.log(result);
-        
+
 
         this.postulante.preferenciaLaboral?.forEach((prefLab: PreferenciaLaboral) => {
           const PrefLabForm = this.fb.group({
@@ -159,42 +159,43 @@ export class InteresesPreferenciasComponent implements OnInit {
     let form: any = this.preferenciasLaborales.at(prefLabIndex);
     console.log(form.controls[prefLabIndex + 'id']);
 
-    if (
-      form.controls[prefLabIndex + 'id']) {
-      this.confirmationService.confirm({
-        message: '¿Seguro quiere eliminar esta preferencia laboral?',
-        header: 'Confirmar',
-        icon: 'pi pi-info-warning',
-        accept: async () => {
+
+    this.confirmationService.confirm({
+      message: '¿Seguro quiere eliminar esta preferencia laboral?',
+      header: 'Confirmar',
+      icon: 'pi pi-info-warning',
+      accept: async () => {
+        if (
+          form.controls[prefLabIndex + 'id']) {
           await this.postulanteService.deletePreferenciaLaboral(form.controls[prefLabIndex + 'id'].value).toPromise();
           this.preferenciasLaborales.removeAt(prefLabIndex);
+        } else {
+          this.preferenciasLaborales.removeAt(prefLabIndex);
+        }
+        this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Preferencia Laboral borrada' });
+      },
 
-          this.messageService.add({ severity: 'info', summary: 'Borrado', detail: 'Preferencia Laboral borrada' });
-        },
+    });
 
-      });
-    }else{
-      this.preferenciasLaborales.removeAt(prefLabIndex);
-    }
   }
 
   //Cambiar página del steper
-  
+
   async nextPage() {
     this.submitted = true;
-    if(this.JornadaPreferidaForm.controls.jIndiferente.value==true || this.JornadaPreferidaForm.controls.jCompleta.value==true 
-      || this.JornadaPreferidaForm.controls.jMtManiana.value==true || this.JornadaPreferidaForm.controls.jMtTarde.value==true 
-      || this.JornadaPreferidaForm.controls.jMtNoche.value==true){
-        this.checked=true;
-      }
-    if(this.JornadaPreferidaForm.valid&&this.preferenciaLaboralForm.valid&&this.checked){
+    if (this.JornadaPreferidaForm.controls.jIndiferente.value == true || this.JornadaPreferidaForm.controls.jCompleta.value == true
+      || this.JornadaPreferidaForm.controls.jMtManiana.value == true || this.JornadaPreferidaForm.controls.jMtTarde.value == true
+      || this.JornadaPreferidaForm.controls.jMtNoche.value == true) {
+      this.checked = true;
+    }
+    if (this.JornadaPreferidaForm.valid && this.preferenciaLaboralForm.valid && this.checked) {
       if (await this.ngOnSubmit()) {
-      this.router.navigate(['formulario/cv']);
+        this.router.navigate(['formulario/cv']);
       }
-    }else{
+    } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
-    
+
     return;
   }
 

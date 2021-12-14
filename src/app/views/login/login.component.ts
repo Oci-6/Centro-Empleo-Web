@@ -40,23 +40,12 @@ export class LoginComponent implements OnInit {
             response => {
                 localStorage.setItem('auth', JSON.stringify(response));
 
-                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Logeado correctamente' });
-                window.location.href = '/';
-                // this.auth.getUserInfo().subscribe(
-                //     response => {
-                //         console.log(response);
-                //         localStorage.setItem('user', JSON.stringify(response));
+                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Sesión iniciada' });
 
-                //         window.location.href = '/';
-                //     },
-                //     error => {
-                //         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error en el servidor' });
-                //     }
-                // );
-
+                window.location.href = window.location.href.slice(0,window.location.href.lastIndexOf('/'));
             },
             error => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Incorrect username or password' });
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Correo o contraseña incorrectos' });
             }
         );
 
@@ -80,10 +69,12 @@ export class LoginComponent implements OnInit {
                 response => {
                     console.log(response);
                     localStorage.setItem('auth', JSON.stringify(response));
-                    window.location.href = '/';
+                    this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Sesión iniciada' });
+
+                    window.location.href = window.location.href.slice(0,window.location.href.lastIndexOf('/'));
                 },
                 error => {
-
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Algo salio mal' });
                 }
             );
         });

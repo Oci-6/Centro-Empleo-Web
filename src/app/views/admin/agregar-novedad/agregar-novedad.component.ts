@@ -53,8 +53,8 @@ export class AgregarNovedadComponent implements OnInit {
       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       return true;
 
-    } catch (error) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
+    } catch (error: any) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ?? 'Algo salio mal' });
       return false;
     }
     
@@ -63,14 +63,14 @@ export class AgregarNovedadComponent implements OnInit {
   async enviar() {
     this.submitted = true;
     if(this.novedadForm.valid){
-      if (await this.ngOnSubmit()) {
+      if (await this.ngOnSubmit())
         this.router.navigate(['/novedades']);
     }else{
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor revise los campos' });
     }
     
     return;
-    }
+    
   }
 
   onFileSelected(event: any) {

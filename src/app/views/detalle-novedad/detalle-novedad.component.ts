@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { Novedad } from 'src/app/models/Novedad';
 import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detalle-novedad',
@@ -16,6 +17,7 @@ export class DetalleNovedadComponent implements OnInit {
   novedad: Novedad = {};
   novedadId: number | undefined;
   imagenNovedad: string = "";
+  apiURL = environment.apiURL;
 
   constructor(
     private messageService: MessageService,

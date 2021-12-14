@@ -1,13 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-.layout-footer {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+
+html {
+    height: 100%;
+    margin: 0;
+    overflow-y: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-html { 
-    height: 100%;  
-    margin: 0;  
+html::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
 body {
@@ -20,29 +23,28 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
     background-size: 25px 25px, 25px 25px, 12.5px 12.5px, 12.5px 12.5px;
 }
 
-
 .p-menubar {
     /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(14,174,87,1) 0%, rgba(12,116,117,1) 90% ); */
-    background: rgb(43,150,53);
-    background: linear-gradient(0deg, rgba(43,150,53,0.6) 0%, rgba(43,130,53,0.6) 48%, rgba(43,100,53,0.6) 100%);
+    background: rgb(43, 150, 53);
+    background: linear-gradient(0deg, rgba(43, 150, 53, 0.6) 0%, rgba(43, 130, 53, 0.6) 48%, rgba(43, 100, 53, 0.6) 100%);
 }
 
-.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+.p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link .p-menuitem-text {
     color: white;
 }
 
-.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+.p-menubar .p-menubar-root-list>.p-menuitem>.p-menuitem-link .p-menuitem-icon {
     color: white;
     margin-right: 0.5rem;
 }
 
-.p-avatar img{
+.p-avatar img {
     height: auto !important;
 }
 
 .p-menubar.p-menubar-mobile-active .p-menubar-root-list {
-    background: rgb(43,150,53);
-    background: linear-gradient(0deg, rgba(43,150,53,0.6) 0%, rgba(43,130,53,0.6) 48%, rgba(43,100,53,0.6) 100%);
+    background: rgb(43, 150, 53);
+    background: linear-gradient(0deg, rgba(43, 150, 53, 0.6) 0%, rgba(43, 130, 53, 0.6) 48%, rgba(43, 100, 53, 0.6) 100%);
 }
 
 .p-menubar .p-menubar-button {
@@ -51,21 +53,23 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 
 @media only screen and (max-width: 500px) {
     .p-steps .p-steps-item .p-menuitem-link .p-steps-title {
-      display: none !important;
+        display: none !important;
     }
-  }
+}
+
 
 /* .p-accordion p-accordiontab:last-child .p-accordion-header:not(.p-highlight) .p-accordion-header-link{
     background-color: rgb(203, 252, 197) !important; 
 } */
 
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{
-    background-color: rgb(189, 253, 183) !important; 
+.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+    background-color: rgb(189, 253, 183) !important;
 }
 
 .file-input {
     display: none;
-  }
+}
+
 
 /* .p-panelmenu .p-panelmenu-panel:first-child .p-panelmenu-header .rojo  > a{
     background-color: red;
@@ -73,16 +77,16 @@ background: linear-gradient(20deg, rgba(215,215,215,0.9472163865546218) 0%, rgba
 
 @media only screen and (max-width: 500px) {
     .novedad-imagen {
-      max-height: 400px;
+        max-height: 400px;
     }
 }
 
 @media only screen and (max-width: 500px) {
     .novedadTexto {
-      overflow: hidden;
-      width: 80%;
+        overflow: hidden;
+        width: 80%;
     }
-    .tdnovedad{
+    .tdnovedad {
         width: 100%;
         display: block;
     }

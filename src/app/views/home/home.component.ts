@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import {PanelModule} from 'primeng/panel';
+import { Novedad } from 'src/app/models/Novedad';
+import { AuthService } from 'src/app/services/Auth/auth.service';
+import { NovedadService } from 'src/app/services/NovedadService/novedad.service';
 
 @Component({
   selector: 'app-home',
@@ -9,63 +12,6 @@ import {PanelModule} from 'primeng/panel';
 })
 export class HomeComponent implements OnInit {
 
-  cars: [
-    {
-      albumId: 1,
-      id: 1,
-      title: "accusamus beatae ad facilis cum similique qui sunt",
-      url: "https://via.placeholder.com/600/92c952",
-      thumbnailUrl: "https://via.placeholder.com/150/92c952"
-    },
-    {
-    albumId: 1,
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796"
-    },
-    {
-      albumId: 1,
-      id: 3,
-      title: "officia porro iure quia iusto qui ipsa ut modi",
-      url: "https://via.placeholder.com/600/24f355",
-      thumbnailUrl: "https://via.placeholder.com/150/24f355"
-    },
-    {
-      albumId: 1,
-      id: 3,
-      title: "officia porro iure quia iusto qui ipsa ut modi",
-      url: "https://via.placeholder.com/600/24f355",
-      thumbnailUrl: "https://via.placeholder.com/150/24f355"
-    }] = [
-      {
-        albumId: 1,
-        id: 1,
-        title: "accusamus beatae ad facilis cum similique qui sunt",
-        url: "https://via.placeholder.com/600/92c952",
-        thumbnailUrl: "https://via.placeholder.com/150/92c952"
-      },
-      {
-      albumId: 1,
-        id: 2,
-        title: "reprehenderit est deserunt velit ipsam",
-        url: "https://via.placeholder.com/600/771796",
-        thumbnailUrl: "https://via.placeholder.com/150/771796"
-      },
-      {
-        albumId: 1,
-        id: 3,
-        title: "officia porro iure quia iusto qui ipsa ut modi",
-        url: "https://via.placeholder.com/600/24f355",
-        thumbnailUrl: "https://via.placeholder.com/150/24f355"
-      },
-      {
-        albumId: 1,
-        id: 3,
-        title: "officia porro iure quia iusto qui ipsa ut modi",
-        url: "https://via.placeholder.com/600/24f355",
-        thumbnailUrl: "https://via.placeholder.com/150/24f355"
-      }]
   responsiveOptions: [{
     breakpoint: '1024px',
     numVisible: 3,
@@ -95,7 +41,10 @@ export class HomeComponent implements OnInit {
     numVisible: 1,
     numScroll: 1
   }]
-  constructor() {
+  constructor(
+    public authService: AuthService,
+    private novedadService: NovedadService
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -115,6 +64,14 @@ export class HomeComponent implements OnInit {
     ];
   }
 
+  novedades: Novedad[] = [];
+
   ngOnInit() {
+    this.novedadService.ultimasNovedades().subscribe(
+      response => {
+        this.novedades = response;
+      })
+
+    
   }
 }

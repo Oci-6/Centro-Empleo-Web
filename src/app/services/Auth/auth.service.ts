@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private URL = 'http://localhost:3000/api/auth';
+  private URL = environment.apiURL+ 'api/'+'auth';
 
   login(data: User) {
     return this.http.post(this.URL + '/login', data);
@@ -18,8 +19,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
-    window.location.href =
-      window.location.href.slice(0, window.location.href.indexOf('/', 7));
+    window.location.reload();
   }
 
   cambiarContrasenia(data: {token: string, email:string, contraseña: string}){

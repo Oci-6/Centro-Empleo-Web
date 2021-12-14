@@ -41,7 +41,9 @@ export class RegistrarComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el usuario' });
+        console.log(error);
+        
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ? error.error.message : 'Algo salio mal' });
       }
     );
   }

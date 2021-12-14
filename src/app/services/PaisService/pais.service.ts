@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Departamento } from 'src/app/models/Departamento';
 import { Localidad } from 'src/app/models/Localidad';
 import { Pais } from 'src/app/models/Pais';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaisService {
 
-  private URL = 'http://localhost:3000/api/pais';
+  private URL = environment.apiURL+ 'api/'+'pais';
   
   constructor(private http: HttpClient) { }
 

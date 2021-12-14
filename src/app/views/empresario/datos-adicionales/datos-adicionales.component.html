@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="p-col p-mt-5">
-                        <p-button type="submit" label="Solicitar acceso" icon="pi pi-check"></p-button>
+                        <p-button type="submit" [label]="this.auth.getUser()?.estado ? 'Guardar' : 'Solicitar Acceso'" icon="pi pi-check"></p-button>
                     </div>
                 </div>
             </form>

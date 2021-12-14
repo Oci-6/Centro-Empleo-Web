@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Oferta } from 'src/app/models/Oferta';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
 
-  private URL: string = 'http://localhost:3000/api/ofertas';
+  private URL: string = environment.apiURL+ 'api/'+'ofertas';
 
   constructor(private http: HttpClient) { }
   

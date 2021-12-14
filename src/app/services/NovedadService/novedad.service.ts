@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from 'src/app/models/Admin';
 import { Novedad } from 'src/app/models/Novedad';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Novedad } from 'src/app/models/Novedad';
 })
 export class NovedadService {
 
-  private URL: string = 'http://localhost:3000/api/novedad';
+  private URL: string = environment.apiURL+ 'api/'+'novedad';
 
   constructor(private http: HttpClient) { }
   

@@ -24,12 +24,11 @@ export class EmpresaActivaGuard implements CanActivate {
 
     if (!auth.usuario.estado&&auth.tipo!="Admin") {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Complete sus datos' })
-      this.router.navigate(['/datosAdicionales'])
+      this.router.navigate(['datosAdicionales'])
     }
     else
       if (!res) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Solicite acceso para utilizar esta funcionalidad' })
-        this.router.navigate(['/solicitarAcceso'])
       }
 
     return res;

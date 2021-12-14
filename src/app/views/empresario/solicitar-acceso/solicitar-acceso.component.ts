@@ -55,8 +55,8 @@ export class SolicitarAccesoComponent implements OnInit {
         this.router.navigate(['/datosAdicionales']).then(() =>
         window.location.reload());
       },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el usuario' });
+      error => {        
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message ? error.error.message : 'Algo salio mal' });
       }
     );
 

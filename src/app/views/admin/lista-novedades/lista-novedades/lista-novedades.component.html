@@ -63,19 +63,18 @@
       [href]="'http://twitter.com/share?url='+url+'&text=Mira esta novedad del Centro Comercial de San José. Titulo de la novedad: '+selectedNovedad.titulo">
     </a>
     <button pButton pRipple type="button" label="Email" (click)="enviarCorreo()" class="p-button-raised p-button-help p-mb-2"></button>
-    <!-- <a pButton pRipple type="button" label="LinkedIn" class="p-button-raised p-button-info p-mb-2"></a> -->
   </div>
 
 
 </p-dialog>
 
 <p-dialog header="Editar Novedad" [(visible)]="displayEditarNovedadDialog" [draggable]="false"
-  [style]="{height: '90%',width: '90%'}">
+  [style]="{height: '90%',width: '80%'}">
   <form [formGroup]="editarNovedadForm" >
     <div class="p-fluid p-formgrid p-grid">
 
       <div class="p-field p-col-12 p-text-center" *ngIf="novedad.imagen">
-        <img [src]="novedad.imagen | safe: 'url'" style="max-height:250px; max-width: 100%;"  #img>
+        <img [src]="(file ? novedad.imagen : apiURL + novedad.imagen )| safe: 'url'" style="max-height:250px; max-width: 100%;"  #img>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
@@ -107,4 +106,3 @@
   </form>
 </p-dialog>
 
-<!-- <p-confirmDialog header="Confirmacion" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->

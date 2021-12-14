@@ -108,7 +108,7 @@ export class ListaEmpresasComponent implements OnInit {
     this.empresaC.id = empresa.id;
     this.empresaC.fechaExpiracion = moment().subtract(1,'days').toDate();
     console.log(this.empresaC);
-    this.empresarioService.modificarEmpresario(this.empresaC).subscribe(
+    this.adminService.inhabilitarEmpresa(this.empresaC).subscribe(
       result=>{
         this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Empresa inhabilitada exitosamente' })
         this.getEmpresas();
