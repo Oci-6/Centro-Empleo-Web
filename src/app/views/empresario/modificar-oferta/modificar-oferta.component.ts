@@ -50,8 +50,8 @@ export class ModificarOfertaComponent implements OnInit {
       requisitosExcluyentes: new FormControl(''),
       requisitosValorar: new FormControl(''),
       horario: new FormControl(''),
-      salarioDesde: new FormControl(''),
-      salarioHasta: new FormControl(''),
+      salarioDesde: new FormControl(undefined),
+      salarioHasta: new FormControl(undefined),
       lugar: new FormControl(''),
       fechaCierre: new FormControl(''),
     });

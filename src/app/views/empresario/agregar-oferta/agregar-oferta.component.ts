@@ -45,8 +45,8 @@ export class AgregarOfertaComponent implements OnInit {
       requisitosExcluyentes: new FormControl('', [Validators.required]),
       requisitosValorar: new FormControl(''),
       horario: new FormControl('', [Validators.required]),
-      salarioDesde: new FormControl(''),
-      salarioHasta: new FormControl(''),
+      salarioDesde: new FormControl(undefined),
+      salarioHasta: new FormControl(undefined),
       lugar: new FormControl('', [Validators.required]),
       fechaCierre: new FormControl('', [Validators.required]),
     });

@@ -116,6 +116,7 @@ export class PostulanteService {
     return this.http.get<ExpLaboral[]>(this.URL + '/expLaboral/' + idPostulante);
   }
   postExpLaboral(idPostulante: number, expLaboral: ExpLaboral){
+    if(expLaboral.telefonoRef) expLaboral.telefonoRef = String(expLaboral.telefonoRef);
     return this.http.post<ExpLaboral>(this.URL + '/expLaboral/' + idPostulante, expLaboral);
   }
   putExpLaboral(expLaboral: ExpLaboral){
