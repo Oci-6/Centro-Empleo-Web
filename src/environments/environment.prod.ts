@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: "https://centroempleo.brazilsouth.cloudapp.azure.com/"
+  apiURL: "https://g2back.ccisanjose.com.uy/"
 
 };

@@ -69,7 +69,7 @@
 
                     <span class="p-field p-col-12 p-md-6">
                         <label for="fechaN">Fecha de Nacimiento</label>
-                        <p-calendar inputId="fechaN" formControlName="fechaN" dateFormat="dd/mm/yy"></p-calendar>
+                        <p-calendar inputId="fechaN" formControlName="fechaN" dateFormat="dd/mm/yy" [maxDate]="maxDate"></p-calendar>
                         <div *ngIf="f.fechaN.errors&&submitted" class="invalid-feedback">
                             <small class="p-error" *ngIf="f.fechaN.errors.required">Ingrese una fecha de nacimiento</small>
                         </div>

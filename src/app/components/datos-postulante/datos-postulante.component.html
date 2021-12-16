@@ -75,7 +75,14 @@
                 <strong>Dirección:</strong> <br> {{postulante.direccion}}
             </div>
             <div class="p-field p-col-12 p-md-6">
-                <strong>País:</strong> <br> {{postulante.pais?.nombre}}, {{postulante.localidad?.departamento?.nombre}}, {{postulante.localidad?.nombre}}
+                <strong>País:</strong> <br>
+                <div *ngIf="postulante.localidad; else pais">
+                    {{postulante.pais?.nombre}}, {{postulante.localidad?.departamento?.nombre}},
+                    {{postulante.localidad?.nombre}}
+                </div>
+                <ng-template #pais>
+                    {{postulante.pais?.nombre}}
+                </ng-template>
             </div>
 
             <p-divider class="p-col-12"></p-divider>

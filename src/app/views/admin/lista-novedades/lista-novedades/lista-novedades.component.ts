@@ -115,6 +115,7 @@ export class ListaNovedadesComponent implements OnInit {
       this.displayEditarNovedadDialog = false;
       this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Datos guardados correctamente' });
       this.file = undefined;
+      this.getNovedades();
       return true;
 
     } catch (error) {
