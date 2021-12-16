@@ -15,13 +15,12 @@ export class DashboardComponent implements OnInit {
   data: any;
   ofertasMes: any;
   datos: any;
-  desde: Date = new Date();
+  desde: Date =  moment(new Date()).add(1,"month").subtract(1,"years").toDate();
 
-  hasta: Date = new Date();
+  hasta: Date =  moment(new Date()).add(1,"month").toDate();
 
   loading: boolean = false;
   async ngOnInit() {
-    this.desde.setFullYear((new Date().getFullYear())-1);
     this.desde.setDate(1);
     this.hasta.setDate(1);
     this.getEstadisticas();
