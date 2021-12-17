@@ -45,7 +45,7 @@ export class DatosPersonalesComponent implements OnInit {
   fechaN = '';
 
   fecha: Date | undefined | string;
-  maxDate: Date = moment(new Date()).subtract(15, "years").toDate();
+  maxDate: Date = new Date();
 
   postulanteId: number | undefined;
 
