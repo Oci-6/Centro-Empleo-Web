@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: $CI_REGISTRY_IMAGE/$CI_ENVIRONMENT_SLUG:$VERSION
+    networks:
+      - traefik-public
+    environment:
+      - BACKEND_URL=backend.$APP_NAME.$CI_ENVIRONMENT_SLUG.softtero.com
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${APP_NAME}frontend.rule=Host(`${APP_NAME}.${CI_ENVIRONMENT_SLUG}.softtero.com`)"
+        - "traefik.http.routers.${APP_NAME}frontend.entrypoints=http"
+        - "traefik.http.routers.${APP_NAME}frontend-secured.rule=Host(`${APP_NAME}.${CI_ENVIRONMENT_SLUG}.softtero.com`)"
+        - "traefik.http.routers.${APP_NAME}frontend-secured.entrypoints=https"
+        - "traefik.http.routers.${APP_NAME}frontend-secured.tls.certresolver=le"
+        - "traefik.http.services.${APP_NAME}frontend.loadbalancer.server.port=80"
+        - "traefik.http.routers.${APP_NAME}frontend.middlewares=${APP_NAME}frontend-redirect"
+        - "traefik.http.middlewares.${APP_NAME}frontend-redirect.redirectscheme.scheme=https"
+        - "traefik.constraint-label=traefik-public"
+      placement:
+        constraints:
+          - node.platform.os == linux
+          - node.role == worker
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+networks:
+  traefik-public:
+    external: true
